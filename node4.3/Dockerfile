@@ -16,44 +16,18 @@ RUN echo "Starting ..." && \
 
     echo "Done base install!" && \
 
-    echo "Starting PHP" && \
-    apt-get -y build-dep php5-cli && \
-    cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
-    cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
-    php-build -i development 7.0.3 "/root/.phpenv/versions/7.0.3" && \
-    php-build -i development 5.6.18 "/root/.phpenv/versions/5.6.18" && \
-
-    curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
-    curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
-    echo "Done PHP!" && \
-
     echo "Starting Javascript..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v0.30.2 && \
     . /root/.nvm/nvm.sh && \
 
-    nvm install 0.12.10 && nvm use 0.12.10 && \
-    npm install -g npm@3 && \
-    npm config set progress false && \
-    npm config set loglevel warn && \
-    npm install -g gulp@3.9 bower@1.7 grunt-cli@0.1 webpack@1.12 browserify@13.0 && \
-    npm install -g babel@6.5 eslint@2.0 eslint-plugin-react@3.16 eslint-plugin-angular@0.15  && \
-    npm install -g eslint-config-standard@5.1 eslint-plugin-promise@1.0 eslint-plugin-standard@1.3 && \
-
-    nvm install 4.3.0 && nvm use 4.3.0 && \
+    nvm install 4.3.0 && nvm alias default 4.3.0 && \
     npm install -g npm@3 && \
     npm config set progress false && \
     npm config set loglevel warn && \
     npm install -g gulp@3.9 bower@1.7 grunt-cli@0.1 webpack@1.12 browserify@13.0 && \
     npm install -g babel@6.5 eslint@2.0 eslint-plugin-react@3.16 eslint-plugin-angular@0.15 && \
     npm install -g eslint-config-standard@5.1 eslint-plugin-promise@1.0 eslint-plugin-standard@1.3 && \
-
-    nvm install 5.7.0 && nvm use 5.7.0 && \
-    npm install -g npm@3 && \
-    npm config set progress false && \
-    npm config set loglevel warn && \
-    npm install -g gulp@3.9 bower@1.7 grunt-cli@0.1 webpack@1.12 browserify@13.0 && \
-    npm install -g babel@6.5 eslint@2.0 eslint-plugin-react@3.16 eslint-plugin-angular@0.15 && \
-    npm install -g eslint-config-standard@5.1 eslint-plugin-promise@1.0 eslint-plugin-standard@1.3 && \
+    npm install -g mocha@2.4 && \
 
     echo "Done JS!" && \
 

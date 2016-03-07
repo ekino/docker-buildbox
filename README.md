@@ -1,8 +1,8 @@
 BuildBox
 ========
 
-The idea behing this Dockerfile is to provide a complete set of build tools for web developpers. This
-image MUST NOT be used in production.
+The idea behing this repository is to provide a complete set of build tools for web developpers. This
+image MUST NOT be used in production. The target usage of this repository is GitlabCI.
 
 Usage
 -----
