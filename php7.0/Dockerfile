@@ -19,8 +19,8 @@ RUN echo "Starting ..." && \
     apt-get -y build-dep php5-cli && \
     cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
-    php-build -i development 7.0.3 "/root/.phpenv/versions/7.0.3" && \
-    phpenv global 7.0.3  && \
+    php-build -i development 7.0.4 "/root/.phpenv/versions/7.0.3" && \
+    /root/.phpenv/bin/phpenv global 7.0.4  && \
 
     curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
     curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
