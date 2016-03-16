@@ -1,6 +1,22 @@
 Versions
 ========
 
+2014.15-DEV
+-----------
+
+GitlabCi can handle an image per job. So there is no need to have an all-in-one image.
+
+PHP Images: 
+
+- php5.6
+- php7.0
+
+NodeJs Images:
+
+- node0.12
+- node4.3
+- node5.7
+
 2016.03-DEV
 -----------
 

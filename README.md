@@ -7,10 +7,7 @@ image MUST NOT be used in production. The target usage of this repository is Git
 Usage
 -----
 
-      $ source /root/.bashrc         # make sure the .bashrc is sourced to (phpenv and nvm are available)
-      $ phpenv local 5.6.18          # use php 5.6.18
-      $ nvm use 4.3.0                # use node 4.3.0
-
+      $ source /root/.bashrc         # make sure path are correctly set
 
 Versions
 --------
