@@ -21,6 +21,8 @@ RUN echo "Starting ..." && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
     php-build -i development 5.6.18 "/root/.phpenv/versions/5.6.18" && \
     /root/.phpenv/bin/phpenv global 5.6.18  && \
+    rm -rf /root/.phpenv/versions/5.6.18/bin/phpdbg && \
+    rm -rf /root/.phpenv/versions/5.6.18/bin/php-cgi && \
 
     curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
     curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
