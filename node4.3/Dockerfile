@@ -2,9 +2,7 @@ FROM debian:8.2
 MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV PHP_BUILD_EXTRA_MAKE_ARGUMENTS -j4
 ENV NVM_DIR /root/.nvm
-ENV COMPOSER_NO_INTERACTION 1
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -12,7 +10,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev && \
+      libmcrypt-dev libreadline-dev openssh-client && \
 
     echo "Done base install!" && \
 
