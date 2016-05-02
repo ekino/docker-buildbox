@@ -10,7 +10,9 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev openssh-client && \
+      libmcrypt-dev libreadline-dev ruby-full openssh-client && \
+    gem install sass && \
+    gem install scss_lint && \
 
     echo "Done base install!" && \
 
