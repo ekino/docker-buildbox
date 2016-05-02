@@ -1,21 +1,11 @@
 Versions
 ========
 
-2014.15-DEV
+2016.05-DEV
 -----------
 
-GitlabCi can handle an image per job. So there is no need to have an all-in-one image.
-
-PHP Images: 
-
-- php5.6
-- php7.0
-
-NodeJs Images:
-
-- node0.12
-- node4.3
-- node5.7
+* Add NodeJS 6.0.0.
+* Remove bashrc sourcing for NodeJS images
 
 2016.03-DEV
 -----------
@@ -71,3 +61,18 @@ NodeJs Images:
         - eslint-plugin-promise@1.0
         - eslint-plugin-standard@1.3
         
+2014.15-DEV
+-----------
+
+GitlabCi can handle an image per job. So there is no need to have an all-in-one image.
+
+PHP Images: 
+
+- php5.6
+- php7.0
+
+NodeJs Images:
+
+- node0.12
+- node4.3
+- node5.7
