@@ -1,4 +1,4 @@
-FROM debian:8.2
+FROM debian:8.4
 MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 
 ENV DEBIAN_FRONTEND noninteractive

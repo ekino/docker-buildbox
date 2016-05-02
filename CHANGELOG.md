@@ -4,10 +4,11 @@ Versions
 2016.05-DEV
 -----------
 
-* Add NodeJS 4.4 and 6.0.0, remove 0.12 and 5.7 images.
-* Upgrade NodeJS versions: 4.3.2. 4.4.3, 6.0.0
+* Add NodeJS 4.4 and 6.0.0, remove 0.12 image.
+* Upgrade NodeJS versions: 4.3.2. 4.4.3, 5.7.1, 6.0.0
 * Upgrade PHP versions: 5.6.20, 7.0.5
 * Remove bashrc sourcing for NodeJS and PHP images.
+* Use Debian 8.4 as base image
 
 2016.03-DEV
 -----------
