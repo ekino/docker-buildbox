@@ -11,7 +11,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev ruby-full openssh-client && \
+      libmcrypt-dev libreadline-dev openssh-client ruby-full && \
     gem install sass && \
     gem install scss_lint && \
 
@@ -21,9 +21,8 @@ RUN echo "Starting ..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v0.31.0 && \
     . /root/.nvm/nvm.sh && \
 
-    nvm install 4.3.0 && nvm alias default 4.3.0 && \
-    ln -s /root/.nvm/versions/node/v4.3.0 /root/.nvm/versions/node/current && \
-
+    nvm install 6.0.0 && nvm alias default 6.0.0 && \
+    ln -s /root/.nvm/versions/node/v6.0.0 /root/.nvm/versions/node/current && \
     npm install -g npm@3 && \
     npm config set progress false && \
     npm config set loglevel warn && \

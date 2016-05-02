@@ -7,7 +7,7 @@ image MUST NOT be used in production. The target usage of this repository is Git
 Usage
 -----
 
-      $ source /root/.bashrc         # make sure path are correctly set
+      $ source /root/.bashrc         # make sure path are correctly set (for php)
 
 Versions
 --------
