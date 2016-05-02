@@ -1,13 +1,8 @@
 BuildBox
 ========
 
-The idea behing this repository is to provide a complete set of build tools for web developpers. This
-image MUST NOT be used in production. The target usage of this repository is GitlabCI.
-
-Usage
------
-
-      $ source /root/.bashrc         # make sure path are correctly set (for php)
+The idea behing this repository is to provide a complete set of build tools for web developpers. These
+images MUST NOT be used in production. The target usage of this repository is GitlabCI.
 
 Versions
 --------

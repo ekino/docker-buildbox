@@ -11,12 +11,23 @@ test-node:  ## Format code to respect CS
 		echo "Testing : $${DIR}"; \
 		cd $${DIR}; \
 		echo " > Build image"; \
-		docker build -t test-$${DIR} . > build.log ; \
+		docker build -t $${DIR} --no-cache . || exit 1; \
 		echo " > Testing basic commands"; \
-		docker run --rm test-$${DIR} node --version ; \
-		docker run --rm test-$${DIR} npm --version ; \
-		docker run --rm test-$${DIR} sass --version ; \
-		(docker rmi -f $${DIR} || exit 0); \
-		echo " > Rename image test-$${DIR} => $${DIR}"; \
-		docker rename test-$${DIR} $${DIR}; \
+		docker run --rm $${DIR} node --version || exit 1; \
+		docker run --rm $${DIR} npm --version  || exit 1; \
+		docker run --rm $${DIR} sass --version || exit 1; \
 	done
+	echo "done!"
+
+test-php:  ## Format code to respect CS
+	for DIR in $(PHP_DIRS) ; do \
+		cd $(CURRENT_PATH); \
+		echo "Testing : $${DIR}"; \
+		cd $${DIR}; \
+		echo " > Build image"; \
+		docker build -t $${DIR} --no-cache . || exit 1; \
+		echo " > Testing basic commands"; \
+		docker run --rm $${DIR} php --version || exit 1; \
+		docker run --rm $${DIR} composer --version || exit 1; \
+	done
+	echo "done!"

@@ -4,8 +4,10 @@ Versions
 2016.05-DEV
 -----------
 
-* Add NodeJS 6.0.0.
-* Remove bashrc sourcing for NodeJS images
+* Add NodeJS 4.4 and 6.0.0, remove 0.12 and 5.7 images.
+* Upgrade NodeJS versions: 4.3.2. 4.4.3, 6.0.0
+* Upgrade PHP versions: 5.6.20, 7.0.5
+* Remove bashrc sourcing for NodeJS and PHP images.
 
 2016.03-DEV
 -----------

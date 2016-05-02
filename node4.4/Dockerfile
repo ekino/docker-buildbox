@@ -4,6 +4,7 @@ MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV NVM_DIR /root/.nvm
 ENV PATH /root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV NODE_VERSION 4.4.3
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -21,14 +22,14 @@ RUN echo "Starting ..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v0.31.0 && \
     . /root/.nvm/nvm.sh && \
 
-    nvm install 0.12.10 && nvm alias default 0.12.10 && \
-    ln -s /root/.nvm/versions/node/v0.12.10 /root/.nvm/versions/node/current && \
+    nvm install ${NODE_VERSION} && nvm alias default ${NODE_VERSION} && \
+    ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
 
     npm install -g npm@3 && \
     npm config set progress false && \
     npm config set loglevel warn && \
     npm install -g gulp@3.9 bower@1.7 grunt-cli@0.1 webpack@1.12 browserify@13.0 && \
-    npm install -g babel@6.5 eslint@2.0 eslint-plugin-react@3.16 eslint-plugin-angular@0.15  && \
+    npm install -g babel@6.5 eslint@2.0 eslint-plugin-react@3.16 eslint-plugin-angular@0.15 && \
     npm install -g eslint-config-standard@5.1 eslint-plugin-promise@1.0 eslint-plugin-standard@1.3 && \
     npm install -g mocha@2.4 && \
 
@@ -41,6 +42,6 @@ RUN echo "Starting ..." && \
       mysql-client-5.5 mysql-common mysql-server-5.5 mysql-server-core-5.5 odbcinst odbcinst1debian2 \
       patch po-debconf psmisc xauth xtrans-dev xz-utils zlib1g-dev && \
 
-    apt-get clean apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
+    apt-get clean apt-get purge && rm -rf /var/lib/apt/lists/* && \
 
     echo "Done!"

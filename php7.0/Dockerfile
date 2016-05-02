@@ -4,6 +4,8 @@ MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV PHP_BUILD_EXTRA_MAKE_ARGUMENTS -j4
 ENV COMPOSER_NO_INTERACTION 1
+ENV PATH /root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PHP_VERSION 7.0.5
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -19,10 +21,10 @@ RUN echo "Starting ..." && \
     apt-get -y build-dep php5-cli && \
     cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
-    php-build -i development 7.0.3 "/root/.phpenv/versions/7.0.3" && \
-    /root/.phpenv/bin/phpenv global 7.0.3  && \
-    rm -rf /root/.phpenv/versions/7.0.3/bin/phpdbg && \
-    rm -rf /root/.phpenv/versions/7.0.3/bin/php-cgi && \
+    php-build -i development ${PHP_VERSION} "/root/.phpenv/versions/${PHP_VERSION}" && \
+    ln -s /root/.phpenv/versions/${PHP_VERSION} /root/.phpenv/versions/current && \
+    rm -rf /root/.phpenv/versions/current/bin/phpdbg && \
+    rm -rf /root/.phpenv/versions/current/bin/php-cgi && \
 
     curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
     curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
@@ -39,5 +41,3 @@ RUN echo "Starting ..." && \
     apt-get clean apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
 
     echo "Done!"
-
-COPY bashrc /root/.bashrc

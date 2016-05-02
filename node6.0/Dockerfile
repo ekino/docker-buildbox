@@ -4,6 +4,7 @@ MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV NVM_DIR /root/.nvm
 ENV PATH /root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV NODE_VERSION 6.0.0
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -11,7 +12,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev openssh-client ruby-full && \
+      libmcrypt-dev libreadline-dev ruby-full openssh-client && \
     gem install sass && \
     gem install scss_lint && \
 
@@ -21,8 +22,9 @@ RUN echo "Starting ..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v0.31.0 && \
     . /root/.nvm/nvm.sh && \
 
-    nvm install 6.0.0 && nvm alias default 6.0.0 && \
-    ln -s /root/.nvm/versions/node/v6.0.0 /root/.nvm/versions/node/current && \
+    nvm install ${NODE_VERSION} && nvm alias default ${NODE_VERSION} && \
+    ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
+
     npm install -g npm@3 && \
     npm config set progress false && \
     npm config set loglevel warn && \
