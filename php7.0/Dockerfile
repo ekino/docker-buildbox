@@ -1,18 +1,18 @@
-FROM debian:8.4
+FROM debian:8.5
 MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV PHP_BUILD_EXTRA_MAKE_ARGUMENTS -j4
 ENV COMPOSER_NO_INTERACTION 1
 ENV PATH /root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV PHP_VERSION 7.0.5
+ENV PHP_VERSION 7.0.7
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
     echo "deb-src http://httpredir.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
-    apt-get -qq update && \
-    apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
+    apt-get clean && apt-get -qq update && \
+    apt-get -y install build-essential libssl-dev curl git subversion make mercurial \
       libmcrypt-dev libreadline-dev openssh-client && \
 
     echo "Done base install!" && \

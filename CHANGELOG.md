@@ -1,6 +1,17 @@
 Versions
 ========
 
+2016.07-DEV
+-----------
+
+* Use Debian 8.5 as base image
+* Upgrade PHP versions: 5.6.22, 7.0.7
+* Remove node version: 4.3, 6.0, 5.7
+* Add node version: 6.2
+* Upgrade node version: 4.4.5
+* Updrade node tools: grunt-cli@1.2, webpack@1.13, estlint@2.13, eslint-plugin-react@5.2 
+    eslint-plugin-angular@1.1, eslint-config-standard@5.3, eslint-plugin-promise@1.3 and 
+    eslint-plugin-standard@1.3
 
 2016.05.03
 ----------
