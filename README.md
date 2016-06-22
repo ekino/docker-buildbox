@@ -1,8 +1,8 @@
 BuildBox
 ========
 
-The idea behing this repository is to provide a complete set of build tools for web developpers. These
-images MUST NOT be used in production. The target usage of this repository is GitlabCI.
+The idea behind this repository is to provide a complete set of build tools for web developpers. These
+images MUST NOT be used in production. The target usage of those images is GitlabCI.
 
 Versions
 --------
