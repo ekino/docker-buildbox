@@ -7,7 +7,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
     echo "deb-src http://httpredir.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
-    apt-get -qq update && \
+    apt-get clean && apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
       libmcrypt-dev libreadline-dev openssh-client && \
 
