@@ -4,7 +4,7 @@ MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV NVM_DIR /root/.nvm
 ENV PATH /root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV NODE_VERSION 4.4.5
+ENV NODE_VERSION 4.5.0
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
