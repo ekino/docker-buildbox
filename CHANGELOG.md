@@ -1,6 +1,12 @@
 Versions
 ========
 
+2016.11-DEV
+-----------
+
+* Add driver pdo_pgsql in PHP images
+* Add cache APCu in PHP images
+
 2016.09-DEV
 -----------
 
