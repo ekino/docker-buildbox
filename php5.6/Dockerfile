@@ -3,6 +3,8 @@ MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV PHP_BUILD_EXTRA_MAKE_ARGUMENTS -j4
+ENV PHP_BUILD_CONFIGURE_OPTS --with-pdo-pgsql
+ENV PHP_BUILD_INSTALL_EXTENSION apcu=4.0.11
 ENV COMPOSER_NO_INTERACTION 1
 ENV PATH /root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV PHP_VERSION 5.6.22
