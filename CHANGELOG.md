@@ -1,8 +1,8 @@
 Versions
 ========
 
-2016.11-DEV
------------
+2016.11.25
+----------
 
 * Use only major version, php7.0 => php7, etc ...
 * Upgrade PHP versions: 5.6.28, 7.0.13
@@ -15,7 +15,7 @@ Versions
 * Add Yarn to node
 * Update nvm to 0.32.1
 
-2016.09-16
+2016.09.16
 ----------
 
 * Use Debian 8.5 as base image
