@@ -13,6 +13,7 @@ RUN echo "Starting ..." && \
     apt-get clean && apt-get -qq update && \
     apt-get -y install build-essential libssl-dev curl git subversion make mercurial \
       libmcrypt-dev libreadline-dev ruby-full openssh-client && \
+
     gem install sass --verbose && \
     gem install scss_lint --verbose && \
 
@@ -26,7 +27,10 @@ RUN echo "Starting ..." && \
     ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
 
     npm install -g npm@3 && \
-    npm install -g yarn && \
+
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb http://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install yarn && \
 
     echo "Done JS!" && \
 

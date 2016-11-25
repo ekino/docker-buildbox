@@ -26,7 +26,10 @@ RUN echo "Starting ..." && \
     ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
 
     npm install -g npm@3 && \
-    npm install -g yarn && \
+
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb http://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install yarn && \
 
     echo "Done JS!" && \
 
