@@ -41,6 +41,6 @@ RUN echo "Starting ..." && \
       mysql-client-5.5 mysql-common mysql-server-5.5 mysql-server-core-5.5 odbcinst odbcinst1debian2 \
       patch po-debconf psmisc xauth xtrans-dev xz-utils zlib1g-dev && \
 
-    apt-get clean apt-get purge && rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* && \
 
     echo "Done!"

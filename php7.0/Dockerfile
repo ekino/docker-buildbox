@@ -43,6 +43,6 @@ RUN echo "Starting ..." && \
       openssl patch po-debconf psmisc x11-common x11proto-core-dev \
       x11proto-input-dev x11proto-kb-dev xauth xorg-sgml-doctools xtrans-dev xz-utils zlib1g-dev && \
 
-    apt-get clean apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* && \
 
     echo "Done!"
