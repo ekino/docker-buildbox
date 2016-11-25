@@ -1,11 +1,13 @@
-FROM debian:8.5
+FROM debian:8.6
 MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV PHP_BUILD_EXTRA_MAKE_ARGUMENTS -j4
 ENV COMPOSER_NO_INTERACTION 1
 ENV PATH /root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV PHP_VERSION 5.6.22
+ENV PHP_VERSION 5.6.28
+ENV PHP_BUILD_CONFIGURE_OPTS --with-pdo-pgsql
+ENV PHP_BUILD_INSTALL_EXTENSION apcu=4.0.11
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \

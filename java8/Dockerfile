@@ -1,4 +1,4 @@
-FROM debian:8.4
+FROM debian:8.6
 MAINTAINER Stephane Leclercq <leclercq@ekino.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -19,7 +19,7 @@ RUN echo "Starting ..." && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
     apt-get -qq update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -y install oracle-java8-installer oracle-java8-set-default && \
+    apt-get -y install oracle-java8-installer oracle-java8-set-default maven && \
     echo "Done Java!" && \
 
     echo "Cleaning files!" && \

@@ -1,17 +1,29 @@
 Versions
 ========
 
-2016.09-DEV
+2016.11-DEV
 -----------
 
+* Use only major version, php7.0 => php7, etc ...
+* Upgrade PHP versions: 5.6.28, 7.0.13
+* Add driver pdo_pgsql in PHP images
+* Add cache APCu in PHP images
+* Upgrade Node versions: 4.6.2, 6.9.1 (LTS)
+* Add Node 7.0.0
+* Add maven to java8
+* Remove global packages install from node: gulp, bower, grunt-cli, webpack, browserify, babel, eslint, eslint-plugin-react, eslint-plugin-angular, eslint-config-standard, eslint-plugin-promise, eslint-plugin-standard.
+* Add Yarn to node
+* Update nvm to 0.32.1
+
+2016.09-16
+----------
+
 * Use Debian 8.5 as base image
-* Upgrade PHP versions: 5.6.24, 7.0.10
-* Remove node version: 4.3, 6.0, 5.7
+* Upgrade PHP versions: 5.6.22, 7.0.10
+* Remove node versions: 4.3, 6.0, 5.7
 * Add node version: 6.5
 * Upgrade node version: 4.5.0
-* Updrade node tools: grunt-cli@1.2, webpack@1.13, estlint@2.13, eslint-plugin-react@5.2 
-    eslint-plugin-angular@1.1, eslint-config-standard@5.3, eslint-plugin-promise@1.3 and 
-    eslint-plugin-standard@1.3
+* Updrade node tools: grunt-cli@1.2, webpack@1.13, estlint@2.13, eslint-plugin-react@5.2, eslint-plugin-angular@1.1, eslint-config-standard@5.3, eslint-plugin-promise@1.3 and eslint-plugin-standard@1.3.
 
 2016.05.03
 ----------
