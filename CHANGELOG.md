@@ -4,6 +4,7 @@ Versions
 2016.11.25
 ----------
 
+* Use Debian 8.6 as base image
 * Use only major version, php7.0 => php7, etc ...
 * Upgrade PHP versions: 5.6.28, 7.0.13
 * Add driver pdo_pgsql in PHP images
