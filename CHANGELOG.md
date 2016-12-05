@@ -1,6 +1,13 @@
 Versions
 ========
 
+2016.12.05
+----------
+
+* Fix maven install on Java
+* Fix clean commands
+* Update Yarn 0.18
+
 2016.11.25
 ----------
 
