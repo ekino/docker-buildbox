@@ -42,5 +42,6 @@ test-java:  ## Format code to respect CS
 		docker build -t $${DIR} --no-cache . || exit 1; \
 		echo " > Testing basic commands"; \
 		docker run --rm $${DIR} java -version || exit 1; \
+		docker run --rm $${DIR} mvn --version || exit 1; \
 	done
 	echo "done!"

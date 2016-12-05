@@ -24,9 +24,9 @@ RUN echo "Starting ..." && \
 
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
-    apt-get remove --purge -y dpkg-dev fakeroot file libx11-6 libx11-data manpages manpages-dev \
-      openssl patch x11-common xauth xz-utils zlib1g-dev && \
+    apt-get remove --purge -y dpkg-dev fakeroot file manpages manpages-dev \
+      openssl patch xauth xz-utils zlib1g-dev && \
 
-    apt-get clean apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
 
     echo "Done!"
