@@ -35,12 +35,17 @@ RUN echo "Starting ..." && \
 
     echo "Done PHP!" && \
 
+    echo "Starting AWS" && \
+    apt-get install -y python-pip groff-base && \
+    pip install -U awscli && \
+    echo "Done AWS!" && \
+
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get remove --purge -y dpkg-dev emacsen-common fakeroot file firebird2.5-common firebird2.5-common-doc \
       firebird2.5-server-common libx11-6 libx11-data libx11-dev man-db manpages manpages-dev \
       mysql-client-5.5 mysql-common mysql-server-5.5 mysql-server-core-5.5 odbcinst odbcinst1debian2 \
-      openssl patch po-debconf psmisc x11-common x11proto-core-dev \
+      openssl patch po-debconf psmisc python-pip x11-common x11proto-core-dev \
       x11proto-input-dev x11proto-kb-dev xauth xorg-sgml-doctools xtrans-dev xz-utils zlib1g-dev && \
 
     apt-get clean && apt-get purge &&  rm -rf /var/lib/apt/lists/* && \

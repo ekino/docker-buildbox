@@ -8,8 +8,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get clean && apt-get -qq update && \
-    apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev openssh-client && \
+    apt-get -qq -y install build-essential curl git subversion make mercurial openssh-client && \
 
     echo "Done base install!" && \
 
@@ -22,11 +21,17 @@ RUN echo "Starting ..." && \
     apt-get -y install oracle-java8-installer oracle-java8-set-default maven && \
     echo "Done Java!" && \
 
+    echo "Starting AWS" && \
+    apt-get install -y python-pip groff-base && \
+    pip install -U awscli && \
+    echo "Done AWS!" && \
+
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
-    apt-get remove --purge -y dpkg-dev fakeroot file manpages manpages-dev \
-      openssl patch xauth xz-utils zlib1g-dev && \
+    apt-get remove --purge -y dpkg-dev fakeroot file gcc-4.8-base icc-profiles-free manpages manpages-dev \
+      python-pip openssl patch xauth xz-utils zlib1g-dev && \
 
+    apt-get -y autoremove && \
     apt-get clean && apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
 
     echo "Done!"
