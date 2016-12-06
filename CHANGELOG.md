@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Slightly reduce the size of the Java image
+* Add the AWS CLI to all images
 
 2016.12.05
 ----------

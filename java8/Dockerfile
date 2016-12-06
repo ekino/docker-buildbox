@@ -21,10 +21,15 @@ RUN echo "Starting ..." && \
     apt-get -y install oracle-java8-installer oracle-java8-set-default maven && \
     echo "Done Java!" && \
 
+    echo "Starting AWS" && \
+    apt-get install -y python-pip groff-base && \
+    pip install -U awscli && \
+    echo "Done AWS!" && \
+
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get remove --purge -y dpkg-dev fakeroot file gcc-4.8-base icc-profiles-free manpages manpages-dev \
-      openssl patch xauth xz-utils zlib1g-dev && \
+      python-pip openssl patch xauth xz-utils zlib1g-dev && \
 
     apt-get -y autoremove && \
     apt-get clean && apt-get purge &&  rm -rf /var/lib/apt/lists/* && \
