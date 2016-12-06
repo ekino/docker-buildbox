@@ -1,6 +1,11 @@
 Versions
 ========
 
+2016.12-dev
+-----------
+
+* Slightly reduce the size of the Java image
+
 2016.12.05
 ----------
 
