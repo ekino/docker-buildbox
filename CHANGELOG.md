@@ -6,6 +6,7 @@ Versions
 
 * Slightly reduce the size of the Java image
 * Add the AWS CLI to all images
+* Add packages ocaml & libelf-dev for FlowType checking
 
 2016.12.05
 ----------
