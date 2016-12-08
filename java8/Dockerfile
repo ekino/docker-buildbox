@@ -35,5 +35,8 @@ RUN echo "Starting ..." && \
     apt-get clean && apt-get purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/info /var/lib/dpkg/*-old && \
     rm -rf /usr/share/doc /usr/share/locale/[a-df-z]* /usr/share/locale/e[a-lo-z]* /usr/share/locale/en@* /usr/share/locale/en_GB && \
+    rm -rf /var/cache/oracle-jdk8-installer && \
+    rm -rf /usr/lib/jvm/java-8-oracle/*src.zip /usr/lib/jvm/java-8-oracle/lib/*javafx* \
+      /usr/lib/jvm/java-8-oracle/lib/missioncontrol /usr/lib/jvm/java-8-oracle/lib/visualvm && \
 
     echo "Done!"
