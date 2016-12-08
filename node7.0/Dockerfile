@@ -12,7 +12,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get clean && apt-get -qq update && \
     apt-get -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev ruby-full openssh-client && \
+      libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev && \
 
     gem install sass --verbose && \
     gem install scss_lint --verbose && \
