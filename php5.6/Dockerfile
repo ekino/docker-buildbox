@@ -50,7 +50,7 @@ RUN echo "Starting ..." && \
 
     apt-get -y autoremove && \
     apt-get clean && apt-get purge && \
-    rm -rf /var/lib/apt/lists/* /var/lib/dpkg/info /var/lib/dpkg/*-old && \
+    rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     rm -rf /usr/share/doc /usr/share/locale/[a-df-z]* /usr/share/locale/e[a-lo-z]* /usr/share/locale/en@* /usr/share/locale/en_GB && \
 
     echo "Done!"
