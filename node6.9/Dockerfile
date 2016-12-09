@@ -10,8 +10,8 @@ RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
     echo "deb-src http://httpredir.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
-    apt-get clean && apt-get -qq update && \
-    apt-get -y install build-essential libssl-dev curl git subversion make mercurial \
+    apt-get -qq clean && apt-get -qq update && \
+    apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
       libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev && \
     gem install sass --verbose && \
     gem install scss_lint --verbose && \
@@ -34,19 +34,19 @@ RUN echo "Starting ..." && \
     echo "Done JS!" && \
 
     echo "Starting AWS" && \
-    apt-get install -y python-pip groff-base && \
-    pip install -U awscli && \
+    apt-get -qq -y install python-pip groff-base && \
+    pip install -q -U awscli && \
     echo "Done AWS!" && \
 
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
-    apt-get remove --purge -y emacsen-common fakeroot file firebird2.5-common firebird2.5-common-doc \
+    apt-get -qq -y remove --purge emacsen-common fakeroot file firebird2.5-common firebird2.5-common-doc \
       firebird2.5-server-common man-db manpages manpages-dev \
       mysql-client-5.5 mysql-common mysql-server-5.5 mysql-server-core-5.5 odbcinst odbcinst1debian2 \
       patch po-debconf psmisc python-pip xauth xtrans-dev xz-utils zlib1g-dev && \
 
-    apt-get -y autoremove && \
-    apt-get clean && apt-get purge && \
+    apt-get -qq -y autoremove && \
+    apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     rm -rf /usr/share/doc /usr/share/locale/[a-df-z]* /usr/share/locale/e[a-lo-z]* /usr/share/locale/en@* /usr/share/locale/en_GB && \
 
