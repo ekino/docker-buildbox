@@ -21,7 +21,7 @@ RUN echo "Starting ..." && \
     echo "Done base install!" && \
 
     echo "Starting PHP" && \
-    apt-get -qq -y build-dep php5-cli postgresql-client && \
+    apt-get -qq -y build-dep php5-cli pgtop && \
     cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
     php-build -i development ${PHP_VERSION} "/root/.phpenv/versions/${PHP_VERSION}" && \
