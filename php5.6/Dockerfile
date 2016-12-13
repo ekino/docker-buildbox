@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     COMPOSER_NO_INTERACTION=1 \
     PATH=/root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PHP_VERSION=5.6.28 \
-    PHP_BUILD_CONFIGURE_OPTS=--with-pdo-pgsql \
+    PHP_BUILD_CONFIGURE_OPTS="--with-pdo-pgsql --disable-cgi" \
     PHP_BUILD_INSTALL_EXTENSION=apcu=4.0.11
 
 RUN echo "Starting ..." && \
@@ -27,7 +27,6 @@ RUN echo "Starting ..." && \
     php-build -i development ${PHP_VERSION} "/root/.phpenv/versions/${PHP_VERSION}" && \
     ln -s /root/.phpenv/versions/${PHP_VERSION} /root/.phpenv/versions/current && \
     rm -rf /root/.phpenv/versions/current/bin/phpdbg && \
-    rm -rf /root/.phpenv/versions/current/bin/php-cgi && \
 
     curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
     curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
