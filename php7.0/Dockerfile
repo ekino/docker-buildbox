@@ -16,12 +16,12 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev openssh-client && \
+      libmcrypt-dev libreadline-dev openssh-client pgtop && \
 
     echo "Done base install!" && \
 
     echo "Starting PHP" && \
-    apt-get -qq -y build-dep php5-cli pgtop && \
+    apt-get -qq -y build-dep php5-cli && \
     cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
     php-build -i development ${PHP_VERSION} "/root/.phpenv/versions/${PHP_VERSION}" && \
