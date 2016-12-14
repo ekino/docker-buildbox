@@ -1,0 +1,18 @@
+sudo: required
+dist: trusty
+language: go
+
+services:
+  - docker
+
+matrix:
+  include:
+    - env: IMAGE=node4.6
+    - env: IMAGE=node6.9
+    - env: IMAGE=node7.0
+    - env: IMAGE=java8
+    - env: IMAGE=php5.6
+    - env: IMAGE=php7.0
+
+script:
+    - docker build -t ${IMAGE} --no-cache ${IMAGE}
