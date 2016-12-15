@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PHP_BUILD_EXTRA_MAKE_ARGUMENTS=-j4 \
     COMPOSER_NO_INTERACTION=1 \
     PATH=/root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    PHP_VERSION=7.0.13 \
-    PHP_BUILD_CONFIGURE_OPTS="--with-pdo-pgsql --disable-cgi" \
+    PHP_VERSION=7.0.14 \
+    PHP_BUILD_CONFIGURE_OPTS="--with-pdo-pgsql" \
     PHP_BUILD_INSTALL_EXTENSION=apcu=5.1.7
 
 RUN echo "Starting ..." && \
@@ -24,9 +24,13 @@ RUN echo "Starting ..." && \
     apt-get -qq -y build-dep php5-cli && \
     cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
+
+    sed -i "/--enable-cgi/d" share/php-build/default_configure_options && \
+    sed -i "/--enable-phpdbg/d" share/php-build/default_configure_options && \
+    sed -i "/--enable-ftp/d" share/php-build/default_configure_options && \
+
     php-build -i development ${PHP_VERSION} "/root/.phpenv/versions/${PHP_VERSION}" && \
     ln -s /root/.phpenv/versions/${PHP_VERSION} /root/.phpenv/versions/current && \
-    rm -rf /root/.phpenv/versions/current/bin/phpdbg && \
 
     curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
     curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
@@ -48,7 +52,6 @@ RUN echo "Starting ..." && \
       openssl patch po-debconf psmisc python-pip x11-common x11proto-core-dev \
       x11proto-input-dev x11proto-kb-dev xauth xorg-sgml-doctools xtrans-dev xz-utils zlib1g-dev && \
 
-    apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     rm -rf /usr/share/doc /usr/share/locale/[a-df-z]* /usr/share/locale/e[a-lo-z]* /usr/share/locale/en@* /usr/share/locale/en_GB && \
