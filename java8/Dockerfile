@@ -19,7 +19,7 @@ RUN echo "Starting ..." && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
     apt-get -qq update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -qq -y install oracle-java8-installer oracle-java8-set-default maven && \
+    apt-get -qq -y install oracle-java8-installer=8u111+8u111arm-1~webupd8~0 oracle-java8-set-default=8u111+8u111arm-1~webupd8~0 maven && \
     echo "Done Java!" && \
 
     echo "Starting AWS" && \
