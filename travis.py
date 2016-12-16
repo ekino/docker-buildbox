@@ -27,23 +27,21 @@ commit_range = os.environ.get('TRAVIS_COMMIT_RANGE', "HEAD...HEAD").replace("...
 files = subprocess.Popen("git diff --name-only %s | sort | uniq" % commit_range, stdout=subprocess.PIPE, shell=True).stdout.read()
 language = os.environ.get("LANGUAGE")
 version = os.environ.get("VERSION")
-
-print "TRAVIS_BRANCH: %s" % os.environ.get('TRAVIS_BRANCH', False)
-print "TRAVIS_TAG: %s" % os.environ.get('TRAVIS_TAG', False)
-print "TRAVIS_PULL_REQUEST: %s" % os.environ.get('TRAVIS_PULL_REQUEST', False)
-print "TRAVIS_BRANCH: %s" % os.environ.get('TRAVIS_BRANCH', False)
-print "LANGUAGE: %s" % os.environ.get('LANGUAGE', False)
-print "VERSION: %s" % os.environ.get('VERSION', False)
-print "TRAVIS_COMMIT_RANGE: %s" % commit_range
-print "BASE IMAGE: %s" % base_image
-print "MODIFIED FILES: %s" % files
-
 is_tag = False
 is_pr = False
 is_release = False
 is_master = False
 start_build = False
 push_image = False
+
+print "TRAVIS_BRANCH: %s" % os.environ.get('TRAVIS_BRANCH', False)
+print "TRAVIS_TAG: %s" % os.environ.get('TRAVIS_TAG', False)
+print "TRAVIS_PULL_REQUEST: %s" % os.environ.get('TRAVIS_PULL_REQUEST', False)
+print "LANGUAGE: %s" % os.environ.get('LANGUAGE', False)
+print "VERSION: %s" % os.environ.get('VERSION', False)
+print "TRAVIS_COMMIT_RANGE: %s" % commit_range
+print "BASE IMAGE: %s" % base_image
+print "MODIFIED FILES: %s" % files
 
 if len(os.environ.get('TRAVIS_PULL_REQUEST', "")) > 0:
     is_pr = True
@@ -53,9 +51,10 @@ if len(os.environ.get('TRAVIS_TAG', "")) > 0:
     image = "ekino/docker-buildbox:%s-%s" % (base_image, os.environ.get('TRAVIS_TAG'))
     start_build = True # on tag build all images
     push_image = True
-elif os.environ.get('TRAVIS_BRANCH') == 'master' and not is_pr and not is_tag:
+elif os.environ.get('TRAVIS_BRANCH') == 'master' and not is_pr:
     is_master = True
     image = "ekino/docker-buildbox:latest-%s" % (base_image)
+    start_build = True
     push_image = True
 else:
     image = base_image
