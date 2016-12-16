@@ -4,8 +4,9 @@ MAINTAINER Thomas Rabaix <rabaix@ekino.com>
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     NVM_DIR=/root/.nvm \
-    PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    NODE_VERSION=7.0.0
+    PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+ARG NODE_VERSION
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -14,7 +15,6 @@ RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
       libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev && \
-
     gem install sass --verbose && \
     gem install scss_lint --verbose && \
 

@@ -34,12 +34,13 @@ is_master = False
 start_build = False
 push_image = False
 
-print "TRAVIS_BRANCH: %s" % os.environ.get('TRAVIS_BRANCH', False)
-print "TRAVIS_TAG: %s" % os.environ.get('TRAVIS_TAG', False)
-print "TRAVIS_PULL_REQUEST: %s" % os.environ.get('TRAVIS_PULL_REQUEST', False)
-print "LANGUAGE: %s" % os.environ.get('LANGUAGE', False)
-print "VERSION: %s" % os.environ.get('VERSION', False)
-print "TRAVIS_COMMIT_RANGE: %s" % commit_range
+print "TRAVIS_BRANCH=%s" % os.environ.get('TRAVIS_BRANCH', False)
+print "TRAVIS_TAG=%s" % os.environ.get('TRAVIS_TAG', False)
+print "TRAVIS_PULL_REQUEST=%s" % os.environ.get('TRAVIS_PULL_REQUEST', False)
+print "LANGUAGE=%s" % os.environ.get('LANGUAGE', False)
+print "VERSION=%s" % os.environ.get('VERSION', False)
+print "TRAVIS_COMMIT_RANGE=%s" % commit_range
+
 print "BASE IMAGE: %s" % base_image
 print "MODIFIED FILES: %s" % files
 
@@ -60,11 +61,17 @@ elif os.environ.get('TRAVIS_BRANCH') == 'master' and not is_pr:
 else:
     image = base_image
 
+if os.environ.get('TRAVIS_EVENT_TYPE') == "cron":
+    print " > This is a cron event"
+    image = "ekino/docker-buildbox:nightly-%s" % (base_image)
+    start_build = True
+    push_image = True
+
 if is_pr and is_tag:
     print "cannot be a tag and a pr"
     sys.exit(1)
 
-if (is_pr or is_master) and base_image in files:
+if (is_pr or is_master) and language in files:
     start_build = True
     push_image = is_master
 
@@ -78,19 +85,36 @@ print "start_build: %s" % start_build
 print "push_image: %s" % push_image
 
 if start_build:
-    if run_command("docker build -t %s --no-cache %s" % (image, base_image)) != 0:
+    build_args = ""
+    if language == "php":
+        build_args = "--build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
+
+    if language == "java":
+        build_args = "--build-arg JAVA_VERSION=%s" % os.environ.get("JAVA_VERSION")
+
+    if language == "node":
+        build_args = "--build-arg NODE_VERSION=%s" % os.environ.get("NODE_VERSION")
+
+    cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, language)
+
+    print "> Run: %s" % cmd
+
+    if run_command(cmd) != 0:
         print "fail to build the image"
         sys.exit(1)
 
     if language == "php":
+        print "> Testing PHP Image ...."
         run_command_exit("docker run --rm %s php --version" % image, "Error with php check")
         run_command_exit("docker run --rm %s composer --version" % image, "Error with composer check")
 
     if language == "java":
+        print "> Testing Java Image ...."
         run_command_exit("docker run --rm %s java -version" % image, "Error with java check")
         run_command_exit("docker run --rm %s mvn --version" % image, "Error with mvn check")
 
     if language == "node":
+        print "> Testing Node Image ...."
         run_command_exit("docker run --rm %s node --version" % image, "Error with node check")
         run_command_exit("docker run --rm %s npm --version" % image, "Error with npm check")
         run_command_exit("docker run --rm %s sass --version" % image, "Error with sass check")

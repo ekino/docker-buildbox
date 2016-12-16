@@ -4,6 +4,8 @@ MAINTAINER Stephane Leclercq <leclercq@ekino.com>
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8
 
+ARG JAVA_VERSION
+
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
     echo "deb-src http://httpredir.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
@@ -19,7 +21,7 @@ RUN echo "Starting ..." && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
     apt-get -qq update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -qq -y install oracle-java8-installer=8u111+8u111arm-1~webupd8~0 oracle-java8-set-default=8u111+8u111arm-1~webupd8~0 maven && \
+    apt-get -qq -y install oracle-java8-installer=${JAVA_VERSION} oracle-java8-set-default=${JAVA_VERSION} maven && \
     echo "Done Java!" && \
 
     echo "Starting AWS" && \
