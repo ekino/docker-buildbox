@@ -1,6 +1,6 @@
 sudo: required
 dist: trusty
-language: go
+language: python
 
 services:
   - docker
@@ -15,50 +15,4 @@ matrix:
     - env: LANGUAGE=php  VERSION=7.0
 
 script:
-
-    # compute basic information
-    - FILES=`git diff --name-only ${TRAVIS_COMMIT_RANGE/.../..} | sort | uniq`
-    - export IMAGE=${LANGUAGE}${VERSION}
-    - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then export IMAGE="ekino/docker-buildbox:latest-${IMAGE}"; fi
-    - if [ "$TRAVIS_TAG" != "" ]; then export IMAGE="ekino/docker-buildbox:${TRAVIS_TAG}-${IMAGE}"; fi
-
-    # print some travis information
-    - |
-        echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}";
-        echo "TRAVIS_TAG: ${TRAVIS_TAG}";
-        echo "TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST}";
-        echo "TRAVIS_COMMIT_RANGE: ${TRAVIS_COMMIT_RANGE}";
-        echo "IMAGE: ${IMAGE}";
-        echo "FILES: ${FILES}";
-
-
-    # build and test image if modified files available
-    - if [[ $FILES == *"${LANGUAGE}${VERSION}"* ]]; then
-        docker build -t ${IMAGE} --no-cache ${LANGUAGE}${VERSION};
-
-        if [ "${LANGUAGE}" == "php" ]; then
-            docker run --rm ${IMAGE} php --version || exit 1;
-            docker run --rm ${IMAGE} composer --version || exit 1;
-        fi
-
-        if [ "${LANGUAGE}" == "java" ]; then
-            docker run --rm ${IMAGE} java -version || exit 1;
-            docker run --rm ${IMAGE} mvn --version || exit 1;
-        fi
-
-        if [ "${LANGUAGE}" == "node" ]; then
-            docker run --rm ${IMAGE} node --version || exit 1;
-            docker run --rm ${IMAGE} npm --version  || exit 1;
-            docker run --rm ${IMAGE} sass --version || exit 1;
-        fi
-      fi
-
-    # push image to repository if it is a tag or a merge into the master branch
-    - |
-        if [ "$TRAVIS_TAG" != "" ]; then
-            docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit 1;
-            docker push $IMAGE || exit 1;
-        elif [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
-            docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit 1;
-            docker push ${IMAGE} || exit 1;
-        fi
+    - python travis.py
