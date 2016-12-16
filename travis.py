@@ -43,15 +43,18 @@ print "TRAVIS_COMMIT_RANGE: %s" % commit_range
 print "BASE IMAGE: %s" % base_image
 print "MODIFIED FILES: %s" % files
 
-if len(os.environ.get('TRAVIS_PULL_REQUEST', "")) > 0:
+if os.environ.get('TRAVIS_PULL_REQUEST') != "false":
+    print " > This is a PR"
     is_pr = True
 
 if len(os.environ.get('TRAVIS_TAG', "")) > 0:
+    print " > This is a Tag"
     is_tag = True
     image = "ekino/docker-buildbox:%s-%s" % (base_image, os.environ.get('TRAVIS_TAG'))
     start_build = True # on tag build all images
     push_image = True
 elif os.environ.get('TRAVIS_BRANCH') == 'master' and not is_pr:
+    print " > This is a master commit"
     is_master = True
     image = "ekino/docker-buildbox:latest-%s" % (base_image)
     start_build = True
