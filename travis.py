@@ -57,8 +57,6 @@ elif os.environ.get('TRAVIS_BRANCH') == 'master' and not is_pr:
     print " > This is a master commit"
     is_master = True
     image = "ekino/docker-buildbox:latest-%s" % (base_image)
-    start_build = True
-    push_image = True
 else:
     image = base_image
 
@@ -68,6 +66,8 @@ if is_pr and is_tag:
 
 if (is_pr or is_master) and base_image in files:
     start_build = True
+    push_image = is_master
+
 
 print "is_pr: %s" % is_pr
 print "is_tag: %s" % is_tag
