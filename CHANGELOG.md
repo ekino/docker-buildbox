@@ -6,7 +6,13 @@ Versions
 
 * Slightly reduce the size of the Java image
 * Add the AWS CLI to all images
-* Add packages ocaml & libelf-dev for FlowType checking
+* Add packages ocaml & libelf-dev for FlowType (Node) checking
+* Upgrade Node versions: 4.7.0, 7.2.1
+* Upgrade PHP: 7.0.14
+* Fix Java Version to 8u111+8u111arm-1~webupd8~0
+* Fix composer version to 1.2.4
+* Migrate builds and tests to TravisCI, add support for nightly build
+* Tweak PHP build configuration
 
 2016.12.05
 ----------
@@ -19,7 +25,6 @@ Versions
 ----------
 
 * Use Debian 8.6 as base image
-* Use only major version, php7.0 => php7, etc ...
 * Upgrade PHP versions: 5.6.28, 7.0.13
 * Add driver pdo_pgsql in PHP images
 * Add cache APCu in PHP images
