@@ -22,6 +22,11 @@ RUN echo "Starting ..." && \
 
     echo "Done base install!" && \
 
+    echo "Install CI Helper" && \
+    curl -L https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    chmod 755 /usr/bin/ci-helper && \
+    echo "Done install CI Helper" && \
+
     echo "Starting PHP" && \
     export PHP_BUILD_INSTALL_EXTENSION=${PHP_BUILD_INSTALL_EXTENSION} && \
     apt-get -qq -y build-dep php5-cli && \
