@@ -4,7 +4,7 @@ Versions
 2017-01-DEV
 -----------
 
-* to do ;)
+* Add CI-Helper 0.0.1 into base image
 
 2016.12-19
 ----------

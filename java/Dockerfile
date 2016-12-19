@@ -15,6 +15,11 @@ RUN echo "Starting ..." && \
 
     echo "Done base install!" && \
 
+    echo "Install CI Helper" && \
+    curl -L https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    chmod 755 /usr/bin/ci-helper && \
+    echo "Done install CI Helper" && \
+
     echo "Starting Java" && \
     echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
     echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \

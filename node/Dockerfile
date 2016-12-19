@@ -20,6 +20,11 @@ RUN echo "Starting ..." && \
 
     echo "Done base install!" && \
 
+    echo "Install CI Helper" && \
+    curl -L https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    chmod 755 /usr/bin/ci-helper && \
+    echo "Done install CI Helper" && \
+
     echo "Starting Javascript..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v0.32.1 && \
     . /root/.nvm/nvm.sh && \

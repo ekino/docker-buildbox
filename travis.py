@@ -103,6 +103,8 @@ if start_build:
 
     run_command_exit(cmd, "fail to build the image")
 
+    run_command_exit("docker run --rm %s ci-helper version -e" % image, "Error with ci-helper installation")
+
     if language == "php":
         print "> Testing PHP Image ...."
         run_command_exit("docker run --rm %s php --version" % image, "Error with php check")
