@@ -1,9 +1,11 @@
 import os, subprocess, sys
 
+
 def run_command_exit(command, exit_message):
     if run_command(command) != 0:
         print exit_message
         sys.exit(1)
+
 
 def run_command(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
@@ -17,6 +19,7 @@ def run_command(command):
     rc = process.poll()
 
     return rc
+
 
 if not os.environ.get('LANGUAGE', False) or not os.environ.get('VERSION', False):
     print "please provide a LANGUAGE and a VERSION env variable"
@@ -52,7 +55,7 @@ if len(os.environ.get('TRAVIS_TAG', "")) > 0:
     print " > This is a Tag"
     is_tag = True
     image = "ekino/docker-buildbox:%s-%s" % (base_image, os.environ.get('TRAVIS_TAG'))
-    start_build = True # on tag build all images
+    start_build = True  # on tag build all images
     push_image = True
 elif os.environ.get('TRAVIS_BRANCH') == 'master' and not is_pr:
     print " > This is a master commit"
@@ -74,7 +77,6 @@ if is_pr and is_tag:
 if (is_pr or is_master) and language in files:
     start_build = True
     push_image = is_master
-
 
 print "is_pr: %s" % is_pr
 print "is_tag: %s" % is_tag
@@ -99,9 +101,7 @@ if start_build:
 
     print "> Run: %s" % cmd
 
-    if run_command(cmd) != 0:
-        print "fail to build the image"
-        sys.exit(1)
+    run_command_exit(cmd, "fail to build the image")
 
     if language == "php":
         print "> Testing PHP Image ...."
@@ -120,10 +120,5 @@ if start_build:
         run_command_exit("docker run --rm %s sass --version" % image, "Error with sass check")
 
 if push_image:
-    if run_command("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD'))) != 0:
-        print "unable to login to docker"
-        sys.exit(1)
-
-    if run_command("docker push %s" % image) != 0:
-        print "unable to login to docker"
-        sys.exit(1)
+    run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
+    run_command_exit("docker push %s" % image, "unable to login to docker")
