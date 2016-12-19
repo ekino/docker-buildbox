@@ -1,8 +1,13 @@
 Versions
 ========
 
-2016.12-dev
+2017-01-DEV
 -----------
+
+* to do ;)
+
+2016.12-19
+----------
 
 * Slightly reduce the size of the Java image
 * Add the AWS CLI to all images
