@@ -4,6 +4,7 @@ Versions
 2017-01-DEV
 -----------
 
+* Add a new AWS image with awscli and python libs
 * Add CI-Helper 0.0.1 into base image
 
 2016.12-19

@@ -13,6 +13,7 @@ matrix:
     - env: LANGUAGE=java VERSION=8   JAVA_VERSION=8u111+8u111arm-1~webupd8~0
     - env: LANGUAGE=php  VERSION=5.6 PHP_VERSION=5.6.28 PHP_BUILD_INSTALL_EXTENSION=apcu=4.0.11
     - env: LANGUAGE=php  VERSION=7.0 PHP_VERSION=7.0.13 PHP_BUILD_INSTALL_EXTENSION=apcu=5.1.7
+    - env: LANGUAGE=aws  VERSION=1
 
 script:
     - python travis.py
