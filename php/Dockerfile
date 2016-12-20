@@ -23,7 +23,7 @@ RUN echo "Starting ..." && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
-    curl -L https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
 
@@ -47,8 +47,8 @@ RUN echo "Starting ..." && \
     ln -s /root/.phpenv/versions/${PHP_VERSION} /root/.phpenv/versions/current && \
 
     ls -lsah /root/.phpenv/versions/current/bin && \
-    curl https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
-    curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
+    curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
+    curl -sSL http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
 
     echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /root/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
 
