@@ -18,3 +18,4 @@ The ``travis.py`` script try to be clever:
  - PR: only images with modified files are built.
  - Merge to master: only images with modified files are built and pushed to the docker registry with the tag ``latest-IMAGE``
  - TAG: all images are built and pushed to the docker registry
+ - Nightly: all images are built and pushed to the docker registry with the tag ``nightly-IMAGE``
