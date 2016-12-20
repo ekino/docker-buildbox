@@ -25,11 +25,13 @@ if not os.environ.get('LANGUAGE', False) or not os.environ.get('VERSION', False)
     print "please provide a LANGUAGE and a VERSION env variable"
     sys.exit(1)
 
-base_image = "%s%s" % (os.environ.get('LANGUAGE', False), os.environ.get('VERSION', False))
 commit_range = os.environ.get('TRAVIS_COMMIT_RANGE', "HEAD...HEAD").replace("...", "..")
 files = subprocess.Popen("git diff --name-only %s | sort | uniq" % commit_range, stdout=subprocess.PIPE, shell=True).stdout.read()
 language = os.environ.get("LANGUAGE")
 version = os.environ.get("VERSION")
+base_image = "%s%s" % (language, version)
+if language == "aws":
+    base_image = "aws"
 is_tag = False
 is_pr = False
 is_release = False
@@ -40,8 +42,8 @@ push_image = False
 print "TRAVIS_BRANCH=%s" % os.environ.get('TRAVIS_BRANCH', False)
 print "TRAVIS_TAG=%s" % os.environ.get('TRAVIS_TAG', False)
 print "TRAVIS_PULL_REQUEST=%s" % os.environ.get('TRAVIS_PULL_REQUEST', False)
-print "LANGUAGE=%s" % os.environ.get('LANGUAGE', False)
-print "VERSION=%s" % os.environ.get('VERSION', False)
+print "LANGUAGE=%s" % language
+print "VERSION=%s" % version
 print "TRAVIS_COMMIT_RANGE=%s" % commit_range
 
 print "BASE IMAGE: %s" % base_image
@@ -120,6 +122,12 @@ if start_build:
         run_command_exit("docker run --rm %s node --version" % image, "Error with node check")
         run_command_exit("docker run --rm %s npm --version" % image, "Error with npm check")
         run_command_exit("docker run --rm %s sass --version" % image, "Error with sass check")
+
+    if language == "aws":
+        print "> Testing AWS Image ...."
+        run_command_exit("docker run --rm %s aws --version" % image, "Error with awscli check")
+        run_command_exit("docker run --rm %s python -c \"import boto3\"" % image, "Error with boto3 check")
+        run_command_exit("docker run --rm %s python -c \"import yaml\"" % image, "Error with PyYAML check")
 
 if push_image:
     run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
