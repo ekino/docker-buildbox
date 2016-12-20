@@ -21,7 +21,7 @@ RUN echo "Starting ..." && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
-    curl -L https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
 
@@ -34,7 +34,7 @@ RUN echo "Starting ..." && \
 
     npm install -g npm@3 && \
 
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb http://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn && \
 
