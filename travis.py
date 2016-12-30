@@ -90,6 +90,7 @@ print "push_image: %s" % push_image
 
 if start_build:
     build_args = ""
+    run_args = "--rm "
     if language == "php":
         build_args = "--build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
 
@@ -99,35 +100,44 @@ if start_build:
     if language == "node":
         build_args = "--build-arg NODE_VERSION=%s" % os.environ.get("NODE_VERSION")
 
+    if language == "dind-aws":
+        run_args = "--rm --privileged"
+
     cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, language)
 
     print "> Run: %s" % cmd
 
     run_command_exit(cmd, "fail to build the image")
 
-    run_command_exit("docker run --rm %s ci-helper version -e" % image, "Error with ci-helper installation")
+    run_command_exit("docker run %s %s ci-helper version -e" % (run_args, image), "Error with ci-helper installation")
 
     if language == "php":
         print "> Testing PHP Image ...."
-        run_command_exit("docker run --rm %s php --version" % image, "Error with php check")
-        run_command_exit("docker run --rm %s composer --version" % image, "Error with composer check")
+        run_command_exit("docker run %s %s php --version" % (run_args, image), "Error with php check")
+        run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
 
     if language == "java":
         print "> Testing Java Image ...."
-        run_command_exit("docker run --rm %s java -version" % image, "Error with java check")
-        run_command_exit("docker run --rm %s mvn --version" % image, "Error with mvn check")
+        run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
+        run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
 
     if language == "node":
         print "> Testing Node Image ...."
-        run_command_exit("docker run --rm %s node --version" % image, "Error with node check")
-        run_command_exit("docker run --rm %s npm --version" % image, "Error with npm check")
-        run_command_exit("docker run --rm %s sass --version" % image, "Error with sass check")
+        run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
+        run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
+        run_command_exit("docker run %s %s sass --version" % (run_args, image), "Error with sass check")
 
     if language == "aws":
         print "> Testing AWS Image ...."
-        run_command_exit("docker run --rm %s aws --version" % image, "Error with awscli check")
-        run_command_exit("docker run --rm %s python -c \"import boto3\"" % image, "Error with boto3 check")
-        run_command_exit("docker run --rm %s python -c \"import yaml\"" % image, "Error with PyYAML check")
+        run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
+        run_command_exit("docker run %s %s python -c \"import boto3\"" % (run_args, image), "Error with boto3 check")
+        run_command_exit("docker run %s %s python -c \"import yaml\"" % (run_args, image), "Error with PyYAML check")
+
+    if language == "dind-aws":
+        print "> Testing DIND - AWS Image ...."
+        run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
+        run_command_exit("docker run %s %s docker --version" % (run_args, image), "Error with docker check (should be installed by gitlab/dind image)")
+        run_command_exit("docker run %s %s docker-compose --version" % (run_args, image), "Error with docker-compose check (should be installed by gitlab/dind image)")
 
 if push_image:
     run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
