@@ -25,13 +25,17 @@ if not os.environ.get('LANGUAGE', False) or not os.environ.get('VERSION', False)
     print "please provide a LANGUAGE and a VERSION env variable"
     sys.exit(1)
 
+ci_helper_version = os.environ.get("CI_HELPER_VERSION", "0.0.2")
+
 commit_range = os.environ.get('TRAVIS_COMMIT_RANGE', "HEAD...HEAD").replace("...", "..")
 files = subprocess.Popen("git diff --name-only %s | sort | uniq" % commit_range, stdout=subprocess.PIPE, shell=True).stdout.read()
 language = os.environ.get("LANGUAGE")
 version = os.environ.get("VERSION")
 base_image = "%s%s" % (language, version)
-if language == "aws":
-    base_image = "aws"
+
+if language in ["aws", "dind-aws"]:
+    base_image = language
+
 is_tag = False
 is_pr = False
 is_release = False
@@ -44,6 +48,7 @@ print "TRAVIS_TAG=%s" % os.environ.get('TRAVIS_TAG', False)
 print "TRAVIS_PULL_REQUEST=%s" % os.environ.get('TRAVIS_PULL_REQUEST', False)
 print "LANGUAGE=%s" % language
 print "VERSION=%s" % version
+print "CI_HELPER_VERSION=%s" % ci_helper_version
 print "TRAVIS_COMMIT_RANGE=%s" % commit_range
 
 print "BASE IMAGE: %s" % base_image
@@ -89,19 +94,19 @@ print "start_build: %s" % start_build
 print "push_image: %s" % push_image
 
 if start_build:
-    build_args = ""
-    run_args = "--rm "
+    build_args = "--build-arg CI_HELPER_VERSION=%s" % ci_helper_version
+    run_args = "--rm"
     if language == "php":
-        build_args = "--build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
+        build_args = "%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (build_args, os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
 
     if language == "java":
-        build_args = "--build-arg JAVA_VERSION=%s" % os.environ.get("JAVA_VERSION")
+        build_args = "%s --build-arg JAVA_VERSION=%s" % (build_args, os.environ.get("JAVA_VERSION"))
 
     if language == "node":
-        build_args = "--build-arg NODE_VERSION=%s" % os.environ.get("NODE_VERSION")
+        build_args = "%s --build-arg NODE_VERSION=%s" % (build_args, os.environ.get("NODE_VERSION"))
 
     if language == "dind-aws":
-        run_args = "--rm --privileged"
+        run_args = "%s --privileged" % run_args
 
     cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, language)
 

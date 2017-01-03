@@ -1,6 +1,8 @@
 FROM alpine:3.4
 MAINTAINER Frank Pavageau <fpavageau@ekino.com>
 
+ARG CI_HELPER_VERSION
+
 WORKDIR /root
 RUN echo "Install AWS" && \
     apk add -q --no-cache bash ca-certificates curl git openssh-client python py-pip && \
@@ -12,6 +14,6 @@ RUN echo "Install AWS" && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk -O && \
     apk add -q glibc-2.23-r3.apk && \
     rm /etc/apk/keys/sgerrand.rsa.pub glibc-2.23-r3.apk && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/0.0.1/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper"
