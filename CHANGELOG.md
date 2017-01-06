@@ -13,6 +13,9 @@ Versions
 * Add CI-Helper 0.0.2 into base image
 * Add a new DIND AWS image with AWS Cli
 * Add Modd 0.0.4 into base image
+* Upgrade Node version: 4.7.2, 6.9.4, 7.4.0
+* Upgrade PHP version: 5.6.29, 7.0.14
+* Upgrade composer version: 1.3.0
 
 2016.12-19
 ----------
