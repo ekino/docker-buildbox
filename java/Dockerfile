@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 ARG JAVA_VERSION
 ARG CI_HELPER_VERSION
+ARG MODD_VERSION
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -20,6 +21,11 @@ RUN echo "Starting ..." && \
     curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
+
+    echo "Install Modd" && \
+    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
+    chmod 755 /usr/bin/modd && \
+    echo "Done Install Modd" && \
 
     echo "Starting Java" && \
     echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \

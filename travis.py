@@ -81,7 +81,7 @@ if is_pr and is_tag:
     print "cannot be a tag and a pr"
     sys.exit(1)
 
-if (is_pr or is_master) and language in files:
+if (is_pr or is_master) and (language in files or ".travis.yml" in files):
     start_build = True
     push_image = is_master
 
@@ -97,13 +97,13 @@ if start_build:
     build_args = "--build-arg CI_HELPER_VERSION=%s" % ci_helper_version
     run_args = "--rm"
     if language == "php":
-        build_args = "%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (build_args, os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
+        build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
 
     if language == "java":
-        build_args = "%s --build-arg JAVA_VERSION=%s" % (build_args, os.environ.get("JAVA_VERSION"))
+        build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("JAVA_VERSION"))
 
     if language == "node":
-        build_args = "%s --build-arg NODE_VERSION=%s" % (build_args, os.environ.get("NODE_VERSION"))
+        build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("NODE_VERSION"))
 
     if language == "dind-aws":
         run_args = "%s --privileged" % run_args
@@ -120,17 +120,20 @@ if start_build:
         print "> Testing PHP Image ...."
         run_command_exit("docker run %s %s php --version" % (run_args, image), "Error with php check")
         run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
+        run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
     if language == "java":
         print "> Testing Java Image ...."
         run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
         run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
+        run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
     if language == "node":
         print "> Testing Node Image ...."
         run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
         run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
         run_command_exit("docker run %s %s sass --version" % (run_args, image), "Error with sass check")
+        run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
     if language == "aws":
         print "> Testing AWS Image ...."

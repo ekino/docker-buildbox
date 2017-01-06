@@ -12,6 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ARG PHP_VERSION
 ARG PHP_BUILD_INSTALL_EXTENSION
 ARG CI_HELPER_VERSION
+ARG MODD_VERSION
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -27,6 +28,11 @@ RUN echo "Starting ..." && \
     curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
+
+    echo "Install Modd" && \
+    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
+    chmod 755 /usr/bin/modd && \
+    echo "Done Install Modd" && \
 
     echo "Starting PHP" && \
     export PHP_BUILD_INSTALL_EXTENSION=${PHP_BUILD_INSTALL_EXTENSION} && \

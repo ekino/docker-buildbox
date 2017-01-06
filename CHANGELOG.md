@@ -7,7 +7,8 @@ Versions
 * Add a new AWS image with awscli and python libs
 * Add CI-Helper 0.0.1 into base image
 * Add a new DIND AWS image with AWS Cli
-* Bump CI-Helper to 0.0.2 on all images
+* Add CI-Helper to 0.0.2 on all images
+* Add Modd 0.0.4 into base image
 
 2016.12-19
 ----------
