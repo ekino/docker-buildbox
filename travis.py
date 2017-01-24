@@ -105,6 +105,9 @@ if start_build:
     if language == "node":
         build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("NODE_VERSION"))
 
+    if language == "golang":
+        build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("GLIDE_VERSION"))
+
     if language == "dind-aws":
         run_args = "%s --privileged" % run_args
 
@@ -117,35 +120,43 @@ if start_build:
     run_command_exit("docker run %s %s ci-helper version -e" % (run_args, image), "Error with ci-helper installation")
 
     if language == "php":
-        print "> Testing PHP Image ...."
+        print "> Testing PHP Image..."
         run_command_exit("docker run %s %s php --version" % (run_args, image), "Error with php check")
         run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
         run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
     if language == "java":
-        print "> Testing Java Image ...."
+        print "> Testing Java Image..."
         run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
         run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
         run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
     if language == "node":
-        print "> Testing Node Image ...."
+        print "> Testing Node Image..."
         run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
         run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
         run_command_exit("docker run %s %s sass --version" % (run_args, image), "Error with sass check")
         run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
     if language == "aws":
-        print "> Testing AWS Image ...."
+        print "> Testing AWS Image..."
         run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
         run_command_exit("docker run %s %s python -c \"import boto3\"" % (run_args, image), "Error with boto3 check")
         run_command_exit("docker run %s %s python -c \"import yaml\"" % (run_args, image), "Error with PyYAML check")
 
     if language == "dind-aws":
-        print "> Testing DIND - AWS Image ...."
+        print "> Testing DIND - AWS Image..."
         run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
         run_command_exit("docker run %s %s docker --version" % (run_args, image), "Error with docker check (should be installed by gitlab/dind image)")
         run_command_exit("docker run %s %s docker-compose --version" % (run_args, image), "Error with docker-compose check (should be installed by gitlab/dind image)")
+
+    if language == "golang":
+        print "> Testing Golang Image..."
+        run_command_exit("docker run %s %s aws --version" % (run_args, image),   "Error with awscli check")
+        run_command_exit("docker run %s %s go version" % (run_args, image),      "Error with go check")
+        run_command_exit("docker run %s %s glide --version" % (run_args, image), "Error with glide check")
+        run_command_exit("docker run %s %s gin --version" % (run_args, image),   "Error with gin check")
+        run_command_exit("docker run %s %s modd --version" % (run_args, image),  "Error with modd check")
 
 if push_image:
     run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
