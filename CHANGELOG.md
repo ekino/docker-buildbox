@@ -5,6 +5,7 @@ Versions
 -----------
 
 * To do .. update version ...
+* Add a new Golang image
 
 2017-01-06
 ----------

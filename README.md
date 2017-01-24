@@ -25,6 +25,10 @@ Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS C
 
 Contains PHP (installed in the PHP_VERSION env var value) within a phpenv, composer, php-cs-fixer, AWS Cli and CI Helper.
 
+### Golang
+
+Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
+
 ## Versions
 
 Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
