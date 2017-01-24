@@ -4,6 +4,11 @@ Versions
 2017-02-DEV
 -----------
 
+* Add PHP version: 7.1.1
+* Remove PHP version: 7.0.14
+* Upgrade PHP version: 5.6.30
+* Upgrade APCu version: 5.1.8
+* Upgrade composer version: 1.3.1
 * To do .. update version ...
 * Add a new Golang image
 
