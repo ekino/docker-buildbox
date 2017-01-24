@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     COMPOSER_NO_INTERACTION=1 \
     PATH=/root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PHP_BUILD_CONFIGURE_OPTS="--with-pdo-pgsql --disable-phpdbg --disable-cgi" \
-    COMPOSER_VERSION=1.3.0
+    COMPOSER_VERSION=1.3.1
 
 ARG PHP_VERSION
 ARG PHP_BUILD_INSTALL_EXTENSION
