@@ -28,12 +28,14 @@ RUN echo "Starting ..." && \
     echo "Done Install Modd" && \
 
     echo "Starting Java" && \
-    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
-    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
+    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java.list && \
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list && \
+    echo "deb http://ppa.launchpad.net/andrei-pozolotin/maven3/ubuntu trusty main" > /etc/apt/sources.list.d/maven3.list && \
+    echo "deb-src http://ppa.launchpad.net/andrei-pozolotin/maven3/ubuntu trusty main" >> /etc/apt/sources.list.d/maven3.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 68B166DC && \
     apt-get -qq update && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -qq -y install oracle-java8-installer=${JAVA_VERSION} oracle-java8-set-default=${JAVA_VERSION} maven && \
+    apt-get -qq -y install oracle-java8-installer=${JAVA_VERSION} oracle-java8-set-default=${JAVA_VERSION} maven3 && \
     echo "Done Java!" && \
 
     echo "Starting AWS" && \

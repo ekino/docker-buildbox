@@ -9,6 +9,8 @@ Versions
 * Upgrade PHP version: 5.6.30
 * Upgrade APCu version: 5.1.8
 * Upgrade composer version: 1.3.1
+* Upgrade Java version: 8u121
+* Upgrade Maven version: 3.3.9
 * To do .. update version ...
 * Add a new Golang image
 
