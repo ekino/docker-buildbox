@@ -4,6 +4,7 @@ Versions
 2017-02-DEV
 -----------
 
+* Add PHP extension for Redis
 * Add PHP version: 7.1.1
 * Remove PHP version: 7.0.14
 * Upgrade PHP version: 5.6.30

@@ -13,6 +13,7 @@ ARG PHP_VERSION
 ARG PHP_BUILD_INSTALL_EXTENSION
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
+ARG REDIS_VERSION
 
 RUN echo "Starting ..." && \
     echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -30,14 +31,14 @@ RUN echo "Starting ..." && \
     echo "Done install CI Helper" && \
 
     echo "Install Modd" && \
-    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
+    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd && \
     chmod 755 /usr/bin/modd && \
     echo "Done Install Modd" && \
 
     echo "Starting PHP" && \
     export PHP_BUILD_INSTALL_EXTENSION=${PHP_BUILD_INSTALL_EXTENSION} && \
     apt-get -qq -y build-dep php5-cli && \
-    cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh  && \
+    cd /root && git clone https://github.com/CHH/phpenv.git && cd phpenv && ./bin/phpenv-install.sh && \
     cd /root && git clone git://github.com/php-build/php-build && cd php-build && ./install.sh && \
 
     sed -i "/--enable-cgi/d" share/php-build/default_configure_options && \
@@ -54,10 +55,14 @@ RUN echo "Starting ..." && \
     ln -s /root/.phpenv/versions/${PHP_VERSION} /root/.phpenv/versions/current && \
 
     ls -lsah /root/.phpenv/versions/current/bin && \
-    curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x  /usr/local/bin/composer && \
-    curl -sSL http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x  /usr/local/bin/php-cs-fixer && \
+    curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
+    curl -sSL http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
 
     echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /root/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
+
+    curl -sSL https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp && \
+    cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make install && \
+    echo "extension=redis.so" > /root/.phpenv/versions/${PHP_VERSION}/etc/conf.d/redis.ini && \
 
     echo "Done PHP!" && \
 

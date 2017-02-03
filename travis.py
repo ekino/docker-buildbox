@@ -97,7 +97,7 @@ if start_build:
     build_args = "--build-arg CI_HELPER_VERSION=%s" % ci_helper_version
     run_args = "--rm"
     if language == "php":
-        build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"))
+        build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s --build-arg REDIS_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"), os.environ.get("REDIS_VERSION"))
 
     if language == "java":
         build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("JAVA_VERSION"))
