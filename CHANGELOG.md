@@ -1,18 +1,23 @@
 Versions
 ========
 
-2017-02-DEV
+2017-03-DEV
 -----------
+
+* To do ... update version ...
+
+2017-02-07
+----------
 
 * Add PHP extension for Redis
 * Add PHP version: 7.1.1
 * Remove PHP version: 7.0.14
 * Upgrade PHP version: 5.6.30
 * Upgrade APCu version: 5.1.8
-* Upgrade composer version: 1.3.1
+* Upgrade composer version: 1.3.2
 * Upgrade Java version: 8u121
 * Upgrade Maven version: 3.3.9
-* To do .. update version ...
+* Upgrade Node version: 4.7.3, 6.9.5, 7.5.0
 * Add a new Golang image
 
 2017-01-06
