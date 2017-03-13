@@ -4,6 +4,7 @@ Versions
 2017-03-DEV
 -----------
 
+* Upgrade Java version: 8u121-1~webupd8~2
 * To do ... update version ...
 
 2017-02-07
