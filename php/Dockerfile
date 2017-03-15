@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PHP_BUILD_EXTRA_MAKE_ARGUMENTS=-j2 \
     COMPOSER_NO_INTERACTION=1 \
     PATH=/root/.phpenv/versions/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    PHP_BUILD_CONFIGURE_OPTS="--with-pdo-pgsql --disable-phpdbg --disable-cgi" \
+    PHP_BUILD_CONFIGURE_OPTS="--with-pdo-pgsql --disable-phpdbg --disable-cgi --enable-intl " \
     COMPOSER_VERSION=1.3.2
 
 ARG PHP_VERSION
