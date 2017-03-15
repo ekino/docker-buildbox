@@ -4,7 +4,8 @@ Versions
 2017-03-DEV
 -----------
 
-* Upgrade Java version: 8u121-1~webupd8~2
+* Upgrade Java version: 8u121-1\~webupd8\~2
+* Add PHP extension: intl
 * To do ... update version ...
 
 2017-02-07
