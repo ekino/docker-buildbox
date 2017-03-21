@@ -6,6 +6,7 @@ Versions
 
 * Upgrade Java version: 8u121-1\~webupd8\~2
 * Add PHP extension: intl
+* Add bzip2 into Node, Java and PHP images
 * To do ... update version ...
 
 2017-02-07
