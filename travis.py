@@ -25,7 +25,7 @@ if not os.environ.get('LANGUAGE', False) or not os.environ.get('VERSION', False)
     print "please provide a LANGUAGE and a VERSION env variable"
     sys.exit(1)
 
-ci_helper_version = os.environ.get("CI_HELPER_VERSION", "0.0.2")
+ci_helper_version = os.environ.get("CI_HELPER_VERSION", "0.0.3")
 
 commit_range = os.environ.get('TRAVIS_COMMIT_RANGE', "HEAD...HEAD").replace("...", "..")
 files = subprocess.Popen("git diff --name-only %s | sort | uniq" % commit_range, stdout=subprocess.PIPE, shell=True).stdout.read()

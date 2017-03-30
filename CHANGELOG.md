@@ -7,7 +7,9 @@ Versions
 * Upgrade Java version: 8u121-1\~webupd8\~2
 * Add PHP extension: intl
 * Add bzip2 into Node, Java and PHP images
-* To do ... update version ...
+* Upgrade ci-helper to version 0.0.3 to support gitlab 9.x
+* Update PHP version: 7.1.3
+* Update Node version: 4.8.1, 6.10.1, 7.8.0 
 
 2017-02-07
 ----------
