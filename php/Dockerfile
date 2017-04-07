@@ -57,6 +57,7 @@ RUN echo "Starting ..." && \
     ls -lsah /root/.phpenv/versions/current/bin && \
     curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
     curl -sSL http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
+    composer global require "hirak/prestissimo:^0.3" && \
 
     echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /root/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
 
