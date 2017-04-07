@@ -5,6 +5,8 @@ Versions
 -----------
 
 * Add notes here
+* Add composer hirak/prestissimo plugin
+
 
 2017-03-30
 ----------
