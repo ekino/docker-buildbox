@@ -1,12 +1,12 @@
 Versions
 ========
 
-2017-0X-DEV
+2017-04-DEV
 -----------
 
 * Add notes here
+* Add a new Ruby image
 * Add composer hirak/prestissimo plugin
-
 
 2017-03-30
 ----------
