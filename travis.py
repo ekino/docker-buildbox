@@ -158,6 +158,11 @@ if start_build:
         run_command_exit("docker run %s %s gin --version" % (run_args, image),   "Error with gin check")
         run_command_exit("docker run %s %s modd --version" % (run_args, image),  "Error with modd check")
 
+    if language == "ruby":
+        print "> Testing Ruby Image..."
+        run_command_exit("docker run %s %s ruby --version" % (run_args, image),   "Error with ruby check")
+        run_command_exit("docker run %s %s bundle --version" % (run_args, image), "Error with bundle check")
+
 if push_image:
     run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
     run_command_exit("docker push %s" % image, "unable to login to docker")

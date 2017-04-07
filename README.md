@@ -13,6 +13,10 @@ Contains AWS Cli + CI Helper
 
 Adds AWS Cli & CI Helper to gitlab's dind image (to run docker in a gitlab runner).
 
+### Golang
+
+Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
+
 ### Java
 
 Contains AWS Cli, CI Helper, and Java 8.
@@ -25,9 +29,9 @@ Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS C
 
 Contains PHP (installed in the PHP_VERSION env var value) within a phpenv, composer, php-cs-fixer, AWS Cli and CI Helper.
 
-### Golang
+### Ruby
 
-Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
+Contains Ruby (installed from official alpine) and CI Helper.
 
 ## Versions
 
