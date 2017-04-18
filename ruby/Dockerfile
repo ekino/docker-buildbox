@@ -4,7 +4,7 @@ MAINTAINER Rémi Marseille <marseille@ekino.com>
 ARG CI_HELPER_VERSION
 
 RUN echo "Starting ..." && \
-    apk add --update curl git make openssh-client rsync && \
+    apk add --update curl git make openssh-client rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
