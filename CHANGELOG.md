@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Add notes here
+* Add imagemagick into Node image
 * Add a new Ruby image
 * Add composer hirak/prestissimo plugin
 
