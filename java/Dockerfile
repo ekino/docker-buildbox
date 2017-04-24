@@ -9,8 +9,8 @@ ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 
 RUN echo "Starting ..." && \
-    echo "deb-src http://httpredir.debian.org/debian jessie main" >> /etc/apt/sources.list && \
-    echo "deb-src http://httpredir.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
+    echo "deb-src http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list && \
+    echo "deb-src http://deb.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install build-essential curl git subversion make mercurial openssh-client bzip2 && \
