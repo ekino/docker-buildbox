@@ -5,6 +5,8 @@ Versions
 -----------
 
 * Add notes here
+* Upgrade the base Debian image: 8.7
+* Upgrade Java version: 8u131
 * Add imagemagick into Node image
 * Add a new Ruby image
 * Add composer hirak/prestissimo plugin
