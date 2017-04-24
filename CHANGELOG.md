@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Add notes here
+* Upgrade Java version: 8u131
 * Add imagemagick into Node image
 * Add a new Ruby image
 * Add composer hirak/prestissimo plugin
