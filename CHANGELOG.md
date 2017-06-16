@@ -1,10 +1,13 @@
 Versions
 ========
 
-2017-04-DEV
+2017-06-DEV
 -----------
 
 * Add notes here
+* Upgrade Node version: 4.8.3, 6.11.0, 7.10.0
+* Upgrade PHP version: 7.1.6
+* Upgrade composer version: 1.4.2
 * Upgrade the base Debian image: 8.7
 * Upgrade Java version: 8u131
 * Add imagemagick into Node image
