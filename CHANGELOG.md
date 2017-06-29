@@ -10,7 +10,7 @@ Versions
 * Upgrade composer version: 1.4.2
 * Upgrade the base Debian image: 8.7
 * Upgrade Java version: 8u131
-* Add imagemagick into Node image
+* Add imagemagick, gcc and g++ into Node image
 * Add a new Ruby image
 * Add composer hirak/prestissimo plugin
 
