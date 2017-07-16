@@ -1,4 +1,4 @@
-FROM golang:1.7
+FROM golang:1.8
 MAINTAINER Raphaël Benitte <raphael.benitte@ekino.com>
 
 ARG GLIDE_VERSION

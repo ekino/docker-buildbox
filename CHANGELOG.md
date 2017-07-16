@@ -1,7 +1,7 @@
 Versions
 ========
 
-2017-06-DEV
+2017-07-DEV
 -----------
 
 * Add notes here
@@ -13,6 +13,7 @@ Versions
 * Add imagemagick, gcc and g++ into Node image
 * Add a new Ruby image
 * Add composer hirak/prestissimo plugin
+* Upgrade go version: 1.8
 
 2017-03-30
 ----------
