@@ -26,6 +26,8 @@ RUN echo "Starting ..." && \
     phpenv rehash && \
     pear config-set php_ini $(php -r 'echo php_ini_loaded_file();') && \
 
+    ln -s ${HOME}/.phpenv/versions/${PHP_VERSION} ${HOME}/.phpenv/versions/current && \
+
     composer global require "hirak/prestissimo:^0.3" && \
 
     echo "date.timezone=${PHP_TIMEZONE:-UTC}" > ${HOME}/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
