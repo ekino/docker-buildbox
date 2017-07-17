@@ -7,7 +7,9 @@ ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 ARG REDIS_VERSION
 
+# restore to root config
 USER root
+ENV HOME /root
 
 RUN echo "Starting ..." && \
     echo "Install CI Helper" && \
@@ -26,15 +28,15 @@ RUN echo "Starting ..." && \
     phpenv rehash && \
     pear config-set php_ini $(php -r 'echo php_ini_loaded_file();') && \
 
-    ln -s ${HOME}/.phpenv/versions/${PHP_VERSION} ${HOME}/.phpenv/versions/current && \
+    ln -s /home/.phpenv/versions/${PHP_VERSION} /home/.phpenv/versions/current && \
 
     composer global require "hirak/prestissimo:^0.3" && \
 
-    echo "date.timezone=${PHP_TIMEZONE:-UTC}" > ${HOME}/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
+    echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /home/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
 
     curl -sSL https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp && \
     cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make install && \
-    echo "extension=redis.so" > ${HOME}/.phpenv/versions/${PHP_VERSION}/etc/conf.d/redis.ini && \
+    echo "extension=redis.so" > /home/.phpenv/versions/${PHP_VERSION}/etc/conf.d/redis.ini && \
 
     echo "Done PHP!" && \
 
