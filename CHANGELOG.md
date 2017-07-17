@@ -5,8 +5,9 @@ Versions
 -----------
 
 * Add notes here
+* Add a "new" PHP image (5.3) for legacy support
 * Upgrade Node version: 4.8.3, 6.11.0, 7.10.0
-* Upgrade PHP version: 7.1.6
+* Upgrade PHP version: 7.1.7
 * Upgrade composer version: 1.4.2
 * Upgrade the base Debian image: 8.7
 * Upgrade Java version: 8u131

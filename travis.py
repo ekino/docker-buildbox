@@ -95,9 +95,12 @@ print "push_image: %s" % push_image
 
 if start_build:
     build_args = "--build-arg CI_HELPER_VERSION=%s" % ci_helper_version
+    build_context = language
     run_args = "--rm"
     if language == "php":
         build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s --build-arg REDIS_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"), os.environ.get("REDIS_VERSION"))
+        if version == "5.3":
+            build_context = "%s/%s" % (language, version)
 
     if language == "java":
         build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("JAVA_VERSION"))
@@ -111,7 +114,7 @@ if start_build:
     if language == "dind-aws":
         run_args = "%s --privileged" % run_args
 
-    cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, language)
+    cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
 
     print "> Run: %s" % cmd
 
