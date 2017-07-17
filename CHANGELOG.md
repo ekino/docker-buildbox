@@ -5,8 +5,9 @@ Versions
 -----------
 
 * Add notes here
+* Upgrade PhpRedis: 3.1.3
 * Add a "new" PHP image (5.3) for legacy support
-* Upgrade Node version: 4.8.3, 6.11.0, 7.10.0
+* Upgrade Node version: 4.8.4, 6.11.1, 7.10.1
 * Upgrade PHP version: 7.1.7
 * Upgrade composer version: 1.4.2
 * Upgrade the base Debian image: 8.7
