@@ -5,6 +5,8 @@ Versions
 -----------
 
 * Add notes here
+* Add Node 8.2
+* Remove Node 4.8
 
 2017-07-17
 ----------
