@@ -5,6 +5,8 @@ Versions
 -----------
 
 * Add notes here
+* Upgrade Java version: 8u144
+* Upgrade PHP version: 5.6.31
 * Add Node 8.2
 * Remove Node 4.8
 
