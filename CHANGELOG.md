@@ -1,14 +1,17 @@
 Versions
 ========
 
-2017-0X-DEV
------------
+2017-10-02
+----------
 
-* Add notes here
 * Upgrade Java version: 8u144
-* Upgrade PHP version: 5.6.31
-* Add Node 8.2
+* Upgrade PHP version: 5.6.31, 7.1.9
+* Upgrade PHP Redis: 3.1.4
+* Add Node 8.6
+* Upgrade node 6.11.3
 * Remove Node 4.8
+* Upgrade golang: 1.9
+* Upgrade Glide: 0.13.0
 
 2017-07-17
 ----------
