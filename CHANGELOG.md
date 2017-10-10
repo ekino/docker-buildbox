@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Add notes here
+* Upgrade Docker version to 17.09 and Docker Compose to 1.16.1 in dind-aws image
 * Upgrade Java version: 8u144
 * Upgrade PHP version: 5.6.31
 * Add Node 8.2

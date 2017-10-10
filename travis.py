@@ -112,6 +112,7 @@ if start_build:
         build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, os.environ.get("MODD_VERSION"), os.environ.get("GLIDE_VERSION"))
 
     if language == "dind-aws":
+        build_args = "%s --build-arg DOCKER_VERSION=%s --build-arg DOCKER_COMPOSE_VERSION=%s" % (build_args, os.environ.get("DOCKER_VERSION"), os.environ.get("DOCKER_COMPOSE_VERSION"))
         run_args = "%s --privileged" % run_args
 
     cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
