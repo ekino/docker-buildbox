@@ -116,7 +116,7 @@ if start_build:
         run_args = "%s --privileged" % run_args
     
     if language == "ansible":
-        build_args = "%s --build-arg ANSIBLE_VERSION=%s" % (build_args, os.environ.get("ANSIBLE_VERSION"))
+        build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("VERSION"), os.environ.get("PYTHON_VERSION"), os.environ.get("GLIBC_VERSION"))
 
     cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
 
