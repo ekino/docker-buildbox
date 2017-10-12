@@ -1,3 +1,5 @@
-FROM python-2.7-alpine
+FROM alpine:3.6
+RUN apk update
 RUN apk add git \
-    echo "Done "
+    ansible
+RUN echo "'Done !"
