@@ -1,7 +1,3 @@
-FROM alpine
+FROM python-2.7-alpine
 RUN apk add git \
-    python-devel \
-    python-setuptools \
-    python-pip \
-    ansible \
     echo "Done "
