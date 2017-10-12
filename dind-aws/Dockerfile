@@ -1,4 +1,4 @@
-FROM gitlab/dind
+FROM jpetazzo/dind
 MAINTAINER Hugo Briand <briand@ekino.com>
 
 ARG CI_HELPER_VERSION
