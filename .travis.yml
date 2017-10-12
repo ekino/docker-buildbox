@@ -21,4 +21,4 @@ matrix:
     - env: LANGUAGE=ansible  VERSION=2.3.2 ANSIBLE_VERSION=2.3.2
 
 script:
-    - python travis.py
+    - travis_wait python travis.py
