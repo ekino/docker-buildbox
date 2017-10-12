@@ -114,6 +114,9 @@ if start_build:
     if language == "dind-aws":
         build_args = "%s --build-arg DOCKER_VERSION=%s --build-arg DOCKER_COMPOSE_VERSION=%s" % (build_args, os.environ.get("DOCKER_VERSION"), os.environ.get("DOCKER_COMPOSE_VERSION"))
         run_args = "%s --privileged" % run_args
+    
+    if language == "ansible":
+        build_args = "%s --build-arg ANSIBLE_VERSION=%s --build-arg PYTHON_VERSION=%s" % (build_args, os.environ.get("ANSIBLE_VERSION"), os.environ.get("PYTHON_VERSION"))
 
     cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
 
@@ -166,6 +169,11 @@ if start_build:
         print "> Testing Ruby Image..."
         run_command_exit("docker run %s %s ruby --version" % (run_args, image),   "Error with ruby check")
         run_command_exit("docker run %s %s bundle --version" % (run_args, image), "Error with bundle check")
+    
+    if language == "ansible":
+        print "> Testing Ansible Image..."
+        run_command_exit("docker run %s %s ansible --version" % (run_args, image),   "Error with ansible check")
+        run_command_exit("docker run %s %s ansible-playbook --version" % (run_args, image), "Error with ansible-playbook check")
 
 if push_image:
     run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
