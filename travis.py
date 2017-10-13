@@ -113,8 +113,7 @@ if start_build:
 
     if language == "dind-aws":
         build_args = "%s --build-arg DOCKER_VERSION=%s --build-arg DOCKER_COMPOSE_VERSION=%s" % (build_args, os.environ.get("DOCKER_VERSION"), os.environ.get("DOCKER_COMPOSE_VERSION"))
-        run_args = "%s --privileged" % run_args
-    
+
     if language == "ansible":
         build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("VERSION"), os.environ.get("PYTHON_VERSION"), os.environ.get("GLIBC_VERSION"))
 
@@ -154,8 +153,11 @@ if start_build:
     if language == "dind-aws":
         print "> Testing DIND - AWS Image..."
         run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
-        run_command_exit("docker run %s %s docker --version" % (run_args, image), "Error with docker check (should be installed by gitlab/dind image)")
-        run_command_exit("docker run %s %s docker-compose --version" % (run_args, image), "Error with docker-compose check (should be installed by gitlab/dind image)")
+        run_command_exit("docker run %s %s docker --version" % (run_args, image), "Error with docker check (should be installed by docker image)")
+        run_command_exit("docker run %s %s docker-compose --version" % (run_args, image), "Error with docker-compose check (should be installed by dind-aws image)")
+        run_command_exit("docker run --privileged -d --name %s %s" % (language, image), "Error on starting dind-aws container")
+        run_command_exit("docker exec %s docker ps" % (language), "Error with docker ps check")
+        run_command_exit("docker rm -f %s" % (language), "Error on removing dind-aws container")
 
     if language == "golang":
         print "> Testing Golang Image..."
@@ -169,7 +171,7 @@ if start_build:
         print "> Testing Ruby Image..."
         run_command_exit("docker run %s %s ruby --version" % (run_args, image),   "Error with ruby check")
         run_command_exit("docker run %s %s bundle --version" % (run_args, image), "Error with bundle check")
-    
+
     if language == "ansible":
         print "> Testing Ansible Image..."
         run_command_exit("docker run %s %s ansible --version" % (run_args, image),   "Error with ansible check")
