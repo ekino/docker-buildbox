@@ -1,5 +1,19 @@
 FROM alpine:3.6
-RUN apk update
-RUN apk add git \
-    ansible
-RUN echo "'Done !"
+
+ARG CI_HELPER_VERSION
+ARG GLIBC_VERSION
+ARG PYTHON_VERSION
+ARG VERSION
+
+WORKDIR /root
+RUN echo "Install Ansible with deps" && \
+    apk --update --no-cache add bash ca-certificates curl git openssh-client python=${PYTHON_VERSION} py-pip ansible=${VERSION} && \
+    echo "Done install Ansible with deps" &&\
+    echo "Install CI Helper" && \
+    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
+    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
+    apk add -q glibc-${GLIBC_VERSION}.apk && \
+    rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk && \
+    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    chmod 755 /usr/bin/ci-helper && \
+    echo "Done install CI Helper"

@@ -18,7 +18,7 @@ matrix:
     - env: LANGUAGE=dind-aws VERSION=1    DOCKER_VERSION=17.09.0~ce-0~ubuntu DOCKER_COMPOSE_VERSION=1.16.1
     - env: LANGUAGE=golang   VERSION=1.9  MODD_VERSION=0.4 GLIDE_VERSION=v0.13.0
     - env: LANGUAGE=ruby     VERSION=2.4
-    - env: LANGUAGE=ansible  VERSION=2.3.2 ANSIBLE_VERSION=2.3.2
+    - env: LANGUAGE=ansible  VERSION=2.3.0.0-r1 PYTHON_VERSION=2.7.13-r1 GLIBC_VERSION=2.26-r0
 
 script:
     - travis_wait python travis.py

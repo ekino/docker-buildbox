@@ -1,7 +1,7 @@
 Versions
 ========
 
-2017-10-12
+2017-10-13
 ----------
 
 * Upgrade Docker version to 17.09 and Docker Compose to 1.16.1 in dind-aws image
@@ -13,6 +13,7 @@ Versions
 * Remove Node 4.8
 * Upgrade golang: 1.9
 * Upgrade Glide: 0.13.0
+* Add Ansible: 2.2.3.0
 
 2017-07-17
 ----------

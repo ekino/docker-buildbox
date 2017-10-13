@@ -33,6 +33,10 @@ Contains PHP (installed in the PHP_VERSION env var value) within a phpenv, compo
 
 Contains Ruby (installed from official alpine) and CI Helper.
 
+### Ansible
+
+Contains Ansible, CI Helper and Python 2.7
+
 ## Versions
 
 Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
