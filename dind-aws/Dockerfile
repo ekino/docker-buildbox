@@ -1,44 +1,31 @@
-FROM jpetazzo/dind
-MAINTAINER Hugo Briand <briand@ekino.com>
+FROM docker:17.09.0-ce-dind
+MAINTAINER Rémi Marseille <marseille@ekino.com>
 
 ARG CI_HELPER_VERSION
-ARG DOCKER_VERSION
 ARG DOCKER_COMPOSE_VERSION
+ARG GLIBC_VERSION=2.23-r3
 
-RUN echo "Install AWS Cli" && \
-    apt-get update -q && \
-    apt-get install -qy \
-      build-essential \
-      python-pip \
-      groff-base && \
-    pip install awscli && \
-    echo "Done installing AWS Cli" && \
+RUN echo "Install AWS" && \
+    apk add -q --no-cache bash ca-certificates curl git openssh-client python py-pip && \
+    pip -q install awscli boto3 PyYAML && \
+    echo "Done install AWS" && \
 
     echo "Install CI Helper" && \
+    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
+    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
+    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O && \
+    apk add --update -q glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk && \
+    rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk && \
     curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
-    echo "Done installing CI Helper" && \
+    echo "Done install CI Helper" && \
 
-    echo "Update Docker" && \
-    apt-get -y remove docker docker-engine docker.io && \
-    apt-get -qy install apt-transport-https ca-certificates curl software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    add-apt-repository \
-        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) \
-        stable" && \
-    apt-get -q update && \
-    apt-get -qy install docker-ce=${DOCKER_VERSION} && \
-    docker --version && \
-
-    echo "Update Docker Compose" && \
-    rm -f /usr/local/bin/docker-compose && \
+    echo "Install Docker Compose" && \
     curl -sSL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
     docker-compose --version && \
 
-    echo "Clean up" && \
-    apt-get clean && \
-    apt-get purge && \
-    rm -rf /var/lib/apt/lists/* && \
-    echo "Done cleaning up"
+    echo "Cleaning files!" && \
+    rm -rf /tmp/* /var/cache/apk/* && \
+
+    echo "Done!"

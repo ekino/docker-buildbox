@@ -1,9 +1,10 @@
 Versions
 ========
 
-2017-10-12
+2017-10-13
 ----------
 
+* BC break: dind-aws image is now based on Alpine
 * Upgrade Docker version to 17.09 and Docker Compose to 1.16.1 in dind-aws image
 * Upgrade Java version: 8u144
 * Upgrade PHP version: 5.6.31, 7.1.9
