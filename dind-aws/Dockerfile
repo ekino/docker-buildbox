@@ -25,7 +25,7 @@ RUN echo "Install AWS" && \
     chmod +x /usr/local/bin/docker-compose && \
     docker-compose --version && \
 
-    sed -i -e "s,\$DOCKER_PORT_2375_TCP,\$EKINO__DOCKER_BUILDBOX_PORT_2375_TCP," \
+    sed -i -e "s,\$DOCKER_PORT_2375_TCP,\$EKINO_DOCKER_BUILDBOX_PORT_2375_TCP," \
         -e "s,export DOCKER_HOST='tcp://docker:2375',export DOCKER_HOST='tcp://ekino__docker-buildbox:2375'," \
         /usr/local/bin/docker-entrypoint.sh && \
 
