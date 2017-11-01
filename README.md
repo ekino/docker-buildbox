@@ -37,6 +37,11 @@ Contains Ruby (installed from official alpine) and CI Helper.
 
 Contains Ansible, CI Helper and Python 2.7
 
+### SonarQube Scanner
+
+Contains SonarQube Scanner and CI Helper
+
+
 ## Versions
 
 Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
@@ -52,3 +57,7 @@ The ``travis.py`` script try to be clever:
  - Nightly: all images are built and pushed to the docker registry with the tag ``nightly-IMAGE``
 
 [![Build Status](https://travis-ci.org/ekino/docker-buildbox.svg?branch=master)](https://travis-ci.org/ekino/docker-buildbox)
+
+It is possible to build local image for testing with the following command:
+
+    SONARSCANNER_VERSION=3.0.3.778 VERSION=3.0 python travis.py --language sonar --pull-request=true
