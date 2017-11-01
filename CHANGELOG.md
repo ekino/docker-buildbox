@@ -1,12 +1,12 @@
 Versions
 ========
 
-2017-10-13
+2017-11-01
 ----------
 
 * BC break: dind-aws image is now based on Alpine
 * Upgrade Docker version to 17.09 and Docker Compose to 1.16.1 in dind-aws image
-* Upgrade Java version: 8u144
+* Upgrade Java version: 8u151-1~webupd8~0
 * Upgrade PHP version: 5.6.31, 7.1.9
 * Upgrade PHP Redis: 3.1.4
 * Add Node 8.6
@@ -15,6 +15,7 @@ Versions
 * Upgrade golang: 1.9
 * Upgrade Glide: 0.13.0
 * Add Ansible: 2.2.3.0
+* Add Sonar Scanner: 3.0.3.778
 
 2017-07-17
 ----------
