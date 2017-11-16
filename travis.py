@@ -169,6 +169,7 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s php --version" % (run_args, image), "Error with php check")
             run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+            run_command_exit("docker run %s %s security-checker --version" % (run_args, image), "Error with security-checker check")
 
         if language == "java":
             print "> Testing Java Image..."

@@ -1,6 +1,11 @@
 Versions
 ========
 
+2017-11-16
+-----------
+
+* Add sensiolabs' security-checker to php images
+
 2017-11-01
 ----------
 
@@ -40,7 +45,7 @@ Versions
 * Add bzip2 into Node, Java and PHP images
 * Upgrade ci-helper to version 0.0.3 to support gitlab 9.x
 * Update PHP version: 7.1.3
-* Update Node version: 4.8.1, 6.10.1, 7.8.0 
+* Update Node version: 4.8.1, 6.10.1, 7.8.0
 
 2017-02-07
 ----------
