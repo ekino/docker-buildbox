@@ -14,6 +14,7 @@ ARG PHP_BUILD_INSTALL_EXTENSION
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 ARG REDIS_VERSION
+ARG SECURITY_CHECKER_VERSION
 
 RUN echo "Starting ..." && \
     echo "deb-src http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -57,6 +58,7 @@ RUN echo "Starting ..." && \
     ls -lsah /root/.phpenv/versions/current/bin && \
     curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
     curl -sSL http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
+    curl -sSL http://get.sensiolabs.org/security-checker-v${SECURITY_CHECKER_VERSION}.phar -o /usr/local/bin/security-checker && chmod a+x /usr/local/bin/security-checker && \
     composer global require "hirak/prestissimo:^0.3" && \
 
     echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /root/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
