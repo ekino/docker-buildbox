@@ -134,7 +134,7 @@ def run_build(buildInfo):
         build_context = language
         run_args = "--rm"
         if language == "php":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s --build-arg REDIS_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"), os.environ.get("REDIS_VERSION"))
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg PHP_BUILD_INSTALL_EXTENSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("PHP_VERSION"), os.environ.get("PHP_BUILD_INSTALL_EXTENSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"))
             if version == "5.3":
                 build_context = "%s/%s" % (language, version)
 
