@@ -6,6 +6,7 @@ ARG PHP_BUILD_INSTALL_EXTENSION
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 ARG REDIS_VERSION
+ARG SECURITY_CHECKER_VERSION
 
 # restore to root config
 USER root
@@ -29,7 +30,7 @@ RUN echo "Starting ..." && \
     pear config-set php_ini $(php -r 'echo php_ini_loaded_file();') && \
 
     ln -s /home/.phpenv/versions/${PHP_VERSION} /home/.phpenv/versions/current && \
-
+    curl -sSL http://get.sensiolabs.org/security-checker-v${SECURITY_CHECKER_VERSION}.phar -o /usr/local/bin/security-checker && chmod a+x /usr/local/bin/security-checker && \
     composer global require "hirak/prestissimo:^0.3" && \
 
     echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /home/.phpenv/versions/${PHP_VERSION}/etc/conf.d/date_timezone.ini && \
