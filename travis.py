@@ -117,7 +117,7 @@ def run_build(buildInfo):
         print "cannot be a tag and a pr"
         sys.exit(1)
 
-    if (is_pr or is_master) and (not buildInfo.is_travis or language in files or ".travis.yml" in files):
+    if (is_pr or is_master) and (not buildInfo.is_travis or language in files or set([".travis.yml", "travis.py"]).intersection(files)):
         start_build = True
         push_image = is_master
 
