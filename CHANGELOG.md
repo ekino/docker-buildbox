@@ -1,9 +1,10 @@
 Versions
 ========
 
-2017-11-16
+2017-11-21
 -----------
 
+* Add tzdata into dind-aws image
 * Add sensiolabs' security-checker to php images
 
 2017-11-01
