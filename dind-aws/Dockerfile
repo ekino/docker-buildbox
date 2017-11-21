@@ -6,7 +6,7 @@ ARG DOCKER_COMPOSE_VERSION
 ARG GLIBC_VERSION=2.23-r3
 
 RUN echo "Install AWS" && \
-    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip && \
+    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip tzdata && \
     pip -q install awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
@@ -24,10 +24,6 @@ RUN echo "Install AWS" && \
     curl -sSL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
     docker-compose --version && \
-
-    sed -i -e "s,\$DOCKER_PORT_2375_TCP,\$EKINO_DOCKER_BUILDBOX_PORT_2375_TCP," \
-        -e "s,export DOCKER_HOST='tcp://docker:2375',export DOCKER_HOST='tcp://ekino__docker-buildbox:2375'," \
-        /usr/local/bin/docker-entrypoint.sh && \
 
     echo "Cleaning files!" && \
     rm -rf /tmp/* /var/cache/apk/* && \
