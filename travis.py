@@ -142,7 +142,7 @@ def run_build(buildInfo):
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
 
         if language == "node":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"))
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"))
 
         if language == "golang":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("GLIDE_VERSION"))
