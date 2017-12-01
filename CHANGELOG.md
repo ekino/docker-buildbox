@@ -1,11 +1,12 @@
 Versions
 ========
 
-2017-11-24
+2017-12-DEV
 ----------
 
 * Add rsync and tzdata into dind-aws image
 * Add sensiolabs' security-checker to php images
+* Add make to aws image
 
 2017-11-01
 ----------
