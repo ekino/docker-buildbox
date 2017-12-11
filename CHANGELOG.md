@@ -1,10 +1,15 @@
 Versions
 ========
 
-2017-12-DEV
------------
+2017-12-11
+----------
 
-* Upgrade Node version: 8.9.1, 9.2.0
+* Upgrade Ruby version: 2.4.2
+* Upgrade Glide version: 0.13.1
+* Upgrade Docker Compose version: 1.17.1
+* Upgrade Composer version: 1.5.5
+* Upgrade PHP version: 5.6.32, 7.1.12
+* Upgrade Node version: 6.12.2, 8.9.3, 9.2.1
 * Allow specifying NPM version in Node image :
     - node v6.11.3 -> npm v3.10.10
     - node v8.9.1  -> npm v5.5.1
