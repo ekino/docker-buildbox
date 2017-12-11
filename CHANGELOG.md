@@ -2,8 +2,13 @@ Versions
 ========
 
 2017-12-DEV
-----------
+-----------
 
+* Upgrade Node version: 8.9.1, 9.2.0
+* Allow specifying NPM version in Node image :
+    - node v6.11.3 -> npm v3.10.10
+    - node v8.9.1  -> npm v5.5.1
+    - node v9.2.0  -> npm v5.5.1
 * Add rsync and tzdata into dind-aws image
 * Add sensiolabs' security-checker to php images
 * Add make to aws image

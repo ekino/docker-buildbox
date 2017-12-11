@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ARG NODE_VERSION
+ARG NPM_VERSION
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 
@@ -39,7 +40,7 @@ RUN echo "Starting ..." && \
     nvm install ${NODE_VERSION} && nvm alias default ${NODE_VERSION} && \
     ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
 
-    npm install -g npm@3 && \
+    npm install -g npm@${NPM_VERSION} && \
 
     curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb http://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
