@@ -1,9 +1,10 @@
 Versions
 ========
 
-2017-12-11
+2017-12-12
 ----------
 
+* Add tzdata into sonar image
 * Upgrade Ruby version: 2.4.2
 * Upgrade Glide version: 0.13.1
 * Upgrade Docker Compose version: 1.17.1

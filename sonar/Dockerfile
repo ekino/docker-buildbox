@@ -8,9 +8,9 @@ ARG SONARSCANNER_VERSION
 ARG CI_HELPER_VERSION
 
 RUN echo "Starting ..." && \
-    apk --update upgrade && apk add curl unzip make && \
+    apk --update upgrade && apk add curl make tzdata unzip && \
     echo "Done base install!" && \
-    
+
     echo "Starting Sonar Scanner" && \
     curl --insecure -o ./sonarscanner.zip -L https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARSCANNER_VERSION}-linux.zip && \
     unzip sonarscanner.zip && \
