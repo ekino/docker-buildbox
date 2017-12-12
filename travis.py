@@ -1,5 +1,6 @@
 import os, subprocess, sys, argparse
 import collections
+import re
 
 BuildInfo = collections.namedtuple('BuildInfo', 'language version ci_helper_version commit_range branch tag pull_request event_type is_travis modd')
 
@@ -117,7 +118,7 @@ def run_build(buildInfo):
         print "cannot be a tag and a pr"
         sys.exit(1)
 
-    if (is_pr or is_master) and (not buildInfo.is_travis or language in files or reduce(lambda a, b: (a == True or b in files), [".travis.yml", "travis.py"])):
+    if (is_pr or is_master) and (not buildInfo.is_travis or language in files or re.search(r".travis.yml|travis.py", files)):
         start_build = True
         push_image = is_master
 
