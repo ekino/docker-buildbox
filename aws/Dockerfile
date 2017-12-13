@@ -5,7 +5,7 @@ ARG CI_HELPER_VERSION
 
 WORKDIR /root
 RUN echo "Install AWS" && \
-    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip && \
+    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
     pip -q install awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
