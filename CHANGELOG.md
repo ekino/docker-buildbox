@@ -5,6 +5,8 @@ Versions
 -----------
 
 * Upgrade PHP version: 7.2.0
+* Add rsync to aws image
+* Add zip to aws image
 
 2017-12-12
 ----------
