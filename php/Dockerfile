@@ -22,7 +22,7 @@ RUN echo "Starting ..." && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git subversion make mercurial \
-      libmcrypt-dev libreadline-dev openssh-client pgtop bzip2 && \
+      libmcrypt-dev libreadline-dev openssh-client pgtop postgresql-client bzip2 && \
 
     echo "Done base install!" && \
 
