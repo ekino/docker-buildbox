@@ -1,10 +1,19 @@
 Versions
 ========
 
-2017-12-DEV
+2018-01-DEV
 -----------
 
-* Upgrade PHP version: 7.2.0
+* Upgrade ci-helper version: 0.0.4
+* Upgrade Docker version to 18.01.0 and Docker Compose to 1.18.0 in dind-aws image
+* Upgrade Java version: 8u161-1~webupd8~0
+* Upgrade Node version: 6.12.3, 8.9.4, 9.4.0
+* Upgrade APCu version: 5.1.9
+* Upgrade Composer version: 1.6.2
+* Upgrade PHP Redis version: 3.1.6
+* Upgrade Sensiolabs' security-checker version for PHP 7: 4.1.7
+* Upgrade PHP version: 5.6.33, 7.2.1
+* Upgrade Ruby version: 2.5.0
 * Add rsync to aws image
 * Add zip to aws image
 * Add postgresql-client to php image
@@ -24,7 +33,7 @@ Versions
     - node v8.9.1  -> npm v5.5.1
     - node v9.2.0  -> npm v5.5.1
 * Add rsync and tzdata into dind-aws image
-* Add sensiolabs' security-checker to php images
+* Add Sensiolabs' security-checker to PHP images
 * Add make to aws image
 
 2017-11-01

@@ -1,4 +1,4 @@
-FROM docker:17.09.0-ce-dind
+FROM docker:18.01.0-ce-dind
 MAINTAINER Rémi Marseille <marseille@ekino.com>
 
 ARG CI_HELPER_VERSION

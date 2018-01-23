@@ -8,7 +8,7 @@ def main():
     parser = argparse.ArgumentParser(description='Build some docker images.')
     parser.add_argument('--language', dest='language', default=os.environ.get('LANGUAGE'), help='The language/image to build')
     parser.add_argument('--version', dest='version', default=os.environ.get('VERSION'), help='The language\'s version to build')
-    parser.add_argument('--ci-helper-version', dest='ci_helper_version', default=os.environ.get('CI_HELPER_VERSION', '0.0.3'), help='the ci helper version')
+    parser.add_argument('--ci-helper-version', dest='ci_helper_version', default=os.environ.get('CI_HELPER_VERSION', '0.0.4'), help='the ci helper version')
     parser.add_argument('--commit-range', dest='commit_range', default=os.environ.get('TRAVIS_COMMIT_RANGE', 'HEAD...HEAD'), help='the commit range')
     parser.add_argument('--branch', dest='branch', default=os.environ.get('TRAVIS_BRANCH', ""), help='the commit branch')
     parser.add_argument('--tag', dest='tag', default=os.environ.get('TRAVIS_TAG', False), help='the commit tag')
