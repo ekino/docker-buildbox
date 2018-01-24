@@ -4,6 +4,9 @@ Versions
 2018-01-DEV
 -----------
 
+* Upgrade NPM version in Node image (fix node@9 incompatibility):
+    - node v8.9.4  -> npm v5.6.0
+    - node v9.4.0  -> npm v5.6.0
 * Upgrade ci-helper version: 0.0.4
 * Upgrade Docker version to 18.01.0 and Docker Compose to 1.18.0 in dind-aws image
 * Upgrade Java version: 8u161-1~webupd8~0
