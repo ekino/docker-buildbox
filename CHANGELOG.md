@@ -1,15 +1,15 @@
 Versions
 ========
 
-2018-01-DEV
------------
+2018-01-25
+----------
 
 * Upgrade NPM version in Node image (fix node@9 incompatibility):
     - node v8.9.4  -> npm v5.6.0
     - node v9.4.0  -> npm v5.6.0
 * Upgrade ci-helper version: 0.0.4
 * Upgrade Docker version to 18.01.0 and Docker Compose to 1.18.0 in dind-aws image
-* Upgrade Java version: 8u161-1~webupd8~0
+* Upgrade Java version: 8u161-1\~webupd8\~0
 * Upgrade Node version: 6.12.3, 8.9.4, 9.4.0
 * Upgrade APCu version: 5.1.9
 * Upgrade Composer version: 1.6.2
@@ -19,7 +19,7 @@ Versions
 * Upgrade Ruby version: 2.5.0
 * Add rsync to aws image
 * Add zip to aws image
-* Add postgresql-client to php image
+* Add postgresql-client to PHP image
 
 2017-12-12
 ----------
@@ -44,7 +44,7 @@ Versions
 
 * BC break: dind-aws image is now based on Alpine
 * Upgrade Docker version to 17.09 and Docker Compose to 1.16.1 in dind-aws image
-* Upgrade Java version: 8u151-1~webupd8~0
+* Upgrade Java version: 8u151-1\~webupd8\~0
 * Upgrade PHP version: 5.6.31, 7.1.9
 * Upgrade PHP Redis: 3.1.4
 * Add Node 8.6
