@@ -16,7 +16,8 @@ ENV COMPOSER_NO_INTERACTION=1 \
 RUN echo "Starting ..." && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@edge-main http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    apk add --update --upgrade alpine-sdk autoconf bash bzip2 curl git icu-dev@edge-main libmcrypt-dev libxml2-dev make openssh-client php{{PHP_MAJOR_VERSION}}-intl@edge-community postgresql-dev tzdata && \
+    apk add --update --upgrade alpine-sdk autoconf bash bzip2 curl freetype-dev git icu-dev@edge-main libjpeg-turbo-dev libmcrypt-dev \
+        libpng-dev libxml2-dev make openssh-client php{{PHP_MAJOR_VERSION}}-intl@edge-community postgresql-dev tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
@@ -34,7 +35,8 @@ RUN echo "Starting ..." && \
     echo "Done Install Modd" && \
 
     echo "Starting PHP" && \
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath pcntl pdo_mysql pdo_pgsql soap sockets zip && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath gd pcntl pdo_mysql pdo_pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
     echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
