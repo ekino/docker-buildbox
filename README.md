@@ -27,7 +27,7 @@ Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS C
 
 ### PHP
 
-Contains PHP (installed in the PHP_VERSION env var value) within a phpenv, composer, php-cs-fixer, AWS Cli and CI Helper.
+Contains PHP (installed from official alpine in the PHP_VERSION env var value) within composer, php-cs-fixer, security-checker, AWS Cli and CI Helper.
 
 ### Ruby
 
@@ -40,7 +40,6 @@ Contains Ansible, CI Helper and Python 2.7
 ### SonarQube Scanner
 
 Contains SonarQube Scanner and CI Helper
-
 
 ## Versions
 
