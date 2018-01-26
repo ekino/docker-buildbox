@@ -1,31 +1,30 @@
 FROM php:{{PHP_VERSION}}
-MAINTAINER Rémi Marseille <marseille@ekino.com>
+LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG APCU_VERSION
 ARG CI_HELPER_VERSION
 ARG COMPOSER_VERSION
-ARG GLIBC_VERSION
 ARG MODD_VERSION
 ARG REDIS_VERSION
 ARG SECURITY_CHECKER_VERSION
 ARG XDEBUG_VERSION
 
+# iconv issue https://github.com/docker-library/php/issues/240
+
 ENV COMPOSER_NO_INTERACTION=1 \
-    TERM=xterm
+    TERM=xterm \
+    LD_PRELOAD="/usr/lib/preloadable_libiconv.so php"
 
 RUN echo "Starting ..." && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@edge-main http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    apk add --update --upgrade alpine-sdk autoconf bash bzip2 curl freetype-dev git icu-dev@edge-main libjpeg-turbo-dev libmcrypt-dev \
-        libpng-dev libxml2-dev make openssh-client php{{PHP_MAJOR_VERSION}}-intl@edge-community postgresql-dev tzdata && \
+    echo "@edge-testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    apk add --update --upgrade alpine-sdk autoconf bash bzip2 curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main libjpeg-turbo-dev \
+        libmcrypt-dev libpng-dev libxml2-dev make openssh-client php{{PHP_MAJOR_VERSION}}-intl@edge-community postgresql-dev tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
-    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
-    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
-    apk add -q glibc-${GLIBC_VERSION}.apk && \
-    rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
 

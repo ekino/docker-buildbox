@@ -1,5 +1,5 @@
 FROM golang:1.8
-MAINTAINER Raphaël Benitte <raphael.benitte@ekino.com>
+LABEL maintainer="Raphaël Benitte <raphael.benitte@ekino.com>"
 
 ARG GLIDE_VERSION
 ARG CI_HELPER_VERSION

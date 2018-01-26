@@ -134,14 +134,15 @@ def run_build(buildInfo):
         build_args = "--build-arg CI_HELPER_VERSION=%s" % ci_helper_version
         build_context = language
         run_args = "--rm"
-        if language == "php":
-            if version == "5.3":
-                build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("PHP_VERSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"))
-                build_context = "%s/%s" % (language, version)
-            else:
-                build_args = "%s --build-arg MODD_VERSION=%s --build-arg APCU_VERSION=%s --build-arg COMPOSER_VERSION=%s --build-arg GLIBC_VERSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s --build-arg XDEBUG_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("APCU_VERSION"), os.environ.get("COMPOSER_VERSION"), os.environ.get("GLIBC_VERSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"), os.environ.get("XDEBUG_VERSION"))
-                build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
-                run_command_exit('sed -e "s,{{PHP_VERSION}},%s," -e "s,{{PHP_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PHP_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PHP_VERSION")))
+
+        if language == "ansible":
+            build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("PYTHON_VERSION"))
+
+        if language == "dind-aws":
+            build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"))
+
+        if language == "golang":
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("GLIDE_VERSION"))
 
         if language == "java":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
@@ -149,17 +150,17 @@ def run_build(buildInfo):
         if language == "node":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"))
 
-        if language == "golang":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("GLIDE_VERSION"))
-
-        if language == "dind-aws":
-            build_args = "%s --build-arg DOCKER_VERSION=%s --build-arg DOCKER_COMPOSE_VERSION=%s" % (build_args, os.environ.get("DOCKER_VERSION"), os.environ.get("DOCKER_COMPOSE_VERSION"))
-
-        if language == "ansible":
-            build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("PYTHON_VERSION"), os.environ.get("GLIBC_VERSION"))
+        if language == "php":
+            if version == "5.3":
+                build_args = "%s --build-arg MODD_VERSION=%s --build-arg PHP_VERSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("PHP_VERSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"))
+                build_context = "%s/%s" % (language, version)
+            else:
+                build_args = "%s --build-arg MODD_VERSION=%s --build-arg APCU_VERSION=%s --build-arg COMPOSER_VERSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s --build-arg XDEBUG_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("APCU_VERSION"), os.environ.get("COMPOSER_VERSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"), os.environ.get("XDEBUG_VERSION"))
+                build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
+                run_command_exit('sed -e "s,{{PHP_VERSION}},%s," -e "s,{{PHP_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PHP_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PHP_VERSION")))
 
         if language == "sonar":
-            build_args = "%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("SONARSCANNER_VERSION"))
+            build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
 
         cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
 
@@ -169,25 +170,10 @@ def run_build(buildInfo):
 
         run_command_exit("docker run %s %s ci-helper version -e" % (run_args, image), "Error with ci-helper installation")
 
-        if language == "php":
-            print "> Testing PHP Image..."
-            run_command_exit("docker run %s %s php --version" % (run_args, image), "Error with php check")
-            run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
-            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
-            run_command_exit("docker run %s %s security-checker --version" % (run_args, image), "Error with security-checker check")
-
-        if language == "java":
-            print "> Testing Java Image..."
-            run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
-            run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
-            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
-
-        if language == "node":
-            print "> Testing Node Image..."
-            run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
-            run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
-            run_command_exit("docker run %s %s sass --version" % (run_args, image), "Error with sass check")
-            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+        if language == "ansible":
+            print "> Testing Ansible Image..."
+            run_command_exit("docker run %s %s ansible --version" % (run_args, image),   "Error with ansible check")
+            run_command_exit("docker run %s %s ansible-playbook --version" % (run_args, image), "Error with ansible-playbook check")
 
         if language == "aws":
             print "> Testing AWS Image..."
@@ -212,21 +198,35 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s gin --version" % (run_args, image),   "Error with gin check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image),  "Error with modd check")
 
+        if language == "java":
+            print "> Testing Java Image..."
+            run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
+            run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
+            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+
+        if language == "node":
+            print "> Testing Node Image..."
+            run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
+            run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
+            run_command_exit("docker run %s %s sass --version" % (run_args, image), "Error with sass check")
+            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+
+        if language == "php":
+            print "> Testing PHP Image..."
+            run_command_exit("docker run %s %s php --version" % (run_args, image), "Error with php check")
+            run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
+            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+            run_command_exit("docker run %s %s security-checker --version" % (run_args, image), "Error with security-checker check")
+
         if language == "ruby":
             print "> Testing Ruby Image..."
             run_command_exit("docker run %s %s ruby --version" % (run_args, image),   "Error with ruby check")
             run_command_exit("docker run %s %s bundle --version" % (run_args, image), "Error with bundle check")
 
-        if language == "ansible":
-            print "> Testing Ansible Image..."
-            run_command_exit("docker run %s %s ansible --version" % (run_args, image),   "Error with ansible check")
-            run_command_exit("docker run %s %s ansible-playbook --version" % (run_args, image), "Error with ansible-playbook check")
-
         if language == "sonar":
             print "> Testing Sonar Scanner Image..."
             run_command_exit("docker run %s %s java -version" % (run_args, image),   "Error with java version")
             run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with ansible-playbook check")
-
 
         print ""
         print "You can now test the image with the following command:\n   $ docker run --rm -ti %s" % image
