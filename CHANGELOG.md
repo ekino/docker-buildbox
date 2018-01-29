@@ -4,6 +4,8 @@ Versions
 2018-01-DEV
 -----------
 
+* Use Alpine binary of ci-helper for Ansible, AWS, DIND-AWS, PHP >= 5.6, Ruby and Sonar images
+* Fix deprecated MAINTAINER instruction
 * BC break: PHP image is now based on Alpine
     - intl for PHP 7.2 is not released yet, so image 7.2 is not available anymore
 * Upgrade modd version: 0.5

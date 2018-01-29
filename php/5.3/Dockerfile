@@ -1,5 +1,5 @@
 FROM jolicode/phpenv
-MAINTAINER Rémi Marseille <marseille@ekino.com>
+LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG PHP_VERSION
 ARG CI_HELPER_VERSION
