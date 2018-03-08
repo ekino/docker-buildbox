@@ -11,7 +11,21 @@ Contains AWS Cli + CI Helper
 
 ### DIND - AWS
 
-Adds AWS Cli & CI Helper to gitlab's dind image (to run docker in a gitlab runner).
+Adds AWS Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
+
+Use case:
+```
+# .gitlab-ci.yml
+test:
+  image: ekino/docker-buildbox:latest-dind-aws
+  services:
+    - ekino/docker-buildbox:latest-dind-aws
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST:   "tcp://ekino__docker-buildbox:2375"
+  script:
+    - docker ...
+```
 
 ### Golang
 
