@@ -54,8 +54,8 @@ zend_extension=opcache.so \n\
     cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make install && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
 
-    curl -sSL https://github.com/xdebug/xdebug/archive/XDEBUG_${XDEBUG_VERSION}.tar.gz | tar xz -C /tmp && \
-    cd /tmp/xdebug-XDEBUG_${XDEBUG_VERSION} && phpize && ./configure --enable-xdebug && make && make install && \
+    curl -sSL https://github.com/xdebug/xdebug/archive/${XDEBUG_VERSION}.tar.gz | tar xz -C /tmp && \
+    cd /tmp/xdebug-${XDEBUG_VERSION} && phpize && ./configure --enable-xdebug && make && make install && \
     echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini && \
 
     echo "Done PHP!" && \
