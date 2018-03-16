@@ -1,9 +1,17 @@
 Versions
 ========
 
-2018-01-DEV
+2018-03-DEV
 -----------
 
+* Upgrade Python version in Ansible image: 2.7.14-r0
+* Upgrade Docker version to 18.02.0 and Docker Compose to 1.19.0 in dind-aws image
+* Upgrade Node version: 6.13.1, 8.10.0, 9.8.0
+* Upgrade PHP version: 5.6.34, 7.1.15
+* Upgrade APCu version for PHP 7.1: 5.1.11
+* Upgrade Composer version: 1.6.3
+* Upgrade Sensiolabs' security-checker version for PHP 7: 4.1.8
+* Upgrade Xdebug version for PHP 7: 2.6.0
 * Use Alpine binary of ci-helper for Ansible, AWS, DIND-AWS, PHP >= 5.6, Ruby and Sonar images
 * Fix deprecated MAINTAINER instruction
 * BC break: PHP image is now based on Alpine
