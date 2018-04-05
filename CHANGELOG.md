@@ -1,13 +1,13 @@
 Versions
 ========
 
-2018-04-DEV
------------
+2018-04-05
+----------
 
 * Upgrade Python version in Ansible image: 2.7.14-r0
 * Upgrade Docker version to 18.03.0 and Docker Compose to 1.20.1 in dind-aws image
 * Upgrade Node version: 6.14.1, 8.11.1, 9.10.1
-* Upgrade PHP version: 5.6.34, 7.1.15
+* Upgrade PHP version: 5.6.35, 7.1.16
 * Upgrade APCu version for PHP 7.1: 5.1.11
 * Upgrade Composer version: 1.6.3
 * Upgrade PHP Redis version: 4.0.0
