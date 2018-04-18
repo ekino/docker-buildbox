@@ -1,6 +1,11 @@
 Versions
 ========
 
+2018-04-DEV
+-----------
+
+* Fix intl in PHP images
+
 2018-04-05
 ----------
 
