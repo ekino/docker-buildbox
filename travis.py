@@ -147,6 +147,9 @@ def run_build(buildInfo):
         if language == "java":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
 
+        if language == "java9":
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
+
         if language == "node":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"))
 
@@ -200,6 +203,12 @@ def run_build(buildInfo):
 
         if language == "java":
             print "> Testing Java Image..."
+            run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
+            run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
+            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+
+        if language == "java9":
+            print "> Testing Java 9 Image..."
             run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
             run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")

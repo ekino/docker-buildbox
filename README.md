@@ -35,6 +35,10 @@ Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
 
 Contains AWS Cli, CI Helper, and Java 8.
 
+### Java9
+
+Contains AWS Cli, CI Helper, and Java 9.
+
 ### Node
 
 Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS Cli.
@@ -72,5 +76,15 @@ The ``travis.py`` script try to be clever:
 [![Build Status](https://travis-ci.org/ekino/docker-buildbox.svg?branch=master)](https://travis-ci.org/ekino/docker-buildbox)
 
 It is possible to build local image for testing with the following command:
+- mac :
+```
+SONARSCANNER_VERSION=3.0.3.778 VERSION=3.0 python travis.py --language sonar --pull-request=true
+```
 
-    SONARSCANNER_VERSION=3.0.3.778 VERSION=3.0 python travis.py --language sonar --pull-request=true
+- linux :
+```
+export CI_HELPER_VERSION=0.0.4 
+export MODD_VERSION=0.5
+export JAVA_VERSION=9.0.4-1~webupd8~0
+python travis.py --language java9 --version 9 --pull-request=true
+```
