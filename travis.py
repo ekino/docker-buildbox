@@ -217,6 +217,7 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s composer --version" % (run_args, image), "Error with composer check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
             run_command_exit("docker run %s %s security-checker --version" % (run_args, image), "Error with security-checker check")
+            run_command_exit("docker run %s -v $(pwd)/php:/tmp %s php /tmp/test.php" % (run_args, image), "Error on testing php container")
 
         if language == "ruby":
             print "> Testing Ruby Image..."
