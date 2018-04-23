@@ -4,6 +4,7 @@ Versions
 2018-04-DEV
 -----------
 
+* Add tests on PHP images
 * Upgrade Java version: 8u171-1\~webupd8\~0
 * Fix intl in PHP images
 
