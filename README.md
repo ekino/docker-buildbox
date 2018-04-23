@@ -55,6 +55,10 @@ Contains Ansible, CI Helper and Python 2.7
 
 Contains SonarQube Scanner and CI Helper
 
+### React Native Android
+
+Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
+
 ## Versions
 
 Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
