@@ -1,0 +1,7 @@
+- name: Update and Upgrade
+  apt: update_cache=True
+
+- name: Install list of packages
+  apt: name={{item}} state=installed
+  with_items: "{{ default_packages }}"
+

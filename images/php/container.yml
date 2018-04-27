@@ -1,0 +1,20 @@
+version: "2"
+settings:
+  conductor:
+    base: alpine:3.5
+  project_name: docker-buildbox
+
+services: 
+  php:
+    from: "php:7.1.16-cli-alpine"
+    roles:
+      - init
+      - php
+      - ci-helper
+      - modd
+      - awscli
+      - end
+    # vars:
+    #   apcu_version: 5.1.11
+    environment:
+      LD_PRELOAD: "/usr/lib/preloadable_libiconv.so php"

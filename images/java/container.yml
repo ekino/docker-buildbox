@@ -1,0 +1,12 @@
+version: "2"
+settings:
+  conductor:
+    base: debian:8
+  project_name: docker-buildbox
+
+services: 
+  java:
+    from: "debian:8"
+    roles:
+      - init
+      - java

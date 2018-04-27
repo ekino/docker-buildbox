@@ -1,0 +1,5 @@
+- name: Install awscli dependencies
+  apk: name={{item}} state=installed
+  with_items: 
+    - groff
+    - py-pip

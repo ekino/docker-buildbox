@@ -1,0 +1,6 @@
+- name: Install awscli dependencies
+  apt: name={{item}} state=installed
+  with_items: 
+    - python-pip
+    - groff-base
+ 

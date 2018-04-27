@@ -1,0 +1,9 @@
+- include_tasks: awscli-Alpine.yml
+  when: ansible_os_family == 'Alpine'
+
+- include_tasks: awscli-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: install awscli
+  pip:
+    name: awscli

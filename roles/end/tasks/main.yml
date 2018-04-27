@@ -1,0 +1,6 @@
+- name: Remove files
+  shell: /bin/rm -rf {{ item }}
+  with_items: "{{ clean_paths }}"
+
+- include_tasks: cleanup-Alpine.yml
+  when: ansible_os_family == 'Alpine'

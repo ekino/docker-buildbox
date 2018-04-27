@@ -3,6 +3,11 @@
 The repository provides a complete set of build tools for web developpers. **These
 images MUST NOT be used in production**. The targeted usage of those images is GitlabCI.
 
+## Build Requirements
+
+ - ansible container : pip install ansible-container[docker]
+
+
 ## Available images
 
 ### AWS

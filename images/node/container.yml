@@ -1,0 +1,15 @@
+version: "2"
+settings:
+  conductor:
+    base: alpine:3.5
+  project_name: docker-buildbox
+
+services: 
+  node:
+    from: "node:9.11.1-alpine"
+    roles:
+      - prepare
+      - ci-helper
+      - modd
+      - awscli
+      - cleanup

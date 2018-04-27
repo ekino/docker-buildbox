@@ -1,0 +1,6 @@
+---
+java_version: 8u171-1~webupd8~0
+java_packages:
+  - oracle-java8-installer={{ java_version }} 
+  - oracle-java8-set-default={{ java_version }} 
+  - maven3

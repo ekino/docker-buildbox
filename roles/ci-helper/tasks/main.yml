@@ -1,0 +1,5 @@
+- name: Download ci-helper
+  get_url:
+    url: https://github.com/rande/gitlab-ci-helper/releases/download/{{ CI_HELPER_VERSION }}/linux-amd64-gitlab-ci-helper
+    dest: /usr/bin/ci-helper
+    mode: 0755

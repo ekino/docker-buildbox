@@ -1,0 +1,35 @@
+- name: Update and Upgrade
+  apk: update_cache=True upgrade=True
+
+- name: Install list of packages
+  apk: name={{item}} state=installed
+  with_items: "{{ default_packages }}"
+
+- name: Add alpine-pkg-glibc pub key
+  get_url: 
+    url: https://github.com/sgerrand/alpine-pkg-glibc/releases/download/{{ glibc_version }}/sgerrand.rsa.pub 
+    dest: /etc/apk/keys/sgerrand.rsa.pub
+    mode: 0644
+
+- name: Download lib alpine-pkg-glibc
+  get_url: 
+    url: https://github.com/sgerrand/alpine-pkg-glibc/releases/download/{{ glibc_version }}/glibc-{{ glibc_version }}.apk 
+    dest: /tmp/glibc.apk
+    mode: 0644
+
+- name: Download bin alpine-pkg-glibc
+  get_url: 
+    url: https://github.com/sgerrand/alpine-pkg-glibc/releases/download/{{ glibc_version }}/glibc-bin-{{ glibc_version }}.apk
+    dest: /tmp/glibc-bin.apk
+    mode: 0644
+
+- name: Install alpine-pkg-glibc
+  shell: apk add /tmp/glibc.apk /tmp/glibc-bin.apk
+
+- name: Remove alpine-pkg-glibc's packages
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - "/tmp/glibc.apk"
+    - "/tmp/glibc-bin.apk"

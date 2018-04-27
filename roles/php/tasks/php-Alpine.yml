@@ -1,0 +1,133 @@
+- name: Install edge-main packages
+  apk:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    repository: http://nl.alpinelinux.org/alpine/edge/main
+  with_items: 
+    - apk-tools
+    - icu-dev
+
+- name: Install edge-testing packages
+  apk:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    repository: http://nl.alpinelinux.org/alpine/edge/testing
+  with_items: 
+    - gnu-libiconv
+
+- name: Install packages
+  apk: name="{{ item }}" state=installed
+  with_items:
+    - alpine-sdk
+    - autoconf
+    - freetype-dev
+    - libjpeg-turbo-dev
+    - libmcrypt-dev
+    - libpng-dev
+    - libxml2-dev
+    - make
+    - postgresql-dev
+
+- name: Install GD
+  shell: docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+
+- name: Install PHP extensions
+  shell: PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11" docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) {{ item }}
+  with_items:
+    - intl
+    - bcmath
+    - gd
+    - pcntl
+    - pdo_mysql
+    - pdo_pgsql
+    - soap
+    - sockets
+    - zip
+  
+- name: Install APCu
+  shell: pecl install apcu-{{ apcu_version }}
+
+- name: configure PHP.ini file
+  lineinfile:
+    path: /usr/local/etc/php/php.ini
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - "date.timezone=${PHP_TIMEZONE:-UTC}"
+    - "short_open_tag=Off"
+    - "extension=apcu.so"
+    - "zend_extension=opcache.so"
+
+- name: Download composer
+  get_url: 
+    url: https://getcomposer.org/download/{{ composer_version }}/composer.phar
+    dest: /usr/local/bin/composer
+    mode: 0755
+
+- name: Download php-cs-fixer
+  get_url: 
+    url: http://get.sensiolabs.org/php-cs-fixer.phar
+    dest: /usr/local/bin/php-cs-fixer
+    mode: 0755
+
+- name: Download security-checker
+  get_url: 
+    url: http://get.sensiolabs.org/security-checker-v{{ security_checker_version }}.phar
+    dest: /usr/local/bin/security-checker
+    mode: 0755
+
+- name: Install hirak/prestissimo
+  shell: COMPOSER_NO_INTERACTION=1 composer global require "hirak/prestissimo:^0.3"
+
+- name: Download redis
+  unarchive:
+    src: https://github.com/phpredis/phpredis/archive/{{ redis_version }}.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Compile Redis
+  shell: | 
+    phpize 
+    ./configure
+    make
+    make install
+  args:
+    chdir:  /tmp/phpredis-{{ redis_version }}
+
+- name: configure PHP.ini file for redis
+  lineinfile:
+    path: /usr/local/etc/php/conf.d/redis.ini
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - "extension=redis.so"
+
+- name: Download xdebug
+  unarchive:
+    src: https://github.com/xdebug/xdebug/archive/{{ xdebug_version }}.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Compile xdebug
+  shell: | 
+    phpize 
+    ./configure
+    make
+    make install
+  args:
+    chdir:  /tmp/xdebug-{{ xdebug_version }}
+
+- name: configure PHP.ini file for xdebug
+  lineinfile:
+    path: /usr/local/etc/php/conf.d/xdebug.ini
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - "extension=xdebug.so"
+
+- name: Remove dev packages
+  apk: 
+    name: alpine-sdk, autoconf, make
+    state: absent

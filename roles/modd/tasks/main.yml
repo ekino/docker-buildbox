@@ -1,0 +1,8 @@
+- name: Download modd archive
+  unarchive:
+    src: https://github.com/cortesi/modd/releases/download/v{{ modd_version }}/modd-{{ modd_version }}-linux64.tgz
+    dest: /tmp
+    remote_src: yes
+
+# the ansible copy does not work 
+- shell: cp /tmp/modd-0.5-linux64/modd /usr/bin/modd

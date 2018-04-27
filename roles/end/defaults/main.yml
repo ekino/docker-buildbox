@@ -1,0 +1,6 @@
+clean_paths: 
+  - "/tmp/*"
+  - "/usr/share/doc/*"
+  - "/var/cache/apk/*"
+
+remove_packages: []

@@ -1,0 +1,55 @@
+- name: "Add Java repository"
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+    update_cache: false
+  with_items:
+    - "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+    - "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+    - "deb http://ppa.launchpad.net/andrei-pozolotin/maven3/ubuntu trusty main"
+    - "deb-src http://ppa.launchpad.net/andrei-pozolotin/maven3/ubuntu trusty main"
+
+- name: "Add ubuntu key server"
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: "EEA14886"
+
+- name: "Add ubuntu key server"
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: "68B166DC"
+
+- name: Update and Upgrade
+  apt: update_cache=True
+
+- name: Accept Oracle licence
+  shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+- name: install Java
+  apt: 
+    name: "{{ item }}" 
+    state: installed
+  with_items: "{{ java_packages }}"
+
+- name: remove useless java files
+  shell: |
+      rm -rf /usr/lib/jvm/java-8-oracle/*src.zip
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/bin/javaws
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/*javafx*
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/*jfx*
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libdecora_sse.so 
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libfxplugins.so
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libglass.so
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libgstreamer-lite.so
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjavafx*.so
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjfx*.so
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libprism_*.so
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/deploy*
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/desktop
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/javaws.jar
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/lib/plugin.jar
+      rm -rf /usr/lib/jvm/java-8-oracle/jre/plugin
+      rm -rf /usr/lib/jvm/java-8-oracle/lib/*javafx*
+      rm -rf /usr/lib/jvm/java-8-oracle/lib/missioncontrol
+      rm -rf /usr/lib/jvm/java-8-oracle/lib/visualvm

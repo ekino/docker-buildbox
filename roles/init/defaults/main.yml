@@ -1,0 +1,13 @@
+default_packages: 
+  - 'curl'
+  - 'tzdata' 
+  - 'unzip' 
+  - 'tar'
+  - 'git' 
+  - 'subversion' 
+  - 'make' 
+  - 'mercurial' 
+  - 'openssh-client' 
+  - 'bzip2'
+
+glibc_version: 2.23-r3
