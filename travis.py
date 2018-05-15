@@ -36,6 +36,7 @@ def main():
 
     run_build(buildInfo)
 
+
 def run_command_exit(command, exit_message):
     if run_command(command) != 0:
         print exit_message
@@ -158,6 +159,13 @@ def run_build(buildInfo):
                 build_args = "%s --build-arg MODD_VERSION=%s --build-arg APCU_VERSION=%s --build-arg COMPOSER_VERSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s --build-arg XDEBUG_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("APCU_VERSION"), os.environ.get("COMPOSER_VERSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"), os.environ.get("XDEBUG_VERSION"))
                 build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
                 run_command_exit('sed -e "s,{{PHP_VERSION}},%s," -e "s,{{PHP_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PHP_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PHP_VERSION")))
+
+        if language == "python":
+            build_args = "%s --build-arg PYTHON_VERSION=%s" % (
+                build_args, os.environ.get("PYTHON_VERSION"))
+            build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
+            run_command_exit('sed -e "s,{{PYTHON_VERSION}},%s," -e "s,{{PYTHON_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PYTHON_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PYTHON_VERSION")))
+
 
         if language == "react-native":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
