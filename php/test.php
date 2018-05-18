@@ -142,7 +142,7 @@ EOF
 
         $errors             = array();
         $extensionsExpected = array(
-            'bcmath', 'gd', 'iconv', 'intl', 'mbstring', 'pcntl', 'pdo_mysql',
+            'bcmath', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'pcntl', 'pdo_mysql',
             'pdo_pgsql', 'redis', 'soap', 'sockets', 'xdebug', 'zip',
         );
 

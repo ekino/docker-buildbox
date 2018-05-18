@@ -4,6 +4,7 @@ Versions
 2018-05-DEV
 -----------
 
+* Add exif extension in PHP images
 * Add PHP 7.2.5
 
 2018-05-18

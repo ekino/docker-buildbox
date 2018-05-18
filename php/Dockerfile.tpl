@@ -35,7 +35,7 @@ RUN echo "Starting ..." && \
 
     echo "Starting PHP" && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath gd intl pcntl pdo_mysql pdo_pgsql soap sockets zip && \
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl pcntl pdo_mysql pdo_pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
     echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
