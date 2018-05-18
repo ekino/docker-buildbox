@@ -1,10 +1,18 @@
 Versions
 ========
 
-2018-04-DEV
------------
+2018-05-18
+----------
 
+* Upgrade Docker version to 18.05.0 and Docker Compose to 1.21.2 in dind-aws image
+* Upgrade Node version: 6.14.2, 8.11.2, 9.11.1
+* Upgrade PHP version: 5.6.36, 7.1.17
+* Upgrade Composer version: 1.6.5
+* Upgrade PHP Redis version: 4.0.2
+* Upgrade Ruby version: 2.5.1
+* Add Python images: versions 2.7 and 3.6
 * Add tests on PHP images
+* Add React Native image
 * Upgrade Java version: 8u171-1\~webupd8\~0
 * Fix intl in PHP images
 
