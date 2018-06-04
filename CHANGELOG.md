@@ -1,9 +1,10 @@
 Versions
 ========
 
-2018-05-DEV
+2018-06-DEV
 -----------
 
+* Add rsync in PHP images
 * Add exif extension in PHP images
 * Add PHP 7.2.5
 

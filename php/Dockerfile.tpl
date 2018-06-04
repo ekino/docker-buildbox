@@ -20,7 +20,7 @@ RUN echo "Starting ..." && \
     echo "@edge-main http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main libjpeg-turbo-dev \
-        libmcrypt-dev libpng-dev libxml2-dev make openssh-client postgresql-dev tzdata && \
+        libmcrypt-dev libpng-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
