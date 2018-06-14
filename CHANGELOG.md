@@ -1,12 +1,16 @@
 Versions
 ========
 
-2018-06-DEV
------------
+2018-06-14
+----------
 
 * Add rsync in PHP images
 * Add exif extension in PHP images
-* Add PHP 7.2.5
+* Add PHP 7.2.6
+* Upgrade PHP version: 7.1.18
+* Upgrade Node version: 6.14.3, 8.11.3, 10.4.1
+* Upgrade Sonar Scanner: 3.2.0.1227
+* Upgrade ci-helper: 0.0.5
 
 2018-05-18
 ----------
