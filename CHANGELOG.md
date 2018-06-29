@@ -1,6 +1,11 @@
 Versions
 ========
 
+2018-07-DEV
+-----------
+
+* Add Blackfire probe & client in PHP images
+
 2018-06-14
 ----------
 
