@@ -14,7 +14,7 @@ Contains AWS Cli + CI Helper
 Adds AWS Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
 
 Use case:
-```
+```yaml
 # .gitlab-ci.yml
 test:
   image: ekino/docker-buildbox:latest-dind-aws
@@ -41,7 +41,13 @@ Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS C
 
 ### PHP
 
-Contains PHP (installed from official alpine in the PHP_VERSION env var value) within composer, php-cs-fixer, security-checker, AWS Cli and CI Helper.
+Contains PHP (installed from official alpine in the PHP_VERSION env var value) within Blackfire, Composer, PHP CS Fixer, Security Checker, AWS Cli and CI Helper.
+
+About Blackfire, please read the official documentation to install the agent https://blackfire.io/docs/integrations/docker, then you should be able to profile a PHP script like this:
+
+```bash
+docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-container blackfire run bin/console app:foo:bar
+```
 
 ### Ruby
 

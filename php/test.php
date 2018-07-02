@@ -147,7 +147,7 @@ EOF
         );
 
         if (version_compare(PHP_VERSION, '5.4', '>')) {
-            array_push($extensionsExpected, 'apcu', 'Zend OPcache');
+            array_push($extensionsExpected, 'apcu', 'blackfire', 'Zend OPcache');
         }
 
         sort($extensionsExpected);
