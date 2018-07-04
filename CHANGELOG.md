@@ -4,6 +4,7 @@ Versions
 2018-07-DEV
 -----------
 
+* Upgrade ci-helper: 0.0.6
 * Add Blackfire probe & client in PHP images
 
 2018-06-14
