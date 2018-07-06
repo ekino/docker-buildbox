@@ -83,4 +83,4 @@ The ``travis.py`` script try to be clever:
 
 It is possible to build local image for testing with the following command:
 
-    SONARSCANNER_VERSION=3.0.3.778 VERSION=3.0 python travis.py --language sonar --pull-request=true
+    CI_HELPER_VERSION=0.0.5 MODD_VERSION=0.5 JAVA_VERSION=10.0.1-jdk-slim VERSION=10 python travis.py --language java --pull-request=true

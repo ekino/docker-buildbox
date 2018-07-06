@@ -146,7 +146,9 @@ def run_build(buildInfo):
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("GLIDE_VERSION"))
 
         if language == "java":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_MAJOR_VERSION=%s" % (build_args, buildInfo.modd, version)
+            build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
+            run_command_exit('sed -e "s,{{JAVA_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("JAVA_VERSION"), language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("JAVA_VERSION")))
 
         if language == "node":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"))

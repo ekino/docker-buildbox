@@ -11,7 +11,8 @@ matrix:
     - env: LANGUAGE=aws           VERSION=1
     - env: LANGUAGE=dind-aws      VERSION=1    DOCKER_COMPOSE_VERSION=1.21.2 GLIBC_VERSION=2.23-r3
     - env: LANGUAGE=golang        VERSION=1.9  GLIDE_VERSION=v0.13.1
-    - env: LANGUAGE=java          VERSION=8    JAVA_VERSION=8u171-1~webupd8~0
+    - env: LANGUAGE=java          VERSION=8    JAVA_VERSION=8u171-jdk-slim
+    - env: LANGUAGE=java          VERSION=10   JAVA_VERSION=10.0.1-jdk-slim
     - env: LANGUAGE=node          VERSION=6.14 NODE_VERSION=6.14.3 NPM_VERSION=3.10.10
     - env: LANGUAGE=node          VERSION=8.11 NODE_VERSION=8.11.3 NPM_VERSION=5.6.0
     - env: LANGUAGE=node          VERSION=10.4 NODE_VERSION=10.4.1 NPM_VERSION=6.1.0
@@ -21,7 +22,7 @@ matrix:
     - env: LANGUAGE=php           VERSION=7.2  PHP_VERSION=7.2.6-cli-alpine  APCU_VERSION=5.1.11 COMPOSER_VERSION=1.6.5 REDIS_VERSION=4.0.2 SECURITY_CHECKER_VERSION=4.1.8 XDEBUG_VERSION=2.6.0
     - env: LANGUAGE=python        VERSION=2.7  PYTHON_VERSION=2.7.15
     - env: LANGUAGE=python        VERSION=3.6  PYTHON_VERSION=3.6.5
-    - env: LANGUAGE=react-native  VERSION=1    JAVA_VERSION=8u171-1~webupd8~0
+    - env: LANGUAGE=react-native  VERSION=1    JAVA_VERSION=8u171-1~webupd8~1
     - env: LANGUAGE=ruby          VERSION=2.5
     - env: LANGUAGE=sonar         VERSION=3.2  GLIBC_VERSION=2.23-r3 SONARSCANNER_VERSION=3.2.0.1227
 
