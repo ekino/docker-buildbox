@@ -168,9 +168,8 @@ def run_build(buildInfo):
             build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
             run_command_exit('sed -e "s,{{PYTHON_VERSION}},%s," -e "s,{{PYTHON_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PYTHON_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PYTHON_VERSION")))
 
-
         if language == "react-native":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("JAVA_VERSION"))
+            build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
         if language == "sonar":
             build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
@@ -236,6 +235,17 @@ def run_build(buildInfo):
             print "> Testing Ruby Image..."
             run_command_exit("docker run %s %s ruby --version" % (run_args, image),   "Error with ruby check")
             run_command_exit("docker run %s %s bundle --version" % (run_args, image), "Error with bundle check")
+
+        if language == "react-native":
+            print "> Testing React Native Image..."
+            run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
+            run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
+            run_command_exit("docker run %s %s yarn --version" % (run_args, image), "Error with sass check")
+            run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
+            run_command_exit("docker run %s %s react-native --version" % (run_args, image), "Error with java check")
+            run_command_exit("docker run %s %s watchman --version" % (run_args, image), "Error with mvn check")
+            run_command_exit("docker run %s %s rnpm --version" % (run_args, image), "Error with mvn check")
+            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
         if language == "sonar":
             print "> Testing Sonar Scanner Image..."
