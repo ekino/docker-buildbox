@@ -6,6 +6,8 @@ Versions
 
 * Upgrade ci-helper: 0.0.6
 * Add Blackfire probe & client in PHP images
+* Use openjdk slim as base Java image
+* Add Java version 10.0.1
 
 2018-06-14
 ----------
