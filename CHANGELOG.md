@@ -8,6 +8,8 @@ Versions
 * Add Blackfire probe & client in PHP images
 * Use openjdk slim as base Java image
 * Add Java version 10.0.1
+* Use openjdk slim as base React Native image
+* Remove Maven and Gradle from React Native image
 
 2018-06-14
 ----------
