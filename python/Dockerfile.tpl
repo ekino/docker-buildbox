@@ -3,7 +3,7 @@ FROM python:{{PYTHON_VERSION}}-alpine3.7
 ARG CI_HELPER_VERSION
 
 RUN echo "Starting ..." && \
-    apk add --update curl git make openssh-client rsync tzdata && \
+    apk add --update -q --no-cache bash curl git make openssh-client rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
