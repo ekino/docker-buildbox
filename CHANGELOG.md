@@ -10,6 +10,7 @@ Versions
 * Add Java version 10.0.1
 * Use openjdk slim as base React Native image
 * Remove Maven and Gradle from React Native image
+* Add bash to Python images
 
 2018-06-14
 ----------
