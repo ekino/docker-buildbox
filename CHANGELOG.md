@@ -11,6 +11,7 @@ Versions
 * Use openjdk slim as base React Native image
 * Remove Maven and Gradle from React Native image
 * Add bash to Python images
+* Add an up to date mime types definition file for the images that use AWS CLI
 
 2018-06-14
 ----------

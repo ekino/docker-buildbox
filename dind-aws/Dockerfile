@@ -25,6 +25,9 @@ RUN echo "Install AWS" && \
     chmod +x /usr/local/bin/docker-compose && \
     docker-compose --version && \
 
+    echo "Adding an up to date mime-types definition file" && \
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
     echo "Cleaning files!" && \
     rm -rf /tmp/* /var/cache/apk/* && \
 

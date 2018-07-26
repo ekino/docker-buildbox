@@ -53,6 +53,9 @@ RUN echo "Starting ..." && \
     pip install -q -U awscli && \
     echo "Done AWS!" && \
 
+    echo "Adding an up to date mime-types definition file" && \
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -qq -y remove --purge emacsen-common fakeroot file firebird2.5-common firebird2.5-common-doc \

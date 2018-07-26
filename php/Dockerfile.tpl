@@ -75,6 +75,9 @@ zend_extension=opcache.so \n\
     pip install -q -U awscli && \
     echo "Done AWS!" && \
 
+    echo "Adding an up to date mime-types definition file" && \
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
     echo "Cleaning files!" && \
     apk del --purge alpine-sdk autoconf && \
     rm -rf /tmp/* /usr/share/doc /var/cache/apk/* && \

@@ -44,6 +44,9 @@ RUN echo "Starting ..." && \
     apt-get -qq -y install maven && \
     echo "Done Install Maven!" && \
 
+    echo "Adding an up to date mime-types definition file" && \
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -y remove --purge \

@@ -36,4 +36,7 @@ RUN echo "Starting...\n" && \
     chmod 755 /usr/bin/modd && \
     echo "Successfully installed Modd\n" && \
 
+    echo "Adding an up to date mime-types definition file" && \
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
     echo "Done!"
