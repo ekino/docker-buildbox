@@ -28,7 +28,6 @@ RUN echo "Starting ..." && \
     phpenv rehash && \
     curl -sSL https://pear.php.net/go-pear.phar -o /tmp/go-pear.phar && \
     php /tmp/go-pear.phar && \
-    rm /tmp/go-pear.phar && \
     pear config-set php_ini $(php -r 'echo php_ini_loaded_file();') && \
 
     ln -s /home/.phpenv/versions/${PHP_VERSION} /home/.phpenv/versions/current && \
