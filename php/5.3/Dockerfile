@@ -26,7 +26,7 @@ RUN echo "Starting ..." && \
     MAKEFLAGS=' -j8' LDFLAGS=-lstdc++ phpenv install ${PHP_VERSION} && \
     phpenv global ${PHP_VERSION} && \
     phpenv rehash && \
-    curl -sSL http://pear.php.net/go-pear.phar -o /tmp/go-pear.phar && \
+    curl -sSL https://pear.php.net/go-pear.phar -o /tmp/go-pear.phar && \
     php /tmp/go-pear.phar && \
     rm /tmp/go-pear.phar && \
     pear config-set php_ini $(php -r 'echo php_ini_loaded_file();') && \
