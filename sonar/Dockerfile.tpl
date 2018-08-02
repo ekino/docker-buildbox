@@ -1,16 +1,15 @@
-FROM alpine:3.8
-LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
+FROM node:{{NODE_VERSION}}
+LABEL maintainer="Sebastien Augereau <sebastien.augereau@ekino.com>"
 
+ARG CI_HELPER_VERSION
 ARG SONARSCANNER_VERSION
+ARG GLIBC_VERSION
 
 ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-ARG CI_HELPER_VERSION
-ARG GLIBC_VERSION
-ARG SONARSCANNER_VERSION
-
 RUN echo "Starting ..." && \
-    apk --update upgrade && apk add curl make tzdata unzip && \
+    apk --update upgrade && apk add --no-cache curl unzip  && \
+
     echo "Done base install!" && \
 
     echo "Starting Sonar Scanner" && \

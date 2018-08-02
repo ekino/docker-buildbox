@@ -25,7 +25,7 @@ matrix:
     - env: LANGUAGE=python        VERSION=3.6  PYTHON_VERSION=3.6.5
     - env: LANGUAGE=react-native  VERSION=1
     - env: LANGUAGE=ruby          VERSION=2.5
-    - env: LANGUAGE=sonar         VERSION=3.2  GLIBC_VERSION=2.23-r3 SONARSCANNER_VERSION=3.2.0.1227
+    - env: LANGUAGE=sonar         VERSION=10.7 NODE_VERSION=10.7.0-alpine GLIBC_VERSION=2.23-r3 SONARSCANNER_VERSION=3.2.0.1227
 
 script:
     - travis_wait python travis.py
