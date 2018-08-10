@@ -33,7 +33,8 @@ Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
 
 ### Java
 
-Contains AWS Cli, CI Helper, and Java 8.
+Contains AWS Cli, CI Helper, and Java.
+**Please note that for Java 6, the image doesn't contain CI Helper, Modd and AWS Cli.**
 
 ### Node
 
