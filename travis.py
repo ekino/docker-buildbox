@@ -175,7 +175,11 @@ def run_build(buildInfo):
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
         if language == "sonar":
-            build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
+            build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s " % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
+            build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
+            run_command_exit('sed -e "s,{{NODE_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("NODE_VERSION"), language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("VERSION")))
+
+
 
         cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
 
@@ -255,7 +259,8 @@ def run_build(buildInfo):
         if language == "sonar":
             print "> Testing Sonar Scanner Image..."
             run_command_exit("docker run %s %s java -version" % (run_args, image),   "Error with java version")
-            run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with ansible-playbook check")
+            run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
+            run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with sonar-scanner check")
 
         print ""
         print "You can now test the image with the following command:\n   $ docker run --rm -ti %s" % image

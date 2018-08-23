@@ -60,7 +60,7 @@ Contains Ansible, CI Helper and Python 2.7
 
 ### SonarQube Scanner
 
-Contains SonarQube Scanner and CI Helper
+Contains Node, SonarQube Scanner and CI Helper
 
 ### React Native Android
 
