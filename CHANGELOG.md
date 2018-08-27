@@ -1,7 +1,7 @@
 Versions
 ========
 
-2018-07-DEV
+2018-08-DEV
 -----------
 
 * Upgrade ci-helper: 0.0.6
@@ -15,6 +15,8 @@ Versions
 * Add an up to date mime types definition file for the images that use AWS CLI
 * Install PEAR in the PHP 5.3 image
 * Update Alpine Version for sonar image: 3.8
+* Add `build-base`, `libffi-dev` and `openldap-dev` packages in Python images
+* Upgrade Pip version in Python images
 
 2018-06-14
 ----------
