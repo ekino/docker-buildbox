@@ -9,7 +9,7 @@ matrix:
   include:
     - env: LANGUAGE=ansible       VERSION=2.3.0.0-r1 PYTHON_VERSION=2.7.14-r0
     - env: LANGUAGE=aws           VERSION=1
-    - env: LANGUAGE=dind-aws      VERSION=1    DOCKER_COMPOSE_VERSION=1.21.2 GLIBC_VERSION=2.23-r3
+    - env: LANGUAGE=dind-aws      VERSION=1    DOCKER_COMPOSE_VERSION=1.22.0 GLIBC_VERSION=2.23-r3
     - env: LANGUAGE=golang        VERSION=1.9  GLIDE_VERSION=v0.13.1
     - env: LANGUAGE=java          VERSION=6
     - env: LANGUAGE=java          VERSION=8    JAVA_VERSION=8u171-jdk-slim

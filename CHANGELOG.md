@@ -17,6 +17,7 @@ Versions
 * Update Alpine Version for sonar image: 3.8
 * Add `build-base`, `libffi-dev` and `openldap-dev` packages in Python images
 * Upgrade Pip version in Python images
+* Update dind-aws to use 18.06.1-ce-dind
 
 2018-06-14
 ----------
