@@ -19,6 +19,7 @@ Versions
 * Upgrade Pip version in Python images
 * Update dind-aws to use 18.06.1-ce-dind
 * Fix ansible build (move from python 2.7.14-r0 to 2.7.15-r0)
+* Java image : fix aws failed when removing pip
 
 2018-06-14
 ----------
