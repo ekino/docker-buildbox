@@ -1,7 +1,7 @@
 Versions
 ========
 
-2018-08-DEV
+2018-09-DEV
 -----------
 
 * Upgrade ci-helper: 0.0.6
@@ -17,6 +17,8 @@ Versions
 * Update Alpine Version for sonar image: 3.8
 * Add `build-base`, `libffi-dev` and `openldap-dev` packages in Python images
 * Upgrade Pip version in Python images
+* Update dind-aws to use 18.06.1-ce-dind
+* Fix ansible build (move from python 2.7.14-r0 to 2.7.15-r0)
 
 2018-06-14
 ----------
