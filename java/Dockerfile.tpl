@@ -55,7 +55,6 @@ RUN echo "Starting ..." && \
         file \
         manpages \
         manpages-dev \
-        python-pip \
         patch \
         xauth \
         xz-utils && \

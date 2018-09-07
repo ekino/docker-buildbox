@@ -219,6 +219,7 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
             run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
             if version != "6":
+                run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with mvn check")
                 run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
         if language == "node":
