@@ -20,6 +20,14 @@ Versions
 * Update dind-aws to use 18.06.1-ce-dind
 * Fix ansible build (move from python 2.7.14-r0 to 2.7.15-r0)
 * Java image : fix aws failed when removing pip
+* Upgrade APCu version for PHP 7.1 and 7.2: 5.1.12
+* Upgrade Composer version for PHP 7.1 and 7.2: 1.7.2
+* Upgrade PHP version: 5.6.37, 7.1.21, 7.2.9
+* Upgrade Redis version for PHP 7.1 and 7.2: 4.1.1
+* Upgrade Xdebug version for PHP 7.1 and 7.2: 2.6.1
+* Upgrade Node version: 8.12, 10.10
+* Upgrade npm version for Node 8.12 and 10.10: 6.4.1
+* Upgrade Python version: 3.7
 
 2018-06-14
 ----------
