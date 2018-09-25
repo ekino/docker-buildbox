@@ -1,4 +1,4 @@
-FROM python:{{PYTHON_VERSION}}-alpine3.7
+FROM python:{{PYTHON_VERSION}}-alpine3.8
 
 ARG CI_HELPER_VERSION
 

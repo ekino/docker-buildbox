@@ -1,6 +1,8 @@
 FROM debian:squeeze
 MAINTAINER Jean-Baptiste Hembise <jean-baptiste.hembise@ekino.com>
 
+ARG MAVEN_VERSION
+
 RUN echo "Starting ..." && \
 
     echo "Updating packages using sources :" && \
@@ -29,9 +31,9 @@ RUN echo "Starting ..." && \
     echo "Done Install java" && \
 
     echo "Install Maven" && \
-    curl -sSL https://archive.apache.org/dist/maven/maven-3/3.2.1/binaries/apache-maven-3.2.1-bin.tar.gz | tar -xzf - -C /usr/bin && \
-    chmod 755 /usr/bin/apache-maven-3.2.1 && \
-    ln -s /usr/bin/apache-maven-3.2.1/bin/mvn /usr/bin/mvn && \
+    curl -sSL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xzf - -C /usr/bin && \
+    chmod 755 /usr/bin/apache-maven-${MAVEN_VERSION} && \
+    ln -s /usr/bin/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn && \
     echo "Done Install Maven!" && \
 
     echo "Adding an up to date mime-types definition file" && \

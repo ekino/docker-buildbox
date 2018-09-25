@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 ARG NODE_VERSION
 ARG NPM_VERSION
+ARG NVM_VERSION=0.33.11
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 
@@ -34,7 +35,7 @@ RUN echo "Starting ..." && \
     echo "Done Install Modd" && \
 
     echo "Starting Javascript..." && \
-    git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v0.32.1 && \
+    git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${NVM_VERSION} && \
     . /root/.nvm/nvm.sh && \
 
     nvm install ${NODE_VERSION} && nvm alias default ${NODE_VERSION} && \
