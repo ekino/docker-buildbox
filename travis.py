@@ -147,8 +147,8 @@ def run_build(buildInfo):
 
         if language == "java":
             if version == "6":
-                build_context = "%s/%s" % (language, version)
                 build_args = "%s --build-arg MAVEN_VERSION=%s" % (build_args, os.environ.get("MAVEN_VERSION"))
+                build_context = "%s/%s" % (language, version)
             else:
                 build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_MAJOR_VERSION=%s" % (build_args, buildInfo.modd, version)
                 build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
