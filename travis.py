@@ -148,13 +148,14 @@ def run_build(buildInfo):
         if language == "java":
             if version == "6":
                 build_context = "%s/%s" % (language, version)
+                build_args = "%s --build-arg MAVEN_VERSION=%s" % (build_args, os.environ.get("MAVEN_VERSION"))
             else:
                 build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_MAJOR_VERSION=%s" % (build_args, buildInfo.modd, version)
                 build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
                 run_command_exit('sed -e "s,{{JAVA_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("JAVA_VERSION"), language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("JAVA_VERSION")))
 
         if language == "node":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"))
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s --build-arg NVM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"), os.environ.get("NVM_VERSION"))
 
         if language == "php":
             if version == "5.3":
