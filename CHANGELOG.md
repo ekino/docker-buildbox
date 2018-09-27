@@ -20,7 +20,7 @@ Versions
 * Update dind-aws to use 18.06.1-ce-dind
 * Fix ansible build (move from python 2.7.14-r0 to 2.7.15-r1)
 * Java image : fix aws failed when removing pip
-* Upgrade Maven version : 3.5.4
+* Upgrade Maven version : 3.2.5
 * Upgrade APCu version for PHP 7.1 and 7.2: 5.1.12
 * Upgrade Composer version for PHP 7.1 and 7.2: 1.7.2
 * Upgrade PHP version: 5.6.38, 7.1.22, 7.2.10
