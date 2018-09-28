@@ -14,19 +14,21 @@ Versions
 * Add bash to Python images
 * Add an up to date mime types definition file for the images that use AWS CLI
 * Install PEAR in the PHP 5.3 image
-* Update Alpine Version for sonar image: 3.8
+* Update Alpine Version for ansible, aws and sonar image: 3.8
 * Add `build-base`, `libffi-dev` and `openldap-dev` packages in Python images
 * Upgrade Pip version in Python images
 * Update dind-aws to use 18.06.1-ce-dind
-* Fix ansible build (move from python 2.7.14-r0 to 2.7.15-r0)
+* Fix ansible build (move from python 2.7.14-r0 to 2.7.15-r1)
 * Java image : fix aws failed when removing pip
+* Upgrade Maven version : 3.2.5
 * Upgrade APCu version for PHP 7.1 and 7.2: 5.1.12
 * Upgrade Composer version for PHP 7.1 and 7.2: 1.7.2
-* Upgrade PHP version: 5.6.37, 7.1.21, 7.2.9
+* Upgrade PHP version: 5.6.38, 7.1.22, 7.2.10
 * Upgrade Redis version for PHP 7.1 and 7.2: 4.1.1
 * Upgrade Xdebug version for PHP 7.1 and 7.2: 2.6.1
-* Upgrade Node version: 8.12, 10.10
-* Upgrade npm version for Node 8.12 and 10.10: 6.4.1
+* Upgrade Node version: 8.12, 10.11
+* Upgrade NPM version for Node 8.12 and 10.10: 6.4.1
+* Upgrade NVM version: 0.33.11
 * Upgrade Python version: 3.7
 
 2018-06-14

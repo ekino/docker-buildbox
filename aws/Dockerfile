@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.8
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG CI_HELPER_VERSION
