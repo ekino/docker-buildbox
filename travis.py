@@ -220,7 +220,7 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
             run_command_exit("docker run %s %s mvn --version" % (run_args, image), "Error with mvn check")
             if version != "6":
-                run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with mvn check")
+                run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
                 run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
         if language == "node":
@@ -247,24 +247,24 @@ def run_build(buildInfo):
             print "> Testing React Native Image..."
             run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
             run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
-            run_command_exit("docker run %s %s yarn --version" % (run_args, image), "Error with sass check")
+            run_command_exit("docker run %s %s yarn --version" % (run_args, image), "Error with yarn check")
             run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
-            run_command_exit("docker run %s %s react-native --version" % (run_args, image), "Error with java check")
-            run_command_exit("docker run %s %s watchman --version" % (run_args, image), "Error with mvn check")
+            run_command_exit("docker run %s %s react-native --version" % (run_args, image), "Error with react-native check")
+            run_command_exit("docker run %s %s watchman --version" % (run_args, image), "Error with watchman check")
             run_command_exit("docker run %s %s rnpm --version" % (run_args, image), "Error with mvn check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
         if language == "sonar":
             print "> Testing Sonar Scanner Image..."
-            run_command_exit("docker run %s %s java -version" % (run_args, image),   "Error with java version")
-            run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with ansible-playbook check")
+            run_command_exit("docker run %s %s java -version" % (run_args, image),   "Error with java check")
+            run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with sonar-scanner check")
 
         print ""
         print "You can now test the image with the following command:\n   $ docker run --rm -ti %s" % image
 
     if push_image:
         run_command_exit("docker login --username %s --password %s" % (os.environ.get('DOCKER_USERNAME'), os.environ.get('DOCKER_PASSWORD')), "unable to login to docker")
-        run_command_exit("docker push %s" % image, "unable to login to docker")
+        run_command_exit("docker push %s" % image, "unable to push to docker")
 
 
 if __name__ == "__main__":
