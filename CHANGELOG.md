@@ -1,7 +1,7 @@
 Versions
 ========
 
-2018-09-DEV
+2018-10-DEV
 -----------
 
 * Upgrade ci-helper: 0.0.6
@@ -26,6 +26,7 @@ Versions
 * Upgrade PHP version: 5.6.38, 7.1.22, 7.2.10
 * Upgrade Redis version for PHP 7.1 and 7.2: 4.1.1
 * Upgrade Xdebug version for PHP 7.1 and 7.2: 2.6.1
+* Fix install of intl extension in PHP images
 * Upgrade Node version: 8.12, 10.11
 * Upgrade NPM version for Node 8.12 and 10.10: 6.4.1
 * Upgrade NVM version: 0.33.11

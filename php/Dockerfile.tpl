@@ -19,7 +19,7 @@ ENV COMPOSER_NO_INTERACTION=1 \
 RUN echo "Starting ..." && \
     echo "@edge-main http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main libjpeg-turbo-dev \
+    apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main php{{PHP_MAJOR_VERSION}}-intl libjpeg-turbo-dev \
         libmcrypt-dev libpng-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
@@ -35,6 +35,7 @@ RUN echo "Starting ..." && \
 
     echo "Starting PHP" && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-configure intl && \
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl pcntl pdo_mysql pdo_pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
     echo -e "\
