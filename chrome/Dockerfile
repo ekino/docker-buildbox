@@ -1,5 +1,6 @@
 # Based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 FROM node:10-slim
+LABEL maintainer="Guillaume AMAT <guillaume.amat@ekino.com>"
 
 
 ARG CI_HELPER_VERSION
