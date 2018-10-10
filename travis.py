@@ -215,7 +215,6 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
             run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
             run_command_exit("docker run %s %s yarn --version" % (run_args, image), "Error with yarn check")
-            run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
 
         if language == "dind-aws":
             print "> Testing DIND - AWS Image..."

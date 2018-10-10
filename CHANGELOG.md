@@ -33,7 +33,7 @@ Versions
 * Upgrade NPM version for Node 8.12 and 10.10: 6.4.1
 * Upgrade NVM version: 0.33.11
 * Upgrade Python version: 3.7
-* Add a Chrome image (based on node, with NPM, Yarn and Puppeteer)
+* Add a Chrome image (based on Alpine Node, with NPM, Yarn and Puppeteer)
 
 2018-06-14
 ----------
