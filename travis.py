@@ -145,8 +145,11 @@ def run_build(buildInfo):
         if language == "chrome":
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
+        if language == "aws":
+            build_args = "%s --build-arg --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
+
         if language == "dind-aws":
-            build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"))
+            build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"), os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
 
         if language == "golang":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("GLIDE_VERSION"))
@@ -173,8 +176,8 @@ def run_build(buildInfo):
                 run_command_exit('sed -e "s,{{PHP_VERSION}},%s," -e "s,{{PHP_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PHP_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PHP_VERSION")))
 
         if language == "python":
-            build_args = "%s --build-arg PYTHON_VERSION=%s" % (
-                build_args, os.environ.get("PYTHON_VERSION"))
+            build_args = "%s --build-arg PYTHON_VERSION=%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (
+                build_args, os.environ.get("PYTHON_VERSION"), os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
             build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
             run_command_exit('sed -e "s,{{PYTHON_VERSION}},%s," -e "s,{{PYTHON_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PYTHON_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PYTHON_VERSION")))
 

@@ -6,8 +6,8 @@ ARG CI_HELPER_VERSION
 WORKDIR /root
 RUN echo "Install AWS" && \
     apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
-    pip -q install pip==18 \
-    pip -q install pipenv==2018.7.1 awscli boto3 PyYAML && \
+    pip -q install pip=={{PIP_VERSION}} \
+    pip -q install pipenv=={{PIPENV_VERSION}} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
     echo "Install CI Helper" && \

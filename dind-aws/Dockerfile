@@ -7,8 +7,8 @@ ARG GLIBC_VERSION
 
 RUN echo "Install AWS" && \
     apk add -q --no-cache bash build-base ca-certificates curl git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \
-    pip -q install pip==18 \
-    pip -q install pipenv==2018.7.1 awscli boto3 PyYAML && \
+    pip -q install pip=={{PIP_VERSION}} \
+    pip -q install pipenv=={{PIPENV_VERSION}} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
     echo "Install CI Helper" && \
