@@ -139,6 +139,9 @@ def run_build(buildInfo):
         if language == "ansible":
             build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("PYTHON_VERSION"))
 
+        if language == "arachni":
+            build_args = "%s --build-arg VERSION=%s --build-arg ARACHNI_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("ARACHNI_VERSION"))
+
         if language == "dind-aws":
             build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"))
 
@@ -191,6 +194,10 @@ def run_build(buildInfo):
             print "> Testing Ansible Image..."
             run_command_exit("docker run %s %s ansible --version" % (run_args, image),   "Error with ansible check")
             run_command_exit("docker run %s %s ansible-playbook --version" % (run_args, image), "Error with ansible-playbook check")
+
+        if language == "arachni":
+             print "> Testing Arachni Image..."
+             run_command_exit("docker run %s %s arachni --version" % (run_args, image), "Error with arachni check")
 
         if language == "aws":
             print "> Testing AWS Image..."
