@@ -6,7 +6,8 @@ ARG DOCKER_COMPOSE_VERSION
 ARG GLIBC_VERSION
 
 RUN echo "Install AWS" && \
-    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync tzdata && \
+    apk add -q --no-cache bash build-base ca-certificates curl git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \
+    pip install -U pip==18 pipenv==2018.7.1 \
     pip -q install awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 

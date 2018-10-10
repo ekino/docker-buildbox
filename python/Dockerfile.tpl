@@ -10,5 +10,5 @@ RUN echo "Starting ..." && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
     echo "Install basics Python tools" && \
-    pip install --upgrade pipenv && \
+    pip install --upgrade pipenv==2018.7.1 pip==18 && \
     echo "Done install CI Helper"
