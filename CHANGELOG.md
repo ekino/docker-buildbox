@@ -4,6 +4,7 @@ Versions
 2018-10-DEV
 -----------
 
+* Add Arachni image version 1.5.1
 * Update Sonar download URL
 * Upgrade ci-helper: 0.0.6
 * Add Blackfire probe & client in PHP images
