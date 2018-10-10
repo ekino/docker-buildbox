@@ -18,7 +18,7 @@ RUN echo "Starting ..." && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
     apk add -q glibc-${GLIBC_VERSION}.apk && \
     rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk && \
-    curl --insecure -o ./sonarscanner.zip -L https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARSCANNER_VERSION}-linux.zip && \
+    curl --insecure -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARSCANNER_VERSION}-linux.zip && \
     unzip sonarscanner.zip && \
     rm sonarscanner.zip && \
     mv sonar-scanner-${SONARSCANNER_VERSION}-linux sonar-scanner && \

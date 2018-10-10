@@ -4,6 +4,7 @@ Versions
 2018-10-DEV
 -----------
 
+* Update Sonar download URL
 * Upgrade ci-helper: 0.0.6
 * Add Blackfire probe & client in PHP images
 * Use openjdk slim as base Java image
