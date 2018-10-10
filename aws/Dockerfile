@@ -4,9 +4,11 @@ LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 ARG CI_HELPER_VERSION
 
 WORKDIR /root
-RUN echo "Install AWS" && \
+
+RUN echo "Install system dependencies, python and pip" && \
     apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
-    pip -q install pip=={{PIP_VERSION}} \
+    pip install pip=={{PIP_VERSION}}
+RUN echo "Install AWS" && \
     pip -q install pipenv=={{PIPENV_VERSION}} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 

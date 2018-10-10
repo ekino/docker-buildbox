@@ -5,9 +5,10 @@ ARG CI_HELPER_VERSION
 ARG DOCKER_COMPOSE_VERSION
 ARG GLIBC_VERSION
 
-RUN echo "Install AWS" && \
+RUN echo "Install system dependencies, python and pip" && \
     apk add -q --no-cache bash build-base ca-certificates curl git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \
-    pip -q install pip=={{PIP_VERSION}} \
+    pip install pip=={{PIP_VERSION}}
+RUN echo "Install AWS" && \
     pip -q install pipenv=={{PIPENV_VERSION}} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
