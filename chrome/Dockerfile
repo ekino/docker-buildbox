@@ -24,8 +24,6 @@ RUN yarn add puppeteer@1.4.0
 
 
 
-RUN ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
-RUN ln -s /usr/bin/chromium-browser /usr/bin/google-chrome-unstable
 
 RUN apk add --update curl git grep make ncurses tzdata && \
 
@@ -36,5 +34,9 @@ RUN apk add --update curl git grep make ncurses tzdata && \
 
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
+    echo "Linking the Chrome executable with all the known/used names" && \
+    ln -s /usr/bin/chromium-browser /usr/bin/google-chrome && \
+    ln -s /usr/bin/chromium-browser /usr/bin/google-chrome-unstable && \
 
     rm -rf /tmp/* /var/cache/apk/*
