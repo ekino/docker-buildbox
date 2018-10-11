@@ -140,7 +140,7 @@ def run_build(buildInfo):
             build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("PYTHON_VERSION"))
 
         if language == "arachni":
-            build_args = "%s --build-arg VERSION=%s --build-arg ARACHNI_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("ARACHNI_VERSION"))
+            build_args = "%s --build-arg VERSION=%s --build-arg ARACHNI_VERSION=%s --build-arg ARACHNI_WEB_UI_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("ARACHNI_VERSION"), os.environ.get("ARACHNI_WEB_UI_VERSION"))
 
         if language == "dind-aws":
             build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"))
@@ -197,7 +197,7 @@ def run_build(buildInfo):
 
         if language == "arachni":
              print "> Testing Arachni Image..."
-             run_command_exit("docker run %s %s arachni --version" % (run_args, image), "Error with arachni check")
+             run_command_exit("docker run %s %s bin/arachni --version" % (run_args, image), "Error with arachni check")
 
         if language == "aws":
             print "> Testing AWS Image..."
