@@ -1,10 +1,12 @@
 FROM python:{{PYTHON_VERSION}}-alpine3.8
 
 ARG CI_HELPER_VERSION
+ARG PYTHON_PIP_VERSION
+ARG PIPENV_VERSION
 
 RUN echo "Install system dependencies for python and pip" && \
     apk add --update -q --no-cache bash build-base curl git libffi-dev make openldap-dev openssh-client rsync tzdata && \
-    pip install pip=={{PIP_VERSION}}
+    pip install pip==${PYTHON_PIP_VERSION}
 RUN echo "Starting ..." && \
     echo "Done base install!" && \
     echo "Install CI Helper" && \
@@ -12,5 +14,5 @@ RUN echo "Starting ..." && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
     echo "Install basics Python tools" && \
-    pip install --upgrade pipenv=={{PIPENV_VERSION}} && \
+    pip install --upgrade pipenv==${PIPENV_VERSION} && \
     echo "Done install CI Helper"

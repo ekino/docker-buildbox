@@ -2,14 +2,16 @@ FROM alpine:3.8
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG CI_HELPER_VERSION
+ARG PYTHON_PIP_VERSION
+ARG PIPENV_VERSION
 
 WORKDIR /root
 
 RUN echo "Install system dependencies, python and pip" && \
     apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
-    pip install pip=={{PIP_VERSION}}
+    pip install pip==${PYTHON_PIP_VERSION}
 RUN echo "Install AWS" && \
-    pip -q install pipenv=={{PIPENV_VERSION}} awscli boto3 PyYAML && \
+    pip -q install pipenv==${PIPENV_VERSION} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
     echo "Install CI Helper" && \
