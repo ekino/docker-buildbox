@@ -197,7 +197,7 @@ def run_build(buildInfo):
 
         if language == "arachni":
              print "> Testing Arachni Image..."
-             run_command_exit("docker run %s %s bin/arachni --version" % (run_args, image), "Error with arachni check")
+             run_command_exit("docker run %s %s arachni --version" % (run_args, image), "Error with arachni check")
 
         if language == "aws":
             print "> Testing AWS Image..."

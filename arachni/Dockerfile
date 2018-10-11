@@ -5,6 +5,8 @@ ARG ARACHNI_VERSION
 ARG ARACHNI_WEB_UI_VERSION
 ARG CI_HELPER_VERSION
 
+ENV PATH="${PATH}:/arachni-${ARACHNI_VERSION}-${ARACHNI_WEB_UI_VERSION}/bin"
+
 RUN echo "Starting ..." && \
 
     echo "Updating packages using sources:" && \
@@ -15,7 +17,9 @@ RUN echo "Starting ..." && \
     apt-get -qq -y install curl && \
     echo "Done Install base!" && \
 
+    echo "Install Arachni" && \
     curl -sSL https://github.com/Arachni/arachni/releases/download/v${ARACHNI_VERSION}/arachni-${ARACHNI_VERSION}-${ARACHNI_WEB_UI_VERSION}-linux-x86_64.tar.gz | tar zx && \
+    echo "Done install Arachni" && \
 
     echo "Install CI Helper" && \
     curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
@@ -31,5 +35,3 @@ RUN echo "Starting ..." && \
     rm -rf /usr/share/doc && \
 
     echo "Done!"
-
-WORKDIR /arachni-${ARACHNI_VERSION}-${ARACHNI_WEB_UI_VERSION}

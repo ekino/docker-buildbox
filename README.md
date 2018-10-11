@@ -16,7 +16,7 @@ Contains Arachni + CI Helper
 To run the web UI:
 
 ```bash
-docker run -d -p 9292:9292 ekino/docker-buildbox:latest-arachni1.5 bin/arachni_web -o 0.0.0.0
+docker run -d -p 9292:9292 ekino/docker-buildbox:latest-arachni1.5 arachni_web -o 0.0.0.0
 ```
 
 Then go to http://localhost:9292
