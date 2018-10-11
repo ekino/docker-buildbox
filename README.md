@@ -5,6 +5,22 @@ images MUST NOT be used in production**. The targeted usage of those images is G
 
 ## Available images
 
+### Ansible
+
+Contains Ansible, CI Helper and Python 2.7
+
+### Arachni
+
+Contains Arachni + CI Helper
+
+To run the web UI:
+
+```bash
+docker run -d -p 9292:9292 ekino/docker-buildbox:latest-arachni1.5 bin/arachni_web -o 0.0.0.0
+```
+
+Then go to http://localhost:9292
+
 ### AWS
 
 Contains AWS Cli + CI Helper
@@ -53,10 +69,6 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 ### Ruby
 
 Contains Ruby (installed from official alpine) and CI Helper.
-
-### Ansible
-
-Contains Ansible, CI Helper and Python 2.7
 
 ### SonarQube Scanner
 
