@@ -7,10 +7,9 @@ ARG PIPENV_VERSION
 
 WORKDIR /root
 
-RUN echo "Install system dependencies, python and pip" && \
-    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
-    pip install pip==${PYTHON_PIP_VERSION}
 RUN echo "Install AWS" && \
+    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
+    pip install pip==${PYTHON_PIP_VERSION} && \
     pip -q install pipenv==${PIPENV_VERSION} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 

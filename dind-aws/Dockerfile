@@ -7,10 +7,9 @@ ARG GLIBC_VERSION
 ARG PYTHON_PIP_VERSION
 ARG PIPENV_VERSION
 
-RUN echo "Install system dependencies, python and pip" && \
-    apk add -q --no-cache bash build-base ca-certificates curl git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \
-    pip install pip==${PYTHON_PIP_VERSION}
 RUN echo "Install AWS" && \
+    apk add -q --no-cache bash build-base ca-certificates curl git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \
+    pip install pip==${PYTHON_PIP_VERSION} && \
     pip -q install pipenv==${PIPENV_VERSION} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
