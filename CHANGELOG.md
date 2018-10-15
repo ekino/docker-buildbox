@@ -35,6 +35,8 @@ Versions
 * Upgrade NVM version: 0.33.11
 * Upgrade Python version: 3.7
 * Add a Chrome image (based on Alpine Node, with NPM, Yarn and Puppeteer)
+* Fix pip version to 18 and pipenv to 2018.7.1 to avoid recent conflict between these tools
+* Add dependencies for cpython libs in dind-aws image
 
 2018-06-14
 ----------
