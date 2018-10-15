@@ -142,6 +142,9 @@ def run_build(buildInfo):
         if language == "arachni":
             build_args = "%s --build-arg VERSION=%s --build-arg ARACHNI_VERSION=%s --build-arg ARACHNI_WEB_UI_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("ARACHNI_VERSION"), os.environ.get("ARACHNI_WEB_UI_VERSION"))
 
+        if language == "chrome":
+            build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
+
         if language == "dind-aws":
             build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"))
 
@@ -204,6 +207,14 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
             run_command_exit("docker run %s %s python -c \"import boto3\"" % (run_args, image), "Error with boto3 check")
             run_command_exit("docker run %s %s python -c \"import yaml\"" % (run_args, image), "Error with PyYAML check")
+
+        if language == "chrome":
+            print "> Testing Chrome Image..."
+            run_command_exit("docker run %s %s google-chrome --no-sandbox --version" % (run_args, image), "Error with google-chrome check")
+            run_command_exit("docker run %s %s google-chrome-unstable --no-sandbox --version" % (run_args, image), "Error with google-chrome-unstable check")
+            run_command_exit("docker run %s %s node --version" % (run_args, image), "Error with node check")
+            run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
+            run_command_exit("docker run %s %s yarn --version" % (run_args, image), "Error with yarn check")
 
         if language == "dind-aws":
             print "> Testing DIND - AWS Image..."
