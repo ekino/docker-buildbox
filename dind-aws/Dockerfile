@@ -4,8 +4,9 @@ LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 ARG CI_HELPER_VERSION
 ARG DOCKER_COMPOSE_VERSION
 ARG GLIBC_VERSION
-ARG PYTHON_PIP_VERSION
 ARG PIPENV_VERSION
+ARG PIP_VERSION
+ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
 RUN echo "Install AWS" && \
     apk add -q --no-cache bash build-base ca-certificates curl git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \

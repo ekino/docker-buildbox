@@ -1,8 +1,9 @@
 FROM python:{{PYTHON_VERSION}}-alpine3.8
 
 ARG CI_HELPER_VERSION
-ARG PYTHON_PIP_VERSION
 ARG PIPENV_VERSION
+ARG PIP_VERSION
+ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
 RUN echo "Starting ..." && \
     echo "Install system dependencies for python and pip" && \

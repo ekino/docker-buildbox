@@ -146,10 +146,10 @@ def run_build(buildInfo):
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
         if language == "aws":
-            build_args = "%s --build-arg PYTHON_PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("PYTHON_PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
+            build_args = "%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
 
         if language == "dind-aws":
-            build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s --build-arg PYTHON_PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"), os.environ.get("PYTHON_PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
+            build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"), os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
 
         if language == "golang":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg GLIDE_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("GLIDE_VERSION"))
@@ -176,8 +176,8 @@ def run_build(buildInfo):
                 run_command_exit('sed -e "s,{{PHP_VERSION}},%s," -e "s,{{PHP_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PHP_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PHP_VERSION")))
 
         if language == "python":
-            build_args = "%s --build-arg PYTHON_VERSION=%s --build-arg PYTHON_PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (
-                build_args, os.environ.get("PYTHON_VERSION"), os.environ.get("PYTHON_PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
+            build_args = "%s --build-arg PYTHON_VERSION=%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (
+                build_args, os.environ.get("PYTHON_VERSION"), os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
             build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
             run_command_exit('sed -e "s,{{PYTHON_VERSION}},%s," -e "s,{{PYTHON_MAJOR_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("PYTHON_VERSION"), version.split(".")[0], language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("PYTHON_VERSION")))
 
@@ -210,6 +210,9 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
             run_command_exit("docker run %s %s python -c \"import boto3\"" % (run_args, image), "Error with boto3 check")
             run_command_exit("docker run %s %s python -c \"import yaml\"" % (run_args, image), "Error with PyYAML check")
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
+
 
         if language == "chrome":
             print "> Testing Chrome Image..."
@@ -222,6 +225,8 @@ def run_build(buildInfo):
         if language == "dind-aws":
             print "> Testing DIND - AWS Image..."
             run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
             run_command_exit("docker run %s %s docker --version" % (run_args, image), "Error with docker check (should be installed by docker image)")
             run_command_exit("docker run %s %s docker-compose --version" % (run_args, image), "Error with docker-compose check (should be installed by dind-aws image)")
             run_command_exit("docker run --privileged -d --name %s %s" % (language, image), "Error on starting dind-aws container")
@@ -258,6 +263,11 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
             run_command_exit("docker run %s %s security-checker --version" % (run_args, image), "Error with security-checker check")
             run_command_exit("docker run %s -v $(pwd)/php:/tmp %s php /tmp/test.php" % (run_args, image), "Error on testing php container")
+
+        if language == "python":
+            print "> Testing AWS Image..."
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
 
         if language == "ruby":
             print "> Testing Ruby Image..."
