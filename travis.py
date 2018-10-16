@@ -210,6 +210,9 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
             run_command_exit("docker run %s %s python -c \"import boto3\"" % (run_args, image), "Error with boto3 check")
             run_command_exit("docker run %s %s python -c \"import yaml\"" % (run_args, image), "Error with PyYAML check")
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
+
 
         if language == "chrome":
             print "> Testing Chrome Image..."
@@ -222,6 +225,8 @@ def run_build(buildInfo):
         if language == "dind-aws":
             print "> Testing DIND - AWS Image..."
             run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
             run_command_exit("docker run %s %s docker --version" % (run_args, image), "Error with docker check (should be installed by docker image)")
             run_command_exit("docker run %s %s docker-compose --version" % (run_args, image), "Error with docker-compose check (should be installed by dind-aws image)")
             run_command_exit("docker run --privileged -d --name %s %s" % (language, image), "Error on starting dind-aws container")
@@ -258,6 +263,11 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
             run_command_exit("docker run %s %s security-checker --version" % (run_args, image), "Error with security-checker check")
             run_command_exit("docker run %s -v $(pwd)/php:/tmp %s php /tmp/test.php" % (run_args, image), "Error on testing php container")
+
+        if language == "python":
+            print "> Testing AWS Image..."
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
 
         if language == "ruby":
             print "> Testing Ruby Image..."
