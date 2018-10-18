@@ -4,9 +4,11 @@ LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 ARG APCU_VERSION
 ARG CI_HELPER_VERSION
 ARG COMPOSER_VERSION
+ARG MEMCACHED_VERSION
 ARG MODD_VERSION
 ARG REDIS_VERSION
 ARG SECURITY_CHECKER_VERSION
+ARG SSH2_VERSION
 ARG XDEBUG_VERSION
 
 # iconv issue https://github.com/docker-library/php/issues/240
@@ -19,8 +21,8 @@ ENV COMPOSER_NO_INTERACTION=1 \
 RUN echo "Starting ..." && \
     echo "@edge-main http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main php{{PHP_MAJOR_VERSION}}-intl libjpeg-turbo-dev \
-        libmcrypt-dev libpng-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
+    apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main \
+        php{{PHP_MAJOR_VERSION}}-intl libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
@@ -36,8 +38,13 @@ RUN echo "Starting ..." && \
     echo "Starting PHP" && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-configure intl && \
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl pcntl pdo_mysql pdo_pgsql soap sockets zip && \
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
+    pecl install memcached-${MEMCACHED_VERSION} && \
+    docker-php-ext-enable memcached && \
+    docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
+    pecl install ssh2-${SSH2_VERSION} && \
+    docker-php-ext-enable ssh2 && \
     echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
 short_open_tag=Off \n\
