@@ -37,6 +37,7 @@ Versions
 * Add a Chrome image (based on Alpine Node, with NPM, Yarn and Puppeteer)
 * Fix pip version to 18 and pipenv to 2018.7.1 to avoid recent conflict between these tools
 * Add dependencies for cpython libs in dind-aws image
+* Add `memcached`, `pgsql` and `ssh2` extensions in PHP images
 
 2018-06-14
 ----------
