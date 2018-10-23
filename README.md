@@ -1,6 +1,6 @@
 # BuildBox
 
-The repository provides a complete set of build tools for web developpers. **These
+The repository provides a complete set of build tools for web developers. **These
 images MUST NOT be used in production**. The targeted usage of those images is GitlabCI.
 
 ## Available images

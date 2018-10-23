@@ -4,6 +4,7 @@ Versions
 2018-10-DEV
 -----------
 
+* Remove support for PHP 5.3
 * Add Java version 11
 * Add Arachni image version 1.5.1
 * Update Sonar download URL
