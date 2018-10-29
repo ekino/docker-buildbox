@@ -16,4 +16,7 @@ RUN echo "Starting ..." && \
     echo "Done install CI Helper" && \
     echo "Install basics Python tools" && \
     pip install --upgrade pipenv==${PIPENV_VERSION} && \
-    echo "Done install CI Helper"
+    if [ "${PYTHON_VERSION:0:1}" = "2" ]; then \
+        pip install anchorecli; \
+    fi && \
+    echo "Done!"
