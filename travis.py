@@ -264,6 +264,8 @@ def run_build(buildInfo):
             print "> Testing AWS Image..."
             run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
             run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
+            if version.split(".")[0] == "2":
+                run_command_exit("docker run %s %s anchore-cli --version" % (run_args, image), "Error with anchore-cli check")
 
         if language == "ruby":
             print "> Testing Ruby Image..."
