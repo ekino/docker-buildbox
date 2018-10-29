@@ -1,8 +1,8 @@
 Versions
 ========
 
-2018-10-DEV
------------
+2018-10-29
+----------
 
 * Add anchorecli in Python 2
 * Remove support for PHP 5.3
@@ -28,11 +28,11 @@ Versions
 * Upgrade Maven version : 3.2.5
 * Upgrade APCu version for PHP 7.1 and 7.2: 5.1.12
 * Upgrade Composer version for PHP 7.1 and 7.2: 1.7.2
-* Upgrade PHP version: 5.6.38, 7.1.22, 7.2.10
+* Upgrade PHP version: 5.6.38, 7.1.23, 7.2.11
 * Upgrade Redis version for PHP 7.1 and 7.2: 4.1.1
 * Upgrade Xdebug version for PHP 7.1 and 7.2: 2.6.1
 * Fix install of intl extension in PHP images
-* Upgrade Node version: 8.12, 10.11
+* Upgrade Node version: 8.12, 10.12
 * Upgrade NPM version for Node 8.12 and 10.10: 6.4.1
 * Upgrade NVM version: 0.33.11
 * Upgrade Python version: 3.7
