@@ -19,7 +19,7 @@ RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git imagemagick subversion make mercurial \
       libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ && \
-    gem install sass --verbose && \
+    gem install rb-inotify:'~> 0.9.10' sass --verbose && \
     gem install scss_lint --verbose && \
 
     echo "Done base install!" && \
