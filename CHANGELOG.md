@@ -1,6 +1,11 @@
 Versions
 ========
 
+2019-01-02
+----------
+
+* Add gitleaks image version 1.22.0
+
 2018-12-DEV
 ----------
 
