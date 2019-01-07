@@ -1,12 +1,13 @@
 Versions
 ========
 
-2018-12-DEV
+2019-01-DEV
 ----------
 
 * Lock rb-inotify version to fix issue with Ruby version
 * Upgrade Java versions: 8u181, 10.0.2, 11.0.1
 * Downgrade Maven version to 3.2.1 for Java 6 buildbox (Maven 3.2.3+ uses HTTPS by default)
+* Upgrade Golang version: 1.11 
 
 2018-10-29
 ----------
@@ -141,7 +142,7 @@ Versions
 * Add Node 8.6
 * Upgrade node 6.11.3
 * Remove Node 4.8
-* Upgrade golang: 1.9
+* Upgrade golang: 1.9 (edit: wrong information, still version 1.8)
 * Upgrade Glide: 0.13.0
 * Add Ansible: 2.2.3.0
 * Add Sonar Scanner: 3.0.3.778
