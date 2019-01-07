@@ -1,4 +1,4 @@
-FROM golang:1.8
+FROM golang:1.11
 LABEL maintainer="Raphaël Benitte <raphael.benitte@ekino.com>"
 
 ARG GLIDE_VERSION
