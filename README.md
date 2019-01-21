@@ -23,7 +23,7 @@ Then go to http://localhost:9292
 
 ### AWS
 
-Contains AWS Cli + CI Helper
+Contains AWS Cli + AWS EB Cli + CI Helper
 
 ### DIND - AWS
 
