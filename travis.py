@@ -164,7 +164,7 @@ def run_build(buildInfo):
                 run_command_exit('sed -e "s,{{JAVA_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("JAVA_VERSION"), language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("JAVA_VERSION")))
 
         if language == "node":
-            build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s --build-arg NVM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"), os.environ.get("NVM_VERSION"))
+            build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s --build-arg NVM_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"), os.environ.get("NVM_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
 
         if language == "php":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg APCU_VERSION=%s --build-arg COMPOSER_VERSION=%s --build-arg MEMCACHED_VERSION=%s --build-arg REDIS_VERSION=%s --build-arg SECURITY_CHECKER_VERSION=%s --build-arg SSH2_VERSION=%s --build-arg XDEBUG_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("APCU_VERSION"), os.environ.get("COMPOSER_VERSION"), os.environ.get("MEMCACHED_VERSION"), os.environ.get("REDIS_VERSION"), os.environ.get("SECURITY_CHECKER_VERSION"), os.environ.get("SSH2_VERSION"), os.environ.get("XDEBUG_VERSION"))
@@ -251,6 +251,7 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s npm --version" % (run_args, image), "Error with npm check")
             run_command_exit("docker run %s %s sass --version" % (run_args, image), "Error with sass check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+            run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with sonar-scanner check")
 
         if language == "php":
             print "> Testing PHP Image..."

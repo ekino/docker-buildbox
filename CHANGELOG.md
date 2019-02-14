@@ -7,8 +7,9 @@ Versions
 * Lock rb-inotify version to fix issue with Ruby version
 * Upgrade Java versions: 8u181, 10.0.2, 11.0.1
 * Downgrade Maven version to 3.2.1 for Java 6 buildbox (Maven 3.2.3+ uses HTTPS by default)
-* Upgrade Golang version: 1.11 
+* Upgrade Golang version: 1.11
 * Added awsebcli to AWS buildbox
+* Add sonar-scanner to the Node images
 
 2018-10-29
 ----------
