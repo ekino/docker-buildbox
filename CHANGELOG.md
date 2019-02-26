@@ -10,6 +10,7 @@ Versions
 * Upgrade Golang version: 1.11 
 * Added awsebcli to AWS buildbox
 * Remove support for PHP 5.6
+* Upgrade Sensiolabs' security-checker version for PHP 7.1 and 7.2: 5.0.3
 
 2018-10-29
 ----------
