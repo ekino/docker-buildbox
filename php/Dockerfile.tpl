@@ -19,8 +19,8 @@ ENV COMPOSER_NO_INTERACTION=1 \
     PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
 
 RUN echo "Starting ..." && \
-    echo "@edge-main http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    echo "@edge-testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+    echo "@edge-testing https://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main \
         php{{PHP_MAJOR_VERSION}}-intl libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
@@ -53,8 +53,8 @@ zend_extension=opcache.so \n\
 " > /usr/local/etc/php/php.ini && \
 
     curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
-    curl -sSL http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
-    curl -sSL http://get.sensiolabs.org/security-checker-v${SECURITY_CHECKER_VERSION}.phar -o /usr/local/bin/security-checker && chmod a+x /usr/local/bin/security-checker && \
+    curl -sSL https://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
+    curl -sSL https://get.sensiolabs.org/security-checker-v${SECURITY_CHECKER_VERSION}.phar -o /usr/local/bin/security-checker && chmod a+x /usr/local/bin/security-checker && \
     composer global require "hirak/prestissimo:^0.3" && \
 
     curl -sSL https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp && \
