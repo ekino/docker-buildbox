@@ -22,7 +22,7 @@ RUN echo "Starting ..." && \
     echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev git gnu-libiconv@edge-community icu-dev@edge-main \
-        php{{PHP_MAJOR_VERSION}}-intl libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
+        libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
@@ -37,7 +37,6 @@ RUN echo "Starting ..." && \
 
     echo "Starting PHP" && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-configure intl && \
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
     pecl install memcached-${MEMCACHED_VERSION} && \
