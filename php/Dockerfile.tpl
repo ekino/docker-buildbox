@@ -20,8 +20,8 @@ ENV COMPOSER_NO_INTERACTION=1 \
 
 RUN echo "Starting ..." && \
     echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    echo "@edge-testing https://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev git gnu-libiconv@edge-testing icu-dev@edge-main \
+    echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev git gnu-libiconv@edge-community icu-dev@edge-main \
         php{{PHP_MAJOR_VERSION}}-intl libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 

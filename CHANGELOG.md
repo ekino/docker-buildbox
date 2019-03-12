@@ -1,7 +1,7 @@
 Versions
 ========
 
-2019-01-DEV
+2019-03-DEV
 ----------
 
 * Lock rb-inotify version to fix issue with Ruby version
@@ -11,6 +11,7 @@ Versions
 * Added awsebcli to AWS buildbox
 * Remove support for PHP 5.6
 * Upgrade Sensiolabs' security-checker version for PHP 7.1 and 7.2: 5.0.3
+* Fix repository of gnu-libiconv for PHP images
 
 2018-10-29
 ----------
