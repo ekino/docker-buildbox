@@ -44,6 +44,10 @@ RUN echo "Starting ..." && \
     apt-get -qq -y install maven && \
     echo "Done Install Maven!" && \
 
+    echo "Install graphviz" && \
+    apt-get -qq -y install graphviz && \
+    echo "Done Install graphviz!" && \
+
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
 
