@@ -22,7 +22,8 @@ RUN echo "Starting ..." && \
         subversion \
         make \
         mercurial \
-        openssh-client && \
+        openssh-client \
+        jq && \
     echo "Done Install base!" && \
 
     echo "Install CI Helper" && \

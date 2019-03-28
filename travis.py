@@ -244,6 +244,8 @@ def run_build(buildInfo):
             if version != "6":
                 run_command_exit("docker run %s %s aws --version" % (run_args, image), "Error with awscli check")
                 run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+                run_command_exit("docker run %s %s dot -V" % (run_args, image), "Error with graphviz check")
+                run_command_exit("docker run %s %s jq --version" % (run_args, image), "Error with jq check")
 
         if language == "node":
             print "> Testing Node Image..."

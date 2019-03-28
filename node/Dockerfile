@@ -13,8 +13,10 @@ ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 
 RUN echo "Starting ..." && \
+    echo "Acquire::Check-Valid-Until \"false\";" > /etc/apt/apt.conf && \
+    echo "deb http://deb.debian.org/debian jessie main" > /etc/apt/sources.list && \
     echo "deb-src http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list && \
-    echo "deb-src http://deb.debian.org/debian jessie-updates main" >> /etc/apt/sources.list && \
+    echo "deb http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install build-essential libssl-dev curl git imagemagick subversion make mercurial \
