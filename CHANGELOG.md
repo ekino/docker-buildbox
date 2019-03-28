@@ -14,6 +14,7 @@ Versions
 * Fix repository of gnu-libiconv for PHP images
 * Remove php7-intl
 * Added graphviz and jq to Java buildbox
+* Fix debian sources list for Node buildbox
 
 
 2018-10-29
