@@ -146,7 +146,7 @@ def run_build(buildInfo):
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
         if language == "aws":
-            build_args = "%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
+            build_args = "%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s --build-arg PY_YAML_VERSION=%s" % (build_args, os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"), os.environ.get("PY_YAML_VERSION"))
 
         if language == "dind-aws":
             build_args = "%s --build-arg DOCKER_COMPOSE_VERSION=%s --build-arg GLIBC_VERSION=%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s" % (build_args, os.environ.get("DOCKER_COMPOSE_VERSION"), os.environ.get("GLIBC_VERSION"), os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"))
