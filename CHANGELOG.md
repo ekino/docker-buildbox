@@ -1,7 +1,12 @@
 Versions
 ========
 
-2019-03-DEV
+2019-04-DEV
+-----------
+
+* Todo...
+
+2019-03-29
 ----------
 
 * Lock rb-inotify version to fix issue with Ruby version
@@ -10,12 +15,21 @@ Versions
 * Upgrade Golang version: 1.11
 * Added awsebcli to AWS buildbox
 * Remove support for PHP 5.6
-* Upgrade Sensiolabs' security-checker version for PHP 7.1 and 7.2: 5.0.3
+* Upgrade PHP version: 7.1.27, 7.2.16
+* Upgrade APCu version: 5.1.17
+* Upgrade Composer version: 1.8.4
+* Upgrade memcached version: 3.1.3
+* Upgrade Redis version: 4.3.0
+* Upgrade Sensiolabs' security-checker version: 5.0.3
+* Upgrade Xdebug version: 2.7.0
 * Fix repository of gnu-libiconv for PHP images
 * Remove php7-intl
 * Added graphviz and jq to Java buildbox
 * Fix debian sources list for Node buildbox
-
+* Upgrade Docker version to 18.06.3 and Docker Compose to 1.24.0 in dind-aws image
+* Upgrade Node version: 6.17.0, 8.15.1, 10.15.3
+* Upgrade Python version: 3.7.3
+* Upgrade Sonar version: 3.3.0.1492
 
 2018-10-29
 ----------

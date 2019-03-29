@@ -1,4 +1,4 @@
-FROM docker:18.06.1-ce-dind
+FROM docker:18.06.3-ce-dind
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG CI_HELPER_VERSION
