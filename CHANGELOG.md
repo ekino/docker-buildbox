@@ -4,7 +4,7 @@ Versions
 2019-04-DEV
 -----------
 
-* Todo...
+* Force PyYAML version to 3.13 in aws image
 
 2019-03-29
 ----------
