@@ -10,7 +10,7 @@ ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 WORKDIR /root
 
 RUN echo "Install AWS" && \
-    apk add -q --no-cache bash ca-certificates curl git make openssh-client python py-pip rsync zip && \
+    apk add -q --no-cache bash ca-certificates curl git jq make openssh-client python py-pip rsync zip && \
     pip install pip==${PYTHON_PIP_VERSION} && \
     pip -q install pipenv==${PIPENV_VERSION} awscli boto3 awsebcli PyYAML==${PY_YAML_VERSION} && \
     echo "Done install AWS" && \
