@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Force PyYAML version to 3.13 in aws image
+* Added jq in aws image
 
 2019-03-29
 ----------
