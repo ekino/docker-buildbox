@@ -4,7 +4,7 @@ Versions
 2019-04-DEV
 -----------
 
-* todo...
+* Add gettext in dind-aws and PHP images
 
 2019-04-05
 ----------
