@@ -4,6 +4,7 @@ Versions
 2019-04-DEV
 -----------
 
+* CI: lock Python version to 2.7
 * Add gettext in dind-aws and PHP images
 
 2019-04-05
