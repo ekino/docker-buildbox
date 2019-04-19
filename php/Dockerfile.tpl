@@ -23,7 +23,7 @@ RUN echo "Starting ..." && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
         gnu-libiconv@edge-community icu-dev@edge-main libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev \
-        libxml2-dev make openssh-client postgresql-dev rsync tzdata && \
+        libxml2-dev make openssh-client patch postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
