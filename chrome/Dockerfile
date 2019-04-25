@@ -15,6 +15,8 @@ RUN apk update && apk upgrade && \
     apk add --no-cache \
       chromium@edge \
       harfbuzz@edge \
+      freetype@edge \
+      ttf-freefont@edge \
       nss@edge
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
@@ -27,17 +29,17 @@ RUN yarn add puppeteer@1.4.0
 
 
 RUN apk add --update curl git grep make ncurses tzdata && \
-
+	\
     echo "Install CI Helper" && \
     curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
-
+	\
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
-
+	\
     echo "Linking the Chrome executable with all the known/used names" && \
     ln -s /usr/bin/chromium-browser /usr/bin/google-chrome && \
     ln -s /usr/bin/chromium-browser /usr/bin/google-chrome-unstable && \
-
+	\
     rm -rf /tmp/* /var/cache/apk/*
