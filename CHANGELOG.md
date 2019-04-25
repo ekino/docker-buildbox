@@ -7,6 +7,7 @@ Versions
 * Add patch in PHP images
 * CI: lock Python version to 2.7
 * Add gettext in dind-aws and PHP images
+* Fix build error in Chrome
 
 2019-04-05
 ----------
