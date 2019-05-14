@@ -1,7 +1,7 @@
 Versions
 ========
 
-2019-04-DEV
+2019-05-DEV
 -----------
 
 * Add patch in PHP images
@@ -9,6 +9,7 @@ Versions
 * Add gettext in dind-aws and PHP images
 * Fix build error in Chrome
 * Upgrade Java versions: 11.0.3, 8u212
+* Lock scss_lint version to fix issue with Ruby version
 
 2019-04-05
 ----------
