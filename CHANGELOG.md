@@ -10,6 +10,12 @@ Versions
 * Fix build error in Chrome
 * Upgrade Java versions: 11.0.3, 8u212
 * Lock scss_lint version to fix issue with Ruby version
+* Upgrade Node version: 6.17.1, 8.16.0
+* Upgrade NVM version: 0.34.0
+* Upgrade PHP version: 7.1.29, 7.2.18
+* Upgrade Composer version: 1.8.5
+* Upgrade Xdebug version: 2.7.2
+* Upgrade Ruby version: 2.6.3
 
 2019-04-05
 ----------
