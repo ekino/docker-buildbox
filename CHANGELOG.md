@@ -16,6 +16,7 @@ Versions
 * Upgrade Composer version: 1.8.5
 * Upgrade Xdebug version: 2.7.2
 * Upgrade Ruby version: 2.6.3
+* Add Schemaspy image with mysql & postgresql connectors
 
 2019-04-05
 ----------

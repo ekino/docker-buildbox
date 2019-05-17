@@ -180,6 +180,9 @@ def run_build(buildInfo):
         if language == "react-native":
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
+        if language == "schemaspy":
+            build_args = "%s  --build-arg MYSQL_CONNECTOR_VERSION=%s --build-arg POSTGRESQL_CONNECTOR_VERSION=%s --build-arg SCHEMASPY_VERSION=%s" % (build_args, os.environ.get("MYSQL_CONNECTOR_VERSION"), os.environ.get("POSTGRESQL_CONNECTOR_VERSION"), os.environ.get("SCHEMASPY_VERSION"))
+
         if language == "sonar":
             build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
 
@@ -284,6 +287,11 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s watchman --version" % (run_args, image), "Error with watchman check")
             run_command_exit("docker run %s %s rnpm --version" % (run_args, image), "Error with mvn check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+
+        if language == "schemaspy":
+            print "> Testing Schemaspy Image..."
+            run_command_exit("docker run %s %s java -version" % (run_args, image), "Error with java check")
+            run_command_exit("docker run %s %s java -jar /schemaspy.jar -h" % (run_args, image), "Error with schemaspy check")
 
         if language == "sonar":
             print "> Testing Sonar Scanner Image..."

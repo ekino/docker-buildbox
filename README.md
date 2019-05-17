@@ -66,17 +66,21 @@ About Blackfire, please read the official documentation to install the agent htt
 docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-container blackfire run bin/console app:foo:bar
 ```
 
+### React Native Android
+
+Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
+
 ### Ruby
 
 Contains Ruby (installed from official alpine) and CI Helper.
 
+### Schemaspy
+
+Contains Java 8 and Schemaspy with mysql and postgresql connectors.
+
 ### SonarQube Scanner
 
 Contains SonarQube Scanner and CI Helper
-
-### React Native Android
-
-Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
 
 ## Versions
 
