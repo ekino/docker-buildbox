@@ -1,0 +1,272 @@
+---
+docker_hub_namespace: &docker_hub_namespace ekino/docker-buildbox
+
+# Common build_vars
+CI_HELPER_VERSION: &CI_HELPER_VERSION 0.0.6
+ci_helper_test: &ci_helper_test ci-helper version -e
+MODD_VERSION: &MODD_VERSION 0.5
+
+
+ansible:
+  "2.5.5":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      VERSION: 2.5.5
+    cmd_test:
+      - *ci_helper_test
+      - ansible --version
+      - ansible-playbook --version
+      - python --version
+
+arachni:
+  "1.5":
+    build_args:
+      ARACHNI_VERSION: 1.5.1
+      ARACHNI_WEB_UI_VERSION: 0.5.12
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+    cmd_test:
+      - arachni --version
+      - *ci_helper_test
+
+aws:
+  "1":
+    cmd_test:
+      - aws --version
+      - pip list | grep boto3
+      - pip list | grep pyyaml
+      - pip --version
+      - pipenv --version
+      - *ci_helper_test
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      PIP_VERSION: 18.1
+      PIPENV_VERSION: 2018.10.13
+      PY_YAML_VERSION: 3.13
+
+chrome:
+  "1":
+    build_args:
+      MODD_VERSION: *MODD_VERSION
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+    cmd_test:
+      - *ci_helper_test
+      - google-chrome --no-sandbox --version
+      - google-chrome-unstable --no-sandbox --version
+      - node --version
+      - npm --version
+      - yarn --version
+
+dind-aws:
+  "1":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      DOCKER_COMPOSE_VERSION: 1.24.0
+      GLIBC_VERSION: 2.27-r0
+      PIP_VERSION: 18.1
+      PIPENV_VERSION: 2018.10.13
+    cmd_test:
+      - *ci_helper_test
+      - aws --version
+      - docker --version
+      - docker-compose --version
+
+golang:
+  "1.11":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      GLIDE_VERSION: v0.13.1
+      MODD_VERSION: *MODD_VERSION
+    cmd_test:
+      - *ci_helper_test
+      - aws --version
+      - go version
+      - glide --version
+      - gin --version
+      - modd --version
+
+java_test: &java_test
+  - *ci_helper_test
+  - java -version
+  - mvn --version
+  - aws --version
+  - modd --version
+  - dot -V
+  - jq --version
+
+java:
+  "6":
+    build_args:
+      MAVEN_VERSION: 3.2.1
+    cmd_test:
+      - java -version
+      - mvn --version
+    dockerfile_dir: java/6
+  "8":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      MODD_VERSION: *MODD_VERSION
+    cmd_test: *java_test
+    template_vars:
+      VERSION: 8
+      JAVA_VERSION: jdk8u212-b04-debian-slim
+  "11":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      MODD_VERSION: *MODD_VERSION
+    cmd_test: *java_test
+    template_vars:
+      VERSION: 11
+      JAVA_VERSION: jdk-11.0.3_7-debian-slim
+
+node_cmd_test: &node_cmd_test
+  - *ci_helper_test
+  - node --version
+  - npm --version
+  - sass --version
+  - modd --version
+
+node:
+  "6.17":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      NODE_VERSION: 6.17.1
+      NPM_VERSION: 3.10.10
+      NVM_VERSION: 0.34.0
+      MODD_VERSION: *MODD_VERSION
+    cmd_test: *node_cmd_test
+  "8.16":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      NODE_VERSION: 8.16.0
+      NPM_VERSION: 6.4.1
+      NVM_VERSION: 0.34.0
+      MODD_VERSION: *MODD_VERSION
+    cmd_test: *node_cmd_test
+  "10.15":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      NODE_VERSION: 10.15.3
+      NPM_VERSION: 6.4.1
+      NVM_VERSION: 0.34.0
+      MODD_VERSION: *MODD_VERSION
+    cmd_test: *node_cmd_test
+
+php_cmd_test: &php_cmd_test
+  - *ci_helper_test
+  - php --version
+  - composer --version
+  - modd --version
+  - security-checker --version
+  - -v $(pwd)/php:/tmp %s php /tmp/test.php
+
+php:
+  "7.1":
+    build_args:
+      APCU_VERSION: 5.1.17
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      COMPOSER_VERSION: 1.8.5
+      MEMCACHED_VERSION: 3.1.3
+      MODD_VERSION: *MODD_VERSION
+      REDIS_VERSION: 4.3.0
+      SECURITY_CHECKER_VERSION: 5.0.3
+      SSH2_VERSION: 1.1.2
+      XDEBUG_VERSION: 2.7.2
+    cmd_test: *php_cmd_test
+    template_vars:
+      PHP_VERSION: 7.1.29-cli-alpine
+  "7.2":
+    build_args:
+      APCU_VERSION: 5.1.17
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      COMPOSER_VERSION: 1.8.5
+      MEMCACHED_VERSION: 3.1.3
+      MODD_VERSION: *MODD_VERSION
+      REDIS_VERSION: 4.3.0
+      SECURITY_CHECKER_VERSION: 5.0.3
+      SSH2_VERSION: 1.1.2
+      XDEBUG_VERSION: 2.7.2
+    cmd_test: *php_cmd_test
+    template_vars:
+      PHP_VERSION: 7.2.18-cli-alpine
+
+python:
+  "2.7":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      PIP_VERSION: 18.1
+      PIPENV_VERSION: 2018.10.13
+    cmd_test:
+      - *ci_helper_test
+      - anchore-cli --version
+      - pip --version
+      - python --version
+    template_vars:
+      PYTHON_VERSION: 2.7.15
+  "3.7":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      PIP_VERSION: 18.1
+      PIPENV_VERSION: 2018.10.13
+    cmd_test:
+      - *ci_helper_test
+      - pip --version
+      - python --version
+    template_vars:
+      PYTHON_VERSION: 3.7.3
+
+react-native:
+  "1":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      MODD_VERSION: *MODD_VERSION
+    cmd_test:
+      - *ci_helper_test
+      - java -version
+      - node --version
+      - npm --version
+      - modd --version
+      - react-native --version
+      - rnpm --version
+      - watchman --version
+      - yarn --version
+
+ruby:
+  "2.6":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+    cmd_test:
+      - bundle --version
+      - *ci_helper_test
+      - ruby --version
+
+scoutsuite:
+  "5.2":
+    build_args:
+      PIP_VERSION: 19.1.1
+      PIPENV_VERSION: 2018.11.26
+      SCOUTSUITE_VERSION: 5.2.0
+    cmd_test:
+      - pip --version
+      - pipenv --version
+      - scout --version
+
+sonar:
+  "3.3":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      GLIBC_VERSION: 2.27-r0
+      SONARSCANNER_VERSION: 3.3.0.1492
+    cmd_test:
+      - *ci_helper_test
+      - java -version
+      - sonar-scanner -v
+
+terraform:
+  "0.12":
+    build_args:
+      TERRAFORM_VERSION: 0.12.0
+    cmd_test:
+      - terraform version
+      - python --version
+      - aws --version
+

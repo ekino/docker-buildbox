@@ -1,7 +1,70 @@
+[![Build Status](https://travis-ci.org/ekino/docker-buildbox.svg?branch=master)](https://travis-ci.org/ekino/docker-buildbox)
+
 # BuildBox
 
 The repository provides a complete set of build tools for web developers. **These
 images MUST NOT be used in production**. The targeted usage of those images is GitlabCI.
+
+## Versions
+
+Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
+
+## Testing
+
+Each box is tested and built using TravisCI.
+
+CI workflow:
+ - PR: only images with modified files are built.
+ - Merge to master: only images with modified files are built and pushed to the docker registry with the tag `latest-IMAGE`
+ - TAG: all images are built and pushed to the docker registry
+ - Nightly: all images are built and pushed to the docker registry with the tag `nightly-IMAGE`
+
+### Local testing
+
+To contribute you will need python3.6 and pipenv (installed by `pip install pipenv`).
+
+- Clone the repo
+- Create your pipenv environnement
+  > pipenv install
+- Load your pipenv
+  > pipenv shell
+- Run the script
+  > python travis.py build --image image --version version
+
+``` bash
+$ python travis.py build --help
+Usage: travis.py build [OPTIONS]
+
+Options:
+  --image TEXT    image to build
+  --version TEXT  image version
+  -d, --debug     debug
+  --help          Show this message and exit.
+```
+
+``` bash
+$ python travis.py build --image java --version 11
+> Building: ekino/docker-buildbox:latest-java11
+Build succesfull
+> Testing ekino/docker-buildbox:latest-java11
+Tests successful
+```
+
+## Adding your image to the build box
+
+Create a directory named after your image and corresponding Dockerfile in it. Then add an entry in `config.yml` according to this schema:
+
+```yaml
+image_name:
+  version:
+    cmd_test: [...]  # shell commands run to be sure tools are well installed
+    build_args: [...]  # If ARG are defined in Dockerfile
+    template_vars: [...]  # If templated Dockerfile
+    dockerfile_dir: /path/to/dockerfile  # If Dockerfile's path is not ./<image_name>/Dockerfile
+```
+Make sure the `image_name` in the config file entry matches your directory.
+
+Do not forget to add an entry in `.travis.yml` too following other image scheme.
 
 ## Available images
 

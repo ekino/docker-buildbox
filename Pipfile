@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyyaml = "==5.1.1"
+click = "==7.0"
+docker = "==3.5.0"
+"jinja2" = "==2.10"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
