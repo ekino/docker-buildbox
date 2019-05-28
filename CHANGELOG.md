@@ -27,6 +27,7 @@ Versions
 * Refacto travis.py script, setup image definitions within a single configuration file
 * Upgrade Jinja to 2.10.1
 * Add a new image integrating node Serverless and python3
+* Add AmazonLinux image with Systemd
 
 2019-04-05
 ----------

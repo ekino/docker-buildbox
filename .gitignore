@@ -3,6 +3,7 @@
 *.iml
 
 # Result of template processing
+awslnx-systemd/Dockerfile
 java/Dockerfile
 php/Dockerfile
 python/Dockerfile
