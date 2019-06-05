@@ -12,6 +12,11 @@ RUN echo "Starting ..." && \
 
     echo "Updating packages using sources :" && \
     cat /etc/apt/sources.list && \
+
+    if [ ! -d /usr/share/man/man1 ]; then \
+        mkdir -p /usr/share/man/man1; \
+    fi; \
+
     apt-get -qq clean -qq && apt-get -qq update && \
 
     echo "Install base" && \
