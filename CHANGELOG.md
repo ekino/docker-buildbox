@@ -16,6 +16,7 @@ Versions
 * Upgrade Composer version: 1.8.5
 * Upgrade Xdebug version: 2.7.2
 * Upgrade Ruby version: 2.6.3
+* Fix Java 8/11 image issues from debian:stretch-slim
 
 2019-04-05
 ----------
