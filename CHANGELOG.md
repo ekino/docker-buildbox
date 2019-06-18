@@ -1,7 +1,7 @@
 Versions
 ========
 
-2019-05-DEV
+2019-06-DEV
 -----------
 
 * Add patch in PHP images
@@ -17,6 +17,8 @@ Versions
 * Upgrade Xdebug version: 2.7.2
 * Upgrade Ruby version: 2.6.3
 * Fix Java 8/11 image issues from debian:stretch-slim
+* Drop JDK 10 support
+* Migrate Java buildboxes to adoptopenjdk
 
 2019-04-05
 ----------
