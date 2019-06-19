@@ -96,4 +96,4 @@ The `travis.py` script try to be clever:
 
 It is possible to build local image for testing with the following command:
 
-    CI_HELPER_VERSION=0.0.5 MODD_VERSION=0.5 JAVA_VERSION=10.0.1-jdk-slim VERSION=10 python travis.py --language java --pull-request=true
+    CI_HELPER_VERSION=0.0.6 MODD_VERSION=0.5 JAVA_VERSION=jdk-11.0.3_7-debian-slim VERSION=11 python travis.py --language java --pull-request=true

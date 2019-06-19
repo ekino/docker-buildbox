@@ -17,9 +17,8 @@ matrix:
     - env: LANGUAGE=dind-aws     VERSION=1        DOCKER_COMPOSE_VERSION=1.24.0 GLIBC_VERSION=2.27-r0 PIP_VERSION=18.1 PIPENV_VERSION=2018.10.13
     - env: LANGUAGE=golang       VERSION=1.9      GLIDE_VERSION=v0.13.1
     - env: LANGUAGE=java         VERSION=6        MAVEN_VERSION=3.2.1
-    - env: LANGUAGE=java         VERSION=8        JAVA_VERSION=8u212-jdk-slim
-    - env: LANGUAGE=java         VERSION=10       JAVA_VERSION=10.0.2-jdk-slim
-    - env: LANGUAGE=java         VERSION=11       JAVA_VERSION=11.0.3-jdk-slim
+    - env: LANGUAGE=java         VERSION=8        JAVA_VERSION=jdk8u212-b04-debian-slim
+    - env: LANGUAGE=java         VERSION=11       JAVA_VERSION=jdk-11.0.3_7-debian-slim
     - env: LANGUAGE=node         VERSION=6.17     NODE_VERSION=6.17.1  NPM_VERSION=3.10.10  NVM_VERSION=0.34.0
     - env: LANGUAGE=node         VERSION=8.16     NODE_VERSION=8.16.0  NPM_VERSION=6.4.1    NVM_VERSION=0.34.0
     - env: LANGUAGE=node         VERSION=10.15    NODE_VERSION=10.15.3 NPM_VERSION=6.4.1    NVM_VERSION=0.34.0

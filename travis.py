@@ -159,9 +159,9 @@ def run_build(buildInfo):
                 build_args = "%s --build-arg MAVEN_VERSION=%s" % (build_args, os.environ.get("MAVEN_VERSION"))
                 build_context = "%s/%s" % (language, version)
             else:
-                build_args = "%s --build-arg MODD_VERSION=%s --build-arg JAVA_MAJOR_VERSION=%s" % (build_args, buildInfo.modd, version)
+                build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
                 build_context = "-f %s/Dockerfile.%s %s" % (language, version, language)
-                run_command_exit('sed -e "s,{{JAVA_VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("JAVA_VERSION"), language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("JAVA_VERSION")))
+                run_command_exit('sed -e "s,{{JAVA_VERSION}},%s," -e "s,{{VERSION}},%s," %s/Dockerfile.tpl > %s/Dockerfile.%s' % (os.environ.get("JAVA_VERSION"), version, language, language, version), "fail to create Dockerfile for %s %s" % (language, os.environ.get("JAVA_VERSION")))
 
         if language == "node":
             build_args = "%s --build-arg MODD_VERSION=%s --build-arg NODE_VERSION=%s --build-arg NPM_VERSION=%s --build-arg NVM_VERSION=%s" % (build_args, buildInfo.modd, os.environ.get("NODE_VERSION"), os.environ.get("NPM_VERSION"), os.environ.get("NVM_VERSION"))
