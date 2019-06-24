@@ -1,6 +1,9 @@
-import os, subprocess, sys, argparse
+import argparse
 import collections
+import os
 import re
+import subprocess
+import sys
 
 BuildInfo = collections.namedtuple('BuildInfo', 'language version ci_helper_version commit_range branch tag pull_request event_type is_travis modd')
 
@@ -179,6 +182,9 @@ def run_build(buildInfo):
 
         if language == "react-native":
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
+
+        if language == "scoutsuite":
+            build_args = "%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s --build-arg SCOUTSUITE_VERSION=%s" % (build_args, os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"), os.environ.get("SCOUTSUITE_VERSION"))
 
         if language == "sonar":
             build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))

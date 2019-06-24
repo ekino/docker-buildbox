@@ -78,6 +78,10 @@ Contains SonarQube Scanner and CI Helper
 
 Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
 
+### Scoutsuite
+
+Contains ScoutSuite cloud scanner
+
 ## Versions
 
 Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.

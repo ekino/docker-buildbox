@@ -1,7 +1,7 @@
 Versions
 ========
 
-2019-06-DEV
+2019-07-DEV
 -----------
 
 * Add patch in PHP images
@@ -19,6 +19,7 @@ Versions
 * Fix Java 8/11 image issues from debian:stretch-slim
 * Drop JDK 10 support
 * Migrate Java buildboxes to adoptopenjdk
+* Add a new image integrating NCC Scoutsuite
 
 2019-04-05
 ----------
