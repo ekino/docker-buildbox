@@ -29,6 +29,7 @@ matrix:
     - env: LANGUAGE=react-native VERSION=1
     - env: LANGUAGE=ruby         VERSION=2.6
     - env: LANGUAGE=sonar        VERSION=3.3      GLIBC_VERSION=2.27-r0 SONARSCANNER_VERSION=3.3.0.1492
+    - env: LANGUAGE=terraform    VERSION=0.12     TERRAFORM_VERSION=0.12.0
 
 script:
     - travis_wait python travis.py

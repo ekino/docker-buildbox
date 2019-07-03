@@ -1,0 +1,15 @@
+FROM python:3.6-alpine
+
+LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
+
+ARG TERRAFORM_VERSION
+
+RUN apk update \
+    && apk add bash ca-certificates unzip wget \
+    && pip install awscli \
+    && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O /tmp/terraform.zip \
+    && cd /tmp \
+    && unzip -o terraform.zip \
+    && cd - \
+    && mv /tmp/terraform /usr/bin/ \
+    && chmod +x /usr/bin/terraform
