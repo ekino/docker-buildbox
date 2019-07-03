@@ -5,7 +5,7 @@ LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
 ARG TERRAFORM_VERSION
 
 RUN apk update \
-    && apk add bash unzip wget ca-certificates \
+    && apk add bash ca-certificates unzip wget \
     && pip install awscli \
     && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O /tmp/terraform.zip \
     && cd /tmp \
