@@ -189,13 +189,16 @@ def run_build(buildInfo):
         if language == "sonar":
             build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
 
+        if language == "terraform":
+            build_args = "%s --build-arg TERRAFORM_VERSION=%s" % (build_args, os.environ.get("TERRAFORM_VERSION"))
+
         cmd = "docker build -t %s %s --no-cache %s" % (image, build_args, build_context)
 
         print "> Run: %s" % cmd
 
         run_command_exit(cmd, "fail to build the image")
 
-        if (language != "java") or (version != "6"):
+        if ((language != "java") or (version != "6")) and language != "terraform":
             run_command_exit("docker run %s %s ci-helper version -e" % (run_args, image), "Error with ci-helper installation")
 
         if language == "ansible":
@@ -295,6 +298,13 @@ def run_build(buildInfo):
             print "> Testing Sonar Scanner Image..."
             run_command_exit("docker run %s %s java -version" % (run_args, image),   "Error with java check")
             run_command_exit("docker run %s %s sonar-scanner -v" % (run_args, image), "Error with sonar-scanner check")
+
+        if language == "terraform":
+            print "> Testing Terraform Scanner Image..."
+            run_command_exit("docker run %s %s terraform --version" % (run_args, image),   "Error with terraform check")
+            run_command_exit("docker run %s %s aws --version" % (run_args, image),   "Error with awscli check")
+            run_command_exit("docker run %s %s python --version" % (run_args, image),   "Error with python check")
+            run_command_exit("docker run %s %s pip --version" % (run_args, image),   "Error with pip check")
 
         print ""
         print "You can now test the image with the following command:\n   $ docker run --rm -ti %s" % image

@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.10
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG CI_HELPER_VERSION
@@ -10,9 +10,11 @@ ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 WORKDIR /root
 
 RUN echo "Install AWS" && \
-    apk add -q --no-cache bash ca-certificates curl git jq make openssh-client python py-pip rsync zip && \
+    apk add -q --no-cache bash ca-certificates curl git jq make openssh-client python3 py3-pip rsync zip && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip && \
     pip install pip==${PYTHON_PIP_VERSION} && \
-    pip -q install pipenv==${PIPENV_VERSION} awscli boto3 awsebcli PyYAML==${PY_YAML_VERSION} && \
+    pip install pipenv==${PIPENV_VERSION} awscli boto3 awsebcli PyYAML==${PY_YAML_VERSION} && \
     echo "Done install AWS" && \
 
     echo "Install CI Helper" && \
