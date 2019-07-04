@@ -21,6 +21,7 @@ Versions
 * Migrate Java buildboxes to adoptopenjdk
 * AWS image now uses python3
 * Add new dockerfile "terraform" version 0.12.0
+* Fix Golang version for accurate image tag
 
 2019-04-05
 ----------
