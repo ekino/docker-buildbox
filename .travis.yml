@@ -15,7 +15,7 @@ matrix:
     - env: LANGUAGE=chrome       VERSION=1
     - env: LANGUAGE=aws          VERSION=1.1      PIP_VERSION=19.1.1 PIPENV_VERSION=2018.11.26 PY_YAML_VERSION=3.13
     - env: LANGUAGE=dind-aws     VERSION=1        DOCKER_COMPOSE_VERSION=1.24.0 GLIBC_VERSION=2.27-r0 PIP_VERSION=18.1 PIPENV_VERSION=2018.10.13
-    - env: LANGUAGE=golang       VERSION=1.9      GLIDE_VERSION=v0.13.1
+    - env: LANGUAGE=golang       VERSION=1.11     GLIDE_VERSION=v0.13.1
     - env: LANGUAGE=java         VERSION=6        MAVEN_VERSION=3.2.1
     - env: LANGUAGE=java         VERSION=8        JAVA_VERSION=jdk8u212-b04-debian-slim
     - env: LANGUAGE=java         VERSION=11       JAVA_VERSION=jdk-11.0.3_7-debian-slim
