@@ -183,6 +183,9 @@ def run_build(buildInfo):
         if language == "react-native":
             build_args = "%s --build-arg MODD_VERSION=%s" % (build_args, buildInfo.modd)
 
+        if language == "scoutsuite":
+            build_args = "%s --build-arg PIP_VERSION=%s --build-arg PIPENV_VERSION=%s --build-arg SCOUTSUITE_VERSION=%s" % (build_args, os.environ.get("PIP_VERSION"), os.environ.get("PIPENV_VERSION"), os.environ.get("SCOUTSUITE_VERSION"))
+
         if language == "sonar":
             build_args = "%s --build-arg GLIBC_VERSION=%s --build-arg SONARSCANNER_VERSION=%s" % (build_args, os.environ.get("GLIBC_VERSION"), os.environ.get("SONARSCANNER_VERSION"))
 
@@ -195,7 +198,7 @@ def run_build(buildInfo):
 
         run_command_exit(cmd, "fail to build the image")
 
-        if ((language != "java") or (version != "6")) and language != "terraform":
+        if ((language != "java") or (version != "6")) and language != "terraform" and language != "scoutsuite":
             run_command_exit("docker run %s %s ci-helper version -e" % (run_args, image), "Error with ci-helper installation")
 
         if language == "ansible":
@@ -290,6 +293,12 @@ def run_build(buildInfo):
             run_command_exit("docker run %s %s watchman --version" % (run_args, image), "Error with watchman check")
             run_command_exit("docker run %s %s rnpm --version" % (run_args, image), "Error with mvn check")
             run_command_exit("docker run %s %s modd --version" % (run_args, image), "Error with modd check")
+
+        if language == "scoutsuite":
+            print "> Testing Scoutsuite Scanner Image..."
+            run_command_exit("docker run %s %s pip --version" % (run_args, image), "Error with pip check")
+            run_command_exit("docker run %s %s pipenv --version" % (run_args, image), "Error with pipenv check")
+            run_command_exit("docker run %s %s scout --version" % (run_args, image), "Error with scoutsuite check")
 
         if language == "sonar":
             print "> Testing Sonar Scanner Image..."
