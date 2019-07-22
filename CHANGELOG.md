@@ -29,6 +29,7 @@ Versions
 * Add a new image integrating node Serverless and python3
 * Add AmazonLinux image with Systemd
 * Add a new image with kubectl & other k8s tools
+* Add Platform.sh CLI image
 
 2019-04-05
 ----------

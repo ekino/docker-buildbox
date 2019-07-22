@@ -28,6 +28,7 @@ matrix:
     - env: IMAGE=node VERSION=10.15
     - env: IMAGE=php VERSION=7.1
     - env: IMAGE=php VERSION=7.2
+    - env: IMAGE=platformsh VERSION=3.44
     - env: IMAGE=python VERSION=2.7
     - env: IMAGE=python VERSION=3.7
     - env: IMAGE=react-native VERSION=1
