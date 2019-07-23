@@ -140,7 +140,7 @@ def run_build(buildInfo):
         run_args = "--rm"
 
         if language == "ansible":
-            build_args = "%s --build-arg VERSION=%s --build-arg PYTHON_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("PYTHON_VERSION"))
+            build_args = "%s --build-arg VERSION=%s " % (build_args, buildInfo.version)
 
         if language == "arachni":
             build_args = "%s --build-arg VERSION=%s --build-arg ARACHNI_VERSION=%s --build-arg ARACHNI_WEB_UI_VERSION=%s" % (build_args, buildInfo.version, os.environ.get("ARACHNI_VERSION"), os.environ.get("ARACHNI_WEB_UI_VERSION"))

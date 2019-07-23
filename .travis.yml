@@ -10,7 +10,7 @@ services:
 
 matrix:
   include:
-    - env: LANGUAGE=ansible      VERSION=2.5.5-r0 PYTHON_VERSION=2.7.15-r1
+    - env: LANGUAGE=ansible      VERSION=2.5.5
     - env: LANGUAGE=arachni      VERSION=1.5      ARACHNI_VERSION=1.5.1 ARACHNI_WEB_UI_VERSION=0.5.12
     - env: LANGUAGE=chrome       VERSION=1
     - env: LANGUAGE=aws          VERSION=1.1      PIP_VERSION=19.1.1 PIPENV_VERSION=2018.11.26 PY_YAML_VERSION=3.13
