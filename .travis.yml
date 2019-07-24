@@ -1,36 +1,38 @@
 sudo: required
-dist: trusty
+dist: xenial
 language: python
-
-python:
-  - "2.7"
+python: 3.6
 
 services:
   - docker
 
+before_install:
+  - pip install pip pipenv
+  - pipenv sync
+
 matrix:
   include:
-    - env: LANGUAGE=ansible      VERSION=2.5.5
-    - env: LANGUAGE=arachni      VERSION=1.5      ARACHNI_VERSION=1.5.1 ARACHNI_WEB_UI_VERSION=0.5.12
-    - env: LANGUAGE=chrome       VERSION=1
-    - env: LANGUAGE=aws          VERSION=1.1      PIP_VERSION=19.1.1 PIPENV_VERSION=2018.11.26 PY_YAML_VERSION=3.13
-    - env: LANGUAGE=dind-aws     VERSION=1        DOCKER_COMPOSE_VERSION=1.24.0 GLIBC_VERSION=2.27-r0 PIP_VERSION=18.1 PIPENV_VERSION=2018.10.13
-    - env: LANGUAGE=golang       VERSION=1.11     GLIDE_VERSION=v0.13.1
-    - env: LANGUAGE=java         VERSION=6        MAVEN_VERSION=3.2.1
-    - env: LANGUAGE=java         VERSION=8        JAVA_VERSION=jdk8u212-b04-debian-slim
-    - env: LANGUAGE=java         VERSION=11       JAVA_VERSION=jdk-11.0.3_7-debian-slim
-    - env: LANGUAGE=node         VERSION=6.17     NODE_VERSION=6.17.1  NPM_VERSION=3.10.10  NVM_VERSION=0.34.0
-    - env: LANGUAGE=node         VERSION=8.16     NODE_VERSION=8.16.0  NPM_VERSION=6.4.1    NVM_VERSION=0.34.0
-    - env: LANGUAGE=node         VERSION=10.15    NODE_VERSION=10.15.3 NPM_VERSION=6.4.1    NVM_VERSION=0.34.0
-    - env: LANGUAGE=php          VERSION=7.1      PHP_VERSION=7.1.29-cli-alpine APCU_VERSION=5.1.17 COMPOSER_VERSION=1.8.5 MEMCACHED_VERSION=3.1.3 REDIS_VERSION=4.3.0 SECURITY_CHECKER_VERSION=5.0.3 SSH2_VERSION=1.1.2 XDEBUG_VERSION=2.7.2
-    - env: LANGUAGE=php          VERSION=7.2      PHP_VERSION=7.2.18-cli-alpine APCU_VERSION=5.1.17 COMPOSER_VERSION=1.8.5 MEMCACHED_VERSION=3.1.3 REDIS_VERSION=4.3.0 SECURITY_CHECKER_VERSION=5.0.3 SSH2_VERSION=1.1.2 XDEBUG_VERSION=2.7.2
-    - env: LANGUAGE=python       VERSION=2.7      PYTHON_VERSION=2.7.15 PIP_VERSION=18.1 PIPENV_VERSION=2018.10.13
-    - env: LANGUAGE=python       VERSION=3.7      PYTHON_VERSION=3.7.3 PIP_VERSION=18.1 PIPENV_VERSION=2018.10.13
-    - env: LANGUAGE=react-native VERSION=1
-    - env: LANGUAGE=ruby         VERSION=2.6
-    - env: LANGUAGE=scoutsuite   VERSION=5.2      PIP_VERSION=19.1.1 PIPENV_VERSION=2018.11.26 SCOUTSUITE_VERSION=5.2.0
-    - env: LANGUAGE=sonar        VERSION=3.3      GLIBC_VERSION=2.27-r0 SONARSCANNER_VERSION=3.3.0.1492
-    - env: LANGUAGE=terraform    VERSION=0.12     TERRAFORM_VERSION=0.12.0
+    - env: IMAGE=ansible VERSION=2.5.5
+    - env: IMAGE=arachni VERSION=1.5
+    - env: IMAGE=aws VERSION=1
+    - env: IMAGE=chrome VERSION=1
+    - env: IMAGE=dind-aws VERSION=1
+    - env: IMAGE=golang VERSION=1.11
+    - env: IMAGE=java VERSION=6
+    - env: IMAGE=java VERSION=8
+    - env: IMAGE=java VERSION=11
+    - env: IMAGE=node VERSION=6.17
+    - env: IMAGE=node VERSION=8.16
+    - env: IMAGE=node VERSION=10.15
+    - env: IMAGE=php VERSION=7.1
+    - env: IMAGE=php VERSION=7.2
+    - env: IMAGE=python VERSION=2.7
+    - env: IMAGE=python VERSION=3.7
+    - env: IMAGE=react-native VERSION=1
+    - env: IMAGE=ruby VERSION=2.6
+    - env: IMAGE=scoutsuite VERSION=5.2
+    - env: IMAGE=sonar VERSION=3.3
+    - env: IMAGE=terraform VERSION=0.12
 
 script:
-    - travis_wait python travis.py
+  - travis_wait pipenv run python travis.py build --image ${IMAGE} --version ${VERSION}

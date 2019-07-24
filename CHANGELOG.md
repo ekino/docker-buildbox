@@ -24,6 +24,7 @@ Versions
 * Fix Golang version for accurate image tag
 * Add a new image integrating NCC Scoutsuite
 * Change Ansible base image for python:2.7-alpine3.8
+* Refacto travis.py script, setup image definitions within a single configuration file
 
 2019-04-05
 ----------
