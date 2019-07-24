@@ -28,6 +28,7 @@ Versions
 * Upgrade Jinja to 2.10.1
 * Add a new image integrating node Serverless and python3
 * Add AmazonLinux image with Systemd
+* Add a new image with kubectl & other k8s tools
 
 2019-04-05
 ----------

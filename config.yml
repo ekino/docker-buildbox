@@ -126,6 +126,18 @@ java:
       VERSION: 11
       JAVA_VERSION: jdk-11.0.3_7-debian-slim
 
+kubectl:
+  "1.15":
+    cmd_test:
+      - kustomize version
+      - kubectx
+      - kube-score version
+    build_args:
+      KUBECTL_VERSION: 1.15.1
+      KUSTOMIZATION_VERSION: 2.0.3
+      KUBECTX_VERSION: 0.6.3
+      KUBESCORE_VERSION: 0.7.1
+
 node_cmd_test: &node_cmd_test
   - *ci_helper_test
   - node --version
