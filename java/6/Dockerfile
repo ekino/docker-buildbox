@@ -31,7 +31,7 @@ RUN echo "Starting ..." && \
     echo "Done Install java" && \
 
     echo "Install Maven" && \
-    curl -sSL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xzf - -C /usr/bin && \
+    curl -ksSL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xzf - -C /usr/bin && \
     chmod 755 /usr/bin/apache-maven-${MAVEN_VERSION} && \
     ln -s /usr/bin/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn && \
     echo "Done Install Maven!" && \
