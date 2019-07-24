@@ -25,6 +25,7 @@ Versions
 * Add a new image integrating NCC Scoutsuite
 * Change Ansible base image for python:2.7-alpine3.8
 * Refacto travis.py script, setup image definitions within a single configuration file
+* Upgrade Jinja to 2.10.1
 
 2019-04-05
 ----------
