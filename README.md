@@ -141,9 +141,17 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 
 Based on python 3.6 alpine image, contains php7 and platform.sh CLI.
 
+### React Native Android
+
+Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
+
 ### Ruby
 
 Contains Ruby (installed from official alpine) and CI Helper.
+
+### Scoutsuite
+
+Contains ScoutSuite cloud scanner
 
 ### Serverless
 
@@ -152,31 +160,3 @@ Contains node Serverless module with python3.
 ### SonarQube Scanner
 
 Contains SonarQube Scanner and CI Helper
-
-### React Native Android
-
-Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
-
-### Scoutsuite
-
-Contains ScoutSuite cloud scanner
-
-## Versions
-
-Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
-
-## Testing
-
-Each box is tested and built using TravisCI.
-
-The `travis.py` script try to be clever:
- - PR: only images with modified files are built.
- - Merge to master: only images with modified files are built and pushed to the docker registry with the tag `latest-IMAGE`
- - TAG: all images are built and pushed to the docker registry
- - Nightly: all images are built and pushed to the docker registry with the tag `nightly-IMAGE`
-
-[![Build Status](https://travis-ci.org/ekino/docker-buildbox.svg?branch=master)](https://travis-ci.org/ekino/docker-buildbox)
-
-It is possible to build local image for testing with the following command:
-
-    CI_HELPER_VERSION=0.0.6 MODD_VERSION=0.5 JAVA_VERSION=jdk-11.0.3_7-debian-slim VERSION=11 python travis.py --language java --pull-request=true
