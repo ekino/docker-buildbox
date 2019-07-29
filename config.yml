@@ -250,6 +250,22 @@ scoutsuite:
       - pipenv --version
       - scout --version
 
+serverless:
+  "1.48":
+    build_args:
+      PIP_VERSION: 19.2.1
+      PIPENV_VERSION: 2018.11.26
+      SERVERLESS_VERSION: 1.48.4
+    cmd_test:
+      - pip --version
+      - python --version
+      - node --version
+      - npm --version
+      - yarn --version
+      - serverless --version
+    template_vars:
+      NODE_MAJOR: 10
+
 sonar:
   "3.3":
     build_args:

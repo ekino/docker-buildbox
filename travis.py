@@ -1,6 +1,5 @@
 import click
 import jinja2
-
 import src.config as config
 import src.docker_image as docker
 
