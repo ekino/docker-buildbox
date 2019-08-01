@@ -1,0 +1,22 @@
+FROM node:{{NODE_MAJOR}}-alpine
+
+ARG PIPENV_VERSION
+ARG PIP_VERSION
+ARG SERVERLESS_VERSION
+
+RUN echo "Starting ..." && \
+    echo "Install system dependencies for python and pip" && \
+    apk add --update -q --no-cache bash build-base curl git libffi-dev make openldap-dev openssh-client python3 py3-pip rsync tzdata zip && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    pip3 install pip==${PIP_VERSION} && \
+    echo "Done base install!" && \
+    echo "Install basics Python tools" && \
+    pip install --upgrade pipenv==${PIPENV_VERSION} && \
+    echo "Done basic python tools install" && \
+    echo "Install serverless" && \
+    npm install -g serverless@${SERVERLESS_VERSION} && \
+    npm install --save serverless-python-requirements && \
+    echo "Done serverless install" && \
+    echo "Cleaning files!" && \
+    apk del py3-pip && \
+    echo "Done!"

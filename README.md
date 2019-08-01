@@ -133,6 +133,10 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 
 Contains Ruby (installed from official alpine) and CI Helper.
 
+### Serverless
+
+Contains node Serverless module with python3.
+
 ### SonarQube Scanner
 
 Contains SonarQube Scanner and CI Helper
