@@ -43,6 +43,14 @@ aws:
       PIPENV_VERSION: 2018.10.13
       PY_YAML_VERSION: 3.13
 
+awslnx-systemd:
+  "2":
+    template_vars:
+      VERSION: 2.0.20190508
+    cmd_test:
+      - python --version
+      - pip --version
+
 chrome:
   "1":
     build_args:

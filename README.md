@@ -88,6 +88,10 @@ Then go to http://localhost:9292
 
 Contains AWS Cli + AWS EB Cli + CI Helper + jq
 
+### AWSLinux systemd
+
+Amazon Linux based image containing Systemd for service management in docker container.
+
 ### DIND - AWS
 
 Adds AWS Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
