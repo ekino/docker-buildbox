@@ -119,6 +119,10 @@ Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
 Contains AWS Cli, CI Helper, Maven, Graphviz, jq and Java.
 **Please note that for Java 6, the image doesn't contain CI Helper, Modd, Graphviz, jq and AWS Cli.**
 
+### Kubectl
+
+Contains kubectl, kubens, kubectx, kube-score.
+
 ### Node
 
 Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS Cli.

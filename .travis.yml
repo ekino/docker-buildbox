@@ -22,6 +22,7 @@ matrix:
     - env: IMAGE=java VERSION=6
     - env: IMAGE=java VERSION=8
     - env: IMAGE=java VERSION=11
+    - env: IMAGE=kubectl VERSION=1.15
     - env: IMAGE=node VERSION=6.17
     - env: IMAGE=node VERSION=8.16
     - env: IMAGE=node VERSION=10.15
