@@ -137,6 +137,10 @@ About Blackfire, please read the official documentation to install the agent htt
 docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-container blackfire run bin/console app:foo:bar
 ```
 
+### Platform.sh CLI
+
+Based on python 3.6 alpine image, contains php7 and platform.sh CLI.
+
 ### Ruby
 
 Contains Ruby (installed from official alpine) and CI Helper.

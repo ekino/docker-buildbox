@@ -209,6 +209,17 @@ php:
     template_vars:
       PHP_VERSION: 7.2.18-cli-alpine
 
+platformsh:
+  "3.44":
+    build_args:
+      PLATFORMSH_CLI_VERSION: "3.44.0"
+      PLATFORMSH_CLI_SHASUM: "f1620dfd149fd17071c7bb538eb0b8ccb847d29dd13169ace67ceab8c2a63585"
+    cmd_test:
+      - php --version
+      - platform help
+      - python --version
+      - pip --version
+
 python:
   "2.7":
     build_args:
