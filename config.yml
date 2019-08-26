@@ -232,7 +232,7 @@ python:
       - pip --version
       - python --version
     template_vars:
-      PYTHON_VERSION: 2.7.15
+      PYTHON_VERSION: 2.7.16
   "3.7":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
@@ -243,7 +243,7 @@ python:
       - pip --version
       - python --version
     template_vars:
-      PYTHON_VERSION: 3.7.3
+      PYTHON_VERSION: 3.7.4
 
 react-native:
   "1":
