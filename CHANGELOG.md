@@ -8,7 +8,7 @@ Versions
 * CI: lock Python version to 2.7
 * Add gettext in dind-aws and PHP images
 * Fix build error in Chrome
-* Upgrade Java versions: 11.0.3, 8u212
+* Upgrade Java versions: 8u222, 11.0.4
 * Lock scss_lint version to fix issue with Ruby version
 * Upgrade Node version: 6.17.1, 8.16.0
 * Upgrade NVM version: 0.34.0
