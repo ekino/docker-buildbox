@@ -33,6 +33,7 @@ Versions
 * Upgrade Python: 2.7.16, 3.7.4
 * Use only major Node version to name node images
 * Add Node 12
+* Upgrade ScoutSuite to 5.3.3
 
 2019-04-05
 ----------

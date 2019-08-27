@@ -279,11 +279,11 @@ ruby:
       - ruby --version
 
 scoutsuite:
-  "5.2":
+  "5.3":
     build_args:
       PIP_VERSION: 19.1.1
       PIPENV_VERSION: 2018.11.26
-      SCOUTSUITE_VERSION: 5.2.0
+      SCOUTSUITE_VERSION: 5.3.3
     cmd_test:
       - pip --version
       - pipenv --version
