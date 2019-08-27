@@ -30,6 +30,7 @@ Versions
 * Add AmazonLinux image with Systemd
 * Add a new image with kubectl & other k8s tools
 * Add Platform.sh CLI image
+* Upgrade Python: 2.7.16, 3.7.4
 
 2019-04-05
 ----------
