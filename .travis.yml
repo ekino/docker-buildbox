@@ -23,9 +23,10 @@ matrix:
     - env: IMAGE=java VERSION=8
     - env: IMAGE=java VERSION=11
     - env: IMAGE=kubectl VERSION=1.15
-    - env: IMAGE=node VERSION=6.17
-    - env: IMAGE=node VERSION=8.16
-    - env: IMAGE=node VERSION=10.15
+    - env: IMAGE=node VERSION=6
+    - env: IMAGE=node VERSION=8
+    - env: IMAGE=node VERSION=10
+    - env: IMAGE=node VERSION=12
     - env: IMAGE=php VERSION=7.1
     - env: IMAGE=php VERSION=7.2
     - env: IMAGE=platformsh VERSION=3.44

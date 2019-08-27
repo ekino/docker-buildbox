@@ -146,7 +146,7 @@ node_cmd_test: &node_cmd_test
   - modd --version
 
 node:
-  "6.17":
+  "6":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       NODE_VERSION: 6.17.1
@@ -154,19 +154,27 @@ node:
       NVM_VERSION: 0.34.0
       MODD_VERSION: *MODD_VERSION
     cmd_test: *node_cmd_test
-  "8.16":
+  "8":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      NODE_VERSION: 8.16.0
-      NPM_VERSION: 6.4.1
+      NODE_VERSION: 8.16.1
+      NPM_VERSION: 6.11.2
       NVM_VERSION: 0.34.0
       MODD_VERSION: *MODD_VERSION
     cmd_test: *node_cmd_test
-  "10.15":
+  "10":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      NODE_VERSION: 10.15.3
-      NPM_VERSION: 6.4.1
+      NODE_VERSION: 10.16.3
+      NPM_VERSION: 6.11.2
+      NVM_VERSION: 0.34.0
+      MODD_VERSION: *MODD_VERSION
+    cmd_test: *node_cmd_test
+  "12":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      NODE_VERSION: 12.9.0
+      NPM_VERSION: 6.11.2
       NVM_VERSION: 0.34.0
       MODD_VERSION: *MODD_VERSION
     cmd_test: *node_cmd_test
