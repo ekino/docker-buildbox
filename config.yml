@@ -51,6 +51,15 @@ awslnx-systemd:
       - python --version
       - pip --version
 
+azure:
+  "2":
+    build_args:
+      AZURE_CLI: 2.0.72
+      TERRAFORM_VERSION: 0.12.7
+    cmd_test:
+      - az --version
+      - terraform --version
+
 chrome:
   "1":
     build_args:

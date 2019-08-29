@@ -34,6 +34,7 @@ Versions
 * Use only major Node version to name node images
 * Add Node 12
 * Upgrade ScoutSuite to 5.3.3
+* Create image with azure CLI and terraform
 
 2019-04-05
 ----------
