@@ -23,7 +23,7 @@ RUN echo "Starting ..." && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
         gnu-libiconv@edge-community icu-dev@edge-main libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev \
-        libxml2-dev make openssh-client patch postgresql-dev rsync tzdata && \
+        libxml2-dev libzip-dev make openssh-client patch postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
     echo "Install CI Helper" && \
@@ -43,8 +43,9 @@ RUN echo "Starting ..." && \
     pecl install memcached-${MEMCACHED_VERSION} && \
     docker-php-ext-enable memcached && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
-    pecl install ssh2-${SSH2_VERSION} && \
-    docker-php-ext-enable ssh2 && \
+    # waiting for https://github.com/php/pecl-networking-ssh2/pull/36 to be merged
+    # pecl install ssh2-${SSH2_VERSION} && \
+    # docker-php-ext-enable ssh2 && \
     echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
 short_open_tag=Off \n\
