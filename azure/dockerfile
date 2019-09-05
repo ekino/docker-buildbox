@@ -1,0 +1,16 @@
+FROM python:3.7-alpine
+
+LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
+
+ARG TERRAFORM_VERSION
+ARG AZURE_CLI
+
+RUN apk update \
+    && apk add --update -q --no-cache build-base libffi-dev openssl-dev bash ca-certificates unzip wget \
+    && pip install --upgrade --no-binary cryptography pip azure-cli==${AZURE_CLI} \
+    && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O /tmp/terraform.zip \
+    && cd /tmp \
+    && unzip -o terraform.zip \
+    && cd - \
+    && mv /tmp/terraform /usr/bin/ \
+    && chmod +x /usr/bin/terraform
