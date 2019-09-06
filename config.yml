@@ -313,6 +313,7 @@ serverless:
       - npm --version
       - yarn --version
       - serverless --version
+      - aws --version
     template_vars:
       NODE_MAJOR: 10
 
