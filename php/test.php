@@ -142,15 +142,9 @@ EOF
 
         $errors             = array();
         $extensionsExpected = array(
-            'bcmath', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'pcntl', 'pdo_mysql',
-            'pdo_pgsql', 'redis', 'soap', 'sockets', 'xdebug', 'zip',
+            'apcu', 'bcmath', 'blackfire', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'memcached', 'pcntl', 'pdo_mysql',
+            'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'xdebug', 'Zend OPcache', 'zip',
         );
-
-        if (version_compare(PHP_VERSION, '5.4', '>')) {
-            array_push($extensionsExpected, 'apcu', 'blackfire', 'memcached', 'pgsql', 'ssh2', 'Zend OPcache');
-        }
-
-        sort($extensionsExpected);
 
         $extensionsMissing = array_filter($extensionsExpected, function ($extension) {
             return !extension_loaded($extension);

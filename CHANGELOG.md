@@ -1,10 +1,9 @@
 Versions
 ========
 
-2019-07-DEV
+2019-09-DEV
 -----------
 
-* Add patch in PHP images
 * CI: lock Python version to 2.7
 * Add gettext in dind-aws and PHP images
 * Fix build error in Chrome
@@ -12,10 +11,15 @@ Versions
 * Lock scss_lint version to fix issue with Ruby version
 * Upgrade Node version: 6.17.1, 8.16.0
 * Upgrade NVM version: 0.34.0
-* Upgrade PHP version: 7.1.29, 7.2.18
-* Upgrade Composer version: 1.8.5
+* Add a new image PHP version 7.3
+* Add patch in PHP images
+* Upgrade PHP version: 7.2.22
+* Upgrade redis version extension: 5.0.2
+* Upgrade security checker version: 6.0.2
+* Upgrade Composer version: 1.9.0
 * Upgrade Xdebug version: 2.7.2
 * Upgrade Ruby version: 2.6.3
+* Remove support for PHP 7.1
 * Fix Java 8/11 image issues from debian:stretch-slim
 * Drop JDK 10 support
 * Migrate Java buildboxes to adoptopenjdk

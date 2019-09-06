@@ -199,34 +199,34 @@ php_cmd_test: &php_cmd_test
   - -v $(pwd)/php:/tmp %s php /tmp/test.php
 
 php:
-  "7.1":
-    build_args:
-      APCU_VERSION: 5.1.17
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
-      COMPOSER_VERSION: 1.8.5
-      MEMCACHED_VERSION: 3.1.3
-      MODD_VERSION: *MODD_VERSION
-      REDIS_VERSION: 4.3.0
-      SECURITY_CHECKER_VERSION: 5.0.3
-      SSH2_VERSION: 1.1.2
-      XDEBUG_VERSION: 2.7.2
-    cmd_test: *php_cmd_test
-    template_vars:
-      PHP_VERSION: 7.1.29-cli-alpine
   "7.2":
     build_args:
       APCU_VERSION: 5.1.17
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      COMPOSER_VERSION: 1.8.5
+      COMPOSER_VERSION: 1.9.0
       MEMCACHED_VERSION: 3.1.3
       MODD_VERSION: *MODD_VERSION
-      REDIS_VERSION: 4.3.0
-      SECURITY_CHECKER_VERSION: 5.0.3
+      REDIS_VERSION: 5.0.2
+      SECURITY_CHECKER_VERSION: 6.0.2
       SSH2_VERSION: 1.1.2
       XDEBUG_VERSION: 2.7.2
     cmd_test: *php_cmd_test
     template_vars:
-      PHP_VERSION: 7.2.18-cli-alpine
+      PHP_VERSION: 7.2.22-cli-alpine
+  "7.3":
+    build_args:
+      APCU_VERSION: 5.1.17
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      COMPOSER_VERSION: 1.9.0
+      MEMCACHED_VERSION: 3.1.3
+      MODD_VERSION: *MODD_VERSION
+      REDIS_VERSION: 5.0.2
+      SECURITY_CHECKER_VERSION: 6.0.2
+      SSH2_VERSION: 1.1.2
+      XDEBUG_VERSION: 2.7.2
+    cmd_test: *php_cmd_test
+    template_vars:
+      PHP_VERSION: 7.3.9-cli-alpine
 
 platformsh:
   "3.44":
