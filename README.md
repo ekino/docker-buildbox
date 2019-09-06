@@ -86,11 +86,19 @@ Then go to http://localhost:9292
 
 ### AWS
 
-Contains AWS Cli + AWS EB Cli + CI Helper + jq
+Contains AWS Cli, AWS EB Cli, CI Helper and jq.
 
 ### AWSLinux systemd
 
 Amazon Linux based image containing Systemd for service management in docker container.
+
+### Azure
+
+Contains Azure Cli and Terraform.
+
+### Chrome
+
+Contains Chromium browser and the latest Node LTS.
 
 ### DIND - AWS
 
@@ -141,6 +149,10 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 
 Based on python 3.6 alpine image, contains php7 and platform.sh CLI.
 
+### Python
+
+Contains Python with PIP and PIPENV.
+
 ### React Native Android
 
 Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
@@ -151,7 +163,7 @@ Contains Ruby (installed from official alpine) and CI Helper.
 
 ### Scoutsuite
 
-Contains ScoutSuite cloud scanner
+Contains ScoutSuite cloud scanner.
 
 ### Serverless
 
@@ -159,4 +171,8 @@ Contains node Serverless module with python3.
 
 ### SonarQube Scanner
 
-Contains SonarQube Scanner and CI Helper
+Contains SonarQube Scanner and CI Helper.
+
+### Terraform
+
+Contains Terraform and AWS Cli.
