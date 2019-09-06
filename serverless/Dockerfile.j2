@@ -1,4 +1,5 @@
 FROM node:{{NODE_MAJOR}}-alpine
+LABEL maintainer="Loïc Nairi <loic.nairi@ekino.com>"
 
 ARG PIPENV_VERSION
 ARG PIP_VERSION
@@ -13,6 +14,9 @@ RUN echo "Starting ..." && \
     echo "Install basics Python tools" && \
     pip install --upgrade pipenv==${PIPENV_VERSION} && \
     echo "Done basic python tools install" && \
+    echo "Install aws-cli" && \
+    pip install awscli && \
+    echo "Done aws-cli install" && \
     echo "Install serverless" && \
     npm install -g serverless@${SERVERLESS_VERSION} && \
     npm install --save serverless-python-requirements && \

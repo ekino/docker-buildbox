@@ -37,6 +37,7 @@ Versions
 * Create image with azure CLI and terraform
 * Upgrade Golang version: 1.13
 * Upgrade Serverless version: 1.51
+* Add aws-cli in serverless image
 
 2019-04-05
 ----------
