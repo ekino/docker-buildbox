@@ -1,7 +1,8 @@
+import os
 import pprint
 
 from docker import DockerClient
-from docker.errors import APIError, BuildError
+from docker.errors import APIError, BuildError, ContainerError
 
 docker_client = DockerClient(base_url="unix://var/run/docker.sock")
 
@@ -13,7 +14,7 @@ def build_image(image_conf, image_fullname, dockerfile, debug):
             pp = pprint.PrettyPrinter(indent=1)
             print(">> Building configuration: ")
             pp.pprint(image_conf)
-            print('\n')
+            print("\n")
 
         docker_client.images.build(
             path=dockerfile,
@@ -27,8 +28,8 @@ def build_image(image_conf, image_fullname, dockerfile, debug):
     except BuildError as build_error:
         print("> [Error] Build failed\n")
         for line in build_error.build_log:
-            if 'stream' in line:
-                print(line['stream'].strip())
+            if "stream" in line:
+                print(line["stream"].strip())
         exit(1)
     except APIError as api_error:
         print("> [Error] API error - " + str(api_error))
@@ -36,17 +37,44 @@ def build_image(image_conf, image_fullname, dockerfile, debug):
 
 
 def run_image(image_fullname, image_conf, debug):
+    volume = {}
+
     print("> [Info] Testing " + image_fullname)
+
     try:
-        if "cmd_test" in image_conf:
-            for cmd in image_conf["cmd_test"]:
+        if "test_config" in image_conf:
+            test_config = image_conf["test_config"]
+            if "volume" in test_config:
+                # Split path:directory string and build volume dict
+                splitted_volume = test_config["volume"].split(":")
+                volume[f"{os.getcwd()}/{splitted_volume[0]}"] = {
+                    "bind": splitted_volume[1],
+                    "mode": "ro",
+                }
+            for cmd in test_config["cmd"]:
                 if debug:
                     print(">> Running test: " + cmd)
-                docker_client.containers.run(image=image_fullname, command=cmd, auto_remove=True)
+                container = docker_client.containers.run(
+                    image=image_fullname,
+                    command=cmd,
+                    volumes=volume,
+                    stdout=True,
+                    stderr=True
+                )
+                if debug:
+                    for line in container.decode('utf-8').split('\n'):
+                        print(line)
         print("Tests successful")
+    except ContainerError as container_error:
+        print(f"'{container_error.command}' command failed")
+        for line in container_error.stderr.decode('utf-8').split('\n'):
+            print(line)
+        exit(1)
     except APIError as api_error:
         print("> [Error] Command test failed - " + str(api_error))
         exit(1)
+    finally:
+        docker_client.containers.prune()
 
 
 def login_to_registry(env_conf):

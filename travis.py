@@ -1,5 +1,6 @@
 import click
 import jinja2
+
 import src.config as config
 import src.docker_image as docker
 
@@ -48,7 +49,11 @@ def build(image, version, debug):
     # - tag
     # - push to master
     # - nightly build
-    if env_conf["tag"] or env_conf["branch"] == "master" or env_conf["event_type"] == "cron":
+    if (
+        env_conf["tag"] == "true"
+        or (env_conf["event_type"] != "pull_request" and env_conf["branch"] == "master")
+        or env_conf["event_type"] == "cron"
+    ):
         # Login to registry
         docker.login_to_registry(env_conf)
         docker.push_image(image_fullname)

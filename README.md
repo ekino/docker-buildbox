@@ -57,7 +57,9 @@ Create a directory named after your image and corresponding Dockerfile in it. Th
 ```yaml
 image_name:
   version:
-    cmd_test: [...]  # shell commands run to be sure tools are well installed
+    test_config:
+      volume: ... # docker volume if needed, format: localdir:/path/to/mount
+      cmd: [...]  # shell commands run to be sure tools are well installed
     build_args: [...]  # If ARG are defined in Dockerfile
     template_vars: [...]  # If templated Dockerfile
     dockerfile_dir: /path/to/dockerfile  # If Dockerfile's path is not ./<image_name>/Dockerfile
@@ -65,6 +67,8 @@ image_name:
 Make sure the `image_name` in the config file entry matches your directory.
 
 Do not forget to add an entry in `.travis.yml` too following other image scheme.
+
+**Volume mounting** for test configuration only need the directory name as full local path is build by the script.
 
 ## Available images
 

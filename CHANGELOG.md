@@ -42,6 +42,7 @@ Versions
 * Upgrade Golang version: 1.13
 * Upgrade Serverless version: 1.51
 * Add aws-cli in serverless image
+* Core: change config file structure to allow volume mounting for local test scripts
 
 2019-04-05
 ----------
