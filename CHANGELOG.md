@@ -16,6 +16,7 @@ Versions
 * Upgrade PHP version: 7.2.22
 * Upgrade redis version extension: 5.0.2
 * Upgrade security checker version: 6.0.2
+* Upgrade PHP CS Fixer: 2.15.3
 * Upgrade Composer version: 1.9.0
 * Upgrade Xdebug version: 2.7.2
 * Upgrade Ruby version: 2.6.3

@@ -209,6 +209,7 @@ php_test_config: &php_test_config
     - php --version
     - composer --version
     - modd --version
+    - php-cs-fixer --version
     - security-checker --version
     - php /tmp/test.php
 
@@ -220,6 +221,7 @@ php:
       COMPOSER_VERSION: 1.9.0
       MEMCACHED_VERSION: 3.1.3
       MODD_VERSION: *MODD_VERSION
+      PHP_CS_FIXER_VERSION: 2.15.3
       REDIS_VERSION: 5.0.2
       SECURITY_CHECKER_VERSION: 6.0.2
       SSH2_VERSION: 1.1.2
@@ -234,6 +236,7 @@ php:
       COMPOSER_VERSION: 1.9.0
       MEMCACHED_VERSION: 3.1.3
       MODD_VERSION: *MODD_VERSION
+      PHP_CS_FIXER_VERSION: 2.15.3
       REDIS_VERSION: 5.0.2
       SECURITY_CHECKER_VERSION: 6.0.2
       SSH2_VERSION: 1.1.2
