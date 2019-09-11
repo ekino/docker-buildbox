@@ -10,7 +10,7 @@ def load_ci_env(debug):
     build_info = {
         "commit_range": os.environ.get("TRAVIS_COMMIT_RANGE", "HEAD...HEAD"),
         "branch": os.environ.get("TRAVIS_BRANCH", ""),
-        "tag": os.environ.get("TRAVIS_TAG", "false"),
+        "tag": os.environ.get("TRAVIS_TAG", ""),
         "pull_request": os.environ.get("TRAVIS_PULL_REQUEST", "false"),
         "travis": os.environ.get("TRAVIS", "false"),
         "event_type": os.environ.get("TRAVIS_EVENT_TYPE", ""),
@@ -51,7 +51,7 @@ def load_image_config(image_type, version):
 
 
 def get_image_fullname(image_name, version, image_conf, env_conf):
-    if env_conf["tag"]:
+    if env_conf["tag"] != '':
         fullname = (
             image_conf["docker_hub_namespace"] + ":" + image_name + version + "-" + env_conf["tag"]
         )

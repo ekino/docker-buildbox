@@ -50,7 +50,7 @@ def build(image, version, debug):
     # - push to master
     # - nightly build
     if (
-        env_conf["tag"] == "true"
+        env_conf["tag"] != ""
         or (env_conf["event_type"] != "pull_request" and env_conf["branch"] == "master")
         or env_conf["event_type"] == "cron"
     ):
