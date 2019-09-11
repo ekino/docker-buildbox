@@ -6,6 +6,7 @@ ARG CI_HELPER_VERSION
 ARG COMPOSER_VERSION
 ARG MEMCACHED_VERSION
 ARG MODD_VERSION
+ARG PHP_CS_FIXER_VERSION
 ARG REDIS_VERSION
 ARG SECURITY_CHECKER_VERSION
 ARG SSH2_VERSION
@@ -54,7 +55,7 @@ zend_extension=opcache.so \n\
 " > /usr/local/etc/php/php.ini && \
 
     curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
-    curl -sSL https://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
+    curl -sSL https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VERSION}/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
     curl -sSL https://get.sensiolabs.org/security-checker-v${SECURITY_CHECKER_VERSION}.phar -o /usr/local/bin/security-checker && chmod a+x /usr/local/bin/security-checker && \
     composer global require "hirak/prestissimo:^0.3" && \
 
