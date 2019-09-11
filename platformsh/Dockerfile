@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM php:7.3-cli-alpine3.10
 LABEL maintainer="Maxime Sibellas<maxime.sibellas@ekino.com>"
 
 ARG PLATFORMSH_CLI_VERSION
@@ -8,7 +8,9 @@ ENV PATH="/usr/local/bin/:${PATH}"
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN apk add --update -q --no-cache bash build-base curl git libffi-dev make openldap-dev openssh-client php7 && \
+RUN apk add --update -q --no-cache bash build-base curl git libffi-dev make openldap-dev openssh-client python3-dev py3-pip && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip && \
     pip install --upgrade pip pipenv
 
 # Install the Platform.sh CLI
