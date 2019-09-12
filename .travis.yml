@@ -41,4 +41,4 @@ matrix:
     - env: IMAGE=terraform VERSION=0.12
 
 script:
-  - travis_wait pipenv run python travis.py build -d --image ${IMAGE} --version ${VERSION}
+  - travis_wait pipenv run python travis.py build --image ${IMAGE} --version ${VERSION}
