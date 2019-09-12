@@ -1,3 +1,4 @@
+import copy
 import os
 import pprint
 
@@ -19,7 +20,7 @@ def load_ci_env(debug):
     }
     if debug:
         pp = pprint.PrettyPrinter(indent=1)
-        info_debug = build_info
+        info_debug = copy.copy(build_info)
         info_debug["docker_reg_password"] = "XXX"
         print(">> CI environment configuration: ")
         pp.pprint(info_debug)

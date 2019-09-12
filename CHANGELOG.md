@@ -44,6 +44,8 @@ Versions
 * Upgrade Serverless version: 1.51
 * Add aws-cli in serverless image
 * Core: change config file structure to allow volume mounting for local test scripts
+* Core: fix docker login & push in debug mode
+* Core: upgrade docker-py lib from 3.5.0 to 4.0.2
 
 2019-04-05
 ----------

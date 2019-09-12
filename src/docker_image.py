@@ -92,7 +92,13 @@ def login_to_registry(env_conf):
 def push_image(image_fullname):
     print("> [Info] Pushing " + image_fullname)
     try:
-        docker_client.images.push(image_fullname)
+        for line in docker_client.images.push(image_fullname, stream=True, decode=True):
+            # Keep 1st and last line of push cmd
+            if "status" in line and "progressDetail" not in line:
+                print(f"{line['status']}")
+            if "error" in line:
+                print(line["error"])
+                exit(1)
         print("Push successful")
     except APIError as api_error:
         print("> [Error] Push failed - " + str(api_error))
