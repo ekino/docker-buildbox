@@ -246,14 +246,14 @@ php:
       PHP_VERSION: 7.3.9-cli-alpine
 
 platformsh:
-  "3.44":
+  "3.47":
     build_args:
-      PLATFORMSH_CLI_VERSION: "3.44.0"
-      PLATFORMSH_CLI_SHASUM: "f1620dfd149fd17071c7bb538eb0b8ccb847d29dd13169ace67ceab8c2a63585"
+      PLATFORMSH_CLI_VERSION: "3.47.0"
+      PLATFORMSH_CLI_SHASUM: "82781450e1ac0246e2b4880a1d9ccf54a4568a8798c8f6be10922acec94e553c"
     test_config:
       cmd:
         - php --version
-        - platform help
+        - platform --version
         - python --version
         - pip --version
 
