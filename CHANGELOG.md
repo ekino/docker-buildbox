@@ -48,6 +48,7 @@ Versions
 * Core: upgrade docker-py lib from 3.5.0 to 4.0.2
 * Remove support for Node 6
 * Add Kubeval to Kubectl images
+* Remove support for JDK 6
 
 2019-04-05
 ----------
