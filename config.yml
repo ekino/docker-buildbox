@@ -154,11 +154,13 @@ kubectl:
         - kustomize version
         - kubectx
         - kube-score version
+        - kubeval --version
     build_args:
       KUBECTL_VERSION: 1.15.1
-      KUSTOMIZATION_VERSION: 2.0.3
       KUBECTX_VERSION: 0.6.3
       KUBESCORE_VERSION: 0.7.1
+      KUBEVAL_VERSION: 0.14.0
+      KUSTOMIZATION_VERSION: 2.0.3
 
 node_test_config: &node_test_config
   cmd:
