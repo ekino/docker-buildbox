@@ -4,6 +4,11 @@ Versions
 2019-09-DEV
 -----------
 
+* todo....
+
+2019-09-19
+----------
+
 * CI: lock Python version to 2.7
 * Add gettext in dind-aws and PHP images
 * Fix build error in Chrome
