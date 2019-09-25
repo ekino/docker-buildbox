@@ -4,7 +4,7 @@ Versions
 2019-09-DEV
 -----------
 
-* todo....
+* Fix Chrome image build
 
 2019-09-19
 ----------

@@ -8,22 +8,20 @@ ARG MODD_VERSION
 
 # Based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-on-alpine
 
-# Installs latest Chromium (68) package.
+# Installs Chromium 72 package.
 RUN apk update && apk upgrade && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
     apk add --no-cache \
-      chromium@edge \
-      harfbuzz@edge \
-      freetype@edge \
-      ttf-freefont@edge \
-      nss@edge
+      chromium \
+      harfbuzz \
+      freetype \
+      ttf-freefont \
+      nss
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-# Puppeteer v1.4.0 works with Chromium 68.
-RUN yarn add puppeteer@1.4.0
+# Puppeteer v1.11.0 works with Chromium 72.
+RUN yarn add puppeteer@1.11.0
 
 
 
