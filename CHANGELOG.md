@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Fix Chrome image build
+* Upgrade Golang version: 1.13.1
 
 2019-09-19
 ----------
