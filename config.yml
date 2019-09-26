@@ -6,7 +6,6 @@ CI_HELPER_VERSION: &CI_HELPER_VERSION 0.0.6
 ci_helper_test: &ci_helper_test ci-helper version -e
 MODD_VERSION: &MODD_VERSION 0.5
 
-
 ansible:
   "2.5.5":
     build_args:
@@ -109,7 +108,7 @@ golang:
         - gin --version
         - modd --version
     template_vars:
-      GOLANG_VERSION: 1.13
+      GOLANG_VERSION: 1.13.1
 
 java_test_config: &java_test_config
   cmd:
