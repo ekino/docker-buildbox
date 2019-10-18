@@ -1,11 +1,11 @@
 Versions
 ========
 
-2019-09-DEV
+2019-10-DEV
 -----------
 
 * Fix Chrome image build
-* Upgrade Golang version: 1.13.1
+* Upgrade Golang version: 1.13.3
 
 2019-09-19
 ----------
