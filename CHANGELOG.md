@@ -6,6 +6,9 @@ Versions
 
 * Fix Chrome image build
 * Upgrade Golang version: 1.13.3
+* Upgrade PHP version: 7.2.23 / 7.3.10
+* Upgrade memcached version: 3.1.4
+* Upgrade ssh2 version: 1.2
 
 2019-09-19
 ----------
