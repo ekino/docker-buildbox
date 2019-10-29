@@ -1,4 +1,4 @@
-FROM debian:8.7
+FROM debian:10.1-slim
 LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -13,13 +13,8 @@ ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 
 RUN echo "Starting ..." && \
-    echo "Acquire::Check-Valid-Until \"false\";" > /etc/apt/apt.conf && \
-    echo "deb http://deb.debian.org/debian jessie main" > /etc/apt/sources.list && \
-    echo "deb-src http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list && \
-    echo "deb http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
-    echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list && \
     apt-get -qq clean && apt-get -qq update && \
-    apt-get -qq -y install build-essential libssl-dev curl git imagemagick subversion make mercurial \
+    apt-get -qq -y install libssl-dev curl git imagemagick make gnupg \
       libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ && \
     gem install rb-inotify:'~> 0.9.10' sass --verbose && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
@@ -46,7 +41,7 @@ RUN echo "Starting ..." && \
     npm install -g npm@${NPM_VERSION} && \
 
     curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb http://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn --no-install-recommends && \
 
     echo "Done JS!" && \
@@ -61,9 +56,9 @@ RUN echo "Starting ..." && \
 
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
-    apt-get -qq -y remove --purge emacsen-common fakeroot file firebird2.5-common firebird2.5-common-doc \
-      firebird2.5-server-common man-db manpages manpages-dev \
-      mysql-client-5.5 mysql-common mysql-server-5.5 mysql-server-core-5.5 odbcinst odbcinst1debian2 \
+    apt-get -qq -y remove --purge emacsen-common fakeroot file firebird3.0-common firebird3.0-common-doc \
+      firebird3.0-server firebird3.0-server-core man-db manpages manpages-dev \
+      default-mysql-client mysql-common default-mysql-server default-mysql-server-core odbcinst odbcinst1debian2 \
       patch po-debconf psmisc python-pip xauth xtrans-dev xz-utils zlib1g-dev && \
 
     apt-get -qq -y autoremove && \

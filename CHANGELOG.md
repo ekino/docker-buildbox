@@ -9,6 +9,8 @@ Versions
 * Upgrade PHP version: 7.2.23 / 7.3.10
 * Upgrade memcached version: 3.1.4
 * Upgrade ssh2 version: 1.2
+* Upgrade Debian to 10.1 for Node images
+* Upgrade Node 12 image to 12.13 and NPM to 6.12.0
 
 2019-09-19
 ----------
