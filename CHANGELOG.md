@@ -1,11 +1,12 @@
 Versions
 ========
 
-2019-10-DEV
+2019-11-DEV
 -----------
 
 * Fix Chrome image build
-* Upgrade Golang version: 1.13.3
+* Upgrade Golang version: 1.13.4
+* Upgrade Serverless version: 1.57
 * Upgrade PHP version: 7.2.23 / 7.3.10
 * Upgrade memcached version: 3.1.4
 * Upgrade ssh2 version: 1.2

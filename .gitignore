@@ -4,6 +4,7 @@
 
 # Result of template processing
 awslnx-systemd/Dockerfile
+golang/Dockerfile
 java/Dockerfile
 php/Dockerfile
 python/Dockerfile
