@@ -108,7 +108,7 @@ golang:
         - gin --version
         - modd --version
     template_vars:
-      GOLANG_VERSION: 1.13.3
+      GOLANG_VERSION: 1.13.4
 
 java_test_config: &java_test_config
   cmd:
@@ -310,11 +310,11 @@ scoutsuite:
         - scout --version
 
 serverless:
-  "1.51":
+  "1.57":
     build_args:
       PIP_VERSION: 19.2.1
       PIPENV_VERSION: 2018.11.26
-      SERVERLESS_VERSION: 1.51.0
+      SERVERLESS_VERSION: 1.57.0
     test_config:
       cmd:
         - pip --version
