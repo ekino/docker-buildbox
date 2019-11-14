@@ -4,7 +4,8 @@ Versions
 2019-11-DEV
 -----------
 
-todo...
+* Upgrade the React Native image to Node 12.13 and NPM to 6.12.0
+* Remove Watchman, some exposed ports and the custom user from the React Native image
 
 2019-11-18
 -----------

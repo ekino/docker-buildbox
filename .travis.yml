@@ -31,7 +31,7 @@ matrix:
     - env: IMAGE=platformsh VERSION=3.47
     - env: IMAGE=python VERSION=2.7
     - env: IMAGE=python VERSION=3.7
-    - env: IMAGE=react-native VERSION=1
+    - env: IMAGE=react-native VERSION=2
     - env: IMAGE=ruby VERSION=2.6
     - env: IMAGE=scoutsuite VERSION=5.4
     - env: IMAGE=serverless VERSION=1.57

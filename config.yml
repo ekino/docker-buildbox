@@ -274,10 +274,11 @@ python:
       PYTHON_VERSION: 3.7.4
 
 react-native:
-  "1":
+  "2":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       MODD_VERSION: *MODD_VERSION
+      NODE_VERSION: 12.13.0
     test_config:
       cmd:
         - *ci_helper_test
@@ -287,7 +288,6 @@ react-native:
         - modd --version
         - react-native --version
         - rnpm --version
-        - watchman --version
         - yarn --version
 
 ruby:
