@@ -2,8 +2,9 @@ FROM alpine:3.10
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG CI_HELPER_VERSION
-ARG PIPENV_VERSION
+ARG NODE_VERSION
 ARG PIP_VERSION
+ARG PIPENV_VERSION
 ARG PY_YAML_VERSION
 ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
@@ -23,4 +24,7 @@ RUN echo "Install AWS" && \
     echo "Done install CI Helper" && \
 
     echo "Adding an up to date mime-types definition file" && \
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+
+    echo "Install Node" && \
+    apk add -q --no-cache nodejs=${NODE_VERSION} nodejs-npm=${NODE_VERSION}

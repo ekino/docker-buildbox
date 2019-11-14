@@ -12,7 +12,12 @@ Versions
 * Upgrade ssh2 version: 1.2
 * Upgrade Debian to 10.1 for Node images
 * Upgrade Node 12 image to 12.13 and NPM to 6.12.0
+<<<<<<< HEAD
 * Upgrade Scoutsuite version: 5.4.0
+||||||| constructed merge base
+=======
+* Add Node & Npm to AWS image, in order to build & deploy AWS CDK
+>>>>>>> chore : adding node & npm to AWS images, in order to use AWS CDK
 
 2019-09-19
 ----------
