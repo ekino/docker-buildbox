@@ -1,5 +1,5 @@
 ---
-docker_hub_namespace: &docker_hub_namespace ekino/docker-buildbox
+docker_hub_namespace: &docker_hub_namespace ekino
 
 # Common build_vars
 CI_HELPER_VERSION: &CI_HELPER_VERSION 0.0.6

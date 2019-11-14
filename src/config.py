@@ -24,7 +24,7 @@ def load_ci_env(debug):
         info_debug["docker_reg_password"] = "XXX"
         print(">> CI environment configuration: ")
         pp.pprint(info_debug)
-        print('\n')
+        print("\n")
     return build_info
 
 
@@ -36,8 +36,10 @@ def load_image_config(image_type, version):
     if image_type not in config:
         raise KeyError("No configuration is set for this image - Image: " + image_type)
     if version not in config[image_type]:
-        existing_versions = [v for v,_ in config[image_type].items()]
-        raise KeyError("This version is not defined for " + image_type + " image - Defined versions: " + ', '.join(existing_versions))
+        existing_versions = [v for v, _ in config[image_type].items()]
+        raise KeyError(
+            f"This version is not defined for {image_type} image - Defined versions: {', '.join(existing_versions)}"
+        )
 
     image_config = config[image_type][version] or dict()
 
@@ -52,15 +54,16 @@ def load_image_config(image_type, version):
 
 
 def get_image_fullname(image_name, version, image_conf, env_conf):
-    if env_conf["tag"] != '':
-        fullname = (
-            image_conf["docker_hub_namespace"] + ":" + image_name + version + "-" + env_conf["tag"]
-        )
-    elif env_conf["event_type"] == "cron":
-        fullname = image_conf["docker_hub_namespace"] + ":nightly-" + image_name + version
-    elif env_conf["branch"] in ["master"]:
-        fullname = image_conf["docker_hub_namespace"] + ":latest-" + image_name + version
-    else:
-        fullname = image_conf["docker_hub_namespace"] + ":latest-" + image_name + version
+    image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    image_tag = version if version != "1" else ""
 
-    return fullname
+    if env_conf["tag"]:
+        image_tag += "-" + env_conf["tag"] if version != "1" else env_conf["tag"]
+    elif env_conf["event_type"] == "cron":
+        image_tag += "-nigthly" if version != "1" else "nigthly"
+    elif env_conf["branch"] in ["master"]:
+        image_tag += "-latest" if version != "1" else "latest"
+    else:
+        image_tag += "-latest" if version != "1" else "latest"
+
+    return f"{image_repo_name_base}:{image_tag}"
