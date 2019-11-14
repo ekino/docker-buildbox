@@ -4,6 +4,11 @@ Versions
 2019-11-DEV
 -----------
 
+todo...
+
+2019-11-18
+-----------
+
 * Fix Chrome image build
 * Upgrade Golang version: 1.13.4
 * Upgrade Serverless version: 1.57
