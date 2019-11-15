@@ -34,13 +34,16 @@ aws:
     test_config:
       cmd:
         - aws --version
+        - node --version
+        - npm --version
+        - pip --version
         - pip list | grep boto3
         - pip list | grep pyyaml
-        - pip --version
         - pipenv --version
         - *ci_helper_test
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
+      NODE_VERSION: 10.16.3-r0
       PIP_VERSION: 18.1
       PIPENV_VERSION: 2018.10.13
       PY_YAML_VERSION: 3.13
