@@ -33,7 +33,7 @@ matrix:
     - env: IMAGE=python VERSION=3.7
     - env: IMAGE=react-native VERSION=1
     - env: IMAGE=ruby VERSION=2.6
-    - env: IMAGE=scoutsuite VERSION=5.3
+    - env: IMAGE=scoutsuite VERSION=5.4
     - env: IMAGE=serverless VERSION=1.57
     - env: IMAGE=sonar VERSION=3.3
     - env: IMAGE=terraform VERSION=0.12
