@@ -44,9 +44,9 @@ Options:
 
 ``` bash
 $ python travis.py build --image java --version 11
-> Building: ekino/docker-buildbox:latest-java11
+> Building: ekino/ci-java:11-latest
 Build succesfull
-> Testing ekino/docker-buildbox:latest-java11
+> Testing ekino/ci-java:11-latest
 Tests successful
 ```
 
@@ -73,38 +73,45 @@ Do not forget to add an entry in `.travis.yml` too following other image scheme.
 ## Available images
 
 ### Ansible
+https://hub.docker.com/r/ekino/ci-ansible/tags
 
 Contains Ansible, CI Helper and Python 2.7
 
 ### Arachni
+https://hub.docker.com/r/ekino/ci-arachni/tags
 
 Contains Arachni + CI Helper
 
 To run the web UI:
 
 ```bash
-docker run -d -p 9292:9292 ekino/docker-buildbox:latest-arachni1.5 arachni_web -o 0.0.0.0
+docker run -d -p 9292:9292 ekino/ci-arachni:1.5-latest arachni_web -o 0.0.0.0
 ```
 
 Then go to http://localhost:9292
 
 ### AWS
+https://hub.docker.com/r/ekino/ci-aws/tags
 
 Contains AWS Cli, AWS EB Cli, CI Helper and jq.
 
 ### AWSLinux systemd
+https://hub.docker.com/r/ekino/ci-awslnx-systemd/tags
 
 Amazon Linux based image containing Systemd for service management in docker container.
 
 ### Azure
+https://hub.docker.com/r/ekino/ci-azure/tags
 
 Contains Azure Cli and Terraform.
 
 ### Chrome
+https://hub.docker.com/r/ekino/ci-chrome/tags
 
 Contains Chromium browser and the latest Node LTS.
 
 ### DIND - AWS
+https://hub.docker.com/r/ekino/ci-dind-aws/tags
 
 Adds AWS Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
 
@@ -112,33 +119,38 @@ Use case:
 ```yaml
 # .gitlab-ci.yml
 test:
-  image: ekino/docker-buildbox:latest-dind-aws
+  image: ekino/ci-dind-aws:latest
   services:
-    - ekino/docker-buildbox:latest-dind-aws
+    - ekino/ci-dind-aws:latest
   variables:
     DOCKER_DRIVER: overlay2
-    DOCKER_HOST:   "tcp://ekino__docker-buildbox:2375"
+    DOCKER_HOST:   "tcp://ekino__ci-dind-aws:2375"
   script:
     - docker ...
 ```
 
 ### Golang
+https://hub.docker.com/r/ekino/ci-golang/tags
 
 Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
 
 ### Java
+https://hub.docker.com/r/ekino/ci-java/tags
 
 Contains AWS Cli, CI Helper, Maven, Graphviz, jq and Java.
 
 ### Kubectl
+https://hub.docker.com/r/ekino/ci-kubectl/tags
 
 Contains kubectl, kubens, kubectx, kube-score.
 
 ### Node
+https://hub.docker.com/r/ekino/ci-node/tags
 
 Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS Cli.
 
 ### PHP
+https://hub.docker.com/r/ekino/ci-php/tags
 
 Contains PHP (installed from official alpine in the PHP_VERSION env var value) within Blackfire, Composer, PHP CS Fixer, Security Checker, AWS Cli and CI Helper.
 
@@ -149,33 +161,41 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 ```
 
 ### Platform.sh CLI
+https://hub.docker.com/r/ekino/ci-platformsh/tags
 
 Based on python 3.6 alpine image, contains php7 and platform.sh CLI.
 
 ### Python
+https://hub.docker.com/r/ekino/ci-python/tags
 
 Contains Python with PIP and PIPENV.
 
 ### React Native Android
+https://hub.docker.com/r/ekino/ci-react-native/tags
 
 Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
 
 ### Ruby
+https://hub.docker.com/r/ekino/ci-ruby/tags
 
 Contains Ruby (installed from official alpine) and CI Helper.
 
 ### Scoutsuite
+https://hub.docker.com/r/ekino/ci-scoutsuite/tags
 
 Contains ScoutSuite cloud scanner.
 
 ### Serverless
+https://hub.docker.com/r/ekino/ci-serverless/tags
 
 Contains node Serverless module with python3.
 
 ### SonarQube Scanner
+https://hub.docker.com/r/ekino/ci-sonar/tags
 
 Contains SonarQube Scanner and CI Helper.
 
 ### Terraform
+https://hub.docker.com/r/ekino/ci-terraform/tags
 
 Contains Terraform and AWS Cli.
