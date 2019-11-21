@@ -2,13 +2,13 @@ FROM openjdk:8u171-jdk-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
-    NODE_VERSION="7.10.0" \
-    ANDROID_HOME="/home/user/android-sdk-linux" \
+    ANDROID_HOME="/opt/android-sdk-linux" \
     SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
-    PATH="${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/home/user/opt/node/bin:${PATH}"
+    PATH="${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/node/bin:${PATH}"
 
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
+ARG NODE_VERSION
 
 # ——————————
 # Install base software packages
@@ -96,13 +96,6 @@ RUN dpkg --add-architecture i386 && \
 RUN update-ca-certificates --fresh
 
 # ——————————
-# Create a non-root user
-# ——————————
-RUN useradd -m user
-USER user
-WORKDIR /home/user
-
-# ——————————
 # Download Android SDK
 # ——————————
 RUN mkdir "$ANDROID_HOME" .android && \
@@ -115,24 +108,12 @@ RUN mkdir "$ANDROID_HOME" .android && \
 # ——————————
 # Install Node and global packages
 # ——————————
-RUN cd && \
+RUN cd /tmp && \
     curl -sSL -O http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz > /dev/null && \
     tar -xzf node-v${NODE_VERSION}-linux-x64.tar.gz && \
-    mkdir opt && \
-    mv node-v${NODE_VERSION}-linux-x64 /home/user/opt/node && \
+    mv node-v${NODE_VERSION}-linux-x64 /opt/node && \
     rm node-v${NODE_VERSION}-linux-x64.tar.gz
 
-# ——————————
-# Installs FB Watchman
-# ——————————
-RUN git clone -b v4.7.0 https://github.com/facebook/watchman.git /home/user/tmp/watchman
-WORKDIR /home/user/tmp/watchman
-RUN ./autogen.sh
-RUN ./configure
-RUN make
-USER root
-RUN make install
-USER user
 
 # ——————————
 # Install Basic React-Native packages
@@ -144,14 +125,12 @@ RUN npm install -g yarn
 # ——————————
 # Mime types
 # ——————————
-USER root
 RUN echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types
 
 # ——————————
 # Clean files
 # ——————————
-USER root
 RUN echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -y remove --purge \
@@ -169,13 +148,7 @@ RUN echo "Cleaning files!" && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     rm -rf /usr/share/doc /usr/share/locale/[a-df-z]* /usr/share/locale/e[a-lo-z]* /usr/share/locale/en@* /usr/share/locale/en_GB
-USER user
 
 ENV LANG en_US.UTF-8
 
-WORKDIR /home/user/data
-
-# Expose ports
-EXPOSE 8080
-EXPOSE 8082
-EXPOSE 8081
+WORKDIR /data

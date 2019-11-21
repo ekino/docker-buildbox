@@ -173,7 +173,7 @@ Contains Python with PIP and PIPENV.
 ### React Native Android
 https://hub.docker.com/r/ekino/ci-react-native/tags
 
-Contains Java 8, Gradle, Android SDK, Node 7.10 and React Native Cli
+Contains Java 8, Gradle, Android SDK, Node 12.13.0 and React Native Cli
 
 ### Ruby
 https://hub.docker.com/r/ekino/ci-ruby/tags
