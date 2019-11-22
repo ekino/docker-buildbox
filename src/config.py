@@ -60,7 +60,7 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
     if env_conf["tag"]:
         image_tag += "-" + env_conf["tag"] if version != "1" else env_conf["tag"]
     elif env_conf["event_type"] == "cron":
-        image_tag += "-nigthly" if version != "1" else "nigthly"
+        image_tag += "-nightly" if version != "1" else "nightly"
     elif env_conf["branch"] in ["master"]:
         image_tag += "-latest" if version != "1" else "latest"
     else:
