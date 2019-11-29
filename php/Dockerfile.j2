@@ -20,6 +20,7 @@ ENV COMPOSER_NO_INTERACTION=1 \
     PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
 
 RUN echo "Starting ..." && \
+    version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
@@ -37,8 +38,12 @@ RUN echo "Starting ..." && \
     chmod 755 /usr/bin/modd && \
     echo "Done Install Modd" && \
 
-    echo "Starting PHP" && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    echo "Starting PHP with $version" && \
+    if [ "$version" = "74" ]; then \
+        docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
+    else \
+        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
+    fi && \
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
     pecl install memcached-${MEMCACHED_VERSION} && \
@@ -68,7 +73,6 @@ zend_extension=opcache.so \n\
     echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini && \
 
     mkdir -p /tmp/blackfire-probe && \
-    version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     curl -A "Docker" -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version && \
     tar zxpf /tmp/blackfire-probe/blackfire-probe.tar.gz -C /tmp/blackfire-probe && \
     mv /tmp/blackfire-probe/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so && \
