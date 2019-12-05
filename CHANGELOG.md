@@ -8,6 +8,7 @@ Versions
 * Remove Watchman, some exposed ports and the custom user from the React Native image
 * Fix a typo in the `nightly` tag name
 * Upgrade Java 8 to 8u232 and 11 to 11.0.5
+* Upgrade Serverless base image to use node:10-alpine3.10 (python 3.7 support)
 
 2019-11-18
 -----------
