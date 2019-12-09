@@ -18,6 +18,7 @@ RUN echo "Starting ..." && \
     pip install awscli && \
     echo "Done aws-cli install" && \
     echo "Install serverless" && \
+    npm config set unsafe-perm true && \
     npm install -g serverless@${SERVERLESS_VERSION} && \
     npm install --save serverless-python-requirements && \
     echo "Done serverless install" && \
