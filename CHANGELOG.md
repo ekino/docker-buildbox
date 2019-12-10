@@ -1,7 +1,7 @@
 Versions
 ========
 
-2019-11-DEV
+2019-12-DEV
 -----------
 
 * Upgrade the React Native image to Node 12.13 and NPM to 6.12.0
@@ -17,6 +17,7 @@ Versions
 * Upgrade Redis version: 5.1.1
 * Upgrade Security Checker version: 6.0.3
 * Upgrade XDEBUG version: 2.8.0
+* Upgrade Golang version: 1.13.5
 
 2019-11-18
 -----------

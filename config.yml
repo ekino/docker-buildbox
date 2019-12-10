@@ -111,7 +111,7 @@ golang:
         - gin --version
         - modd --version
     template_vars:
-      GOLANG_VERSION: 1.13.4
+      GOLANG_VERSION: 1.13.5
 
 java_test_config: &java_test_config
   cmd:
