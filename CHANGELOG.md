@@ -18,6 +18,7 @@ Versions
 * Upgrade Security Checker version: 6.0.3
 * Upgrade XDEBUG version: 2.8.0
 * Upgrade Golang version: 1.13.5
+* Remove Subversion and Mercurial from the Java images
 
 2019-11-18
 -----------
