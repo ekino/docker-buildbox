@@ -142,8 +142,8 @@ EOF
 
         $errors             = array();
         $extensionsExpected = array(
-            'apcu', 'bcmath', 'blackfire', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'memcached', 'pcntl', 'pdo_mysql',
-            'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'xdebug', 'Zend OPcache', 'zip',
+            'apcu', 'bcmath', 'blackfire', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'memcached', 'mysqli', 'pcntl',
+            'pdo_mysql', 'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'xdebug', 'Zend OPcache', 'zip',
         );
 
         $extensionsMissing = array_filter($extensionsExpected, function ($extension) {
