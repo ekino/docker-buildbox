@@ -9,14 +9,15 @@ Versions
 * Fix a typo in the `nightly` tag name
 * Upgrade Java 8 to 8u232 and 11 to 11.0.5
 * Upgrade Serverless base image to use node:10-alpine3.10 (python 3.7 support)
-* Add php image version 7.4.0
+* Add PHP image version 7.4.0
 * Upgrade PHP version: 7.2.25 and 7.3.12
-* Upgrade ACPU version: 5.1.18
+* Upgrade APCu version: 5.1.18
 * Upgrade Composer version: 1.9.1
 * Upgrade php-cs-fixer version: 2.16.1
 * Upgrade Redis version: 5.1.1
 * Upgrade Security Checker version: 6.0.3
 * Upgrade XDEBUG version: 2.8.0
+* Add mysqli in PHP images
 * Upgrade Golang version: 1.13.5
 * Remove Subversion and Mercurial from the Java images
 
