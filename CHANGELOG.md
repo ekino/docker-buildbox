@@ -20,6 +20,7 @@ Versions
 * Add mysqli in PHP images
 * Upgrade Golang version: 1.13.5
 * Remove Subversion and Mercurial from the Java images
+* Upgrade Docker Compose: 1.25.0
 
 2019-11-18
 -----------
