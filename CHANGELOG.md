@@ -21,6 +21,7 @@ Versions
 * Upgrade Golang version: 1.13.5
 * Remove Subversion and Mercurial from the Java images
 * Upgrade Docker Compose: 1.25.0
+* Upgrade platform.sh CLI: 3.50.1
 
 2019-11-18
 -----------
