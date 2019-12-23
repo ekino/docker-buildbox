@@ -150,6 +150,7 @@ kubectl:
         - kube-score version
         - kubeval --version
     build_args:
+      EKSCTL_VERSION: 0.11.1
       KUBECTL_VERSION: 1.15.1
       KUBECTX_VERSION: 0.6.3
       KUBESCORE_VERSION: 0.7.1

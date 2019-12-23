@@ -1,6 +1,7 @@
 FROM alpine:3.10
 LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
+ARG EKSCTL_VERSION
 ARG KUBECTL_VERSION
 ARG KUBECTX_VERSION
 ARG KUBESCORE_VERSION
@@ -32,3 +33,7 @@ RUN wget https://github.com/zegl/kube-score/releases/download/v${KUBESCORE_VERSI
 RUN wget https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz && \
     tar xf kubeval-linux-amd64.tar.gz && \
     mv kubeval /usr/local/bin/kubeval
+
+RUN wget https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION}/eksctl_$(uname -s)_amd64.tar && \
+    tar xf eksctl_$(uname -s)_amd64.tar && \
+    mv eksctl /usr/local/bin/eksctl

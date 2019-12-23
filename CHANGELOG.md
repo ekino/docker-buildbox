@@ -25,6 +25,7 @@ Versions
 * Upgrade Terraform: 0.12.18
 * Upgrade ScoutSuite: 5.5
 * Upgrade Serverless: 1.59.3
+* Add eksctl to the kubectl image
 
 2019-11-18
 -----------
