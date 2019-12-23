@@ -26,6 +26,7 @@ Versions
 * Upgrade ScoutSuite: 5.5
 * Upgrade Serverless: 1.59.3
 * Add eksctl to the kubectl image
+* Update Kubectl version (and associated tools) : 1.16
 
 2019-11-18
 -----------

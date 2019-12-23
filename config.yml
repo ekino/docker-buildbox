@@ -142,20 +142,21 @@ java:
       JAVA_VERSION: jdk-11.0.5_10-debian-slim
 
 kubectl:
-  "1.15":
+  "1.16":
     test_config:
       cmd:
-        - kustomize version
-        - kubectx
+        - eksctl version
         - kube-score version
+        - kubectx
         - kubeval --version
+        - kustomize version
     build_args:
       EKSCTL_VERSION: 0.11.1
-      KUBECTL_VERSION: 1.15.1
-      KUBECTX_VERSION: 0.6.3
-      KUBESCORE_VERSION: 0.7.1
+      KUBECTL_VERSION: 1.16.4
+      KUBECTX_VERSION: 0.7.1
+      KUBESCORE_VERSION: 1.4.0
       KUBEVAL_VERSION: 0.14.0
-      KUSTOMIZATION_VERSION: 2.0.3
+      KUSTOMIZATION_VERSION: 3.5.3
 
 node_test_config: &node_test_config
   cmd:
