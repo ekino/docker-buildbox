@@ -328,11 +328,11 @@ scoutsuite:
         - scout --version
 
 serverless:
-  "1.57":
+  "1.59":
     build_args:
       PIP_VERSION: 19.2.1
       PIPENV_VERSION: 2018.11.26
-      SERVERLESS_VERSION: 1.57.0
+      SERVERLESS_VERSION: 1.59.3
     test_config:
       cmd:
         - pip --version

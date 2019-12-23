@@ -24,6 +24,7 @@ Versions
 * Upgrade platform.sh CLI: 3.50.1
 * Upgrade Terraform: 0.12.18
 * Upgrade ScoutSuite: 5.5
+* Upgrade Serverless: 1.59.3
 
 2019-11-18
 -----------
