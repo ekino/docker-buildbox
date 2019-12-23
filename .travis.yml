@@ -13,6 +13,7 @@ before_install:
 matrix:
   include:
     - env: IMAGE=ansible VERSION=2.8
+    - env: IMAGE=ansible VERSION=2.9
     - env: IMAGE=arachni VERSION=1.5
     - env: IMAGE=aws VERSION=1
     - env: IMAGE=awslnx-systemd VERSION=2

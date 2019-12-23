@@ -15,6 +15,7 @@ Versions
 * Upgrade Node 10 to 10.19.0, Node 12 to 12.16.1 and NPM to 6.13.7
 * Update Kubectl version (and associated tools) : 1.17
 * Upgrade ScoutSuite: 5.7
+* Adding Ansible to 2.9 in addition to 2.8
 
 2019-12-26
 -----------
