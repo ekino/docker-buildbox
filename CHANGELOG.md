@@ -4,6 +4,11 @@ Versions
 2019-12-DEV
 -----------
 
+todo
+
+2019-12-26
+-----------
+
 * Upgrade the React Native image to Node 12.13 and NPM to 6.12.0
 * Remove Watchman, some exposed ports and the custom user from the React Native image
 * Fix a typo in the `nightly` tag name
