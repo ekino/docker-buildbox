@@ -142,7 +142,7 @@ Contains AWS Cli, CI Helper, Maven, Graphviz, jq and Java.
 ### Kubectl
 https://hub.docker.com/r/ekino/ci-kubectl/tags
 
-Contains kubectl, kubens, kubectx, kube-score.
+Contains kubectl, kubens, kubectx, kube-score, eksctl.
 
 ### Node
 https://hub.docker.com/r/ekino/ci-node/tags

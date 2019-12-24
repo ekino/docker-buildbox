@@ -1,6 +1,7 @@
 FROM alpine:3.10
 LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
+ARG EKSCTL_VERSION
 ARG KUBECTL_VERSION
 ARG KUBECTX_VERSION
 ARG KUBESCORE_VERSION
@@ -14,9 +15,9 @@ RUN apk add ca-certificates curl bash wget ncurses && \
     chmod +x ./kubectl && \
     mv ./kubectl /usr/bin/kubectl
 
-RUN wget https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZATION_VERSION}/kustomize_${KUSTOMIZATION_VERSION}_linux_amd64 && \
-    chmod +x ./kustomize_${KUSTOMIZATION_VERSION}_linux_amd64 && \
-    mv ./kustomize_${KUSTOMIZATION_VERSION}_linux_amd64 /usr/bin/kustomize
+RUN wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZATION_VERSION}/kustomize_v${KUSTOMIZATION_VERSION}_linux_amd64.tar.gz && \
+    tar -xf kustomize_v${KUSTOMIZATION_VERSION}_linux_amd64.tar.gz && \
+    mv ./kustomize /usr/bin/kustomize
 
 RUN wget https://raw.githubusercontent.com/ahmetb/kubectx/v${KUBECTX_VERSION}/kubectx && \
     chmod +x kubectx && \
@@ -32,3 +33,7 @@ RUN wget https://github.com/zegl/kube-score/releases/download/v${KUBESCORE_VERSI
 RUN wget https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz && \
     tar xf kubeval-linux-amd64.tar.gz && \
     mv kubeval /usr/local/bin/kubeval
+
+RUN wget https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION}/eksctl_$(uname -s)_amd64.tar.gz && \
+    tar xf eksctl_$(uname -s)_amd64.tar.gz && \
+    mv eksctl /usr/local/bin/eksctl

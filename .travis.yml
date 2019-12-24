@@ -22,7 +22,7 @@ matrix:
     - env: IMAGE=golang VERSION=1.13
     - env: IMAGE=java VERSION=8
     - env: IMAGE=java VERSION=11
-    - env: IMAGE=kubectl VERSION=1.15
+    - env: IMAGE=kubectl VERSION=1.16
     - env: IMAGE=node VERSION=8
     - env: IMAGE=node VERSION=10
     - env: IMAGE=node VERSION=12
