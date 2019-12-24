@@ -360,7 +360,7 @@ sonar:
 terraform:
   "0.12":
     build_args:
-      TERRAFORM_VERSION: 0.12.0
+      TERRAFORM_VERSION: 0.12.18
     test_config:
       cmd:
         - terraform version
