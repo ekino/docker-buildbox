@@ -1,6 +1,7 @@
 */build.log
 .idea
 *.iml
+.vscode
 
 # Result of template processing
 ansible/Dockerfile
