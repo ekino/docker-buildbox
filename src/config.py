@@ -8,13 +8,12 @@ from yaml import Loader
 
 def load_ci_env(debug):
     print("> [Info] Gathering env variables")
+    event = os.environ.get("GITHUB_EVENT_NAME", "")
+    ref = os.environ.get("GITHUB_REF", "").replace("refs/heads/", "")
     build_info = {
-        "commit_range": os.environ.get("TRAVIS_COMMIT_RANGE", "HEAD...HEAD"),
-        "branch": os.environ.get("TRAVIS_BRANCH", ""),
-        "tag": os.environ.get("TRAVIS_TAG", ""),
-        "pull_request": os.environ.get("TRAVIS_PULL_REQUEST", "false"),
-        "travis": os.environ.get("TRAVIS", "false"),
-        "event_type": os.environ.get("TRAVIS_EVENT_TYPE", ""),
+        "branch": ref,
+        "tag": ref if event == "release" else "",
+        "event_type": event,
         "docker_reg_username": os.environ.get("DOCKER_USERNAME", ""),
         "docker_reg_password": os.environ.get("DOCKER_PASSWORD", ""),
     }
@@ -59,7 +58,7 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
 
     if env_conf["tag"]:
         image_tag += "-" + env_conf["tag"] if version != "1" else env_conf["tag"]
-    elif env_conf["event_type"] == "cron":
+    elif env_conf["event_type"] == "schedule":
         image_tag += "-nightly" if version != "1" else "nightly"
     elif env_conf["branch"] in ["master"]:
         image_tag += "-latest" if version != "1" else "latest"

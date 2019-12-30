@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Add mysql-client in PHP images
+* Migrate CI to GitHub Actions
 
 2019-12-26
 -----------

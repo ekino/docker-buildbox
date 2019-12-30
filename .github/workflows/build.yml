@@ -1,0 +1,65 @@
+name: Build and test images
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+  release:
+    types: [published]
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {IMAGE: ansible, VERSION: 2.5.5}
+          - {IMAGE: arachni, VERSION: 1.5}
+          - {IMAGE: aws, VERSION: 1}
+          - {IMAGE: awslnx-systemd, VERSION: 2}
+          - {IMAGE: azure, VERSION: 2}
+          - {IMAGE: chrome, VERSION: 1}
+          - {IMAGE: dind-aws, VERSION: 1}
+          - {IMAGE: golang, VERSION: 1.13}
+          - {IMAGE: java, VERSION: 8}
+          - {IMAGE: java, VERSION: 11}
+          - {IMAGE: kubectl, VERSION: 1.16}
+          - {IMAGE: node, VERSION: 8}
+          - {IMAGE: node, VERSION: 10}
+          - {IMAGE: node, VERSION: 12}
+          - {IMAGE: php, VERSION: 7.2}
+          - {IMAGE: php, VERSION: 7.3}
+          - {IMAGE: php, VERSION: 7.4}
+          - {IMAGE: platformsh, VERSION: "3.50"}
+          - {IMAGE: python, VERSION: 2.7}
+          - {IMAGE: python, VERSION: 3.7}
+          - {IMAGE: react-native, VERSION: 2}
+          - {IMAGE: ruby, VERSION: 2.6}
+          - {IMAGE: scoutsuite, VERSION: 5.5}
+          - {IMAGE: serverless, VERSION: 1.59}
+          - {IMAGE: sonar, VERSION: 3.3}
+          - {IMAGE: terraform, VERSION: 0.12}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Set up Pipenv
+        run: |
+          pip install pip pipenv
+          pipenv sync
+      - name: Build and tests images
+        env:
+          IMAGE: ${{ matrix.config.IMAGE }}
+          VERSION: ${{ matrix.config.VERSION }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          pipenv run python image_builder.py build -d --image ${IMAGE} --version ${VERSION}
