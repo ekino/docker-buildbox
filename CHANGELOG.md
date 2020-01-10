@@ -1,10 +1,10 @@
 Versions
 ========
 
-2019-12-DEV
+2020-01-DEV
 -----------
 
-todo
+* Add mysql-client in PHP images
 
 2019-12-26
 -----------
