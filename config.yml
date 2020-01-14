@@ -122,6 +122,7 @@ java_test_config: &java_test_config
     - modd --version
     - dot -V
     - jq --version
+    - psql --version
 
 java:
   "8":

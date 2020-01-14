@@ -137,7 +137,7 @@ Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
 ### Java
 https://hub.docker.com/r/ekino/ci-java/tags
 
-Contains AWS Cli, CI Helper, Maven, Graphviz, jq and Java.
+Contains AWS Cli, CI Helper, Maven, Graphviz, jq, psql and Java.
 
 ### Kubectl
 https://hub.docker.com/r/ekino/ci-kubectl/tags

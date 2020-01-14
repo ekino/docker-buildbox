@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Add mysql-client in PHP images
+* Add postgresql-client in java image
 
 2019-12-26
 -----------

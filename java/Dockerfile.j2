@@ -47,6 +47,10 @@ RUN echo "Starting ..." && \
     apt-get -qq -y install graphviz && \
     echo "Done Install graphviz!" && \
 
+    echo "Install postgresql-client" && \
+    apt-get -qq -y install postgresql-client && \
+    echo "Done Install postgresql-client!" && \
+
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
 
