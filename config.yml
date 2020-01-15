@@ -100,16 +100,11 @@ golang:
   "1.13":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      GLIDE_VERSION: v0.13.3
-      MODD_VERSION: *MODD_VERSION
     test_config:
       cmd:
         - *ci_helper_test
         - aws --version
         - go version
-        - glide --version
-        - gin --version
-        - modd --version
     template_vars:
       GOLANG_VERSION: 1.13.6
 
