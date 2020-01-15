@@ -132,7 +132,7 @@ test:
 ### Golang
 https://hub.docker.com/r/ekino/ci-golang/tags
 
-Based upon official Golang image, contains glide, gin, AWS Cli and CI Helper.
+Based upon official Golang image, contains AWS Cli and CI Helper.
 
 ### Java
 https://hub.docker.com/r/ekino/ci-java/tags
