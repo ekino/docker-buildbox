@@ -6,6 +6,7 @@ Versions
 
 * Add mysql-client in PHP images
 * Add postgresql-client in java image
+* Upgrade Golang version: 1.13.6
 
 2019-12-26
 -----------
