@@ -8,6 +8,7 @@ Versions
 * Add postgresql-client in java image
 * Upgrade Golang version: 1.13.6
 * Remove Glide, Gin and Modd from the golang image
+* Upgrade Java 8 to 8u242 and 11 to 11.0.6
 
 2019-12-26
 -----------
