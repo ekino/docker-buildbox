@@ -31,12 +31,13 @@ matrix:
     - env: IMAGE=php VERSION=7.3
     - env: IMAGE=php VERSION=7.4
     - env: IMAGE=platformsh VERSION=3.50
+    - env: IMAGE=pynode VERSION=3.7
+    - env: IMAGE=pynode VERSION=3.8
     - env: IMAGE=python VERSION=2.7
     - env: IMAGE=python VERSION=3.7
     - env: IMAGE=react-native VERSION=2
     - env: IMAGE=ruby VERSION=2.6
     - env: IMAGE=scoutsuite VERSION=5.7
-    - env: IMAGE=serverless VERSION=1.59
     - env: IMAGE=sonar VERSION=3.3
     - env: IMAGE=terraform VERSION=0.12
 

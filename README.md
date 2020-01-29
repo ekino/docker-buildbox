@@ -183,6 +183,12 @@ https://hub.docker.com/r/ekino/ci-python/tags
 
 Contains Python with PIP and PIPENV.
 
+### Pynode
+https://hub.docker.com/r/ekino/ci-pynode/tags
+
+Based on Python image, contains Nodejs 12. Used for serverless and CDK use cases, with tools installed in a
+`package-lock.json` file.
+
 ### React Native Android
 https://hub.docker.com/r/ekino/ci-react-native/tags
 
@@ -197,11 +203,6 @@ Contains Ruby (installed from official alpine) and CI Helper.
 https://hub.docker.com/r/ekino/ci-scoutsuite/tags
 
 Contains ScoutSuite cloud scanner.
-
-### Serverless
-https://hub.docker.com/r/ekino/ci-serverless/tags
-
-Contains node Serverless module with python3.
 
 ### SonarQube Scanner
 https://hub.docker.com/r/ekino/ci-sonar/tags
