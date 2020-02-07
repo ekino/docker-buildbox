@@ -10,6 +10,8 @@ Versions
 * Remove Glide, Gin and Modd from the golang image
 * Upgrade Java 8 to 8u242 and 11 to 11.0.6
 * Remove support for Node 8
+* Switch every python related images to debian buster slim base
+* Rename variable use for base image version in templated Dockerfile to `BASE_IMAGE_VERSION`
 
 2019-12-26
 -----------

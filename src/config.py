@@ -55,15 +55,15 @@ def load_image_config(image_type, version):
 
 def get_image_fullname(image_name, version, image_conf, env_conf):
     image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
-    image_tag = version if version != "1" else ""
+    image_tag = f'{version}-' if version != "1" else  ""
 
     if env_conf["tag"]:
-        image_tag += "-" + env_conf["tag"] if version != "1" else env_conf["tag"]
+        image_tag += env_conf["tag"] if version != "1" else env_conf["tag"]
     elif env_conf["event_type"] == "cron":
-        image_tag += "-nightly" if version != "1" else "nightly"
+        image_tag += "nightly" if version != "1" else "nightly"
     elif env_conf["branch"] in ["master"]:
-        image_tag += "-latest" if version != "1" else "latest"
+        image_tag += "latest" if version != "1" else "latest"
     else:
-        image_tag += "-latest" if version != "1" else "latest"
+        image_tag += "latest" if version != "1" else "latest"
 
     return f"{image_repo_name_base}:{image_tag}"

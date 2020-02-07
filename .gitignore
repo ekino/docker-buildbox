@@ -9,3 +9,8 @@ java/Dockerfile
 php/Dockerfile
 python/Dockerfile
 serverless/Dockerfile
+ansible/Dockerfile
+aws/Dockerfile
+azure/Dockerfile
+scoutsuite/Dockerfile
+terraform/Dockerfile
