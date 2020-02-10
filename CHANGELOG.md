@@ -1,12 +1,12 @@
 Versions
 ========
 
-2020-01-DEV
+2020-02-DEV
 -----------
 
 * Add mysql-client in PHP images
 * Add postgresql-client in java image
-* Upgrade Golang version: 1.13.6
+* Upgrade Golang version: 1.13.7
 * Remove Glide, Gin and Modd from the golang image
 * Upgrade Java 8 to 8u242 and 11 to 11.0.6
 * Remove support for Node 8
