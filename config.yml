@@ -106,7 +106,7 @@ golang:
         - aws --version
         - go version
     template_vars:
-      GOLANG_VERSION: 1.13.6
+      GOLANG_VERSION: 1.13.7
 
 java_test_config: &java_test_config
   cmd:
