@@ -1,0 +1,27 @@
+FROM python:{{ BASE_IMAGE_VERSION }}-slim-buster
+
+LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
+
+ARG TERRAFORM_VERSION
+ARG IBM_PROVIDER_VERSION
+ARG IBM_CLI_VERSION
+
+RUN pip install -U pip \
+    && pip install awscli boto3 pipenv
+
+RUN apt-get update -qq \
+    && apt-get -y -qq install wget unzip \
+    && echo "Install IBMCloud CLI" \
+    && wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/${IBM_CLI_VERSION}/binaries/IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz \
+    && tar -xzf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz  -C /usr/local/bin --strip-components 1 IBM_Cloud_CLI/ibmcloud \
+    && rm -rf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz \
+    && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
+    && unzip terraform.zip -d /usr/bin/ \
+    && rm terraform.zip \
+    && chmod +x /usr/bin/terraform \
+    && wget https://github.com/IBM-Cloud/terraform-provider-ibm/releases/download/v${IBM_PROVIDER_VERSION}/linux_amd64.zip \
+    && mkdir -p /terraform.d/plugins \
+    && unzip linux_amd64.zip -d /terraform.d/plugins \
+    && rm linux_amd64.zip \
+    && apt-get -y -qq remove unzip wget && apt-get -y -qq autoremove \
+    && apt-get clean

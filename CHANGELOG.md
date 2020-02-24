@@ -17,6 +17,7 @@ Versions
 * Upgrade ScoutSuite: 5.7
 * Adding Ansible to 2.9 in addition to 2.8
 * Upgrade Azure CLI to 2.1.0 and Terraform to 0.12.21
+* Create IBM image with terraform, ibm provider and ibmcloud cli
 
 2019-12-26
 -----------
