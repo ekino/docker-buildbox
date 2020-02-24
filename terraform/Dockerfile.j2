@@ -1,0 +1,15 @@
+FROM python:{{ BASE_IMAGE_VERSION }}-slim-buster
+
+LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
+
+ARG TERRAFORM_VERSION
+
+RUN apt-get update -qq \
+    && apt-get -y -qq install unzip wget \
+    && pip install -U pip \
+    && pip install awscli boto3 pipenv \
+    && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
+    && unzip -o terraform.zip \
+    && rm terraform.zip \
+    && mv terraform /usr/bin/ \
+    && chmod +x /usr/bin/terraform

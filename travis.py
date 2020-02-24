@@ -6,8 +6,8 @@ import src.docker_image as docker
 
 
 @click.command()
-@click.option("--image", default="aws", help="image to build")
-@click.option("--version", default="1", help="image version")
+@click.option("--image", "-i", default="aws", help="image to build")
+@click.option("--version", "-v", default="1", help="image version")
 @click.option("--debug", "-d", is_flag=True, help="debug")
 def build(image, version, debug):
 
@@ -32,7 +32,7 @@ def build(image, version, debug):
             "Dockerfile.j2"
         )
         # Save in image/Dockerfile
-        with open(image + "/Dockerfile", "w") as f:
+        with open(f"{image}/Dockerfile", "w") as f:
             f.write(template.render(image_conf["template_vars"]))
             f.close()
 

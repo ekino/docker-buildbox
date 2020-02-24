@@ -1,27 +1,26 @@
-FROM node:{{NODE_MAJOR}}-alpine3.10
+FROM python:{{ BASE_IMAGE_VERSION }}-slim-buster
 LABEL maintainer="Loïc Nairi <loic.nairi@ekino.com>"
 
-ARG PIPENV_VERSION
-ARG PIP_VERSION
 ARG SERVERLESS_VERSION
+ARG YARN_VERSION
+ENV PATH="$PATH:/opt/yarn-v${YARN_VERSION}/bin"
 
 RUN echo "Starting ..." && \
-    echo "Install system dependencies for python and pip" && \
-    apk add --update -q --no-cache bash build-base curl git libffi-dev make openldap-dev openssh-client python3 py3-pip rsync tzdata zip && \
-    ln -s /usr/bin/python3 /usr/bin/python && \
-    pip3 install pip==${PIP_VERSION} && \
+    apt-get update -qq && \
+    apt-get install -qq -y curl && \
+    echo "Install system dependencies for node" && \
+    curl -sL https://deb.nodesource.com/setup_13.x | bash - && \
+    apt-get install -y nodejs wget tar gzip && \
+    cd /opt && wget https://github.com/yarnpkg/yarn/releases/download/v1.22.0/yarn-v${YARN_VERSION}.tar.gz && tar zvxf yarn-v${YARN_VERSION}.tar.gz && \
     echo "Done base install!" && \
     echo "Install basics Python tools" && \
-    pip install --upgrade pipenv==${PIPENV_VERSION} && \
+    pip install -U pip && \
+    pip install pipenv awscli boto3 && \
     echo "Done basic python tools install" && \
-    echo "Install aws-cli" && \
-    pip install awscli && \
-    echo "Done aws-cli install" && \
     echo "Install serverless" && \
     npm config set unsafe-perm true && \
     npm install -g serverless@${SERVERLESS_VERSION} && \
-    npm install --save serverless-python-requirements && \
+    npm install -g serverless-python-requirements && \
     echo "Done serverless install" && \
     echo "Cleaning files!" && \
-    apk del py3-pip && \
     echo "Done!"

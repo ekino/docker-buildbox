@@ -61,7 +61,8 @@ image_name:
       volume: ... # docker volume if needed, format: localdir:/path/to/mount
       cmd: [...]  # shell commands run to be sure tools are well installed
     build_args: [...]  # If ARG are defined in Dockerfile
-    template_vars: [...]  # If templated Dockerfile
+    template_vars:  # If templated Dockerfile
+      BASE_IMAGE_VERSION:
     dockerfile_dir: /path/to/dockerfile  # If Dockerfile's path is not ./<image_name>/Dockerfile
 ```
 Make sure the `image_name` in the config file entry matches your directory.
@@ -69,6 +70,8 @@ Make sure the `image_name` in the config file entry matches your directory.
 Do not forget to add an entry in `.travis.yml` too following other image scheme.
 
 **Volume mounting** for test configuration only need the directory name as full local path is build by the script.
+
+**Templating** is used **ONLY** for based image version. For any other variables used in a Dockerfile, prefer build args. Base image version(s) should be defined in a variable named `BASE_IMAGE_VERSION`.
 
 ## Available images
 
