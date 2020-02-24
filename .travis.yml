@@ -20,8 +20,8 @@ matrix:
     - env: IMAGE=azure VERSION=2
     - env: IMAGE=chrome VERSION=1
     - env: IMAGE=dind-aws VERSION=1
-    - env: IMAGE=golang VERSION=1.13
     - env: IMAGE=ibm VERSION=1.2
+    - env: IMAGE=golang VERSION=1.14
     - env: IMAGE=java VERSION=8
     - env: IMAGE=java VERSION=11
     - env: IMAGE=kubectl VERSION=1.16
