@@ -141,12 +141,12 @@ kubectl:
         - kubeval --version
         - kustomize version
     build_args:
-      EKSCTL_VERSION: 0.11.1
-      KUBECTL_VERSION: 1.16.4
-      KUBECTX_VERSION: 0.7.1
-      KUBESCORE_VERSION: 1.4.0
+      EKSCTL_VERSION: 0.13.0
+      KUBECTL_VERSION: 1.17.3
+      KUBECTX_VERSION: 0.8.0
+      KUBESCORE_VERSION: 1.5.0
       KUBEVAL_VERSION: 0.14.0
-      KUSTOMIZATION_VERSION: 3.5.3
+      KUSTOMIZATION_VERSION: 3.5.4
 
 node_test_config: &node_test_config
   cmd:
