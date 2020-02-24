@@ -161,16 +161,16 @@ node:
   "10":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      NODE_VERSION: 10.16.3
-      NPM_VERSION: 6.12.0
+      NODE_VERSION: 10.19.0
+      NPM_VERSION: 6.13.7
       NVM_VERSION: 0.34.0
       MODD_VERSION: *MODD_VERSION
     test_config: *node_test_config
   "12":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      NODE_VERSION: 12.13.0
-      NPM_VERSION: 6.12.0
+      NODE_VERSION: 12.16.1
+      NPM_VERSION: 6.13.7
       NVM_VERSION: 0.34.0
       MODD_VERSION: *MODD_VERSION
     test_config: *node_test_config

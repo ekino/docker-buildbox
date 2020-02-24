@@ -12,6 +12,7 @@ Versions
 * Remove support for Node 8
 * Switch every python related images to debian buster slim base
 * Rename variable use for base image version in templated Dockerfile to `BASE_IMAGE_VERSION`
+* Upgrade Node 10 to 10.19.0, Node 12 to 12.16.1 and NPM to 6.13.7
 
 2019-12-26
 -----------
