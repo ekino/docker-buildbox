@@ -280,9 +280,9 @@ ruby:
         - ruby --version
 
 scoutsuite:
-  "5.5":
+  "5.7":
     build_args:
-      SCOUTSUITE_VERSION: 5.5.0
+      SCOUTSUITE_VERSION: 5.7.0
     test_config:
       cmd:
         - pip --version

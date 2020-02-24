@@ -14,6 +14,7 @@ Versions
 * Rename variable use for base image version in templated Dockerfile to `BASE_IMAGE_VERSION`
 * Upgrade Node 10 to 10.19.0, Node 12 to 12.16.1 and NPM to 6.13.7
 * Update Kubectl version (and associated tools) : 1.17
+* Upgrade ScoutSuite: 5.7
 
 2019-12-26
 -----------
