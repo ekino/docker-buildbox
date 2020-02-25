@@ -137,6 +137,16 @@ https://hub.docker.com/r/ekino/ci-golang/tags
 
 Based upon official Golang image, contains AWS Cli and CI Helper.
 
+### IBM
+https://hub.docker.com/r/ekino/ci-ibm/tags
+
+Based upon Python image, contains Terraform, IBM Terraform provider located in `/terraform.d/plugins` and ibmcloud cli.
+
+To init Terraform with IBM provider, use:
+```bash
+$ terraform init -provider-path=/terraform.d/plugins
+```
+
 ### Java
 https://hub.docker.com/r/ekino/ci-java/tags
 
