@@ -44,8 +44,10 @@ aws:
         - pip --version
         - pipenv --version
         - git --version
+        - sigil --version
     template_vars:
       BASE_IMAGE_VERSION: 3.8
+      SIGIL_VERSION: 0.3.1
 
 awslnx-systemd:
   "2":
