@@ -4,7 +4,7 @@ Versions
 2020-03-DEV
 -----------
 
-todo ...
+* Removing ansible 2.8 image
 
 2020-02-28
 -----------
