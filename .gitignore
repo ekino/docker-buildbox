@@ -3,15 +3,15 @@
 *.iml
 
 # Result of template processing
+ansible/Dockerfile
+aws/Dockerfile
 awslnx-systemd/Dockerfile
+azure/Dockerfile
 golang/Dockerfile
 java/Dockerfile
 php/Dockerfile
 python/Dockerfile
-serverless/Dockerfile
-ansible/Dockerfile
-aws/Dockerfile
-azure/Dockerfile
+pynode/Dockerfile
 scoutsuite/Dockerfile
 terraform/Dockerfile
 ibm/Dockerfile

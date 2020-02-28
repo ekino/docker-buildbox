@@ -18,6 +18,7 @@ Versions
 * Adding Ansible to 2.9 in addition to 2.8
 * Upgrade Azure CLI to 2.1.0 and Terraform to 0.12.21
 * Create IBM image with terraform, ibm provider and ibmcloud cli
+* Rename serverless image into pynode to manage serverless and cdk use cases
 
 2019-12-26
 -----------
