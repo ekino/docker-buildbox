@@ -5,6 +5,7 @@ Versions
 -----------
 
 * Removing ansible 2.8 image
+* Upgrade Node images to debian 10.3
 
 2020-02-28
 -----------
