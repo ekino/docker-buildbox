@@ -107,7 +107,7 @@ ibm:
   "1.2":
     build_args:
       TERRAFORM_VERSION: 0.12.23
-      IBM_PROVIDER_VERSION: 1.2.1
+      IBM_PROVIDER_VERSION: 1.2.4
       IBM_CLI_VERSION: 0.22.0
       IBM_NULL_PROVIDER_VERSION: 2.1.2
     test_config:
