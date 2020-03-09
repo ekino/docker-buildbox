@@ -1,4 +1,4 @@
-FROM debian:10.1-slim
+FROM debian:10.3-slim
 LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive \
