@@ -25,6 +25,7 @@ Versions
 * Upgrade Azure CLI to 2.1.0 and Terraform to 0.12.21
 * Create IBM image with terraform, ibm provider and ibmcloud cli
 * Rename serverless image into pynode to manage serverless and cdk use cases
+* Move ibm image to Golang base image and build Null provider
 
 2019-12-26
 -----------
