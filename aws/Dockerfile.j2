@@ -6,6 +6,12 @@ RUN echo "Install AWS" && \
     pip install -U pip && \
     pip install pipenv awscli boto3 awsebcli PyYAML && \
     echo "Done install AWS" && \
+    echo "Intall eksctl" && \
+    curl -sSL "https://github.com/weaveworks/eksctl/releases/download/{{ EKSCTL_VERSION }}/eksctl_Linux_amd64.tar.gz"
+    tar xzf eksctl_Linux_amd64.tar.gz && \
+    cp eksctl /usr/local/bin/ && \
+    rm eksctl_Linux_amd64.tar.gz eksctl && \
+    echo "Done install eksctl" && \
     apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
