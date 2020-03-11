@@ -8,6 +8,7 @@ Versions
 * Upgrade Node images to debian 10.3
 * Move ibm image to Golang base image and build Null provider
 * Upgrade ibm provider to 1.2.4
+* Upgrade eksctl to 0.14.0
 
 2020-02-28
 -----------
