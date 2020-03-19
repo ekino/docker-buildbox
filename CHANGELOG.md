@@ -14,6 +14,9 @@ Versions
 * Rename dind-aws to dind and add all provider cli (aws, ibm, azure)
 * Add Helm cli to kubectl image
 * Add a workflow dedicated to checking PR mergeability
+* Install kubectl and kubernetes provider in IBM image
+* Upgrade IBM cli to 1.0.0
+* Upgrade IBM provider to 1.4.0
 
 2020-02-28
 -----------
