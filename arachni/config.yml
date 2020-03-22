@@ -1,0 +1,8 @@
+versions:
+  "1.5":
+    build_args:
+      ARACHNI_VERSION: 1.5.1
+      ARACHNI_WEB_UI_VERSION: 0.5.12
+    test_config:
+      cmd:
+        - arachni --version

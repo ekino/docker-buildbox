@@ -27,18 +27,24 @@ def load_ci_env(debug):
 
 def load_image_config(image_type, version):
     config_path = "config.yml"
-    config = yaml.load(open(config_path), Loader=Loader)
+    image_config_path = f"{image_type}/{config_path}"
+    full_config = ""
+    with open(config_path) as base_config:
+        full_config = base_config.read()
+    with open(image_config_path) as image_config:
+        full_config = f"{full_config}\n{image_config.read()}"
+    config = yaml.load(full_config, Loader=Loader)
 
     # Raise exceptions if a key is not found
-    if image_type not in config:
+    if "versions" not in config:
         raise KeyError("No configuration is set for this image - Image: " + image_type)
-    if version not in config[image_type]:
-        existing_versions = [v for v, _ in config[image_type].items()]
+    if version not in config["versions"]:
+        existing_versions = [v for v, _ in config["versions"].items()]
         raise KeyError(
             f"This version is not defined for {image_type} image - Defined versions: {', '.join(existing_versions)}"
         )
 
-    image_config = config[image_type][version] or dict()
+    image_config = config["versions"][version] or dict()
 
     # Make sure all args are used as strings for Docker API
     if "build_args" in image_config:

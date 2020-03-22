@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         config:
           - {IMAGE: ansible, VERSION: 2.9}
@@ -47,19 +48,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - uses: technote-space/get-diff-action@v1.2.2
+        with:
+          PREFIX_FILTER: |
+            ${{ matrix.config.IMAGE }}
+            config.yml
+            image_builder.py
+            src
       - name: Set up Python
+        if: env.GIT_DIFF || github.event_name != 'pull_request' && github.event_name != 'push'
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
       - name: Set up Pipenv
+        if: env.GIT_DIFF || github.event_name != 'pull_request' && github.event_name != 'push'
         run: |
           pip install pip pipenv
           pipenv sync
       - name: Build and tests images
+        if: env.GIT_DIFF || github.event_name != 'pull_request' && github.event_name != 'push'
         env:
-          IMAGE: ${{ matrix.config.IMAGE }}
-          VERSION: ${{ matrix.config.VERSION }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          pipenv run python image_builder.py build -d --image ${IMAGE} --version ${VERSION}
+          pipenv run python image_builder.py build -d --image ${{ matrix.config.IMAGE }} --version ${{ matrix.config.VERSION }}
