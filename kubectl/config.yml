@@ -1,0 +1,18 @@
+versions:
+  "1.18":
+    test_config:
+      cmd:
+        - eksctl version
+        - kube-score version
+        - kubectx
+        - kubeval --version
+        - kustomize version
+        - helm version
+    build_args:
+      EKSCTL_VERSION: 0.17.0
+      KUBECTL_VERSION: 1.18.2
+      KUBECTX_VERSION: 0.8.0
+      KUBESCORE_VERSION: 1.6.0
+      KUBEVAL_VERSION: 0.15.0
+      KUSTOMIZATION_VERSION: 3.5.4
+      HELM_VERSION: 3.2.0

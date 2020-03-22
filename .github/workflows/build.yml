@@ -11,10 +11,31 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
-  build:
+  git-diff:
     runs-on: ubuntu-latest
 
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    
+    outputs:
+      diff: ${{ steps.get-diff.outputs.diff }}
+      common-file-changed: ${{ contains(steps.get-diff.outputs.diff, 'base_config.yml') || contains(steps.get-diff.outputs.diff, 'image_builder.py') || contains(steps.get-diff.outputs.diff, 'src') }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - uses: technote-space/get-diff-action@v1.2.6
+        id: get-diff
+
+  build:
+    runs-on: ubuntu-latest
+    needs: git-diff
+
+    env:
+      SHOULD_RUN: ${{ github.event_name != 'pull_request' && github.event_name != 'push' || needs.git-diff.outputs.common-file-changed == 'true' }}
+
     strategy:
+      fail-fast: false
       matrix:
         config:
           - {IMAGE: ansible, VERSION: 2.9}
@@ -47,20 +68,26 @@ jobs:
           - {IMAGE: terraform, VERSION: 0.12}
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
+      - id: gate
+        name: Check if job should run
+        run: |
+          echo "::set-output name=should-run::${{ env.SHOULD_RUN == 'true' || contains(needs.git-diff.outputs.diff, matrix.config.IMAGE) }}"
+      - if: steps.gate.outputs.should-run == 'true'
+        uses: actions/checkout@v2
+      - if: steps.gate.outputs.should-run == 'true'
+        name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - name: Set up Pipenv
+      - if: steps.gate.outputs.should-run == 'true'
+        name: Set up Pipenv
         run: |
           pip install pip pipenv
           pipenv sync
-      - name: Build and tests images
+      - if: steps.gate.outputs.should-run == 'true'
+        name: Build and test images
         env:
-          IMAGE: ${{ matrix.config.IMAGE }}
-          VERSION: ${{ matrix.config.VERSION }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          pipenv run python image_builder.py build -d --image ${IMAGE} --version ${VERSION}
+          pipenv run python image_builder.py build -d --image ${{ matrix.config.IMAGE }} --version ${{ matrix.config.VERSION }}
