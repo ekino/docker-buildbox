@@ -9,7 +9,8 @@ Versions
 * Move ibm image to Golang base image and build Null provider
 * Upgrade ibm provider to 1.2.4
 * Upgrade eksctl to 0.14.0
-* feat(ci): migrate to github actions
+* Migrate the CI to GitHub Actions
+* Increase DockerClient's timeout to 10 minutes
 
 2020-02-28
 -----------

@@ -4,7 +4,7 @@ import pprint
 from docker import DockerClient
 from docker.errors import APIError, BuildError, ContainerError
 
-docker_client = DockerClient(base_url="unix://var/run/docker.sock")
+docker_client = DockerClient(base_url="unix://var/run/docker.sock", timeout=600)
 
 
 def build_image(image_conf, image_fullname, dockerfile, debug):
