@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ekino/docker-buildbox.svg?branch=master)](https://travis-ci.org/ekino/docker-buildbox)
+[![Build Status](https://github.com/ekino/docker-buildbox/workflows/Build%20and%20test%20images/badge.svg)](https://github.com/ekino/docker-buildbox/actions?query=branch%3Amaster+event%3Apush)
 
 # BuildBox
 
@@ -11,7 +11,7 @@ Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
 
 ## Testing
 
-Each box is tested and built using TravisCI.
+Each box is tested and built using GitHub Actions.
 
 CI workflow:
  - PR: only images with modified files are built.
@@ -29,11 +29,11 @@ To contribute you will need python3.6 and pipenv (installed by `pip install pipe
 - Load your pipenv
   > pipenv shell
 - Run the script
-  > python travis.py build --image image --version version
+  > python image_builder.py build --image image --version version
 
 ``` bash
-$ python travis.py build --help
-Usage: travis.py build [OPTIONS]
+$ python image_builder.py build --help
+Usage: image_builder.py build [OPTIONS]
 
 Options:
   --image TEXT    image to build
@@ -43,7 +43,7 @@ Options:
 ```
 
 ``` bash
-$ python travis.py build --image java --version 11
+$ python image_builder.py build --image java --version 11
 > Building: ekino/ci-java:11-latest
 Build succesfull
 > Testing ekino/ci-java:11-latest
@@ -67,7 +67,7 @@ image_name:
 ```
 Make sure the `image_name` in the config file entry matches your directory.
 
-Do not forget to add an entry in `.travis.yml` too following other image scheme.
+Do not forget to add an entry in `.github/workflows/build.yml` too following other image scheme.
 
 **Volume mounting** for test configuration only need the directory name as full local path is build by the script.
 

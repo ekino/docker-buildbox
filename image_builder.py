@@ -52,7 +52,7 @@ def build(image, version, debug):
     if (
         env_conf["tag"] != ""
         or (env_conf["event_type"] != "pull_request" and env_conf["branch"] == "master")
-        or env_conf["event_type"] == "cron"
+        or env_conf["event_type"] == "schedule"
     ):
         # Login to registry
         docker.login_to_registry(env_conf)
