@@ -11,6 +11,7 @@ Versions
 * Upgrade eksctl to 0.14.0
 * Migrate the CI to GitHub Actions
 * Increase DockerClient's timeout to 10 minutes
+* Rename dind-aws to dind and add all provider cli (aws, ibm, azure)
 
 2020-02-28
 -----------

@@ -1,4 +1,4 @@
-FROM docker:18.06.3-ce-dind
+FROM docker:19.03.8-dind
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG CI_HELPER_VERSION
@@ -6,11 +6,14 @@ ARG DOCKER_COMPOSE_VERSION
 ARG GLIBC_VERSION
 ARG PIPENV_VERSION
 ARG PIP_VERSION
+ARG IBM_CLI_VERSION
+ARG AZURE_CLI_VERSION
 ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
 RUN echo "Install AWS" && \
-    apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python py-pip rsync tzdata && \
-    pip install pip==${PYTHON_PIP_VERSION} && \
+    apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff && \
+    python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools wheel && \
     pip -q install pipenv==${PIPENV_VERSION} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
 
@@ -19,6 +22,17 @@ RUN echo "Install AWS" && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
 
+    echo "Install Azure CLI" && \
+    pip install azure-cli==${AZURE_CLI_VERSION} && \
+    echo "Done install Azure CLI" && \
+
+    echo "Install IBMCloud CLI" && \
+    wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/${IBM_CLI_VERSION}/binaries/IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz && \
+    tar -xzf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz  -C /usr/local/bin --strip-components 1 IBM_Cloud_CLI/ibmcloud && \
+    rm -rf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz && \
+    ibmcloud plugin install container-registry && \
+    echo "Done install IBMCloud CLI" && \
+    
     echo "Install Docker Compose" && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
@@ -28,11 +42,8 @@ RUN echo "Install AWS" && \
     curl -sSL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
     docker-compose --version && \
-
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
-
     echo "Cleaning files!" && \
     rm -rf /tmp/* /var/cache/apk/* && \
-
     echo "Done!"

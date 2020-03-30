@@ -23,7 +23,7 @@ jobs:
           - {IMAGE: awslnx-systemd, VERSION: 2}
           - {IMAGE: azure, VERSION: 2}
           - {IMAGE: chrome, VERSION: 1}
-          - {IMAGE: dind-aws, VERSION: 1}
+          - {IMAGE: dind, VERSION: 1}
           - {IMAGE: ibm, VERSION: 1.2}
           - {IMAGE: golang, VERSION: 1.14}
           - {IMAGE: java, VERSION: 8}
