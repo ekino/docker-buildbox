@@ -13,6 +13,7 @@ Versions
 * Increase DockerClient's timeout to 10 minutes
 * Rename dind-aws to dind and add all provider cli (aws, ibm, azure)
 * Add Helm cli to kubectl image
+* Add a workflow dedicated to checking PR mergeability
 
 2020-02-28
 -----------
