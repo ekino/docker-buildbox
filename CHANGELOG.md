@@ -12,6 +12,7 @@ Versions
 * Migrate the CI to GitHub Actions
 * Increase DockerClient's timeout to 10 minutes
 * Rename dind-aws to dind and add all provider cli (aws, ibm, azure)
+* Add Helm cli to kubectl image
 
 2020-02-28
 -----------
