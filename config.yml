@@ -4,3 +4,4 @@ docker_hub_namespace: &docker_hub_namespace ekino
 CI_HELPER_VERSION: &CI_HELPER_VERSION 0.0.6
 ci_helper_test: &ci_helper_test ci-helper version -e
 MODD_VERSION: &MODD_VERSION 0.5
+TEST: test
