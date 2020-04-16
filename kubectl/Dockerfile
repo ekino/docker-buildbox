@@ -7,6 +7,7 @@ ARG KUBECTX_VERSION
 ARG KUBESCORE_VERSION
 ARG KUBEVAL_VERSION
 ARG KUSTOMIZATION_VERSION
+ARG HELM_VERSION
 
 ENV PATH="${PATH}:/usr/bin"
 
@@ -37,3 +38,7 @@ RUN wget https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERS
 RUN wget https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION}/eksctl_$(uname -s)_amd64.tar.gz && \
     tar xf eksctl_$(uname -s)_amd64.tar.gz && \
     mv eksctl /usr/local/bin/eksctl
+
+RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
+    tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
+    mv linux-amd64/helm /usr/local/bin/helm
