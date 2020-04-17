@@ -109,17 +109,20 @@ golang:
       BASE_IMAGE_VERSION: 1.14
 
 ibm:
-  "1.2":
+  "1.4":
     build_args:
       TERRAFORM_VERSION: 0.12.23
-      IBM_PROVIDER_VERSION: 1.2.4
-      IBM_CLI_VERSION: 0.22.0
+      IBM_PROVIDER_VERSION: 1.4.0
+      IBM_CLI_VERSION: 1.0.0
       IBM_NULL_PROVIDER_VERSION: 2.1.2
+      KUBERNETES_PROVIDER_VERSION: 1.11.1
+      KUBECTL_VERSION: 1.17.3
     test_config:
       cmd:
         - terraform version
         - ibmcloud version
         - ibmcloud plugin list
+        - jq --version
     template_vars:
       BASE_IMAGE_VERSION: 1.14.0
 

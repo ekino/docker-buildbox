@@ -6,9 +6,11 @@ ARG TERRAFORM_VERSION
 ARG IBM_PROVIDER_VERSION
 ARG IBM_CLI_VERSION
 ARG IBM_NULL_PROVIDER_VERSION
+ARG KUBERNETES_PROVIDER_VERSION
+ARG KUBECTL_VERSION
 
 RUN apt-get update -qq \
-    && apt-get -y -qq install wget unzip make \
+    && apt-get -y -qq install wget unzip make jq \
     && echo "Install IBMCloud CLI" \
     && wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/${IBM_CLI_VERSION}/binaries/IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz \
     && tar -xzf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz  -C /usr/local/bin --strip-components 1 IBM_Cloud_CLI/ibmcloud \
@@ -16,6 +18,7 @@ RUN apt-get update -qq \
     && ibmcloud plugin install vpc-infrastructure \
     && ibmcloud plugin install kubernetes-service \
     && ibmcloud plugin install container-registry \
+    && ibmcloud cf install \
     && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
     && unzip terraform.zip -d /usr/bin/ \
     && rm terraform.zip \
@@ -29,5 +32,10 @@ RUN apt-get update -qq \
     && cd terraform-provider-null-${IBM_NULL_PROVIDER_VERSION} \
     && make build \
     && mv $GOPATH/bin/terraform-provider-null /terraform.d/plugins/terraform-provider-null_v${IBM_NULL_PROVIDER_VERSION} \
+    && wget https://github.com/terraform-providers/terraform-provider-kubernetes/releases/download/v${KUBERNETES_PROVIDER_VERSION}/terraform-provider-kubernetes_${KUBERNETES_PROVIDER_VERSION}_linux_amd64.zip \
+    && unzip terraform-provider-kubernetes_${KUBERNETES_PROVIDER_VERSION}_linux_amd64.zip -d /terraform.d/plugins \
+    && rm terraform-provider-kubernetes_${KUBERNETES_PROVIDER_VERSION}_linux_amd64.zip \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+    && chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl \
     && apt-get -y -qq remove unzip wget make && apt-get -y -qq autoremove \
     && apt-get clean
