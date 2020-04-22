@@ -27,7 +27,7 @@ jobs:
           - {IMAGE: golang, VERSION: 1.14}
           - {IMAGE: java, VERSION: 8}
           - {IMAGE: java, VERSION: 11}
-          - {IMAGE: kubectl, VERSION: 1.16}
+          - {IMAGE: kubectl, VERSION: 1.18}
           - {IMAGE: node, VERSION: 10}
           - {IMAGE: node, VERSION: 12}
           - {IMAGE: php, VERSION: 7.2}
