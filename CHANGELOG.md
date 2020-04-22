@@ -17,6 +17,7 @@ Versions
 * Install kubectl and kubernetes provider in IBM image
 * Upgrade IBM cli to 1.0.0
 * Upgrade IBM provider to 1.4.0
+* Upgrade scoutsuite to 5.8.1
 
 2020-02-28
 -----------

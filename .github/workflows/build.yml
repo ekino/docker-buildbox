@@ -41,7 +41,7 @@ jobs:
           - {IMAGE: python, VERSION: 3.7}
           - {IMAGE: react-native, VERSION: 2}
           - {IMAGE: ruby, VERSION: 2.6}
-          - {IMAGE: scoutsuite, VERSION: 5.7}
+          - {IMAGE: scoutsuite, VERSION: 5.8}
           - {IMAGE: sonar, VERSION: 3.3}
           - {IMAGE: terraform, VERSION: 0.12}
 
