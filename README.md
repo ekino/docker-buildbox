@@ -80,19 +80,6 @@ https://hub.docker.com/r/ekino/ci-ansible/tags
 
 Contains Ansible, CI Helper and Python 2.7
 
-### Arachni
-https://hub.docker.com/r/ekino/ci-arachni/tags
-
-Contains Arachni + CI Helper
-
-To run the web UI:
-
-```bash
-docker run -d -p 9292:9292 ekino/ci-arachni:1.5-latest arachni_web -o 0.0.0.0
-```
-
-Then go to http://localhost:9292
-
 ### AWS
 https://hub.docker.com/r/ekino/ci-aws/tags
 

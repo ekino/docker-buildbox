@@ -21,15 +21,6 @@ ansible:
       ANSIBLE_VERSION: 2.9.5
     test_config: *ansible_tests
 
-arachni:
-  "1.5":
-    build_args:
-      ARACHNI_VERSION: 1.5.1
-      ARACHNI_WEB_UI_VERSION: 0.5.12
-    test_config:
-      cmd:
-        - arachni --version
-
 aws:
   "1":
     test_config:
