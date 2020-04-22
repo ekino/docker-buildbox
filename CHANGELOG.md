@@ -21,6 +21,7 @@ Versions
 * Upgrade Azure cli to 2.4.0
 * Removing Arachni image
 * Upgrade misc Kubectl image components
+* Upgrade Terraform to 0.12.24
 
 2020-02-28
 -----------

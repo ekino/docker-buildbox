@@ -45,7 +45,7 @@ azure:
   "2":
     build_args:
       AZURE_CLI: 2.4.0
-      TERRAFORM_VERSION: 0.12.21
+      TERRAFORM_VERSION: 0.12.24
     test_config:
       cmd:
         - az --version
@@ -102,7 +102,7 @@ golang:
 ibm:
   "1.4":
     build_args:
-      TERRAFORM_VERSION: 0.12.23
+      TERRAFORM_VERSION: 0.12.24
       IBM_PROVIDER_VERSION: 1.4.0
       IBM_CLI_VERSION: 1.0.0
       IBM_NULL_PROVIDER_VERSION: 2.1.2
@@ -340,7 +340,7 @@ sonar:
 terraform:
   "0.12":
     build_args:
-      TERRAFORM_VERSION: 0.12.20
+      TERRAFORM_VERSION: 0.12.24
     test_config:
       cmd:
         - terraform version
