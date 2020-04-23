@@ -18,6 +18,7 @@ Versions
 * Upgrade IBM cli to 1.0.0
 * Upgrade IBM provider to 1.4.0
 * Upgrade scoutsuite to 5.8.1
+* Upgrade Azure cli to 2.4.0
 
 2020-02-28
 -----------

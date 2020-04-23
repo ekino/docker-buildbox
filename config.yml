@@ -53,7 +53,7 @@ awslnx-systemd:
 azure:
   "2":
     build_args:
-      AZURE_CLI: 2.1.0
+      AZURE_CLI: 2.4.0
       TERRAFORM_VERSION: 0.12.21
     test_config:
       cmd:
