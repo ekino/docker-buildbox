@@ -20,6 +20,7 @@ Versions
 * Upgrade scoutsuite to 5.8.1
 * Upgrade Azure cli to 2.4.0
 * Removing Arachni image
+* Upgrade misc Kubectl image components
 
 2020-02-28
 -----------
