@@ -19,6 +19,7 @@ Versions
 * Upgrade IBM provider to 1.4.0
 * Upgrade scoutsuite to 5.8.1
 * Upgrade Azure cli to 2.4.0
+* Removing Arachni image
 
 2020-02-28
 -----------

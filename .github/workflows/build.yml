@@ -18,7 +18,6 @@ jobs:
       matrix:
         config:
           - {IMAGE: ansible, VERSION: 2.9}
-          - {IMAGE: arachni, VERSION: 1.5}
           - {IMAGE: aws, VERSION: 1}
           - {IMAGE: awslnx-systemd, VERSION: 2}
           - {IMAGE: azure, VERSION: 2}
