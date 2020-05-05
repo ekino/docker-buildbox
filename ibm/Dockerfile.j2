@@ -8,6 +8,7 @@ ARG IBM_CLI_VERSION
 ARG IBM_NULL_PROVIDER_VERSION
 ARG KUBERNETES_PROVIDER_VERSION
 ARG KUBECTL_VERSION
+ARG HELM_VERSION
 
 RUN apt-get update -qq \
     && apt-get -y -qq install wget unzip make jq \
@@ -37,5 +38,8 @@ RUN apt-get update -qq \
     && rm terraform-provider-kubernetes_${KUBERNETES_PROVIDER_VERSION}_linux_amd64.zip \
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl \
+    && wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+    && tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+    && mv linux-amd64/helm /usr/local/bin/helm \
     && apt-get -y -qq remove unzip wget make && apt-get -y -qq autoremove \
     && apt-get clean
