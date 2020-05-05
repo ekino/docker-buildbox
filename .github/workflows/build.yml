@@ -23,8 +23,8 @@ jobs:
           - {IMAGE: azure, VERSION: 2}
           - {IMAGE: chrome, VERSION: 1}
           - {IMAGE: dind, VERSION: 1}
-          - {IMAGE: ibm, VERSION: 1.4}
           - {IMAGE: golang, VERSION: 1.14}
+          - {IMAGE: ibm, VERSION: 1.4}
           - {IMAGE: java, VERSION: 8}
           - {IMAGE: java, VERSION: 11}
           - {IMAGE: kubectl, VERSION: 1.18}
@@ -34,6 +34,8 @@ jobs:
           - {IMAGE: php, VERSION: 7.3}
           - {IMAGE: php, VERSION: 7.4}
           - {IMAGE: platformsh, VERSION: "3.50"}
+          - {IMAGE: pynode, VERSION: 3.7}
+          - {IMAGE: pynode, VERSION: 3.8}
           - {IMAGE: python, VERSION: 3.7}
           - {IMAGE: python, VERSION: 3.8}
           - {IMAGE: python, VERSION: 2.7}
