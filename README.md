@@ -128,6 +128,7 @@ Based upon official Golang image, contains AWS Cli and CI Helper.
 https://hub.docker.com/r/ekino/ci-ibm/tags
 
 Based upon Golang image, contains Terraform, IBM and Null Terraform provider located in `/terraform.d/plugins` and ibmcloud cli.
+Contains kubectl and Helm.
 
 To init Terraform with IBM provider, use:
 ```bash

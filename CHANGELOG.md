@@ -3,7 +3,7 @@ Versions
 
 2020-05-DEV
 -----------
-todo
+* Install helm on IBM image
 
 2020-04-30
 -----------
