@@ -11,6 +11,8 @@ Versions
 * Upgrade PHP redis extension version: 5.2.2
 * Upgrade PHP xdebug extension version: 2.9.5
 * Restore ssh2 extension in PHP images
+* Upgrade Golang version: 1.14.3
+* Add Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd and testfixtures to Golang image
 
 2020-04-30
 -----------
