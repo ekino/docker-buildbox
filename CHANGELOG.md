@@ -4,6 +4,13 @@ Versions
 2020-05-DEV
 -----------
 * Install helm on IBM image
+* Upgrade PHP version: 7.2.31, 7.3.18 and 7.4.6
+* Upgrade PHP composer version: 1.10.6
+* Upgrade PHP memcached extension version: 3.1.5
+* Upgrade PHP php-cs-fixer version: 2.16.3
+* Upgrade PHP redis extension version: 5.2.2
+* Upgrade PHP xdebug extension version: 2.9.5
+* Restore ssh2 extension in PHP images
 
 2020-04-30
 -----------
