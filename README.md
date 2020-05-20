@@ -95,6 +95,11 @@ https://hub.docker.com/r/ekino/ci-azure/tags
 
 Contains Azure Cli and Terraform.
 
+### Bitcoind
+https://hub.docker.com/r/ekino/ci-bitcoind/tags
+
+Contains Bitcoin core (bitcoind & bitcoin-cli).
+
 ### Chrome
 https://hub.docker.com/r/ekino/ci-chrome/tags
 
