@@ -13,6 +13,7 @@ Versions
 * Restore ssh2 extension in PHP images
 * Upgrade Golang version: 1.14.3
 * Add Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd and testfixtures to Golang image
+* Add bitcoind image, version: 0.19.1
 
 2020-04-30
 -----------
