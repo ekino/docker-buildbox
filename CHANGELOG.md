@@ -1,7 +1,11 @@
 Versions
 ========
 
-2020-05-DEV
+2020-06-DEV
+-----------
+todo
+
+2020-05-28
 -----------
 * Install helm on IBM image
 * Upgrade PHP version: 7.2.31, 7.3.18 and 7.4.6
