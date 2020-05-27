@@ -14,6 +14,7 @@ Versions
 * Upgrade Golang version: 1.14.3
 * Add Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd and testfixtures to Golang image
 * Add bitcoind image, version: 0.19.1
+* Add the following libraries into the php image: libcrypto1.1, libssl1.1
 
 2020-04-30
 -----------
