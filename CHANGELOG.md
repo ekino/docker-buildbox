@@ -17,6 +17,9 @@ Versions
 * Add the following libraries into the php image: libcrypto1.1, libssl1.1
 * Add kubeval and kustomize to IBM image
 * Add AWS Terraform provider in IBM image
+* Add ibmcloud CLI cloud-databases plugin in IBM image
+* Upgrade IBM Terraform Provider to 1.5.3
+* Upgrade terraform to 0.12.26 in IBM Image
 
 2020-04-30
 -----------
