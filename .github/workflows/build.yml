@@ -21,7 +21,7 @@ jobs:
           - { image: aws, version: 1 }
           - { image: awslnx-systemd, version: 2 }
           - { image: azure, version: 2 }
-          - { image: bitcoind, version: 0.19.1 }
+          - { image: bitcoind, version: 0.20.0 }
           - { image: chrome, version: 1 }
           - { image: dind, version: 1 }
           - { image: golang, version: 1.14 }

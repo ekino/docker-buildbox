@@ -3,7 +3,7 @@ Versions
 
 2020-06-DEV
 -----------
-todo
+* Upgrade bitcoind image to 0.20.0
 
 2020-05-28
 -----------
