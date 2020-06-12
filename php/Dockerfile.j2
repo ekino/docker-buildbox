@@ -15,6 +15,7 @@ ARG XDEBUG_VERSION
 # iconv issue https://github.com/docker-library/php/issues/240
 
 ENV COMPOSER_NO_INTERACTION=1 \
+    COMPOSER_MEMORY_LIMIT=-1 \
     TERM=xterm \
     LD_PRELOAD="/usr/lib/preloadable_libiconv.so php" \
     PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
