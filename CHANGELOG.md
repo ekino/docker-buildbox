@@ -3,7 +3,7 @@ Versions
 
 2020-06-DEV
 -----------
-todo
+* Add PHP COMPOSER_MEMORY_LIMIT env var
 
 2020-05-28
 -----------
