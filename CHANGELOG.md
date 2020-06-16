@@ -9,6 +9,11 @@ Versions
 * Upgrade Node 10 to 10.21.0 and 12 to 12.18.1
 * Add Node 14 image
 * Upgrade npm to 6.14.5 and nvm to 0.35.3 in Node images
+* Upgrade Golang version: 1.14.4
+* Upgrade Golang gitleaks version: 4.3.1
+* Upgrade Golang goswagger version: 0.24.0
+* Upgrade PHP composer version: 1.10.7
+* Upgrade PHP xdebug version: 2.9.6
 
 2020-05-28
 -----------
