@@ -31,6 +31,7 @@ jobs:
           - { image: kubectl, version: 1.18 }
           - { image: node, version: 10 }
           - { image: node, version: 12 }
+          - { image: node, version: 14 }
           - { image: php, version: 7.2 }
           - { image: php, version: 7.3 }
           - { image: php, version: 7.4 }
