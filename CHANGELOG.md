@@ -5,6 +5,7 @@ Versions
 -----------
 * Add PHP COMPOSER_MEMORY_LIMIT env var
 * Upgrade Java 8 to 8u252 and 11 to 11.0.7
+* Install IBM CLI plugin for IBM Functions
 
 2020-05-28
 -----------

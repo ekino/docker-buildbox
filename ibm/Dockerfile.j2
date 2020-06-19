@@ -23,6 +23,7 @@ RUN apt-get update -qq \
     && ibmcloud plugin install kubernetes-service \
     && ibmcloud plugin install container-registry \
     && ibmcloud plugin install cloud-databases \
+    && ibmcloud plugin install functions \
     && ibmcloud cf install
 
 RUN echo "Install Terraform" \
