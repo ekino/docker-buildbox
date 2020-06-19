@@ -209,17 +209,25 @@ node:
   "10":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      NODE_VERSION: 10.19.0
-      NPM_VERSION: 6.13.7
-      NVM_VERSION: 0.34.0
+      NODE_VERSION: 10.21.0
+      NPM_VERSION: 6.14.5
+      NVM_VERSION: 0.35.3
       MODD_VERSION: *MODD_VERSION
     test_config: *node_test_config
   "12":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
-      NODE_VERSION: 12.16.1
-      NPM_VERSION: 6.13.7
-      NVM_VERSION: 0.34.0
+      NODE_VERSION: 12.18.1
+      NPM_VERSION: 6.14.5
+      NVM_VERSION: 0.35.3
+      MODD_VERSION: *MODD_VERSION
+    test_config: *node_test_config
+  "14":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      NODE_VERSION: 14.4.0
+      NPM_VERSION: 6.14.5
+      NVM_VERSION: 0.35.3
       MODD_VERSION: *MODD_VERSION
     test_config: *node_test_config
 

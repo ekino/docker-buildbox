@@ -6,6 +6,9 @@ Versions
 * Add PHP COMPOSER_MEMORY_LIMIT env var
 * Upgrade Java 8 to 8u252 and 11 to 11.0.7
 * Install IBM CLI plugin for IBM Functions
+* Upgrade Node 10 to 10.21.0 and 12 to 12.18.1
+* Add Node 14 image
+* Upgrade npm to 6.14.5 and nvm to 0.35.3 in Node images
 
 2020-05-28
 -----------
