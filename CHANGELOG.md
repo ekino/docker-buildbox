@@ -4,6 +4,17 @@ Versions
 2020-06-DEV
 -----------
 * Upgrade bitcoind image to 0.20.0
+* Add PHP COMPOSER_MEMORY_LIMIT env var
+* Upgrade Java 8 to 8u252 and 11 to 11.0.7
+* Install IBM CLI plugin for IBM Functions
+* Upgrade Node 10 to 10.21.0 and 12 to 12.18.1
+* Add Node 14 image
+* Upgrade npm to 6.14.5 and nvm to 0.35.3 in Node images
+* Upgrade Golang version: 1.14.4
+* Upgrade Golang gitleaks version: 4.3.1
+* Upgrade Golang goswagger version: 0.24.0
+* Upgrade PHP composer version: 1.10.7
+* Upgrade PHP xdebug version: 2.9.6
 
 2020-05-28
 -----------
