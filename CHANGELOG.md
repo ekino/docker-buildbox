@@ -15,6 +15,7 @@ Versions
 * Upgrade Golang goswagger version: 0.24.0
 * Upgrade PHP composer version: 1.10.7
 * Upgrade PHP xdebug version: 2.9.6
+* Add tezosqa image with ligo, SmartPy and Pytezos
 
 2020-05-28
 -----------
