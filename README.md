@@ -206,3 +206,8 @@ Contains SonarQube Scanner and CI Helper.
 https://hub.docker.com/r/ekino/ci-terraform/tags
 
 Contains Terraform and AWS Cli.
+
+### TezosQA
+https://hub.docker.com/r/ekino/ci-tezosqa/tags
+
+Contains ligo, SmartPy, and Pytezos.
