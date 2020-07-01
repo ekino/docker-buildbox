@@ -1,7 +1,11 @@
 Versions
 ========
 
-2020-06-DEV
+2020-07-DEV
+-----------
+todo ...
+
+2020-06-30
 -----------
 * Upgrade bitcoind image to 0.20.0
 * Add PHP COMPOSER_MEMORY_LIMIT env var
