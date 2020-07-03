@@ -3,7 +3,7 @@ Versions
 
 2020-07-DEV
 -----------
-todo ...
+* Add zip to the AWS image
 
 2020-06-30
 -----------
