@@ -4,6 +4,7 @@ Versions
 2020-07-DEV
 -----------
 * Add zip to the AWS image
+* Upgrade IBM Terraform provider to v1.8.1
 
 2020-06-30
 -----------
