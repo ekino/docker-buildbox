@@ -2,7 +2,7 @@ FROM python:{{ BASE_IMAGE_VERSION }}-slim-buster
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 RUN echo "Install AWS" && \
-    apt-get update -qq && apt-get install -qq -y curl git && \
+    apt-get update -qq && apt-get install -qq -y curl git zip && \
     pip install -U pip && \
     pip install pipenv awscli boto3 awsebcli PyYAML && \
     echo "Done install AWS" && \
