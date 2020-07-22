@@ -395,4 +395,4 @@ tezosqa:
       BASE_IMAGE_VERSION: 3.8
     test_config:
       cmd:
-        - /opt/SmartPy/SmartPy.sh self-test
+        - /opt/SmartPy/SmartPy.sh --version

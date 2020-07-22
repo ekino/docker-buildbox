@@ -13,7 +13,7 @@ RUN echo "Install system dependencies for python and pip" && \
     apt-get install -q -y curl && \
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs && \
-    curl -s https://SmartPy.io/smartpy-cli-dev/SmartPy.sh | bash -s local-install-dev /opt/SmartPy && \
+    curl -s https://smartpy.io/dev/cli/SmartPy.sh | bash -s local-install-auto /opt/SmartPy && \
     echo "export PATH=/opt/SmartPy:\$PATH" >> /etc/profile && \
     echo "Done!" && \
     echo "Install ligo" && \
