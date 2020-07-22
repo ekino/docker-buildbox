@@ -74,6 +74,7 @@ RUN echo "Starting...\n" && \
   rm testfixtures_linux_amd64.tar.gz && \
   echo "Successfully installed testfixtures\n" && \
 
-  go get golang.org/x/tools/cmd/goimports && \
+  go get golang.org/x/tools/cmd/goimports \
+         github.com/shuLhan/go-bindata/... && \
 
   echo "Done!"

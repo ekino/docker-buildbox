@@ -5,6 +5,12 @@ Versions
 -----------
 * Add zip to the AWS image
 * Upgrade IBM Terraform provider to v1.8.1
+* Upgrade Golang version: 1.14.6
+* Upgrade Golang ci-lint version: 1.28.3
+* Upgrade Golang goswagger version: 0.25.0
+* Upgrade Golang go-mod-upgrade version: 0.2.0
+* Upgrade Golang testfixtures version: 3.3.0
+* Add go-bindata to golang image
 
 2020-06-30
 -----------
