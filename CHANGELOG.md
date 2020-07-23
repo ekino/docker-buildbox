@@ -11,6 +11,7 @@ Versions
 * Upgrade Golang go-mod-upgrade version: 0.2.0
 * Upgrade Golang testfixtures version: 3.3.0
 * Add go-bindata to golang image
+* Upgrade Java 8 to 8u262 and 11 to 11.0.8
 
 2020-06-30
 -----------
