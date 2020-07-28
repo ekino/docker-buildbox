@@ -14,6 +14,8 @@ Versions
 * Add go-bindata to golang image
 * Upgrade Java 8 to 8u262 and 11 to 11.0.8
 * Add [Taskfile](https://taskfile.dev) to the Node.js, Chrome, AWS and DinD images
+* Upgrade PHP composer version to 1.10.9
+* Upgrade PHP versions to 7.2.32, 7.3.20 and 7.4.8
 
 2020-06-30
 -----------
