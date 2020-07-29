@@ -6,7 +6,7 @@ ARG TERRAFORM_VERSION
 ARG TERRAGRUNT_VERSION
 
 RUN apt-get update -qq \
-    && apt-get -y -qq install unzip wget \
+    && apt-get -y -qq install unzip wget git \
     && pip install -U pip \
     && pip install awscli boto3 pipenv \
     && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
