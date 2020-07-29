@@ -9,6 +9,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: Wait 60 seconds
+        run: sleep 60
       - name: Wait for commit statuses
         id: status
         uses: WyriHaximus/github-action-wait-for-status@v1
@@ -21,5 +23,5 @@ jobs:
         if: steps.status.outputs.status == 'success'
         run: exit 0
       - name: Fail
-        if: steps.status.outputs.status == 'failure'
+        if: failure() || steps.status.outputs.status == 'failure'
         run: exit 1
