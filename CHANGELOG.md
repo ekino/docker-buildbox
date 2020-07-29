@@ -3,6 +3,7 @@ Versions
 
 2020-07-DEV
 -----------
+* Add terragrunt v0.23.31 to terraform image
 * Add zip and make to the AWS image
 * Upgrade IBM Terraform provider to v1.8.1
 * Upgrade Golang version: 1.14.6
