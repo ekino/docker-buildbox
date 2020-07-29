@@ -137,7 +137,6 @@ ibm:
   "1.8":
     build_args:
       TERRAFORM_VERSION: 0.12.26
-      TERRAGRUNT_VERSION: 0.23.31
       IBM_PROVIDER_VERSION: 1.8.1
       IBM_CLI_VERSION: 1.0.0
       IBM_NULL_PROVIDER_VERSION: 2.1.2
@@ -150,7 +149,6 @@ ibm:
     test_config:
       cmd:
         - terraform version
-        - terragrunt --version
         - ibmcloud version
         - ibmcloud plugin list
         - kubeval --version
