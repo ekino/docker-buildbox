@@ -3,7 +3,7 @@ Versions
 
 2020-07-DEV
 -----------
-* Add zip to the AWS image
+* Add zip and make to the AWS image
 * Upgrade IBM Terraform provider to v1.8.1
 * Upgrade Golang version: 1.14.6
 * Upgrade Golang ci-lint version: 1.28.3
@@ -12,6 +12,7 @@ Versions
 * Upgrade Golang testfixtures version: 3.3.0
 * Add go-bindata to golang image
 * Upgrade Java 8 to 8u262 and 11 to 11.0.8
+* Add [Taskfile](https://taskfile.dev) to the Node.js, Chrome, AWS and DinD images
 
 2020-06-30
 -----------

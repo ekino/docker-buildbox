@@ -8,6 +8,7 @@ ARG PIPENV_VERSION
 ARG PIP_VERSION
 ARG IBM_CLI_VERSION
 ARG AZURE_CLI_VERSION
+ARG TASKFILE_VERSION
 ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
 RUN echo "Install AWS" && \
@@ -22,6 +23,10 @@ RUN echo "Install AWS" && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
 
+    echo "Install Taskfile" && \
+    curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
+    echo "Done Install Taskfile" && \
+
     echo "Install Azure CLI" && \
     pip install azure-cli==${AZURE_CLI_VERSION} && \
     echo "Done install Azure CLI" && \
@@ -32,7 +37,7 @@ RUN echo "Install AWS" && \
     rm -rf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz && \
     ibmcloud plugin install container-registry && \
     echo "Done install IBMCloud CLI" && \
-    
+
     echo "Install Docker Compose" && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \

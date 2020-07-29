@@ -11,6 +11,7 @@ ARG NPM_VERSION
 ARG NVM_VERSION
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
+ARG TASKFILE_VERSION
 
 RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
@@ -30,6 +31,10 @@ RUN echo "Starting ..." && \
     curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
     chmod 755 /usr/bin/modd && \
     echo "Done Install Modd" && \
+
+    echo "Install Taskfile" && \
+    curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
+    echo "Done Install Taskfile" && \
 
     echo "Starting Javascript..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${NVM_VERSION} && \
