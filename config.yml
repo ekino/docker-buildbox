@@ -393,9 +393,11 @@ terraform:
   "0.12":
     build_args:
       TERRAFORM_VERSION: 0.12.24
+      TERRAGRUNT_VERSION: 0.23.31
     test_config:
       cmd:
         - terraform version
+        - terragrunt --version
         - python --version
         - aws --version
     template_vars:

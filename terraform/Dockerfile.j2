@@ -3,6 +3,7 @@ FROM python:{{ BASE_IMAGE_VERSION }}-slim-buster
 LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
 
 ARG TERRAFORM_VERSION
+ARG TERRAGRUNT_VERSION
 
 RUN apt-get update -qq \
     && apt-get -y -qq install unzip wget \
@@ -13,3 +14,7 @@ RUN apt-get update -qq \
     && rm terraform.zip \
     && mv terraform /usr/bin/ \
     && chmod +x /usr/bin/terraform
+
+RUN wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt \
+    && mv terragrunt /usr/bin \
+    && chmod +x /usr/bin/terragrunt
