@@ -1,7 +1,11 @@
 Versions
 ========
 
-2020-07-DEV
+2020-08-DEV
+-----------
+todo ...
+
+2020-07-31
 -----------
 * Add terragrunt v0.23.31 and git to terraform image
 * Add zip and make to the AWS image
