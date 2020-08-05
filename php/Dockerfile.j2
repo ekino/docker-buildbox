@@ -26,7 +26,7 @@ RUN echo "Starting ..." && \
     echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-        gnu-libiconv@edge-community icu-dev@edge-main libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
+        gnu-libiconv@edge-community icu-dev@edge-main jq libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
         libxml2-dev libzip-dev make musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
