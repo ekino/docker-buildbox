@@ -3,7 +3,10 @@ Versions
 
 2020-08-DEV
 -----------
-todo ...
+* Add terraform-compliance v1.2.11 to terraform image
+* Upgrade terraform to 0.12.29 in terraform and ibm images
+* Change terraform versionning to add patch version value
+* Upgrade IBM Cloud terraform provider to 1.9.0
 
 2020-07-31
 -----------
