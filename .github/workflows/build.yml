@@ -25,7 +25,7 @@ jobs:
           - { image: chrome, version: 1 }
           - { image: dind, version: 1 }
           - { image: golang, version: 1.14 }
-          - { image: ibm, version: 1.8 }
+          - { image: ibm, version: "1.10" }
           - { image: java, version: 8 }
           - { image: java, version: 11 }
           - { image: kubectl, version: 1.18 }
@@ -46,7 +46,7 @@ jobs:
           - { image: ruby, version: 2.6 }
           - { image: scoutsuite, version: 5.8 }
           - { image: sonar, version: 3.3 }
-          - { image: terraform, version: 0.12 }
+          - { image: terraform, version: 0.12.29 }
           - { image: tezosqa, version: 0.1 }
 
     steps:
