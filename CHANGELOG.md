@@ -3,10 +3,10 @@ Versions
 
 2020-08-DEV
 -----------
-* Add terraform-compliance v1.2.11 to terraform image
-* Upgrade terraform to 0.12.29 in terraform and ibm images
-* Change terraform versionning to add patch version value
-* Upgrade IBM Cloud terraform provider to 1.9.0
+* Upgrade PHP composer version to 1.10.10
+* Upgrade PHP versions to 7.2.32, 7.3.20 and 7.4.8
+* Add musl-dev==1.1.24-r9 to fix php image build
+* Add jq in PHP image
 
 2020-07-31
 -----------
