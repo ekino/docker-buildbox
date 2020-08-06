@@ -3,7 +3,9 @@ Versions
 
 2020-08-DEV
 -----------
-todo ...
+* Upgrade PHP composer version to 1.10.10
+* Upgrade PHP versions to 7.2.32, 7.3.20 and 7.4.8
+* Add musl-dev==1.1.24-r9 to fix php image build
 
 2020-07-31
 -----------
