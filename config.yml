@@ -395,10 +395,12 @@ terraform:
     build_args:
       TERRAFORM_VERSION: 0.12.24
       TERRAGRUNT_VERSION: 0.23.31
+      TERRAFORM_COMPLIANCE_VERSION: 1.2.11
     test_config:
       cmd:
         - terraform version
         - terragrunt --version
+        - terraform-compliance --version
         - python --version
         - aws --version
         - git --version

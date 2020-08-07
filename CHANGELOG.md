@@ -7,6 +7,7 @@ Versions
 * Upgrade PHP versions to 7.2.32, 7.3.20 and 7.4.8
 * Add musl-dev==1.1.24-r9 to fix php image build
 * Add jq in PHP image
+* Add terraform-compliance v1.2.11 to terraform image
 
 2020-07-31
 -----------
