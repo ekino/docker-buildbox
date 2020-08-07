@@ -8,6 +8,9 @@ Versions
 * Add musl-dev==1.1.24-r9 to fix php image build
 * Add jq in PHP image
 * Add terraform-compliance v1.2.11 to terraform image
+* Upgrade terraform to 0.12.29 in terraform and ibm images
+* Change terraform versionning to add patch version value
+* Upgrade IBM Cloud terraform provider to 1.10.0
 
 2020-07-31
 -----------
