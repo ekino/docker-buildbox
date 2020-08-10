@@ -197,13 +197,13 @@ kubectl:
         - kustomize version
         - helm version
     build_args:
-      EKSCTL_VERSION: 0.17.0
-      KUBECTL_VERSION: 1.18.2
-      KUBECTX_VERSION: 0.8.0
-      KUBESCORE_VERSION: 1.6.0
+      EKSCTL_VERSION: 0.25.0
+      KUBECTL_VERSION: 1.18.6
+      KUBECTX_VERSION: 0.9.1
+      KUBESCORE_VERSION: 1.7.3
       KUBEVAL_VERSION: 0.15.0
-      KUSTOMIZATION_VERSION: 3.5.4
-      HELM_VERSION: 3.2.0
+      KUSTOMIZATION_VERSION: 3.8.1
+      HELM_VERSION: 3.2.4
 
 node_test_config: &node_test_config
   cmd:
