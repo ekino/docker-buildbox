@@ -11,6 +11,7 @@ Versions
 * Upgrade terraform to 0.12.29 in terraform and ibm images
 * Change terraform versionning to add patch version value
 * Upgrade IBM Cloud terraform provider to 1.10.0
+* Upgrade Golang version: 1.14.7
 
 2020-07-31
 -----------
