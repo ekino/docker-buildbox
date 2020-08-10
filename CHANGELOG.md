@@ -12,6 +12,7 @@ Versions
 * Change terraform versionning to add patch version value
 * Upgrade IBM Cloud terraform provider to 1.10.0
 * Upgrade Golang version: 1.14.7
+* Update Kubectl to 1.18.6 + associated tools
 
 2020-07-31
 -----------
