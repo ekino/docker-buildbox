@@ -13,6 +13,7 @@ Versions
 * Upgrade IBM Cloud terraform provider to 1.10.0
 * Upgrade Golang version: 1.14.7
 * Update Kubectl to 1.18.6 + associated tools
+* Update Scoutsuite to 5.9.1
 
 2020-07-31
 -----------
