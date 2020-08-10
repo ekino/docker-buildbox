@@ -49,8 +49,8 @@ awslnx-systemd:
 azure:
   "2":
     build_args:
-      AZURE_CLI: 2.4.0
-      TERRAFORM_VERSION: 0.12.24
+      AZURE_CLI_VERSION: 2.10.1
+      TERRAFORM_VERSION: 0.12.29
     test_config:
       cmd:
         - az --version
@@ -92,7 +92,7 @@ dind:
       PIP_VERSION: 18.1
       PIPENV_VERSION: 2018.10.13
       IBM_CLI_VERSION: 0.22.0
-      AZURE_CLI_VERSION: 2.2.0
+      AZURE_CLI_VERSION: 2.10.1
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
