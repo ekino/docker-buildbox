@@ -16,6 +16,7 @@ Versions
 * Update Scoutsuite to 5.9.1
 * Add a new Terraform 0.13 image
 - Update Ansible to 2.9.10
+- Update Azure CLI to 2.10.1
 
 2020-07-31
 -----------

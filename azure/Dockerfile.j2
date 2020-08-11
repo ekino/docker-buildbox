@@ -3,10 +3,10 @@ FROM python:{{BASE_IMAGE_VERSION}}-slim-buster
 LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
 ARG TERRAFORM_VERSION
-ARG AZURE_CLI
+ARG AZURE_CLI_VERSION
 
 RUN apt-get update -qq && apt-get install -qq -y ca-certificates curl apt-transport-https gcc wget unzip \
-    && pip install azure-cli==${AZURE_CLI} \
+    && pip install azure-cli==${AZURE_CLI_VERSION} \
     && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
     && unzip -o terraform.zip \
     && mv terraform /usr/bin/ \
