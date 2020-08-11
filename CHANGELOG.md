@@ -14,6 +14,7 @@ Versions
 * Upgrade Golang version: 1.14.7
 * Update Kubectl to 1.18.6 + associated tools
 * Update Scoutsuite to 5.9.1
+* Add a new Terraform 0.13 image
 
 2020-07-31
 -----------
