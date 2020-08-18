@@ -105,21 +105,22 @@ https://hub.docker.com/r/ekino/ci-chrome/tags
 
 Contains Chromium browser and the latest Node LTS.
 
-### DIND - AWS
-https://hub.docker.com/r/ekino/ci-dind-aws/tags
+### DIND
+https://hub.docker.com/r/ekino/ci-dind/tags
 
-Adds AWS Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
+Adds AWS Cli, IBMCloud Cli, Azure Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
 
 Use case:
 ```yaml
 # .gitlab-ci.yml
 test:
-  image: ekino/ci-dind-aws:latest
+  image: ekino/ci-dind:latest
   services:
-    - ekino/ci-dind-aws:latest
+    - ekino/ci-dind:latest
   variables:
+    DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
-    DOCKER_HOST:   "tcp://ekino__ci-dind-aws:2375"
+    DOCKER_HOST: "tcp://ekino__ci-dind:2375"
   script:
     - docker ...
 ```
