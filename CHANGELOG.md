@@ -3,6 +3,7 @@ Versions
 
 2020-08-DEV
 -----------
+* Add rsync to aws image
 * Upgrade PHP composer version to 1.10.10
 * Upgrade PHP versions to 7.2.32, 7.3.20 and 7.4.8
 * Add musl-dev==1.1.24-r9 to fix php image build
