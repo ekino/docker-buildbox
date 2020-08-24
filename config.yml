@@ -32,6 +32,7 @@ aws:
         - pip --version
         - pipenv --version
         - git --version
+        - rsync --version
         - zip --version
         - task --version
     template_vars:
