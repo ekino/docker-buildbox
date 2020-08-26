@@ -19,6 +19,7 @@ Versions
 - Update Ansible to 2.9.10
 - Update Azure CLI to 2.10.1
 - Update Terraform complaince CLI to 1.3.2
+- Install awscli in kubectl image
 
 2020-07-31
 -----------
