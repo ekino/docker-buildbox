@@ -197,6 +197,7 @@ kubectl:
         - kubeval --version
         - kustomize version
         - helm version
+        - aws --version
     build_args:
       EKSCTL_VERSION: 0.25.0
       KUBECTL_VERSION: 1.18.6

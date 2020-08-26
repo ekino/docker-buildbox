@@ -11,6 +11,11 @@ ARG HELM_VERSION
 
 ENV PATH="${PATH}:/usr/bin"
 
+RUN echo "Starting AWS" && \
+    apk add groff py-pip && \
+    pip install -q -U awscli && \
+    echo "Done AWS!"
+
 RUN apk add ca-certificates curl bash wget ncurses && \
     curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
     chmod +x ./kubectl && \
