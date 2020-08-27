@@ -3,6 +3,7 @@ Versions
 
 2020-08-DEV
 -----------
+* Add terraform version 0.13.1
 * Add rsync to aws image
 * Upgrade PHP composer version to 1.10.10
 * Upgrade PHP versions to 7.2.32, 7.3.20 and 7.4.8
