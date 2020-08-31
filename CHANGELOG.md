@@ -1,7 +1,11 @@
 Versions
 ========
 
-2020-08-DEV
+2020-09-xx
+-----------
+todo ...
+
+2020-08-31
 -----------
 * Add terraform version 0.13.1
 * Add rsync to aws image
