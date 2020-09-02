@@ -3,7 +3,12 @@ Versions
 
 2020-09-xx
 -----------
-todo ...
+* Upgrade Golang version: 1.15.1
+* Upgrade Golang gitleaks version: 6.1.1
+* Upgrade Golang ci-lint version: 1.30.0
+* Upgrade Golang go-mod-upgrade version: 0.2.1
+* Upgrade Golang migrate version: 4.12.2
+* Upgrade Golang testfixtures version: 3.4.0
 
 2020-08-31
 -----------
