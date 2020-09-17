@@ -9,6 +9,7 @@ Versions
 * Upgrade Golang go-mod-upgrade version: 0.2.1
 * Upgrade Golang migrate version: 4.12.2
 * Upgrade Golang testfixtures version: 3.4.0
+* Add rsync to Golang image
 
 2020-08-31
 -----------

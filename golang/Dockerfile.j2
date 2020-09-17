@@ -12,10 +12,13 @@ ARG MODD_VERSION
 ARG TESTFIXTURES_VERSION
 
 RUN echo "Starting...\n" && \
+  echo "Installing packages..." && \
+  apt-get update -q && \
+  apt-get -qq -y install rsync && \
+  echo "Successfully installed packages\n" && \
 
   echo "Installing AWS CLI..." && \
-  apt-get update -q && \
-  apt-get -qq -y install python-pip groff-base && \
+  apt-get -qq -y install groff-base python-pip && \
   pip install -q -U awscli && \
   echo "Successfully installed AWS CLI\n" && \
 
