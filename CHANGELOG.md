@@ -1,7 +1,11 @@
 Versions
 ========
 
-2020-09-xx
+2020-10-xx
+-----------
+todo...
+
+2020-09-30
 -----------
 * Upgrade Golang version: 1.15.2
 * Upgrade Golang gitleaks version: 6.1.2
