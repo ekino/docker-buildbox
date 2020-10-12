@@ -1,9 +1,9 @@
 Versions
 ========
 
-2020-10-xx
+2020-10-31
 -----------
-todo...
+* Upgrade terraform to 0.13.4 and terragrunt to 0.25.3
 
 2020-09-30
 -----------
