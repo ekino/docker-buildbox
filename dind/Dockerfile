@@ -16,20 +16,16 @@ RUN echo "Install AWS" && \
     pip3 install --no-cache --upgrade pip setuptools wheel && \
     pip -q install pipenv==${PIPENV_VERSION} awscli boto3 PyYAML && \
     echo "Done install AWS" && \
-
     echo "Install CI Helper" && \
     curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
-
     echo "Install Taskfile" && \
     curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
     echo "Done Install Taskfile" && \
-
     echo "Install Azure CLI" && \
     pip install azure-cli==${AZURE_CLI_VERSION} && \
     echo "Done install Azure CLI" && \
-
     echo "Install Docker Compose" && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
