@@ -4,6 +4,7 @@ Versions
 2020-10-31
 -----------
 * Upgrade terraform to 0.13.4 and terragrunt to 0.25.3
+* fix aws image dependencies with new pip resolver feature `--use-feature=2020-resolver`
 
 2020-09-30
 -----------
