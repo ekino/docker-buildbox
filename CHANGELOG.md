@@ -5,6 +5,7 @@ Versions
 -----------
 * Upgrade terraform to 0.13.4 and terragrunt to 0.25.3 and add jq to image
 * fix aws image dependencies with new pip resolver feature `--use-feature=2020-resolver`
+* fix smartpy version in tezosqa image
 
 2020-09-30
 -----------
