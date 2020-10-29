@@ -6,6 +6,8 @@ Versions
 * Upgrade terraform to 0.13.4 and terragrunt to 0.25.3 and add jq to image
 * fix aws image dependencies with new pip resolver feature `--use-feature=2020-resolver`
 * fix smartpy version in tezosqa image
+* Upgrade Golang version: 1.15.3
+* Upgrade Golang testfixtures version: 3.4.1
 
 2020-09-30
 -----------
