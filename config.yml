@@ -153,10 +153,10 @@ ibm:
       IBM_NULL_PROVIDER_VERSION: 2.1.2
       AWS_PROVIDER_VERSION: 2.61.0
       KUBERNETES_PROVIDER_VERSION: 1.11.1
-      KUBECTL_VERSION: 1.17.3
+      KUBECTL_VERSION: 1.18.10
       KUBEVAL_VERSION: 0.15.0
-      KUSTOMIZATION_VERSION: 3.5.4
-      HELM_VERSION: 3.2.0
+      KUSTOMIZATION_VERSION: 3.8.5
+      HELM_VERSION: 3.3.4
     test_config:
       cmd:
         - terraform version
@@ -209,13 +209,13 @@ kubectl:
         - helm version
         - aws --version
     build_args:
-      EKSCTL_VERSION: 0.25.0
-      KUBECTL_VERSION: 1.18.6
+      EKSCTL_VERSION: 0.30.0
+      KUBECTL_VERSION: 1.18.10
       KUBECTX_VERSION: 0.9.1
-      KUBESCORE_VERSION: 1.7.3
+      KUBESCORE_VERSION: 1.9.0
       KUBEVAL_VERSION: 0.15.0
-      KUSTOMIZATION_VERSION: 3.8.1
-      HELM_VERSION: 3.2.4
+      KUSTOMIZATION_VERSION: 3.8.5
+      HELM_VERSION: 3.3.4
 
 node_test_config: &node_test_config
   cmd:
