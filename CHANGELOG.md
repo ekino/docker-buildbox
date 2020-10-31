@@ -11,6 +11,7 @@ Versions
 * Upgrade Kubescore to 1.9.0
 * Upgrade Kustomize to 3.8.5
 * Upgrade Helm to 3.3.4
+* Upgrading Scoutsuite to 5.10.1
 
 2020-09-30
 -----------
