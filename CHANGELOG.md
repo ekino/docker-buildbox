@@ -3,7 +3,12 @@ Versions
 
 2020-11-30
 -----------
-todo ...
+* Upgrade PHP versions to 7.2.34, 7.3.24 and 7.4.12
+* Upgrade Composer version to 2.0.4
+* Upgrade APCU version to 5.1.19
+* Upgrade php-cs-fixer version to 2.16.7
+* Upgrade Xdebug version to version 2.9.8
+* Delete Composer plugin hirak/prestissimo
 
 2020-10-31
 -----------
