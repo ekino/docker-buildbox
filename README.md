@@ -50,7 +50,13 @@ Build succesfull
 Tests successful
 ```
 
-## Adding your image to the build box
+## Contribution
+
+### Commit message
+Please follow the following pattern in your commit message `<type>(<optional scope>): <description>`.
+`<type>` can be either `chore` (for a routine/maintenance task), `fix` (for a bugfix) or `feat` (for a new feature).
+
+### Adding your image to the build box
 
 Create a directory named after your image and corresponding Dockerfile in it. Then add an entry in `config.yml` according to this schema:
 
