@@ -9,6 +9,7 @@ Versions
 * Upgrade php-cs-fixer version to 2.16.7
 * Upgrade Xdebug version to version 2.9.8
 * Delete Composer plugin hirak/prestissimo
+* Fix missing awscli missing from Node and React Native
 
 2020-10-31
 -----------
