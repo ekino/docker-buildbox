@@ -10,6 +10,7 @@ Versions
 * Upgrade Xdebug version to version 2.9.8
 * Delete Composer plugin hirak/prestissimo
 * Fix missing awscli missing from Node and React Native
+* Upgrade Java 8 to 8u272 and 11 to 11.0.9
 
 2020-10-31
 -----------
