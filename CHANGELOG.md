@@ -11,6 +11,7 @@ Versions
 * Delete Composer plugin hirak/prestissimo
 * Fix missing awscli missing from Node and React Native
 * Upgrade Java 8 to 8u272 and 11 to 11.0.9
+* Update SmartPy install script url in tezosqa image
 
 2020-10-31
 -----------

@@ -1,9 +1,5 @@
 FROM python:{{BASE_IMAGE_VERSION}}-slim-buster
 
-ARG SMARTPY_VERSION
-
-ENV SMARTPY_INSTALL_URL https://smartpy.io/${SMARTPY_VERSION}/cli/install.sh
-
 RUN echo "Install system dependencies for python and pip" && \
     pip install -U pip && \
     echo "Done base install!" && \
@@ -17,7 +13,7 @@ RUN echo "Install system dependencies for python and pip" && \
     apt-get install -q -y curl && \
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs && \
-    curl -s "${SMARTPY_INSTALL_URL}" | bash -s local-install-auto /opt/SmartPy && \
+    curl -s https://smartpy.io/cli/install.sh | bash -s local-install-auto /opt/SmartPy && \
     echo "export PATH=/opt/SmartPy:\$PATH" >> /etc/profile && \
     echo "Done!" && \
     echo "Install ligo" && \
