@@ -8,9 +8,11 @@ Versions
 * Upgrade APCU version to 5.1.19
 * Upgrade php-cs-fixer version to 2.16.7
 * Upgrade Xdebug version to version 2.9.8
+* Upgrade musl-dev version to 1.1.24-r10 to fix php image build
 * Delete Composer plugin hirak/prestissimo
 * Fix missing awscli missing from Node and React Native
 * Upgrade Java 8 to 8u272 and 11 to 11.0.9
+
 
 2020-10-31
 -----------
