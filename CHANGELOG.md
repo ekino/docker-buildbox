@@ -1,6 +1,10 @@
 Versions
 ========
 
+2020-12-31
+-----------
+todo...
+
 2020-11-30
 -----------
 * Upgrade PHP versions to 7.2.34, 7.3.24 and 7.4.12
@@ -12,7 +16,7 @@ Versions
 * Delete Composer plugin hirak/prestissimo
 * Fix missing awscli missing from Node and React Native
 * Upgrade Java 8 to 8u272 and 11 to 11.0.9
-* Update SmartPy version in tezosqa image 
+* Update SmartPy version in tezosqa image
 
 2020-10-31
 -----------
