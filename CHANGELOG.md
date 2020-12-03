@@ -4,6 +4,7 @@ Versions
 2020-12-31
 -----------
 * Add a python 3.9 image
+* Add Infracost to the Terraform images
 
 2020-11-30
 -----------

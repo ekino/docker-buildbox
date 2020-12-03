@@ -5,6 +5,7 @@ LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
 ARG TERRAFORM_VERSION
 ARG TERRAGRUNT_VERSION
 ARG TERRAFORM_COMPLIANCE_VERSION
+ARG INFRACOST_VERSION
 
 RUN apt-get update -qq \
     && apt-get -y -qq install unzip wget git \
@@ -19,3 +20,7 @@ RUN apt-get update -qq \
 RUN wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt \
     && mv terragrunt /usr/bin \
     && chmod +x /usr/bin/terragrunt
+
+RUN wget https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-amd64.tar.gz -O infracost.tar.gz \
+    && tar xvf infracost.tar.gz \
+    && mv infracost-linux-amd64 /usr/bin/infracost
