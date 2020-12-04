@@ -45,10 +45,9 @@ jobs:
           - { image: ruby, version: 2.6 }
           - { image: scoutsuite, version: "5.10" }
           - { image: sonar, version: 3.3 }
-          - { image: terraform, version: 0.12.29 }
-          - { image: terraform, version: 0.13.0 }
-          - { image: terraform, version: 0.13.1 }
-          - { image: terraform, version: 0.13.4 }
+          - { image: terraform, version: "0.12.30" }
+          - { image: terraform, version: 0.13.6 }
+          - { image: terraform, version: 0.14.5 }
           - { image: tezosqa, version: 0.1 }
 
     steps:

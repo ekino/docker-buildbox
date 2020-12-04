@@ -7,6 +7,7 @@ Versions
 * Switch from [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker) to [Local PHP Security Checker](https://github.com/fabpot/local-php-security-checker) (keep compatibility with existing binary name)
 * Removed IBM image & associated tools
 * Remove python 2.7 image (now EOL)
+* Add a terraform 0.14.x image, remove multiple 13.x versions, updated associated tools
 
 2020-12-31
 -----------
