@@ -22,6 +22,7 @@ terraform_tests: &terraform_tests
     - python --version
     - aws --version
     - git --version
+    - infracost --version
 
 ansible:
   "2.9":
@@ -412,6 +413,7 @@ terraform:
       TERRAFORM_VERSION: 0.12.29
       TERRAGRUNT_VERSION: 0.25.3
       TERRAFORM_COMPLIANCE_VERSION: 1.2.11
+      INFRACOST_VERSION: 0.7.6
     test_config: *terraform_tests
     template_vars:
       BASE_IMAGE_VERSION: 3.8
@@ -420,6 +422,7 @@ terraform:
       TERRAFORM_VERSION: 0.13.0
       TERRAGRUNT_VERSION: 0.25.3
       TERRAFORM_COMPLIANCE_VERSION: 1.3.2
+      INFRACOST_VERSION: 0.7.6
     test_config: *terraform_tests
     template_vars:
       BASE_IMAGE_VERSION: 3.8
@@ -428,6 +431,7 @@ terraform:
       TERRAFORM_VERSION: 0.13.1
       TERRAGRUNT_VERSION: 0.25.3
       TERRAFORM_COMPLIANCE_VERSION: 1.3.2
+      INFRACOST_VERSION: 0.7.6
     test_config: *terraform_tests
     template_vars:
       BASE_IMAGE_VERSION: 3.8
@@ -436,6 +440,7 @@ terraform:
       TERRAFORM_VERSION: 0.13.4
       TERRAGRUNT_VERSION: 0.25.3
       TERRAFORM_COMPLIANCE_VERSION: 1.3.2
+      INFRACOST_VERSION: 0.7.6
     test_config: *terraform_tests
     template_vars:
       BASE_IMAGE_VERSION: 3.8
