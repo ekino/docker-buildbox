@@ -4,6 +4,7 @@ LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 ARG APCU_VERSION
 ARG CI_HELPER_VERSION
 ARG COMPOSER_VERSION
+ARG ICONV_VERSION
 ARG MEMCACHED_VERSION
 ARG MODD_VERSION
 ARG MUSL_VERSION
@@ -26,7 +27,7 @@ RUN echo "Starting ..." && \
     echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-        gnu-libiconv@edge-community icu-dev@edge-main jq libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
+        gnu-libiconv@edge-community==${ICONV_VERSION} icu-dev@edge-main jq libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
         libxml2-dev libzip-dev make musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-dev rsync tzdata && \
     echo "Done base install!" && \
 
@@ -41,7 +42,7 @@ RUN echo "Starting ..." && \
     echo "Done Install Modd" && \
 
     echo "Starting PHP with $version" && \
-    if [ "$version" = "74" ]; then \
+    if [ "$version" = "74" ] || [ "$version" = "80" ]; then \
         docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
     else \
         docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
@@ -51,8 +52,10 @@ RUN echo "Starting ..." && \
     pecl install memcached-${MEMCACHED_VERSION} && \
     docker-php-ext-enable memcached && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
-    pecl install ssh2-${SSH2_VERSION} && \
-    docker-php-ext-enable ssh2 && \
+    if [ "$version" != "80" ]; then \
+        pecl install ssh2-${SSH2_VERSION} && \
+        docker-php-ext-enable ssh2; \
+    fi && \
     echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
 short_open_tag=Off \n\

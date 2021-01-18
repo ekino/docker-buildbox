@@ -140,11 +140,14 @@ EOF
     {
         $this->logger->info('> PHP extensions: ', false);
 
-        $errors             = array();
-        $extensionsExpected = array(
+        $errors                    = [];
+        $commonExtensionsExpected  = [
             'apcu', 'bcmath', 'blackfire', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'memcached', 'mysqli', 'pcntl',
             'pdo_mysql', 'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'ssh2', 'xdebug', 'Zend OPcache', 'zip',
-        );
+        ];
+        $unreadyNextMajorExtensions = ['ssh2'];
+        $extensionsExpected        = \PHP_VERSION_ID < 80000 ? $commonExtensionsExpected
+            : array_diff($commonExtensionsExpected, $unreadyNextMajorExtensions);
 
         $extensionsMissing = array_filter($extensionsExpected, function ($extension) {
             return !extension_loaded($extension);
@@ -174,7 +177,7 @@ EOF
     {
         $this->logger->info('> PHP configuration: ', false);
 
-        $errors = array();
+        $errors = [];
 
         if (($value = ini_get('date.timezone')) !== 'UTC') {
             $errors[] = sprintf('    >> "date.timezone" should be equal to "UTC", got "%s"', $value);
@@ -182,7 +185,7 @@ EOF
 
         $value = ini_get('short_open_tag');
 
-        if (!in_array($value, array('', 'Off', 0))) {
+        if (!in_array($value, ['', 'Off', 0])) {
             $errors[] = sprintf('    >> "short_open_tag" should be equal to "Off", got "%s"', $value);
         }
 

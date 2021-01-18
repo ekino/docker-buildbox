@@ -271,12 +271,13 @@ php_test_config: &php_test_config
 php_build_args: &php_build_args
   APCU_VERSION: 5.1.19
   CI_HELPER_VERSION: *CI_HELPER_VERSION
-  COMPOSER_VERSION: 2.0.4
+  COMPOSER_VERSION: 2.0.8
+  ICONV_VERSION: 1.15-r2
   MEMCACHED_VERSION: 3.1.5
   MODD_VERSION: *MODD_VERSION
   MUSL_VERSION: 1.1.24-r10
-  PHP_CS_FIXER_VERSION: 2.16.7
-  REDIS_VERSION: 5.2.2
+  PHP_CS_FIXER_VERSION: 2.18.0
+  REDIS_VERSION: 5.3.2
   SECURITY_CHECKER_VERSION: 6.0.3
   SSH2_VERSION: 1.2
   XDEBUG_VERSION: 2.9.8
@@ -297,6 +298,23 @@ php:
     test_config: *php_test_config
     template_vars:
       BASE_IMAGE_VERSION: 7.4.12-cli-alpine
+  "8.0":
+    build_args:
+      APCU_VERSION: 5.1.19
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      COMPOSER_VERSION: 2.0.8
+      ICONV_VERSION: 1.15-r2
+      MEMCACHED_VERSION: 3.1.5
+      MODD_VERSION: *MODD_VERSION
+      MUSL_VERSION: 1.1.24-r10
+      PHP_CS_FIXER_VERSION: 2.18.0
+      REDIS_VERSION: 5.3.2
+      SECURITY_CHECKER_VERSION: 6.0.3
+      SSH2_VERSION: 1.2
+      XDEBUG_VERSION: 3.0.2
+    test_config: *php_test_config
+    template_vars:
+      BASE_IMAGE_VERSION: 8.0.0-cli-alpine
 
 platformsh:
   "3.50":

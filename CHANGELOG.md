@@ -1,6 +1,10 @@
 Versions
 ========
 
+2021-01-31
+-----------
+* Add PHP image version 8.0.0 and bump composer, php_cs_fixer, xdebug & redis versions
+
 2020-12-31
 -----------
 * Add a python 3.9 image
