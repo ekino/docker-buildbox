@@ -114,7 +114,7 @@ Contains Chromium browser and the latest Node LTS.
 ### DIND
 https://hub.docker.com/r/ekino/ci-dind/tags
 
-Adds AWS Cli, IBMCloud Cli, Azure Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
+Adds AWS Cli, Azure Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
 
 Use case:
 ```yaml
@@ -135,17 +135,6 @@ test:
 https://hub.docker.com/r/ekino/ci-golang/tags
 
 Based upon official Golang image, contains AWS Cli, CI Helper, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd, rsync and testfixtures.
-
-### IBM
-https://hub.docker.com/r/ekino/ci-ibm/tags
-
-Based upon Golang image, contains Terraform, IBM and Null Terraform provider located in `/terraform.d/plugins` and ibmcloud cli.
-Contains kubectl and Helm.
-
-To init Terraform with IBM provider, use:
-```bash
-$ terraform init -provider-path=/terraform.d/plugins
-```
 
 ### Java
 https://hub.docker.com/r/ekino/ci-java/tags

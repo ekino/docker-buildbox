@@ -5,6 +5,7 @@ Versions
 -----------
 * Add PHP image version 8.0.0 and bump composer, php_cs_fixer, xdebug & redis versions
 * Switch from [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker) to [Local PHP Security Checker](https://github.com/fabpot/local-php-security-checker) (keep compatibility with existing binary name)
+* Removed IBM image & associated tools
 
 2020-12-31
 -----------
