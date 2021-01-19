@@ -25,7 +25,6 @@ jobs:
           - { image: chrome, version: 1 }
           - { image: dind, version: 1 }
           - { image: golang, version: 1.15 }
-          - { image: ibm, version: "1.10" }
           - { image: java, version: 8 }
           - { image: java, version: 11 }
           - { image: kubectl, version: 1.18 }

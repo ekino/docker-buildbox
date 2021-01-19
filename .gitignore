@@ -15,5 +15,4 @@ python/Dockerfile
 pynode/Dockerfile
 scoutsuite/Dockerfile
 terraform/Dockerfile
-ibm/Dockerfile
 tezosqa/Dockerfile

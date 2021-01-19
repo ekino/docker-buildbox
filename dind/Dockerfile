@@ -6,7 +6,6 @@ ARG DOCKER_COMPOSE_VERSION
 ARG GLIBC_VERSION
 ARG PIPENV_VERSION
 ARG PIP_VERSION
-ARG IBM_CLI_VERSION
 ARG AZURE_CLI_VERSION
 ARG TASKFILE_VERSION
 ENV PYTHON_PIP_VERSION ${PIP_VERSION}
@@ -30,13 +29,6 @@ RUN echo "Install AWS" && \
     echo "Install Azure CLI" && \
     pip install azure-cli==${AZURE_CLI_VERSION} && \
     echo "Done install Azure CLI" && \
-
-    echo "Install IBMCloud CLI" && \
-    wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/${IBM_CLI_VERSION}/binaries/IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz && \
-    tar -xzf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz  -C /usr/local/bin --strip-components 1 IBM_Cloud_CLI/ibmcloud && \
-    rm -rf IBM_Cloud_CLI_${IBM_CLI_VERSION}_linux_amd64.tgz && \
-    ibmcloud plugin install container-registry && \
-    echo "Done install IBMCloud CLI" && \
 
     echo "Install Docker Compose" && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
