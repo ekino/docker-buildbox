@@ -172,7 +172,7 @@ java:
       JAVA_VERSION: jdk-11.0.9_11-debian-slim
 
 kubectl:
-  "1.18":
+  "1.20":
     test_config:
       cmd:
         - eksctl version
@@ -183,13 +183,13 @@ kubectl:
         - helm version
         - aws --version
     build_args:
-      EKSCTL_VERSION: 0.30.0
-      KUBECTL_VERSION: 1.18.10
+      EKSCTL_VERSION: 0.36.0
+      KUBECTL_VERSION: 1.20.2
       KUBECTX_VERSION: 0.9.1
-      KUBESCORE_VERSION: 1.9.0
+      KUBESCORE_VERSION: 1.10.0
       KUBEVAL_VERSION: 0.15.0
-      KUSTOMIZATION_VERSION: 3.8.5
-      HELM_VERSION: 3.3.4
+      KUSTOMIZATION_VERSION: 3.9.2
+      HELM_VERSION: 3.5.0
 
 node_test_config: &node_test_config
   cmd:
