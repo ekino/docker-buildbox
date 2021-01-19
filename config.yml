@@ -265,7 +265,7 @@ php_test_config: &php_test_config
     - composer --version
     - modd --version
     - php-cs-fixer --version
-    - security-checker --version
+    - security-checker -help
     - php /tmp/test.php
 
 php_build_args: &php_build_args
@@ -278,7 +278,7 @@ php_build_args: &php_build_args
   MUSL_VERSION: 1.1.24-r10
   PHP_CS_FIXER_VERSION: 2.18.0
   REDIS_VERSION: 5.3.2
-  SECURITY_CHECKER_VERSION: 6.0.3
+  SECURITY_CHECKER_VERSION: 1.0.0
   SSH2_VERSION: 1.2
   XDEBUG_VERSION: 2.9.8
 
@@ -309,7 +309,7 @@ php:
       MUSL_VERSION: 1.1.24-r10
       PHP_CS_FIXER_VERSION: 2.18.0
       REDIS_VERSION: 5.3.2
-      SECURITY_CHECKER_VERSION: 6.0.3
+      SECURITY_CHECKER_VERSION: 1.0.0
       SSH2_VERSION: 1.2
       XDEBUG_VERSION: 3.0.2
     test_config: *php_test_config
