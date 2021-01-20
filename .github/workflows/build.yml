@@ -38,7 +38,6 @@ jobs:
           - { image: platformsh, version: "3.50" }
           - { image: pynode, version: 3.7 }
           - { image: pynode, version: 3.8 }
-          - { image: python, version: 2.7 }
           - { image: python, version: 3.7 }
           - { image: python, version: 3.8 }
           - { image: python, version: 3.9 }
