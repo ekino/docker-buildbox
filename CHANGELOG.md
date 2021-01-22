@@ -9,6 +9,7 @@ Versions
 * Remove python 2.7 image (now EOL)
 * Add a terraform 0.14.x image, remove multiple 13.x versions, updated associated tools
 * Upgrade Kubectl to 1.20, along with associated k8s tools
+* Update Sonar client to 4.6.x
 
 2020-12-31
 -----------
