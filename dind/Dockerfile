@@ -1,4 +1,4 @@
-FROM docker:19.03.8-dind
+FROM docker:20.10.2-dind
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG CI_HELPER_VERSION
