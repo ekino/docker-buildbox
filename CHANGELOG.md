@@ -3,6 +3,7 @@ Versions
 
 2021-02-29
 -----------
+* Update node base image to debian:10.7-slim
 
 2021-01-25
 -----------
