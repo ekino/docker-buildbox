@@ -5,6 +5,7 @@ Versions
 -----------
 * Update node base image to debian:10.7-slim
 * Update kubectl base image to alpine:3.13
+* Update dind base image to docker:20.10.2-dind
 
 2021-01-25
 -----------
