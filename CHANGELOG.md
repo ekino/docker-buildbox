@@ -4,6 +4,7 @@ Versions
 2021-02-29
 -----------
 * Update node base image to debian:10.7-slim
+* Update kubectl base image to alpine:3.13
 
 2021-01-25
 -----------
