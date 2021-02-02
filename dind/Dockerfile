@@ -8,6 +8,7 @@ ARG PIPENV_VERSION
 ARG PIP_VERSION
 ARG AZURE_CLI_VERSION
 ARG TASKFILE_VERSION
+ARG TRIVY_VERSION
 ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
 RUN echo "Install AWS" && \
@@ -35,6 +36,12 @@ RUN echo "Install AWS" && \
     curl -sSL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
     docker-compose --version && \
+    echo "Done install Docker Compose" && \
+    echo "Install Trivy" && \
+    apk add -q curl && \
+    curl -sSL https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -o trivy_Linux-64bit.tar.gz && \
+    tar -zxf trivy_Linux-64bit.tar.gz -C /usr/bin/ && \
+    echo "Done install Trivy" && \
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \

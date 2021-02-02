@@ -103,6 +103,7 @@ dind:
       PIP_VERSION: 18.1
       PIPENV_VERSION: 2018.10.13
       AZURE_CLI_VERSION: 2.10.1
+      TRIVY_VERSION: "0.15.0"
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
@@ -112,6 +113,7 @@ dind:
         - docker --version
         - docker-compose --version
         - task --version
+        - trivy --version
 
 golang:
   "1.15":
