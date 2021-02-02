@@ -17,38 +17,38 @@ jobs:
     strategy:
       matrix:
         include:
-          - { image: ansible, version: 2.9 }
-          - { image: aws, version: 1 }
-          - { image: awslnx-systemd, version: 2 }
-          - { image: azure, version: 2 }
-          - { image: bitcoind, version: 0.20.0 }
-          - { image: chrome, version: 1 }
-          - { image: dind, version: 1 }
-          - { image: golang, version: 1.15 }
-          - { image: java, version: 8 }
-          - { image: java, version: 11 }
-          - { image: kubectl, version: "1.20" }
-          - { image: node, version: 10 }
-          - { image: node, version: 12 }
-          - { image: node, version: 14 }
-          - { image: php, version: 7.2 }
-          - { image: php, version: 7.3 }
-          - { image: php, version: 7.4 }
-          - { image: php, version: "8.0" }
-          - { image: platformsh, version: "3.64" }
-          - { image: pynode, version: 3.7 }
-          - { image: pynode, version: 3.8 }
-          - { image: python, version: 3.7 }
-          - { image: python, version: 3.8 }
-          - { image: python, version: 3.9 }
-          - { image: react-native, version: 2 }
-          - { image: ruby, version: 2.6 }
-          - { image: scoutsuite, version: "5.10" }
-          - { image: sonar, version: 4.6 }
-          - { image: terraform, version: "0.12.30" }
-          - { image: terraform, version: 0.13.6 }
-          - { image: terraform, version: 0.14.5 }
-          - { image: tezosqa, version: 0.1 }
+          - { image: ansible, version: 2.9, trivy_exit_code: '1' }
+          - { image: aws, version: 1, trivy_exit_code: '1'  }
+          - { image: awslnx-systemd, version: 2, trivy_exit_code: '1'  }
+          - { image: azure, version: 2, trivy_exit_code: '1'  }
+          - { image: bitcoind, version: 0.20.0, trivy_exit_code: '1'  }
+          - { image: chrome, version: 1, trivy_exit_code: '0'  }
+          - { image: dind, version: 1, trivy_exit_code: '1'  }
+          - { image: golang, version: 1.15, trivy_exit_code: '1'  }
+          - { image: java, version: 8, trivy_exit_code: '1'  }
+          - { image: java, version: 11, trivy_exit_code: '1'  }
+          - { image: kubectl, version: "1.20", trivy_exit_code: '1'  }
+          - { image: node, version: 10, trivy_exit_code: '1'  }
+          - { image: node, version: 12, trivy_exit_code: '1'  }
+          - { image: node, version: 14, trivy_exit_code: '1'  }
+          - { image: php, version: 7.2, trivy_exit_code: '1'  }
+          - { image: php, version: 7.3, trivy_exit_code: '1'  }
+          - { image: php, version: 7.4, trivy_exit_code: '1'  }
+          - { image: php, version: "8.0", trivy_exit_code: '1'  }
+          - { image: platformsh, version: "3.64", trivy_exit_code: '1'  }
+          - { image: pynode, version: 3.7, trivy_exit_code: '1'  }
+          - { image: pynode, version: 3.8, trivy_exit_code: '1'  }
+          - { image: python, version: 3.7, trivy_exit_code: '1'  }
+          - { image: python, version: 3.8, trivy_exit_code: '0'  }
+          - { image: python, version: 3.9, trivy_exit_code: '1'  }
+          - { image: react-native, version: 2, trivy_exit_code: '0'  }
+          - { image: ruby, version: 2.6, trivy_exit_code: '1'  }
+          - { image: scoutsuite, version: "5.10", trivy_exit_code: '1'  }
+          - { image: sonar, version: 4.6, trivy_exit_code: '1'  }
+          - { image: terraform, version: "0.12.30", trivy_exit_code: '1'  }
+          - { image: terraform, version: 0.13.6, trivy_exit_code: '1'  }
+          - { image: terraform, version: 0.14.5, trivy_exit_code: '1'  }
+          - { image: tezosqa, version: 0.1, trivy_exit_code: '1'  }
 
     steps:
       - uses: actions/checkout@v2
@@ -61,8 +61,19 @@ jobs:
           pip install pip pipenv
           pipenv sync
       - name: Build and tests images
+        id: build
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           pipenv run python image_builder.py build -d --image ${{ matrix.image }} --version ${{ matrix.version }}
+          OUTPUT=$(pipenv run python image_builder.py getref --image ${{ matrix.image }} --version ${{ matrix.version }} | tail -1)
+          echo "::set-output name=imageref::$OUTPUT"
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.build.outputs.imageref }}
+          format: 'table'
+          exit-code: ${{ matrix.trivy_exit_code }}
+          ignore-unfixed: true
+          severity: 'CRITICAL'

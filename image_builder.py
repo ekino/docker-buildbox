@@ -59,12 +59,46 @@ def build(image, version, debug):
         docker.push_image(image_fullname)
 
 
+@click.command()
+@click.option("--image", "-i", default="aws", help="image to build")
+@click.option("--version", "-v", default="1", help="image version")
+@click.option("--debug", "-d", is_flag=True, help="debug")
+def getref(image, version, debug):
+
+    # Get env variables
+    env_conf = config.load_ci_env(debug)
+
+    # Get image configuration
+    try:
+        image_conf = config.load_image_config(image, version)
+    except KeyError as e:
+        print(e)
+        exit(1)
+
+    # Render dockerfile if templatized
+    if "template_vars" in image_conf:
+        template = jinja2.Environment(loader=jinja2.FileSystemLoader(image)).get_template(
+            "Dockerfile.j2"
+        )
+        # Save in image/Dockerfile
+        with open(f"{image}/Dockerfile", "w") as f:
+            f.write(template.render(image_conf["template_vars"]))
+            f.close()
+
+    # Build image fullname (registry + repository + tag)
+    image_fullname = config.get_image_fullname(
+        image, version, image_conf, env_conf)
+
+    return click.echo(image_fullname)
+
+
 @click.group()
 def cli():
     pass
 
 
 cli.add_command(build)
+cli.add_command(getref)
 
 
 if __name__ == "__main__":
