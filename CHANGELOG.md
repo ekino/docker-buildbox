@@ -7,6 +7,7 @@ Versions
 * Update kubectl base image to alpine:3.13
 * Update dind base image to docker:20.10.2-dind
 * Adding trivy to the dind image
+* Upgrade Java 8 to 8u282 and 11 to 11.0.10
 
 2021-01-25
 -----------
