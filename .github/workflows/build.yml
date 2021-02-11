@@ -22,7 +22,7 @@ jobs:
           - { image: awslnx-systemd, version: 2, trivy_exit_code: '1'  }
           - { image: azure, version: 2, trivy_exit_code: '1'  }
           - { image: bitcoind, version: 0.20.0, trivy_exit_code: '1'  }
-          - { image: chrome, version: 1, trivy_exit_code: '0'  }
+          - { image: chrome, version: 1, trivy_exit_code: '1'  }
           - { image: dind, version: 1, trivy_exit_code: '1'  }
           - { image: golang, version: 1.15, trivy_exit_code: '1'  }
           - { image: java, version: 8, trivy_exit_code: '1'  }
@@ -39,9 +39,9 @@ jobs:
           - { image: pynode, version: 3.7, trivy_exit_code: '1'  }
           - { image: pynode, version: 3.8, trivy_exit_code: '1'  }
           - { image: python, version: 3.7, trivy_exit_code: '1'  }
-          - { image: python, version: 3.8, trivy_exit_code: '0'  }
+          - { image: python, version: 3.8, trivy_exit_code: '1'  }
           - { image: python, version: 3.9, trivy_exit_code: '1'  }
-          - { image: react-native, version: 2, trivy_exit_code: '0'  }
+          - { image: react-native, version: 2, trivy_exit_code: '1'  }
           - { image: ruby, version: 2.6, trivy_exit_code: '1'  }
           - { image: scoutsuite, version: "5.10", trivy_exit_code: '1'  }
           - { image: sonar, version: 4.6, trivy_exit_code: '1'  }
