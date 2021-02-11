@@ -10,6 +10,7 @@ Versions
 * Upgrade Java 8 to 8u282 and 11 to 11.0.10
 * Update platformsh base image to php:7.4-cli-alpine3.13
 * Update platformsh client to 3.64.x
+* Python : update base image versions
 
 2021-01-25
 -----------
