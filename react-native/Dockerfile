@@ -1,4 +1,4 @@
-FROM openjdk:8u171-jdk-slim
+FROM openjdk:8u282-jdk-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \

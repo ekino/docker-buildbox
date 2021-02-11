@@ -12,6 +12,7 @@ Versions
 * Update platformsh client to 3.64.x
 * Python : update base image versions
 * Chrome : update puppeteer to 1.13 to fix CVE
+* React-native : update base image to openjdk:8u282-jdk-slim (CVE fix)
 
 2021-01-25
 -----------
