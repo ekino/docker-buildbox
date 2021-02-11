@@ -22,7 +22,7 @@ RUN apk update && apk upgrade && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Puppeteer v1.11.0 works with Chromium 72.
-RUN yarn add puppeteer@1.11.0
+RUN yarn add puppeteer@1.13.0
 
 
 

@@ -11,6 +11,7 @@ Versions
 * Update platformsh base image to php:7.4-cli-alpine3.13
 * Update platformsh client to 3.64.x
 * Python : update base image versions
+* Chrome : update puppeteer to 1.13 to fix CVE
 
 2021-01-25
 -----------
