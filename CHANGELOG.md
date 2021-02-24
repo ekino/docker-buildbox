@@ -1,7 +1,16 @@
 Versions
 ========
 
-2021-02-29
+2021-02-24
+-----------
+* Upgrade PHP versions to 7.3.27, 7.4.15 and 8.0.2
+* Upgrade Composer version to 2.0.10 (not for PHP 7.2)
+* Upgrade Iconv version to 1.15-r3 (not for PHP 7.2)
+* Upgrade musl-dev version to 1.2.2-r0 (not for PHP 7.2)
+* Upgrade php-cs-fixer version to 2.18.2 (not for PHP 7.2)
+* Upgrade Xdebug version to version 3.0.3 (not for PHP 7.2)
+
+2021-01-29
 -----------
 * Update node base image to debian:10.7-slim
 * Update kubectl base image to alpine:3.13
