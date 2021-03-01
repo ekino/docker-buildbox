@@ -47,6 +47,8 @@ RUN echo "Starting ..." && \
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip && \
     pecl install apcu-${APCU_VERSION} && \
     pecl install memcached-${MEMCACHED_VERSION} && \
+    pecl install pcov && \
+    docker-php-ext-enable pcov && \
     docker-php-ext-enable memcached && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     if [ "$version" != "80" ]; then \

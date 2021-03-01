@@ -143,7 +143,8 @@ EOF
         $errors                    = [];
         $commonExtensionsExpected  = [
             'apcu', 'bcmath', 'blackfire', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'memcached', 'mysqli', 'pcntl',
-            'pdo_mysql', 'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'ssh2', 'xdebug', 'Zend OPcache', 'zip',
+            'pcov', 'pdo_mysql', 'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'ssh2', 'xdebug', 'Zend OPcache',
+            'zip',
         ];
         $unreadyNextMajorExtensions = ['ssh2'];
         $extensionsExpected        = \PHP_VERSION_ID < 80000 ? $commonExtensionsExpected
