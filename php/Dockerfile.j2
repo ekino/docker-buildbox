@@ -68,7 +68,11 @@ zend_extension=opcache.so \n\
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     curl -sSL https://github.com/xdebug/xdebug/archive/${XDEBUG_VERSION}.tar.gz | tar xz -C /tmp && \
     cd /tmp/xdebug-${XDEBUG_VERSION} && phpize && ./configure --enable-xdebug && make && make install && \
-    echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini && \
+    if [ "$version" = "72" ]; then \
+        echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini; \
+    else \
+        echo -e "zend_extension=xdebug.so \nxdebug.mode=coverage \n" > /usr/local/etc/php/conf.d/xdebug.ini; \
+    fi && \
     mkdir -p /tmp/blackfire-probe && \
     curl -A "Docker" -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version && \
     tar zxpf /tmp/blackfire-probe/blackfire-probe.tar.gz -C /tmp/blackfire-probe && \
