@@ -4,6 +4,7 @@ Versions
 2021-03-31
 -----------
 * add pcov in PHP images
+* add helmfile to kubectl images
 
 
 2021-02-28

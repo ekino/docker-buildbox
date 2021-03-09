@@ -8,6 +8,7 @@ ARG KUBESCORE_VERSION
 ARG KUBEVAL_VERSION
 ARG KUSTOMIZATION_VERSION
 ARG HELM_VERSION
+ARG HELMFILE_VERSION
 
 ENV PATH="${PATH}:/usr/bin"
 
@@ -47,3 +48,7 @@ RUN wget https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION
 RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     mv linux-amd64/helm /usr/local/bin/helm
+
+RUN wget https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 && \
+    chmod +x helmfile_linux_amd64 && \
+    mv helmfile_linux_amd64 /usr/bin/helmfile

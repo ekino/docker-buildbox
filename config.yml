@@ -184,6 +184,7 @@ kubectl:
         - kustomize version
         - helm version
         - aws --version
+        - helmfile --version
     build_args:
       EKSCTL_VERSION: 0.36.0
       KUBECTL_VERSION: 1.20.2
@@ -192,6 +193,7 @@ kubectl:
       KUBEVAL_VERSION: 0.15.0
       KUSTOMIZATION_VERSION: 3.9.2
       HELM_VERSION: 3.5.0
+      HELMFILE_VERSION: 0.138.6
 
 node_test_config: &node_test_config
   cmd:
