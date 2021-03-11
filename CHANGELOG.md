@@ -5,6 +5,7 @@ Versions
 -----------
 * add pcov in PHP images
 * add helmfile to kubectl images
+* Removing terraform from the azure image. Adding azure cli to the terraform image
 
 
 2021-02-28
