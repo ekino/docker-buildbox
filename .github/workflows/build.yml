@@ -24,7 +24,7 @@ jobs:
           - { image: bitcoind, version: 0.20.0 }
           - { image: chrome, version: 1 }
           - { image: dind, version: 1 }
-          - { image: golang, version: 1.15 }
+          - { image: golang, version: 1.16 }
           - { image: java, version: 8 }
           - { image: java, version: 11 }
           - { image: kubectl, version: "1.20" }
