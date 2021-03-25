@@ -47,7 +47,7 @@ jobs:
           - { image: sonar, version: 4.6 }
           - { image: terraform, version: "0.12.30" }
           - { image: terraform, version: 0.13.6 }
-          - { image: terraform, version: 0.14.5 }
+          - { image: terraform, version: 0.14.9 }
           - { image: tezosqa, version: 0.1 }
 
     steps:

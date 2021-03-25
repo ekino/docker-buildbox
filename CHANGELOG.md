@@ -18,6 +18,7 @@ Versions
 * Upgrade Infracost to 0.8.2
 * Add jq and bc to terraform image
 * Bumping kubectl to 1.20.5 along with misc kubernetes tools
+* Updating terraform 0.14.x image to 0.14.9
 
 2021-02-28
 -----------
