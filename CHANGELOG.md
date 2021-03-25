@@ -4,7 +4,7 @@ Versions
 2021-03-31
 -----------
 * add pcov in PHP images
-* add helmfile to kubectl images
+* add helmfile and helm diff plugin to kubectl images
 * Upgrade Golang version: 1.16.1
 * Upgrade Golang gitleaks version: 7.3.0
 * Upgrade Golang go-mod-upgrade version: 0.4.0
