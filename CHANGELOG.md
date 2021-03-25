@@ -15,6 +15,9 @@ Versions
 * Removing terraform from the azure image. Adding azure cli to the terraform image
 * Bumping Scoutsuite to 5.10.2
 * Bumping trivy to 0.16.0
+* Upgrade Infracost to 0.8.2
+* Add jq and bc to terraform image
+
 
 2021-02-28
 -----------

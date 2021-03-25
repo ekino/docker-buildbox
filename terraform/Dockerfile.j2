@@ -9,7 +9,7 @@ ARG INFRACOST_VERSION
 ARG AZURE_CLI_VERSION
 
 RUN apt-get update -qq \
-    && apt-get -y -qq install unzip wget git \
+    && apt-get -y -qq install unzip wget git jq bc \
     && pip install -U pip \
     && pip install awscli boto3 pipenv terraform-compliance==$TERRAFORM_COMPLIANCE_VERSION azure-cli==${AZURE_CLI_VERSION} \
     && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
