@@ -17,7 +17,7 @@ Versions
 * Bumping trivy to 0.16.0
 * Upgrade Infracost to 0.8.2
 * Add jq and bc to terraform image
-
+* Bumping kubectl to 1.20.5 along with misc kubernetes tools
 
 2021-02-28
 -----------
