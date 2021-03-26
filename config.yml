@@ -404,7 +404,7 @@ terraform:
       TERRAFORM_VERSION: 0.12.30
       TERRAGRUNT_VERSION: 0.27.1
       TERRAFORM_COMPLIANCE_VERSION: 1.3.12
-      INFRACOST_VERSION: 0.7.13
+      INFRACOST_VERSION: 0.8.2
       AZURE_CLI_VERSION: 2.10.1
     test_config: *terraform_tests
     template_vars:
@@ -414,7 +414,7 @@ terraform:
       TERRAFORM_VERSION: 0.13.6
       TERRAGRUNT_VERSION: 0.27.1
       TERRAFORM_COMPLIANCE_VERSION: 1.3.12
-      INFRACOST_VERSION: 0.7.13
+      INFRACOST_VERSION: 0.8.2
       AZURE_CLI_VERSION: 2.10.1
     test_config: *terraform_tests
     template_vars:
@@ -424,7 +424,7 @@ terraform:
       TERRAFORM_VERSION: 0.14.5
       TERRAGRUNT_VERSION: 0.27.1
       TERRAFORM_COMPLIANCE_VERSION: 1.3.12
-      INFRACOST_VERSION: 0.7.13
+      INFRACOST_VERSION: 0.8.2
       AZURE_CLI_VERSION: 2.10.1
     test_config: *terraform_tests
     template_vars:
