@@ -7,7 +7,7 @@ name = "pypi"
 pyyaml = "==5.4"
 click = "==7.0"
 docker = "==4.0.2"
-"jinja2" = "==2.10.1"
+"jinja2" = "==2.11.3"
 
 [dev-packages]
 
