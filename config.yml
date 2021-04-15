@@ -235,6 +235,13 @@ node:
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *node_test_config
 
+
+percy:
+  "1":
+    test_config:
+      cmd:
+        - percy --version
+
 php_test_config: &php_test_config
   volume: php:/tmp
   cmd:
