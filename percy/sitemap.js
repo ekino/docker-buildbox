@@ -50,6 +50,11 @@ async function loadSitemap(url) {
       break
     }
 
+    if (maxPages && i >= maxPages) {
+      console.log('[INFO] Reached maximum pages (%d), finishing.', maxPages);
+      break
+    }
+
     const url = parseUrl(pageReferences[i].loc)
     console.log('[INFO] Processing %s', url.href);
 
