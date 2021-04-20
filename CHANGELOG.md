@@ -1,6 +1,11 @@
 Versions
 ========
 
+2021-04-30
+----------
+* Upgrade Composer version to 2.0.12 (not for PHP 7.2)
+* Upgrade php-cs-fixer version to 2.18.5 (not for PHP 7.2)
+
 2021-03-31
 -----------
 * add pcov in PHP images
