@@ -33,15 +33,13 @@ async function loadSitemap(url) {
 
 
 (async() => {
-
   console.log('[INFO] Fetching sitemap');
   const pageReferences = await loadSitemap(process.env.SITEMAP_URL)
 
   console.log('[INFO] Found %d page references', pageReferences.length);
-  const maxPages = process.env.MAX_PAGES || 100
+  const maxPages = parseInt(process.env.MAX_PAGES || 100, 10)
   for (const i in pageReferences) {
-
-    if (maxPages && i >= maxPages) {
+    if (maxPages && parseInt(i, 10) >= maxPages) {
       console.log('[INFO] Reached maximum pages (%d), finishing.', maxPages);
       break
     }
