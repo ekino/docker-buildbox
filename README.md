@@ -151,6 +151,29 @@ https://hub.docker.com/r/ekino/ci-node/tags
 
 Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS Cli.
 
+### Percy
+https://hub.docker.com/r/ekino/ci-percy/tags
+
+Contains [Puppeteer](https://developers.google.com/web/tools/puppeteer) and [Percy](https://percy.io/) for visual regression testing against a sitemap XML file.
+
+Example usage in GitLab-CI YAML:
+
+    take-snapshots:
+      image: ekino/ci-percy:latest
+      script:
+        - percy exec -- node /sitemap.js
+      variables:
+        PERCY_TOKEN: ${MY_PERCY_TOKEN}
+        SITEMAP_URL: my-sitemap.xml
+        PERCY_BRANCH: 'my-branch'
+        MAX_PAGES: 10
+
+- Variables `PERCY_TOKEN` and `SITEMAP_URL` are required.
+- `SITEMAP_URL` can be a local file path or an absolute URL. It must contain a valid sitemap XML schema. Sitemap index files are not supported.
+- Optional `PERCY_BRANCH` labels the test snapshots.
+- Optional `MAX_PAGES` defaults to 100.
+
+
 ### PHP
 https://hub.docker.com/r/ekino/ci-php/tags
 
