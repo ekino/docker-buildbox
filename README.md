@@ -154,24 +154,28 @@ Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS C
 ### Percy
 https://hub.docker.com/r/ekino/ci-percy/tags
 
-Contains [Puppeteer](https://developers.google.com/web/tools/puppeteer) and [Percy](https://percy.io/) for visual regression testing against a sitemap XML file.
+Contains [Puppeteer](https://developers.google.com/web/tools/puppeteer) and [Percy](https://percy.io/) for visual regression testing against a sitemap XML file. Includes a `sitemap.js` script that processes the sitemap and captures Percy screenshots.
 
 Example usage in GitLab-CI YAML:
 
     take-snapshots:
       image: ekino/ci-percy:latest
       script:
-        - percy exec -- node /sitemap.js
+        - percy exec --config ./percy.yml -- node /sitemap.js
       variables:
         PERCY_TOKEN: ${MY_PERCY_TOKEN}
         SITEMAP_URL: my-sitemap.xml
         PERCY_BRANCH: 'my-branch'
         MAX_PAGES: 10
+        PAGE_LOAD_DELAY: 3000
+
+> NB: You'll probably need to include a `percy.yml` config file, in order to pass a whitelist of asset / CDN URLs (by default Percy only captures assets from the hostname that the snapshot was taken on). If you don't have a config file, the `--config` param above should be omitted. For more info on config options see [Percy SDK docs](https://docs.percy.io/docs/sdk-configuration#a-complete-config).
 
 - Variables `PERCY_TOKEN` and `SITEMAP_URL` are required.
 - `SITEMAP_URL` can be a local file path or an absolute URL. It must contain a valid sitemap XML schema. Sitemap index files are not supported.
 - Optional `PERCY_BRANCH` labels the test snapshots.
 - Optional `MAX_PAGES` defaults to 100.
+- Optional `PAGE_LOAD_DELAY` pauses each snapshot to allow the page to load, and defaults to 5000 (milliseconds).
 
 
 ### PHP
