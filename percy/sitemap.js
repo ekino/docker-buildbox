@@ -38,6 +38,7 @@ async function loadSitemap(url) {
 
   console.log('[INFO] Found %d page references', pageReferences.length);
   const maxPages = parseInt(process.env.MAX_PAGES || 100, 10)
+  const pageLoadDelay = parseInt(process.env.PAGE_LOAD_DELAY || 5000, 10)
   for (const i in pageReferences) {
     if (maxPages && parseInt(i, 10) >= maxPages) {
       console.log('[INFO] Reached maximum pages (%d), finishing.', maxPages);
@@ -55,7 +56,7 @@ async function loadSitemap(url) {
     await PercyScript.run(async (page, percySnapshot) => {
         await page.goto(url.href);
         // ensure the page has loaded before capturing a snapshot
-        // await page.waitForSelector("body");
+        await page.waitForTimeout(pageLoadDelay);
         await percySnapshot(url.pathname);
     });
   }
