@@ -5,6 +5,7 @@ Versions
 ----------
 * Upgrade Composer version to 2.0.12 (not for PHP 7.2)
 * Upgrade php-cs-fixer version to 2.18.5 (not for PHP 7.2)
+* Added a new Percy image
 
 2021-03-31
 -----------
