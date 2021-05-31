@@ -4,7 +4,6 @@
 .vscode
 
 # Result of template processing
-aws/Dockerfile
 awslnx-systemd/Dockerfile
 azure/Dockerfile
 golang/Dockerfile
