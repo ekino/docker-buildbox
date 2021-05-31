@@ -399,7 +399,7 @@ sonar:
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       GLIBC_VERSION: 2.32-r0
-      SONARSCANNER_VERSION: 4.6.0.2311
+      SONARSCANNER_VERSION: 4.6.2.2472
       ZLIB_VERSION: 1.2.11-3
     test_config:
       cmd:
