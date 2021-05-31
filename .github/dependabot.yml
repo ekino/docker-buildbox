@@ -5,6 +5,18 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+  # Ansible
+  - package-ecosystem: "docker"
+    directory: "/ansible"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "ansible"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Bitcoind
   - package-ecosystem: "docker"
     directory: "/bitcoind"

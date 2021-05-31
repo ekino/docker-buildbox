@@ -4,7 +4,6 @@
 .vscode
 
 # Result of template processing
-ansible/Dockerfile
 aws/Dockerfile
 awslnx-systemd/Dockerfile
 azure/Dockerfile
