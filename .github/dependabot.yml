@@ -7,100 +7,133 @@ updates:
       interval: "weekly"
   # Bitcoind
   - package-ecosystem: "docker"
-    directory: "/bitcoind/"
+    directory: "/bitcoind"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "bitcoind"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Chrome
   - package-ecosystem: "docker"
-    directory: "/chrome/"
+    directory: "/chrome"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "chrome"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # DIND
   - package-ecosystem: "docker"
-    directory: "/dind/"
+    directory: "/dind"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "dind"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Kubectl
   - package-ecosystem: "docker"
-    directory: "/kubectl/"
+    directory: "/kubectl"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "kubectl"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Node
   - package-ecosystem: "docker"
-    directory: "/node/"
+    directory: "/node"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "node"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Percy
   - package-ecosystem: "docker"
-    directory: "/percy/"
+    directory: "/percy"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "percy"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Platformsh
   - package-ecosystem: "docker"
-    directory: "/platformsh/"
+    directory: "/platformsh"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "platformsh"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Python
   - package-ecosystem: "docker"
-    directory: "/python/"
+    directory: "/python"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "python"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # React native
   - package-ecosystem: "docker"
-    directory: "/react-native/"
+    directory: "/react-native"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "react-native"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Ruby
   - package-ecosystem: "docker"
-    directory: "/ruby/"
+    directory: "/ruby"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "ruby"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Sonar
   - package-ecosystem: "docker"
-    directory: "/sonar/"
+    directory: "/sonar"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
       - "sonar"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
