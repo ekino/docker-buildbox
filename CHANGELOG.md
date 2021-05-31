@@ -6,6 +6,7 @@ Versions
 * Updating azure-cli to 2.24.0
 * Bumping sonar to 4.6.2
 * Bumping python base images to their latest versions
+* Updating kubectl to 1.21, along with all associated tools
 
 2021-04-30
 ----------
