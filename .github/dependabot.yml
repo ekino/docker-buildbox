@@ -86,9 +86,6 @@ updates:
       - "dependencies"
       - "docker"
       - "platformsh"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
   # Python
   - package-ecosystem: "docker"
     directory: "/python"
