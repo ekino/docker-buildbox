@@ -4,6 +4,7 @@ Versions
 2021-05-31
 ----------
 * Updating azure-cli to 2.24.0
+* Bumping sonar to 4.6.2
 
 2021-04-30
 ----------
