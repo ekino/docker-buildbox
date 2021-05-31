@@ -5,3 +5,102 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+  # Bitcoind
+  - package-ecosystem: "docker"
+    directory: "/bitcoind/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "bitcoind"
+  # Chrome
+  - package-ecosystem: "docker"
+    directory: "/chrome/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "chrome"
+  # DIND
+  - package-ecosystem: "docker"
+    directory: "/dind/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "dind"
+  # Kubectl
+  - package-ecosystem: "docker"
+    directory: "/kubectl/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "kubectl"
+  # Node
+  - package-ecosystem: "docker"
+    directory: "/node/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "node"
+  # Percy
+  - package-ecosystem: "docker"
+    directory: "/percy/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "percy"
+  # Platformsh
+  - package-ecosystem: "docker"
+    directory: "/platformsh/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "platformsh"
+  # Python
+  - package-ecosystem: "docker"
+    directory: "/python/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "python"
+  # React native
+  - package-ecosystem: "docker"
+    directory: "/react-native/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "react-native"
+  # Ruby
+  - package-ecosystem: "docker"
+    directory: "/ruby/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "ruby"
+  # Sonar
+  - package-ecosystem: "docker"
+    directory: "/sonar/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "sonar"
