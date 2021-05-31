@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:16-alpine
 LABEL maintainer="Guillaume AMAT <guillaume.amat@ekino.com>"
 
 ARG CI_HELPER_VERSION
