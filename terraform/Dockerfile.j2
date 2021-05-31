@@ -25,3 +25,6 @@ RUN wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGR
 RUN wget https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-amd64.tar.gz -O infracost.tar.gz \
     && tar xvf infracost.tar.gz \
     && mv infracost-linux-amd64 /usr/bin/infracost
+
+RUN wget https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh -O /opt/diff.sh \
+    && chmod +x /opt/diff.sh
