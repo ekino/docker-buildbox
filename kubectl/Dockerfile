@@ -38,7 +38,7 @@ RUN wget https://github.com/zegl/kube-score/releases/download/v${KUBESCORE_VERSI
     chmod +x kube-score_${KUBESCORE_VERSION}_linux_amd64 && \
     mv kube-score_${KUBESCORE_VERSION}_linux_amd64 /usr/bin/kube-score
 
-RUN wget https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz && \
+RUN wget https://github.com/instrumenta/kubeval/releases/download/v${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz && \
     tar xf kubeval-linux-amd64.tar.gz && \
     mv kubeval /usr/local/bin/kubeval
 
