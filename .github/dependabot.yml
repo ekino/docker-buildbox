@@ -17,6 +17,18 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  # AWS
+  - package-ecosystem: "docker"
+    directory: "/aws"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "aws"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Bitcoind
   - package-ecosystem: "docker"
     directory: "/bitcoind"
