@@ -8,5 +8,4 @@ java/Dockerfile
 php/Dockerfile
 python/Dockerfile
 pynode/Dockerfile
-terraform/Dockerfile
 tezosqa/Dockerfile
