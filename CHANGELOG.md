@@ -1,6 +1,10 @@
 Versions
 ========
 
+2021-05-31
+----------
+* Updating azure-cli to 2.24.0
+
 2021-04-30
 ----------
 * Upgrade Composer version to 2.0.12 (not for PHP 7.2)
