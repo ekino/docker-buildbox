@@ -4,7 +4,6 @@
 .vscode
 
 # Result of template processing
-awslnx-systemd/Dockerfile
 azure/Dockerfile
 golang/Dockerfile
 java/Dockerfile

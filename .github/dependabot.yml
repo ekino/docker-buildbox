@@ -29,6 +29,18 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  # awslnx-systemd
+  - package-ecosystem: "docker"
+    directory: "/awslnx-systemd"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "awslnx-systemd"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Bitcoind
   - package-ecosystem: "docker"
     directory: "/bitcoind"
