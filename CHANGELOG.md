@@ -7,6 +7,7 @@ Versions
 * Bumping sonar to 4.6.2
 * Bumping python base images to their latest versions
 * Updating kubectl to 1.21, along with all associated tools
+* Adding terraform 15.x image. Bumping other minor versions to the latest tag
 
 2021-04-30
 ----------
