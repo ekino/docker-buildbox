@@ -5,6 +5,7 @@ Versions
 ----------
 * Updating azure-cli to 2.24.0
 * Bumping sonar to 4.6.2
+* Bumping python base images to their latest versions
 
 2021-04-30
 ----------
