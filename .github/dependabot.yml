@@ -146,6 +146,18 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  # Scoutsuite
+  - package-ecosystem: "docker"
+    directory: "/scoutsuite"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "scoutsuite"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Sonar
   - package-ecosystem: "docker"
     directory: "/sonar"
