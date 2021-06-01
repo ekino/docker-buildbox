@@ -1,6 +1,10 @@
 Versions
 ========
 
+2021-06-30
+----------
+* Dropping terraform 12 support
+
 2021-05-31
 ----------
 * Updating azure-cli to 2.24.0
