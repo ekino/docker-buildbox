@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.9.5-slim-buster
 
 LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
