@@ -403,8 +403,6 @@ terraform:
       INFRACOST_VERSION: 0.8.7
       AZURE_CLI_VERSION: 2.24.0
     test_config: *terraform_tests
-    template_vars:
-      BASE_IMAGE_VERSION: 3.8
   "0.13.7":
     build_args:
       TERRAFORM_VERSION: 0.13.7
@@ -413,8 +411,6 @@ terraform:
       INFRACOST_VERSION: 0.8.7
       AZURE_CLI_VERSION: 2.24.0
     test_config: *terraform_tests
-    template_vars:
-      BASE_IMAGE_VERSION: 3.8
   "0.14.11":
     build_args:
       TERRAFORM_VERSION: 0.14.11
@@ -423,8 +419,6 @@ terraform:
       INFRACOST_VERSION: 0.8.7
       AZURE_CLI_VERSION: 2.24.0
     test_config: *terraform_tests
-    template_vars:
-      BASE_IMAGE_VERSION: 3.8
   "0.15.4":
     build_args:
       TERRAFORM_VERSION: 0.15.4
@@ -433,8 +427,6 @@ terraform:
       INFRACOST_VERSION: 0.8.7
       AZURE_CLI_VERSION: 2.24.0
     test_config: *terraform_tests
-    template_vars:
-      BASE_IMAGE_VERSION: 3.8
 
 tezosqa:
   "0.1":
