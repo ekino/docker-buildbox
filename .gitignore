@@ -4,7 +4,6 @@
 .vscode
 
 # Result of template processing
-azure/Dockerfile
 golang/Dockerfile
 java/Dockerfile
 php/Dockerfile
