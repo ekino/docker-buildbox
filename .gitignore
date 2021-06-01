@@ -11,6 +11,5 @@ java/Dockerfile
 php/Dockerfile
 python/Dockerfile
 pynode/Dockerfile
-scoutsuite/Dockerfile
 terraform/Dockerfile
 tezosqa/Dockerfile

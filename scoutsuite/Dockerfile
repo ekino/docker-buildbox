@@ -1,4 +1,4 @@
-FROM python:{{ BASE_IMAGE_VERSION }}-slim-buster
+FROM python:3.8-slim-buster
 
 ARG SCOUTSUITE_VERSION
 
