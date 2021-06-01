@@ -1,0 +1,8 @@
+versions:
+  "0.20.0":
+    build_args:
+      BITCOIN_VERSION: 0.20.0
+      BITCOIN_SHA256: 35ec10f87b6bc1e44fd9cd1157e5dfa483eaf14d7d9a9c274774539e7824c427
+    test_config:
+      cmd:
+        - bitcoind --version

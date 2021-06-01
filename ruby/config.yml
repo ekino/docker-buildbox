@@ -1,0 +1,9 @@
+versions:
+  "2.6":
+    build_args:
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+    test_config:
+      cmd:
+        - bundle --version
+        - *ci_helper_test
+        - ruby --version

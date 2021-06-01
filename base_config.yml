@@ -1,0 +1,8 @@
+---
+docker_hub_namespace: &docker_hub_namespace ekino
+
+# Common build_vars
+CI_HELPER_VERSION: &CI_HELPER_VERSION 0.0.6
+ci_helper_test: &ci_helper_test ci-helper version -e
+MODD_VERSION: &MODD_VERSION 0.5
+TASKFILE_VERSION: &TASKFILE_VERSION 3.2.2

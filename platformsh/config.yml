@@ -1,0 +1,11 @@
+versions:
+  "3.64":
+    build_args:
+      PLATFORMSH_CLI_VERSION: "3.64.6"
+      PLATFORMSH_CLI_SHASUM: "66dfabcaeceda58df9dfdf71c1a6110034e907c834b908298f37c5be2ccdd638"
+    test_config:
+      cmd:
+        - php --version
+        - platform --version
+        - python --version
+        - pip --version
