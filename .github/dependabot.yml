@@ -89,6 +89,18 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  # Golang
+  - package-ecosystem: "docker"
+    directory: "/golang"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "golang"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Kubectl
   - package-ecosystem: "docker"
     directory: "/kubectl"
