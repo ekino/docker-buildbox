@@ -1,4 +1,4 @@
-FROM ruby:2.6.3-alpine
+FROM ruby:2.6.7-alpine
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG CI_HELPER_VERSION
