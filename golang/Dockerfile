@@ -1,4 +1,4 @@
-FROM golang:1.16.1
+FROM golang:1.16.4
 LABEL maintainer="Raphaël Benitte <raphael.benitte@ekino.com>"
 
 ARG CI_HELPER_VERSION
