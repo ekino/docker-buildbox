@@ -1,4 +1,4 @@
-FROM amazonlinux:{{ BASE_IMAGE_VERSION }}
+FROM amazonlinux:2.0.20190508
 LABEL maintainer="Maxime Sibellas"
 ENV container=docker
 
