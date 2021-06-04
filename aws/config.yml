@@ -1,0 +1,13 @@
+versions:
+  "1":
+    build_args:
+      TASKFILE_VERSION: *TASKFILE_VERSION
+    test_config:
+      cmd:
+        - aws --version
+        - pip --version
+        - pipenv --version
+        - git --version
+        - rsync --version
+        - zip --version
+        - task --version

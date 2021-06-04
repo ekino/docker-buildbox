@@ -1,0 +1,6 @@
+versions:
+  "2":
+    test_config:
+      cmd:
+        - python --version
+        - pip --version
