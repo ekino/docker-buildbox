@@ -4,6 +4,7 @@ Versions
 2021-06-30
 ----------
 * Dropping terraform 12 support
+* Upgrade PHP musl-dev version to 1.2.2-r1 (not for PHP 7.2)
 
 2021-05-31
 ----------
