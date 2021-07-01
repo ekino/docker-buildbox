@@ -5,6 +5,7 @@ Versions
 ----------
 * Dropping terraform 12 support
 * Upgrade PHP musl-dev version to 1.2.2-r1 (not for PHP 7.2)
+* Creating terraform 1.0.1 image
 
 2021-05-31
 ----------

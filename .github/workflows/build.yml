@@ -51,6 +51,7 @@ jobs:
           - { image: terraform, version: 0.13.7 }
           - { image: terraform, version: 0.14.11 }
           - { image: terraform, version: 0.15.4 }
+          - { image: terraform, version: 1.0.1 }
           - { image: tezosqa, version: 0.1 }
 
     steps:
