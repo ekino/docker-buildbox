@@ -3,7 +3,9 @@ Versions
 
 2021-06-30
 ----------
+* bumping base image versions for Ruby, Ansible, AWS, Scoutsuite, Awslnx-systemd, Azure, Golang, Terraform, dind, sonar, kubectl, node
 * Dropping terraform 12 support
+* Python : misc dependencies updates
 * Upgrade PHP musl-dev version to 1.2.2-r1 (not for PHP 7.2)
 * Creating terraform 1.0.1 image
 
