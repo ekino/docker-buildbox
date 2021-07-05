@@ -1,4 +1,4 @@
-FROM php:8.0.7-cli-alpine3.13
+FROM php:8.1.0alpha2-cli-alpine3.13
 LABEL maintainer="Maxime Sibellas<maxime.sibellas@ekino.com>"
 
 ARG PLATFORMSH_CLI_VERSION
