@@ -3,6 +3,7 @@ Versions
 2021-07
 -------
 * bumping image version for bitcoind to 0.21.1 
+* adding postgresql-client to PHP images
 
 2021-06-30
 ----------
