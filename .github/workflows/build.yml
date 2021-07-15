@@ -5,6 +5,8 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - ${{ matrix.image }}
   release:
     types: [published]
   schedule:
