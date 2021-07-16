@@ -15,3 +15,4 @@ RUN apk add --update -q --no-cache bash build-base curl git libffi-dev make open
 # Install the Platform.sh CLI
 ADD install-cli.sh .
 RUN bash ./install-cli.sh ${PLATFORMSH_CLI_VERSION} ${PLATFORMSH_CLI_SHASUM}
+RUN echo "foo"
