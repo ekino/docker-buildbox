@@ -8,3 +8,4 @@ versions:
         - pip --version
         - ansible --version
         - ansible-playbook --version
+        - echo "foo"
