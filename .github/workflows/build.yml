@@ -11,48 +11,38 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  generate_matrix:
+    runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Set up Pipenv
+        run: |
+          pip install pip pipenv
+          pipenv sync
+      - name: Run script
+        id: run_script
+        run: echo "::set-output name=matrix::$(pipenv run python matrix_generator.py)"
+
+    outputs:
+      matrix: ${{ steps.run_script.outputs.matrix }}
+
+  build:
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
+    needs: generate_matrix
+
     strategy:
-      matrix:
-        include:
-          - { image: ansible, version: 2.9 }
-          - { image: aws, version: 1 }
-          - { image: awslnx-systemd, version: 2 }
-          - { image: azure, version: 2 }
-          - { image: bitcoind, version: 0.21.1 }
-          - { image: chrome, version: 1 }
-          - { image: dind, version: 1 }
-          - { image: golang, version: 1.16 }
-          - { image: java, version: 8 }
-          - { image: java, version: 11 }
-          - { image: kubectl, version: "1.21" }
-          - { image: node, version: 10 }
-          - { image: node, version: 12 }
-          - { image: node, version: 14 }
-          - { image: percy, version: 1 }
-          - { image: php, version: 7.2 }
-          - { image: php, version: 7.3 }
-          - { image: php, version: 7.4 }
-          - { image: php, version: "8.0" }
-          - { image: platformsh, version: "3.67" }
-          - { image: pynode, version: 3.7 }
-          - { image: pynode, version: 3.8 }
-          - { image: python, version: 3.7 }
-          - { image: python, version: 3.8 }
-          - { image: python, version: 3.9 }
-          - { image: react-native, version: 2 }
-          - { image: ruby, version: 2.6 }
-          - { image: scoutsuite, version: "5.10" }
-          - { image: sonar, version: 4.6 }
-          - { image: terraform, version: 0.13.7 }
-          - { image: terraform, version: 0.14.11 }
-          - { image: terraform, version: 0.15.4 }
-          - { image: terraform, version: 1.0.1 }
-          - { image: tezosqa, version: 0.1 }
+      matrix: ${{fromJSON(needs.generate_matrix.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v2
