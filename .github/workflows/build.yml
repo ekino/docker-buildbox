@@ -38,7 +38,7 @@ jobs:
           - { image: php, version: 7.3 }
           - { image: php, version: 7.4 }
           - { image: php, version: "8.0" }
-          - { image: platformsh, version: "3.64" }
+          - { image: platformsh, version: "3.67" }
           - { image: pynode, version: 3.7 }
           - { image: pynode, version: 3.8 }
           - { image: python, version: 3.7 }
