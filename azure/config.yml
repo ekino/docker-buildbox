@@ -1,7 +1,7 @@
 versions:
   "2":
     build_args:
-      AZURE_CLI_VERSION: 2.24.0
+      AZURE_CLI_VERSION: 2.26.1
     test_config:
       cmd:
         - az --version
