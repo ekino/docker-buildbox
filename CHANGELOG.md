@@ -5,6 +5,7 @@ Versions
 * bumping image version for bitcoind to 0.21.1
 * adding postgresql-client to PHP images
 * platformSh : bumping client to 3.67.x
+* ansible : bumping to latest 2.9.x release
 
 2021-06-30
 ----------
