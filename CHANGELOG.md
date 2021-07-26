@@ -7,6 +7,7 @@ Versions
 * platformSh : bumping client to 3.67.x
 * ansible : bumping to latest 2.9.x release
 * azure : bumping azure-cli version
+* kubectl : bumping kubectl, kuztomize & other tools' versions
 
 2021-06-30
 ----------
