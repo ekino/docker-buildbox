@@ -6,12 +6,19 @@ import yaml
 from git import Repo
 
 matrix = {"include": []}
+excluded_files = [  # Changes to those files shouldn't trigger a build
+    '.gitignore',
+    'CHANGELOG.md',
+    'README.md',
+]
 
 
 def get_diff_files_list():
     repo = Repo('.')
     modified_files = repo.commit("origin/master").diff(repo.commit())
     changedFiles = [item.a_path for item in modified_files]
+    changedFiles = [
+        file for file in changedFiles if file not in excluded_files]
     return changedFiles
 
 
