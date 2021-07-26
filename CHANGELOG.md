@@ -6,6 +6,7 @@ Versions
 * adding postgresql-client to PHP images
 * platformSh : bumping client to 3.67.x
 * ansible : bumping to latest 2.9.x release
+* azure : bumping azure-cli version
 
 2021-06-30
 ----------
