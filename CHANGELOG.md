@@ -9,6 +9,7 @@ Versions
 * azure : bumping azure-cli version
 * kubectl : bumping kubectl, kuztomize & other tools' versions
 * python : bumping base images minor versions
+* terraform : bumping terraform minor versions, along with terragrunt & associated tools
 
 2021-06-30
 ----------
