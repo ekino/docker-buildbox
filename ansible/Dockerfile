@@ -1,7 +1,7 @@
 FROM python:3.9.6-slim-buster
 
-ARG ANSIBLE_VERSION
+ADD requirements.txt .
 
-RUN pip install ansible==${ANSIBLE_VERSION} pipenv awscli boto3 && \
-    pip install -U pip && \
+RUN pip install -U pip pipenv boto3 awscli && \
+    pip install -r requirements.txt &&  \
     rm -rf /var/cache/apk/*

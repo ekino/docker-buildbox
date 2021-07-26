@@ -1,6 +1,7 @@
 FROM python:3.9.6-slim-buster
 
-ARG SCOUTSUITE_VERSION
+ADD requirements.txt .
 
 RUN pip install -U pip && \
-    pip install pipenv awscli boto3 scoutsuite==${SCOUTSUITE_VERSION}
+    pip install pipenv awscli boto3 && \
+    pip install -r requirements.txt

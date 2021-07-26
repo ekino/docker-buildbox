@@ -4,14 +4,15 @@ LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
 
 ARG TERRAFORM_VERSION
 ARG TERRAGRUNT_VERSION
-ARG TERRAFORM_COMPLIANCE_VERSION
 ARG INFRACOST_VERSION
-ARG AZURE_CLI_VERSION
+
+ADD requirements.txt .
 
 RUN apt-get update -qq \
     && apt-get -y -qq install unzip wget git jq bc \
     && pip install -U pip \
-    && pip install awscli boto3 pipenv terraform-compliance==$TERRAFORM_COMPLIANCE_VERSION azure-cli==${AZURE_CLI_VERSION} \
+    && pip install awscli boto3 pipenv \
+    && pip install -r requirements.txt \
     && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O terraform.zip \
     && unzip -o terraform.zip \
     && rm terraform.zip \
