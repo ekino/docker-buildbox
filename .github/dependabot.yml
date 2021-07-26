@@ -17,6 +17,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "pip"
+    directory: "/ansible"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "ansible"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # AWS
   - package-ecosystem: "docker"
     directory: "/aws"
