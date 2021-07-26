@@ -8,6 +8,7 @@ Versions
 * ansible : bumping to latest 2.9.x release
 * azure : bumping azure-cli version
 * kubectl : bumping kubectl, kuztomize & other tools' versions
+* python : bumping base images minor versions
 
 2021-06-30
 ----------
