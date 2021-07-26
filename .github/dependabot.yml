@@ -17,6 +17,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "pip"
+    directory: "/ansible"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "ansible"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # AWS
   - package-ecosystem: "docker"
     directory: "/aws"
@@ -53,6 +64,14 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "pip"
+    directory: "/azure"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "azure"
   # Bitcoind
   - package-ecosystem: "docker"
     directory: "/bitcoind"
@@ -89,6 +108,14 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "pip"
+    directory: "/dind"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "dind"
   # Golang
   - package-ecosystem: "docker"
     directory: "/golang"
@@ -194,6 +221,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "pip"
+    directory: "/scoutsuite"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "scoutsuite"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Sonar
   - package-ecosystem: "docker"
     directory: "/sonar"
@@ -218,3 +256,11 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "pip"
+    directory: "/terraform"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "terraform"
