@@ -27,6 +27,8 @@ updates:
       - "ansible"
     ignore:
       - dependency-name: "*"
+        update-types: ["version-update:semver-minor"]
+      - dependency-name: "*"
         update-types: ["version-update:semver-major"]
   # AWS
   - package-ecosystem: "docker"
