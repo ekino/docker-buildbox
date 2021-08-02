@@ -1,6 +1,11 @@
 Versions
 ========
-2021-07
+
+2021-08-31
+-------
+todo ...
+
+2021-07-31
 -------
 * bumping image version for bitcoind to 0.21.1
 * adding postgresql-client to PHP images
@@ -10,6 +15,7 @@ Versions
 * kubectl : bumping kubectl, kuztomize & other tools' versions
 * python : bumping base images minor versions
 * terraform : bumping terraform minor versions, along with terragrunt & associated tools
+* bumping base images for php, platformsh, ruby, azure, awslnx-systemd, scoutsuite, terraform, ansible, aws, golang
 
 2021-06-30
 ----------
