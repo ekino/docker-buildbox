@@ -98,6 +98,29 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  # Cloudsploit
+  - package-ecosystem: "docker"
+    directory: "/cloudsploit"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "cloudsploit"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: "npm"
+    directory: "/cloudsploit"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "npm"
+      - "cloudsploit"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # DIND
   - package-ecosystem: "docker"
     directory: "/dind"
