@@ -3,7 +3,7 @@ Versions
 
 2021-08-31
 -------
-todo ...
+* Adding a new container flavour for Aquasecurity's Cloudsploit
 
 2021-07-31
 -------

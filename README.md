@@ -111,6 +111,11 @@ https://hub.docker.com/r/ekino/ci-chrome/tags
 
 Contains Chromium browser and the latest Node LTS.
 
+### Cloudsploit
+https://hub.docker.com/r/ekino/ci-cloudsploit/tags
+
+Contains Aquasecurity's Cloudsploit Scanner.
+
 ### DIND
 https://hub.docker.com/r/ekino/ci-dind/tags
 
