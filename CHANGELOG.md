@@ -4,6 +4,7 @@ Versions
 2021-08-31
 -------
 * Adding a new container flavour for Aquasecurity's Cloudsploit
+* Dind : removing libc6-compat to avoid name clashing
 
 2021-07-31
 -------
