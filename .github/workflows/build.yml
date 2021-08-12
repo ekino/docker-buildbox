@@ -43,6 +43,7 @@ jobs:
 
     strategy:
       matrix: ${{fromJSON(needs.generate_matrix.outputs.matrix)}}
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v2
