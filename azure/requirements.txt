@@ -1,1 +1,1 @@
-azure-cli==2.27.0
+azure-cli==2.27.1
