@@ -1,6 +1,23 @@
+test_config:
+  cmd:
+    - *ci_helper_test
+    - aws --version
+    - gitleaks --version
+    - go version
+    - golangci-lint --version
+    - migrate -version
+    - mockgen -version
+    - modd --version
+    - rsync --version
+    - swagger version
+    - testfixtures --version
+
+
 versions:
   "1.16":
-    build_args:
+    test_config: *test_config
+    template_vars:
+      BASE_IMAGE_VERSION: 1.16.7
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
       GOLANGCILINT_VERSION: 1.38.0
@@ -10,16 +27,16 @@ versions:
       MOCKGEN_VERSION: 1.5.0
       MODD_VERSION: 0.8
       TESTFIXTURES_VERSION: 3.5.0
-    test_config:
-      cmd:
-        - *ci_helper_test
-        - aws --version
-        - gitleaks --version
-        - go version
-        - golangci-lint --version
-        - migrate -version
-        - mockgen -version
-        - modd --version
-        - rsync --version
-        - swagger version
-        - testfixtures --version
+  "1.17":
+    test_config: *test_config
+    template_vars:
+      BASE_IMAGE_VERSION: 1.17.0
+      CI_HELPER_VERSION: *CI_HELPER_VERSION
+      GITLEAKS_VERSION: 7.3.0
+      GOLANGCILINT_VERSION: 1.38.0
+      GOMODUPGRADE_VERSION: 0.4.0
+      GOSWAGGER_VERSION: 0.26.1
+      MIGRATE_VERSION: 4.14.1
+      MOCKGEN_VERSION: 1.5.0
+      MODD_VERSION: 0.8
+      TESTFIXTURES_VERSION: 3.5.0
