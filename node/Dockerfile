@@ -53,7 +53,6 @@ RUN echo "Starting ..." && \
       firebird3.0-server firebird3.0-server-core man-db manpages manpages-dev \
       default-mysql-client mysql-common default-mysql-server default-mysql-server-core odbcinst odbcinst1debian2 \
       patch po-debconf psmisc xauth xtrans-dev xz-utils zlib1g-dev && \
-
     apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \

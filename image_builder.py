@@ -1,5 +1,5 @@
 import click
-import jinja2
+from os.path import exists
 
 import src.config as config
 import src.docker_image as docker
@@ -21,26 +21,17 @@ def build(image, version, debug):
         print(e)
         exit(1)
 
-    # Build dockerfile path
-    dockerfile_directory = (
-        image_conf["dockerfile_dir"] if "dockerfile_dir" in image_conf else image
-    )
-
-    # Render dockerfile if templatized
-    if "template_vars" in image_conf:
-        template = jinja2.Environment(loader=jinja2.FileSystemLoader(image)).get_template(
-            "Dockerfile.j2"
-        )
-        # Save in image/Dockerfile
-        with open(f"{image}/Dockerfile", "w") as f:
-            f.write(template.render(image_conf["template_vars"]))
-            f.close()
+    # Build dockerfile directory and path
+    dockerfile_directory = image
+    prefixed_dockerfile_path = f"{version}/Dockerfile"
+    # Set the subdirectory in path because we want dockerfile_directory (aka the build context) to be the parent image directory
+    dockerfile_path = prefixed_dockerfile_path if exists(f"{dockerfile_directory}/{prefixed_dockerfile_path}") else "Dockerfile"
 
     # Build image fullname (registry + repository + tag)
     image_fullname = config.get_image_fullname(image, version, image_conf, env_conf)
 
     # Build docker image
-    docker.build_image(image_conf, image_fullname, dockerfile_directory, debug)
+    docker.build_image(image_conf, image_fullname, dockerfile_directory, dockerfile_path, debug)
 
     # Run defined test command
     docker.run_image(image_fullname, image_conf, debug)
