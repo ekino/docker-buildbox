@@ -1,4 +1,4 @@
-test_config:
+test_config: &test_config
   cmd:
     - *ci_helper_test
     - aws --version
