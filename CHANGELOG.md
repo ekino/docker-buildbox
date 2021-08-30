@@ -6,6 +6,7 @@ Versions
 * Adding a new container flavour for Aquasecurity's Cloudsploit
 * Dind : removing libc6-compat to avoid name clashing, updating glibc version.
 * Golang : adding a 1.17.x image version
+* Golang : switching from python-pip to python3-pip
 
 2021-07-31
 -------

@@ -17,7 +17,7 @@ RUN echo "Starting...\n" && \
   apt-get -qq -y install rsync && \
   echo "Successfully installed packages\n" && \
   echo "Installing AWS CLI..." && \
-  apt-get -qq -y install groff-base python-pip && \
+  apt-get -qq -y install groff-base python3-pip && \
   pip install -q -U awscli && \
   echo "Successfully installed AWS CLI\n" && \
   echo "Installing CI Helper..." && \
