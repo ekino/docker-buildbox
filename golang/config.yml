@@ -12,12 +12,12 @@ test_config: &test_config
     - swagger version
     - testfixtures --version
 
-
 versions:
   "1.16":
     test_config: *test_config
     template_vars:
       BASE_IMAGE_VERSION: 1.16.7
+    build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
       GOLANGCILINT_VERSION: 1.38.0
@@ -31,6 +31,7 @@ versions:
     test_config: *test_config
     template_vars:
       BASE_IMAGE_VERSION: 1.17.0
+    build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
       GOLANGCILINT_VERSION: 1.38.0
