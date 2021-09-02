@@ -3,6 +3,10 @@ Versions
 
 2021-08-31
 -------
+* Kubectl : bumping client to 1.22.x, along with associated tools updates
+
+2021-08-31
+-------
 * Adding a new container flavour for Aquasecurity's Cloudsploit
 * Dind : removing libc6-compat to avoid name clashing, updating glibc version.
 * Golang : adding a 1.17.x image version
