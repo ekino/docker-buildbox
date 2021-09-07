@@ -38,7 +38,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
+    if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.matrix).include[0]
     needs: generate_matrix
 
     strategy:
