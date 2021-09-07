@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/ekino/docker-buildbox/workflows/Build%20and%20test%20images/badge.svg)](https://github.com/ekino/docker-buildbox/actions?query=branch%3Amaster+event%3Apush)
+[![Build Status](https://github.com/ekino/docker-buildbox/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/ekino/docker-buildbox/actions?query=branch%3Amaster)
 
 # BuildBox
 
