@@ -1,2 +1,2 @@
 pipenv==2021.05.29
-azure-cli==2.27.2
+azure-cli==2.28.1
