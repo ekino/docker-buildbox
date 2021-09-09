@@ -10,6 +10,7 @@ excluded_files = [  # Changes to those files shouldn't trigger a build
     '.gitignore',
     'CHANGELOG.md',
     'README.md',
+    '.github/dependabot.yml',
 ]
 
 
@@ -17,15 +18,25 @@ def get_diff_files_list():
     repo = Repo('.')
     modified_files = repo.commit("origin/master").diff(repo.commit())
     changedFiles = [item.a_path for item in modified_files]
-    changedFiles = [
-        file for file in changedFiles if file not in excluded_files]
     return changedFiles
 
 
-def get_paths(changedFiles):
+def filter_excluded_files(changedFiles):
+    filteredFiles = [
+        file for file in changedFiles if file not in excluded_files
+    ]
+    return filteredFiles
+
+
+def get_paths(changedFiles, unfilteredFiles):
     paths = []
     if changedFiles == []:
-        return glob("*/")
+        if unfilteredFiles == []:
+            # Master or tag job with no diff, builds everything
+            return glob("*/")
+        else:
+            # All files were previously excluded, builds nothing
+            return []
     for file in changedFiles:
         if "/" not in file or "/src" in file or ".github" in file:
             return glob("*/")
@@ -55,5 +66,6 @@ def generate_matrix(paths):
 
 
 changedFiles = get_diff_files_list()
-paths = get_paths(changedFiles)
+filteredFiles = filter_excluded_files(changedFiles)
+paths = get_paths(filteredFiles, changedFiles)
 generate_matrix(paths)
