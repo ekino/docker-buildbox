@@ -5,6 +5,7 @@ Versions
 -------
 * Kubectl : bumping client to 1.22.x, along with associated tools updates
 * azure : bumping azure-cli version to 2.28.1
+* nodejs: update version to use the latest from 10, 12, and 14 series.
 
 2021-08-31
 -------
