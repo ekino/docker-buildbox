@@ -7,7 +7,7 @@ from docker.errors import APIError, BuildError, ContainerError
 docker_client = DockerClient(base_url="unix://var/run/docker.sock", timeout=600)
 
 
-def build_image(image_conf, image_fullname, dockerfile, debug):
+def build_image(image_conf, image_fullname, dockerfile_directory, dockerfile_path, debug):
     print("> [Info] Building: " + image_fullname)
     try:
         if debug:
@@ -15,9 +15,16 @@ def build_image(image_conf, image_fullname, dockerfile, debug):
             print(">> Building configuration: ")
             pp.pprint(image_conf)
             print("\n")
+            print(">> Dockerfile directory: ")
+            print(dockerfile_directory)
+            print("\n")
+            print(">> Dockerfile relative path: ")
+            print(dockerfile_path)
+            print("\n")
 
         docker_client.images.build(
-            path=dockerfile,
+            path=dockerfile_directory,
+            dockerfile=dockerfile_path,
             tag=image_fullname,
             quiet=True,
             nocache=True,

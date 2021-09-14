@@ -2,10 +2,3 @@
 .idea
 *.iml
 .vscode
-
-# Result of template processing
-java/Dockerfile
-php/Dockerfile
-python/Dockerfile
-pynode/Dockerfile
-tezosqa/Dockerfile

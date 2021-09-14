@@ -58,26 +58,24 @@ Please follow the following pattern in your commit message `<type>(<optional sco
 
 ### Adding your image to the build box
 
-Create a directory named after your image and corresponding Dockerfile in it. Then add an entry in `config.yml` according to this schema:
+Create a directory named after your image and corresponding Dockerfile in it. Then create a `config.yml` in the same directory according to this schema:
 
 ```yaml
-image_name:
-  version:
+versions: # List all the available versions
+  "1.0": # The version of your image. This must not change often, so try using major version if possible, or else minor.
     test_config:
       volume: ... # docker volume if needed, format: localdir:/path/to/mount
       cmd: [...]  # shell commands run to be sure tools are well installed
     build_args: [...]  # If ARG are defined in Dockerfile
-    template_vars:  # If templated Dockerfile
-      BASE_IMAGE_VERSION:
-    dockerfile_dir: /path/to/dockerfile  # If Dockerfile's path is not ./<image_name>/Dockerfile
 ```
-Make sure the `image_name` in the config file entry matches your directory.
 
-Do not forget to add an entry in `.github/workflows/build.yml` too following other image scheme.
+Do not forget to add an entry in `.github/dependabot.yml` too if you want it to update your image.
+
+**If you want multiple Dockerfiles for one image**, you need to use subdirectories named after the version + create one dependabot rule / subdirectory for dependabot to update your base docker images correctly.
+
+**When using subdirectories**, keep in mind that the build context still is the main image folder, so COPY/ADD your files from here.
 
 **Volume mounting** for test configuration only need the directory name as full local path is build by the script.
-
-**Templating** is used **ONLY** for based image version. For any other variables used in a Dockerfile, prefer build args. Base image version(s) should be defined in a variable named `BASE_IMAGE_VERSION`.
 
 ## Available images
 
