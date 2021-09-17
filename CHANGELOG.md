@@ -8,6 +8,7 @@ Versions
 * nodejs: update version to use the latest from 10, 12, and 14 series.
 * Removing jinja from build dependencies
 * Removing Dockerfile templating to enforce single version Dockerfile for dependabot
+* Pynode: adding python 3.9 image, dropping version 3.7
 
 2021-08-31
 -------

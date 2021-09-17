@@ -280,7 +280,7 @@ updates:
       - "platformsh"
   # Pynode
   - package-ecosystem: "docker"
-    directory: "/pynode/3.7"
+    directory: "/pynode/3.8"
     schedule:
       interval: "weekly"
     labels:
@@ -291,7 +291,7 @@ updates:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
   - package-ecosystem: "docker"
-    directory: "/pynode/3.8"
+    directory: "/pynode/3.9"
     schedule:
       interval: "weekly"
     labels:

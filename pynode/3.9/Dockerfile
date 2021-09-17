@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM python:3.9-slim-buster
 LABEL maintainer="Loïc Nairi <loic.nairi@ekino.com>"
 
 ENV PATH=$PATH:./node_modules/.bin
