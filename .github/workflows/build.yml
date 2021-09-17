@@ -14,7 +14,8 @@ jobs:
 
   generate_matrix:
     runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
+    # Dependabot triggers jobs only on master branch or pull_request events
+    if: github.actor != 'dependabot[bot]' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request'
 
     steps:
       - name: Checkout
@@ -38,7 +39,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.matrix).include[0]
+    # Runs only if the matrix is not empty
+    if: (github.actor != 'dependabot[bot]' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.matrix).include[0]
     needs: generate_matrix
 
     strategy:
