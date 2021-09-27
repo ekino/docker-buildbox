@@ -15,19 +15,10 @@ curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPE
 chmod 755 /usr/bin/ci-helper
 echo "Done Install CI Helper"
 
-echo "Install Modd"
-curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd 
-chmod 755 /usr/bin/modd
-echo "Done Install Modd"
-
 echo "Install AWS"
 apt-get -qq -y install python-pip groff-base
 pip install -q -U awscli
 echo "Done Install AWS!"
-
-echo "Install Maven"
-apt-get -qq -y install maven
-echo "Done Install Maven!"
 
 echo "Install graphviz"
 apt-get -qq -y install graphviz
@@ -36,9 +27,6 @@ echo "Done Install graphviz!"
 echo "Install postgresql-client"
 apt-get -qq -y install postgresql-client
 echo "Done Install postgresql-client!"
-
-echo "Adding an up to date mime-types definition file"
-curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types
 
 echo "Cleaning files!"
 rm -rf /tmp/*
