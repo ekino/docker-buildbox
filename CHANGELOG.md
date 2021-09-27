@@ -9,6 +9,7 @@ Versions
 * Removing jinja from build dependencies
 * Removing Dockerfile templating to enforce single version Dockerfile for dependabot
 * Pynode: adding python 3.9 image, dropping version 3.7
+* Java: remove Modd, Maven and http call to mime types
 
 2021-08-31
 -------
