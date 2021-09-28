@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:jdk8u282-b08-debian-slim
+FROM eclipse-temurin:8u302-b08-jdk-focal
 LABEL maintainer="Stephane Leclercq <leclercq@ekino.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive \

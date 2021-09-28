@@ -10,6 +10,8 @@ Versions
 * Removing Dockerfile templating to enforce single version Dockerfile for dependabot
 * Pynode: adding python 3.9 image, dropping version 3.7
 * Java: remove Modd, Maven and http call to mime types
+* Java: add new Java 17 image
+* Java: migrate to temurin images
 
 2021-08-31
 -------
