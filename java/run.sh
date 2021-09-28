@@ -16,8 +16,8 @@ chmod 755 /usr/bin/ci-helper
 echo "Done Install CI Helper"
 
 echo "Install AWS"
-apt-get -qq -y install python-pip groff-base
-pip install -q -U awscli
+apt-get -qq -y install python3-pip
+pip3 install -q -U awscli
 echo "Done Install AWS!"
 
 echo "Install graphviz"
