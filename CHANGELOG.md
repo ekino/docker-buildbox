@@ -1,7 +1,11 @@
 Versions
 ========
 
-2021-09
+2021-10-31
+-------
+todo ...
+
+2021-09-30
 -------
 * Kubectl : bumping client to 1.22.x, along with associated tools updates
 * azure : bumping azure-cli version to 2.28.1
