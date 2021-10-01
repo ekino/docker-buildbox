@@ -8,10 +8,6 @@ test_config: &test_config
     - psql --version
 
 versions:
-  "8":
-    build_args:
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
-    test_config: *test_config
   "11":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION

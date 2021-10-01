@@ -3,7 +3,7 @@ Versions
 
 2021-10-31
 -------
-todo ...
+* Java: remove Java 8 image
 
 2021-09-30
 -------
