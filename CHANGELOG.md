@@ -5,6 +5,7 @@ Versions
 -------
 * Java: remove Java 8 image
 * Nodejs: add nodejs 16 image
+* Nodejs: remove nodejs 10 image
 
 2021-09-30
 -------
