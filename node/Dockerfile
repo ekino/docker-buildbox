@@ -1,4 +1,4 @@
-FROM debian:10.10-slim
+FROM debian:11.0-slim
 LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -42,8 +42,8 @@ RUN echo "Starting ..." && \
     apt-get update && apt-get install yarn --no-install-recommends && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
-    apt-get -qq -y install python-pip groff-base && \
-    pip install -q -U awscli && \
+    apt-get -qq -y install python3-pip groff-base && \
+    pip3 install -q -U awscli && \
     echo "Done AWS!" && \
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
