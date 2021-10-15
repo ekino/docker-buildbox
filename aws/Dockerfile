@@ -1,12 +1,12 @@
-FROM python:3.9.7-slim-buster
+FROM python:3.10.0-slim-buster
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG TASKFILE_VERSION
 
 RUN echo "Install AWS" && \
-    apt-get update -qq && apt-get install -qq -y curl git make rsync zip jq && \
+    apt-get update -qq && apt-get install -qq -y curl git make rsync zip jq gcc && \
     pip install -U pip && \
-    pip install --use-feature=2020-resolver pipenv  awscli boto3 awsebcli PyYAML && \
+    pip install pipenv awscli boto3 awsebcli PyYAML && \
     curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
     echo "Done install AWS" && \
     apt-get -qq -y autoremove && \
