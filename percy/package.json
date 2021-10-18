@@ -2,7 +2,7 @@
   "name": "@ekino/ci-percy",
   "private": true,
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.23.0",
     "@percy/script": "^1.1.0",
     "url-parse": "^1.5.1",
     "xml2json": "^0.12.0"
