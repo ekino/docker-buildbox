@@ -1,4 +1,4 @@
-FROM python:3.9.7-slim-buster
+FROM python:3.10.0-slim-buster
 
 LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
 
@@ -9,7 +9,7 @@ ARG INFRACOST_VERSION
 ADD requirements.txt .
 
 RUN apt-get update -qq \
-    && apt-get -y -qq install unzip wget git jq bc \
+    && apt-get -y -qq install unzip wget git jq bc gcc \
     && pip install -U pip \
     && pip install awscli boto3 pipenv \
     && pip install -r requirements.txt \
