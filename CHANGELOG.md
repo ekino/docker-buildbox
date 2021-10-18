@@ -9,6 +9,7 @@ Versions
 * Nodejs: upgrade images to Debian 11
 * AWS: updating base image to python 3.10.x
 * Scoutsuite: updating base image to python 3.10.x
+* Terraform: updating base image to python 3.10.x
 
 2021-09-30
 -------
