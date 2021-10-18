@@ -2,7 +2,8 @@ Versions
 ========
 
 2021-10-31
--------
+----------
+
 * Java: remove Java 8 image
 * Nodejs: add nodejs 16 image
 * Nodejs: remove nodejs 10 image
@@ -11,9 +12,13 @@ Versions
 * Scoutsuite: updating base image to python 3.10.x
 * Terraform: updating base image to python 3.10.x
 * Nodejs: upgrade images to Debian 11.1
+* PHP: remove support for PHP 7.2
+* PHP: bump to 7.3.31, 7.4.24 and 8.0.11 and use Alpine 3.13 as base image
+* PHP: update tools
 
 2021-09-30
--------
+----------
+
 * Kubectl : bumping client to 1.22.x, along with associated tools updates
 * azure : bumping azure-cli version to 2.28.1
 * nodejs: update version to use the latest from 10, 12, and 14 series.
@@ -25,14 +30,16 @@ Versions
 * Java: migrate to temurin images
 
 2021-08-31
--------
+----------
+
 * Adding a new container flavour for Aquasecurity's Cloudsploit
 * Dind : removing libc6-compat to avoid name clashing, updating glibc version.
 * Golang : adding a 1.17.x image version
 * Golang : switching from python-pip to python3-pip
 
 2021-07-31
--------
+----------
+
 * bumping image version for bitcoind to 0.21.1
 * adding postgresql-client to PHP images
 * platformSh : bumping client to 3.67.x
@@ -45,6 +52,7 @@ Versions
 
 2021-06-30
 ----------
+
 * bumping base image versions for Ruby, Ansible, AWS, Scoutsuite, Awslnx-systemd, Azure, Golang, Terraform, dind, sonar, kubectl, node
 * Dropping terraform 12 support
 * Python : misc dependencies updates
@@ -53,6 +61,7 @@ Versions
 
 2021-05-31
 ----------
+
 * Updating azure-cli to 2.24.0
 * Bumping sonar to 4.6.2
 * Bumping python base images to their latest versions
@@ -62,12 +71,14 @@ Versions
 
 2021-04-30
 ----------
+
 * Upgrade Composer version to 2.0.12 (not for PHP 7.2)
 * Upgrade php-cs-fixer version to 2.18.5 (not for PHP 7.2)
 * Added a new Percy image
 
 2021-03-31
------------
+----------
+
 * add pcov in PHP images
 * add helmfile and helm diff plugin to kubectl images
 * Upgrade Golang version: 1.16.1
@@ -86,7 +97,8 @@ Versions
 * Updating terraform 0.14.x image to 0.14.9
 
 2021-02-28
------------
+----------
+
 * Upgrade PHP versions to 7.3.27, 7.4.15 and 8.0.2
 * Upgrade Composer version to 2.0.10 (not for PHP 7.2)
 * Upgrade Iconv version to 1.15-r3 (not for PHP 7.2)
@@ -95,7 +107,8 @@ Versions
 * Upgrade Xdebug version to version 3.0.3 (not for PHP 7.2)
 
 2021-01-29
------------
+----------
+
 * Update node base image to debian:10.7-slim
 * Update kubectl base image to alpine:3.13
 * Update dind base image to docker:20.10.2-dind
@@ -109,7 +122,8 @@ Versions
 * BREAKING CHANGE: Upgrade Taskfile to v3.2.2 (drop compatibility with v1.x.x definition files)
 
 2021-01-25
------------
+----------
+
 * Add PHP image version 8.0.0 and bump composer, php_cs_fixer, xdebug & redis versions
 * Switch from [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker) to [Local PHP Security Checker](https://github.com/fabpot/local-php-security-checker) (keep compatibility with existing binary name)
 * Removed IBM image & associated tools
@@ -119,12 +133,14 @@ Versions
 * Update Sonar client to 4.6.x
 
 2020-12-31
------------
+----------
+
 * Add a python 3.9 image
 * Add Infracost to the Terraform images
 
 2020-11-30
------------
+----------
+
 * Upgrade PHP versions to 7.2.34, 7.3.24 and 7.4.12
 * Upgrade Composer version to 2.0.4
 * Upgrade APCU version to 5.1.19
@@ -137,7 +153,8 @@ Versions
 * Update SmartPy version in tezosqa image
 
 2020-10-31
------------
+----------
+
 * Upgrade terraform to 0.13.4 and terragrunt to 0.25.3 and add jq to image
 * fix aws image dependencies with new pip resolver feature `--use-feature=2020-resolver`
 * fix smartpy version in tezosqa image
@@ -149,7 +166,8 @@ Versions
 * Upgrading Scoutsuite to 5.10.1
 
 2020-09-30
------------
+----------
+
 * Upgrade Golang version: 1.15.2
 * Upgrade Golang gitleaks version: 6.1.2
 * Upgrade Golang ci-lint version: 1.31.0
@@ -159,7 +177,8 @@ Versions
 * Add rsync to Golang image
 
 2020-08-31
------------
+----------
+
 * Add terraform version 0.13.1
 * Add rsync to aws image
 * Upgrade PHP composer version to 1.10.10
@@ -180,7 +199,8 @@ Versions
 - Install awscli in kubectl image
 
 2020-07-31
------------
+----------
+
 * Add terragrunt v0.23.31 and git to terraform image
 * Add zip and make to the AWS image
 * Upgrade IBM Terraform provider to v1.8.1
@@ -194,7 +214,8 @@ Versions
 * Add [Taskfile](https://taskfile.dev) to the Node.js, Chrome, AWS and DinD images
 
 2020-06-30
------------
+----------
+
 * Upgrade bitcoind image to 0.20.0
 * Add PHP COMPOSER_MEMORY_LIMIT env var
 * Upgrade Java 8 to 8u252 and 11 to 11.0.7
@@ -210,7 +231,8 @@ Versions
 * Add tezosqa image with ligo, SmartPy and Pytezos
 
 2020-05-28
------------
+----------
+
 * Install helm on IBM image
 * Upgrade PHP version: 7.2.31, 7.3.18 and 7.4.6
 * Upgrade PHP composer version: 1.10.6
@@ -230,7 +252,7 @@ Versions
 * Upgrade terraform to 0.12.26 in IBM Image
 
 2020-04-30
------------
+----------
 
 * Removing ansible 2.8 image
 * Upgrade Node images to debian 10.3
@@ -252,7 +274,7 @@ Versions
 * Upgrade Terraform to 0.12.24
 
 2020-02-28
------------
+----------
 
 * Add mysql-client in PHP images
 * Add postgresql-client in java image
@@ -271,7 +293,7 @@ Versions
 * Rename serverless image into pynode to manage serverless and cdk use cases
 
 2019-12-26
------------
+----------
 
 * Upgrade the React Native image to Node 12.13 and NPM to 6.12.0
 * Remove Watchman, some exposed ports and the custom user from the React Native image
@@ -298,7 +320,7 @@ Versions
 * Update Kubectl version (and associated tools) : 1.16
 
 2019-11-18
------------
+----------
 
 * Fix Chrome image build
 * Upgrade Golang version: 1.13.4
