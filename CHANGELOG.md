@@ -11,6 +11,7 @@ Versions
 * AWS: updating base image to python 3.10.x
 * Scoutsuite: updating base image to python 3.10.x
 * Terraform: updating base image to python 3.10.x
+* Terraform: updating to TF 1.0.x, terragrunt & infracost latest versions. Also dropping support for TF 0.13, 0.14, 0.15
 * Nodejs: upgrade images to Debian 11.1
 * PHP: remove support for PHP 7.2
 * PHP: bump to 7.3.31, 7.4.24 and 8.0.11 and use Alpine 3.13 as base image
