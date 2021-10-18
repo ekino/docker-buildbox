@@ -224,6 +224,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "npm"
+    directory: "/percy"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "npm"
+      - "percy"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Php
   - package-ecosystem: "docker"
     directory: "/php/7.2"

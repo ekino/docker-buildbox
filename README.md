@@ -154,6 +154,11 @@ https://hub.docker.com/r/ekino/ci-node/tags
 
 Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS Cli.
 
+### Percy
+https://hub.docker.com/r/ekino/ci-percy/tags
+
+Contains https://github.com/percy/percy-script, used to manage https://percy.io/
+
 ### PHP
 https://hub.docker.com/r/ekino/ci-php/tags
 
