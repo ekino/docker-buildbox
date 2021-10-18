@@ -15,6 +15,7 @@ Versions
 * PHP: remove support for PHP 7.2
 * PHP: bump to 7.3.31, 7.4.24 and 8.0.11 and use Alpine 3.13 as base image
 * PHP: update tools
+* Ansible: adding new ansible 2.10.x, 3.x.x & 4.x.x flavors
 
 2021-09-30
 ----------
