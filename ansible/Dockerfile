@@ -1,6 +1,8 @@
 FROM python:3.10.0-slim-buster
 
-ADD requirements.txt .
+ARG ANSIBLE_VERSION
+
+ADD ${ANSIBLE_VERSION}/requirements.txt .
 
 RUN pip install -U pip pipenv boto3 awscli && \
     pip install -r requirements.txt &&  \
