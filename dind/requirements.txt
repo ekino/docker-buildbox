@@ -1,2 +1,2 @@
-pipenv==2021.05.29
+pipenv==2021.11.5.post0
 azure-cli==2.30.0
