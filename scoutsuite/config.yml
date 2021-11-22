@@ -1,7 +1,0 @@
-versions:
-  "5.10":
-    test_config:
-      cmd:
-        - pip --version
-        - pipenv --version
-        - scout --version

@@ -196,11 +196,6 @@ https://hub.docker.com/r/ekino/ci-ruby/tags
 
 Contains Ruby (installed from official alpine) and CI Helper.
 
-### Scoutsuite
-https://hub.docker.com/r/ekino/ci-scoutsuite/tags
-
-Contains ScoutSuite cloud scanner.
-
 ### SonarQube Scanner
 https://hub.docker.com/r/ekino/ci-sonar/tags
 

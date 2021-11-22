@@ -1,10 +1,11 @@
 Versions
 ========
 
-2021-11-xx
+2021-11-30
 ----------
 
 * Percy: Switch to percy-cli instead of percy-agent
+* Scoutsuite: removing this image, as we're now using cloudsploit instead.
 
 2021-10-31
 ----------
