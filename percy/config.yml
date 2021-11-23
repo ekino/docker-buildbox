@@ -1,5 +1,0 @@
-versions:
-  "1":
-    test_config:
-      cmd:
-        - percy --version
