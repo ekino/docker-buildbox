@@ -157,7 +157,7 @@ Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS C
 ### Percy
 https://hub.docker.com/r/ekino/ci-percy/tags
 
-Contains https://github.com/percy/percy-script, used to manage https://percy.io/
+Contains [Percy CLI](https://docs.percy.io/docs/cli-overview), used to manage https://percy.io/
 
 ### PHP
 https://hub.docker.com/r/ekino/ci-php/tags
