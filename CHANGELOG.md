@@ -1,6 +1,11 @@
 Versions
 ========
 
+2021-11-xx
+----------
+
+* Percy: Switch to percy-cli instead of percy-agent
+
 2021-10-31
 ----------
 
