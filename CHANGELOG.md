@@ -8,6 +8,7 @@ Versions
 * Scoutsuite: removing this image, as we're now using cloudsploit instead.
 * Kubectl: updating kubectl & associated tools. Removing eksctl.
 * Platformsh: bumping client to 3.71.0
+* Terraform: bumping to 1.0.11, along with associated tools
 
 2021-10-31
 ----------
