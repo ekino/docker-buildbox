@@ -6,6 +6,7 @@ Versions
 
 * Percy: Switch to percy-cli instead of percy-agent
 * Scoutsuite: removing this image, as we're now using cloudsploit instead.
+* Kubectl: updating kubectl & associated tools. Removing eksctl.
 
 2021-10-31
 ----------
