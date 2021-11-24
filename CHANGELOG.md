@@ -9,6 +9,7 @@ Versions
 * Kubectl: updating kubectl & associated tools. Removing eksctl.
 * Platformsh: bumping client to 3.71.0
 * Terraform: bumping to 1.0.11, along with associated tools
+* Dind: updating docker-compose to 2.1.1, trivy to 0.21.0
 
 2021-10-31
 ----------
