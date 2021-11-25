@@ -1,7 +1,6 @@
 FROM alpine:3.14.3
 LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
-ARG EKSCTL_VERSION
 ARG HELM_DIFF_VERSION
 ARG HELM_VERSION
 ARG HELMFILE_VERSION
@@ -41,10 +40,6 @@ RUN wget https://github.com/zegl/kube-score/releases/download/v${KUBESCORE_VERSI
 RUN wget https://github.com/instrumenta/kubeval/releases/download/v${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz && \
     tar xf kubeval-linux-amd64.tar.gz && \
     mv kubeval /usr/local/bin/kubeval
-
-RUN wget https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION}/eksctl_$(uname -s)_amd64.tar.gz && \
-    tar xf eksctl_$(uname -s)_amd64.tar.gz && \
-    mv eksctl /usr/local/bin/eksctl
 
 RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
