@@ -3,7 +3,6 @@ LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
 ARG HELM_DIFF_VERSION
 ARG HELM_VERSION
-ARG HELMFILE_VERSION
 ARG KUBECTL_VERSION
 ARG KUBECTX_VERSION
 ARG KUBESCORE_VERSION
@@ -44,10 +43,6 @@ RUN wget https://github.com/instrumenta/kubeval/releases/download/v${KUBEVAL_VER
 RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     mv linux-amd64/helm /usr/local/bin/helm
-
-RUN wget https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 && \
-    chmod +x helmfile_linux_amd64 && \
-    mv helmfile_linux_amd64 /usr/bin/helmfile
 
 RUN apk add git && \
     helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff
