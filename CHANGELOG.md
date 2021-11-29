@@ -6,7 +6,7 @@ Versions
 
 * Percy: Switch to percy-cli instead of percy-agent
 * Scoutsuite: removing this image, as we're now using cloudsploit instead.
-* Kubectl: updating kubectl & associated tools. Removing eksctl.
+* Kubectl: updating kubectl & associated tools. Removing eksctl & helmfile. Adding Kubent
 * Platformsh: bumping client to 3.71.0
 * Terraform: bumping to 1.0.11, along with associated tools
 * Dind: updating docker-compose to 2.1.1, trivy to 0.21.0
