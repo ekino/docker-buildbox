@@ -5,6 +5,7 @@ versions:
         - kube-score version
         - kubectx
         - kubeval --version
+        - kubent
         - kustomize version
         - helm version
         - aws --version
@@ -14,6 +15,7 @@ versions:
       HELM_VERSION: 3.7.1
       KUBECTL_VERSION: 1.22.4
       KUBECTX_VERSION: 0.9.4
+      KUBENT_VERSION: 0.5.1
       KUBESCORE_VERSION: 1.13.0
       KUBEVAL_VERSION: 0.16.1
       KUSTOMIZATION_VERSION: 4.4.1
