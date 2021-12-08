@@ -1,6 +1,10 @@
 Versions
 ========
 
+2021-12-31
+----------
+* React-native: dropping support
+
 2021-11-30
 ----------
 
