@@ -379,18 +379,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  # React native
-  - package-ecosystem: "docker"
-    directory: "/react-native"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "react-native"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
   # Ruby
   - package-ecosystem: "docker"
     directory: "/ruby"

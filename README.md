@@ -186,11 +186,6 @@ https://hub.docker.com/r/ekino/ci-pynode/tags
 Based on Python image, contains Nodejs 12. Used for serverless and CDK use cases, with tools installed in a
 `package-lock.json` file.
 
-### React Native Android
-https://hub.docker.com/r/ekino/ci-react-native/tags
-
-Contains Java 8, Gradle, Android SDK, Node 12.13.0 and React Native Cli
-
 ### Ruby
 https://hub.docker.com/r/ekino/ci-ruby/tags
 
