@@ -5,8 +5,9 @@ echo "Starting ..."
 version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
 echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+echo "@edge-community-3.13 http://nl.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories
 apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-    gnu-libiconv@edge-community==${ICONV_VERSION} icu-dev@edge-main jq libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
+    gnu-libiconv@edge-community-3.13==${ICONV_VERSION} icu-dev@edge-main jq libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
     libxml2-dev libzip-dev make musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
 echo "Done base install!"
 
@@ -22,12 +23,7 @@ echo "Done Install Modd"
 
 echo "Starting PHP with $version"
 
-if [ "$version" = "74" ] || [ "$version" = "80" ]; then
-    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/;
-else
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/;
-fi
-
+docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip
 pecl install apcu-${APCU_VERSION}
 pecl install memcached-${MEMCACHED_VERSION}
@@ -36,7 +32,7 @@ docker-php-ext-enable pcov
 docker-php-ext-enable memcached
 docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 
-if [ "$version" != "80" ]; then
+if [ "$version" = "74" ]; then
     pecl install ssh2-${SSH2_VERSION};
     docker-php-ext-enable ssh2;
 fi
@@ -57,12 +53,7 @@ cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make insta
 echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 curl -sSL https://github.com/xdebug/xdebug/archive/${XDEBUG_VERSION}.tar.gz | tar xz -C /tmp
 cd /tmp/xdebug-${XDEBUG_VERSION} && phpize && ./configure --enable-xdebug && make && make install
-
-if [ "$version" = "72" ]; then
-    echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini;
-else \
-    echo -e "zend_extension=xdebug.so \nxdebug.mode=coverage \n" > /usr/local/etc/php/conf.d/xdebug.ini;
-fi
+echo -e "zend_extension=xdebug.so \nxdebug.mode=coverage \n" > /usr/local/etc/php/conf.d/xdebug.ini
 
 mkdir -p /tmp/blackfire-probe
 curl -A "Docker" -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version
