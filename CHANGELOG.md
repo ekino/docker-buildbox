@@ -3,7 +3,9 @@ Versions
 
 2021-12-31
 ----------
+
 * React-native: dropping support
+* PHP: remove support for PHP 7.3, update 7.4 and 8.0, create 8.1
 
 2021-11-30
 ----------
