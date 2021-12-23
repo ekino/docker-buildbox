@@ -15,6 +15,7 @@ test_config: &test_config
 versions:
   "1.16":
     test_config: *test_config
+    platforms: *base_platforms
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
@@ -22,11 +23,12 @@ versions:
       GOMODUPGRADE_VERSION: 0.4.0
       GOSWAGGER_VERSION: 0.26.1
       MIGRATE_VERSION: 4.14.1
-      MOCKGEN_VERSION: 1.5.0
+      MOCKGEN_VERSION: 1.6.0
       MODD_VERSION: 0.8
       TESTFIXTURES_VERSION: 3.5.0
   "1.17":
     test_config: *test_config
+    platforms: *base_platforms
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
@@ -34,6 +36,6 @@ versions:
       GOMODUPGRADE_VERSION: 0.4.0
       GOSWAGGER_VERSION: 0.26.1
       MIGRATE_VERSION: 4.14.1
-      MOCKGEN_VERSION: 1.5.0
+      MOCKGEN_VERSION: 1.6.0
       MODD_VERSION: 0.8
       TESTFIXTURES_VERSION: 3.5.0

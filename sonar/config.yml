@@ -10,3 +10,4 @@ versions:
         - *ci_helper_test
         - java -version
         - sonar-scanner -v
+    platforms: *base_platforms

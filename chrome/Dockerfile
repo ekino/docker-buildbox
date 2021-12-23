@@ -4,8 +4,7 @@ LABEL maintainer="Guillaume AMAT <guillaume.amat@ekino.com>"
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
-
-
+ARG TARGETARCH
 
 # Based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-on-alpine
 
@@ -24,12 +23,9 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 # Puppeteer v1.11.0 works with Chromium 72.
 RUN yarn add puppeteer@1.13.0
 
-
-
-
 RUN apk add --update curl git grep make ncurses tzdata && \
     echo "Install CI Helper" && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
+    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-${TARGETARCH}-gitlab-ci-helper -o /usr/bin/ci-helper && \
     chmod 755 /usr/bin/ci-helper && \
     echo "Done install CI Helper" && \
     echo "Install Taskfile" && \

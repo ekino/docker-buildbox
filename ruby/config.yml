@@ -7,3 +7,4 @@ versions:
         - bundle --version
         - *ci_helper_test
         - ruby --version
+    platforms: *base_platforms

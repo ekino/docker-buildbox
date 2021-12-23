@@ -5,3 +5,4 @@ versions:
     test_config:
       cmd:
         - /opt/SmartPy/SmartPy.sh --version
+    platforms: *base_platforms

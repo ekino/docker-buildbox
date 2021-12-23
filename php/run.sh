@@ -2,6 +2,12 @@
 
 echo "Starting ..."
 
+if [ "${TARGETARCH}" = "arm64" ]; then
+    MODD_ARCH="linuxARM"
+else
+    MODD_ARCH="linux64"
+fi
+
 version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
 echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
@@ -12,14 +18,14 @@ apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cy
 echo "Done base install!"
 
 echo "Install CI Helper"
-curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper
+curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-${TARGETARCH}-gitlab-ci-helper -o /usr/bin/ci-helper
 chmod 755 /usr/bin/ci-helper
 echo "Done install CI Helper"
 
 echo "Install Modd"
-curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd
-chmod 755 /usr/bin/modd
-echo "Done Install Modd"
+curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
+    chmod 755 /usr/bin/modd && \
+    echo "Done Install Modd"
 
 echo "Starting PHP with $version"
 
@@ -51,7 +57,7 @@ zend_extension=opcache.so \n\
 
 curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 curl -sSL https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VERSION}/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer
-curl -sSL https://github.com/fabpot/local-php-security-checker/releases/download/v${SECURITY_CHECKER_VERSION}/local-php-security-checker_${SECURITY_CHECKER_VERSION}_linux_amd64 -o /usr/local/bin/local-php-security-checker && chmod a+x /usr/local/bin/local-php-security-checker
+curl -sSL https://github.com/fabpot/local-php-security-checker/releases/download/v${SECURITY_CHECKER_VERSION}/local-php-security-checker_${SECURITY_CHECKER_VERSION}_linux_${TARGETARCH} -o /usr/local/bin/local-php-security-checker && chmod a+x /usr/local/bin/local-php-security-checker
 ln -s local-php-security-checker /usr/local/bin/security-checker
 curl -sSL https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp
 cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make install
@@ -61,12 +67,12 @@ cd /tmp/xdebug-${XDEBUG_VERSION} && phpize && ./configure --enable-xdebug && mak
 echo -e "zend_extension=xdebug.so \nxdebug.mode=coverage \n" > /usr/local/etc/php/conf.d/xdebug.ini
 
 mkdir -p /tmp/blackfire-probe
-curl -A "Docker" -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version
+curl -A "Docker" -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/${TARGETARCH}/$version
 tar zxpf /tmp/blackfire-probe/blackfire-probe.tar.gz -C /tmp/blackfire-probe
 mv /tmp/blackfire-probe/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so
 printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini
 mkdir -p /tmp/blackfire-client
-curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire-client
+curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/${TARGETARCH} | tar zxp -C /tmp/blackfire-client
 mv /tmp/blackfire-client/blackfire /usr/bin/blackfire
 echo "Done PHP!"
 

@@ -19,3 +19,4 @@ versions:
       KUBESCORE_VERSION: 1.13.0
       KUBEVAL_VERSION: 0.16.1
       KUSTOMIZATION_VERSION: 4.4.1
+    platforms: *base_platforms

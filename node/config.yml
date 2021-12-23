@@ -18,6 +18,7 @@ versions:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
+    platforms: *base_platforms
   "14":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
@@ -27,6 +28,7 @@ versions:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
+    platforms: *base_platforms
   "16":
     build_args:
       CI_HELPER_VERSION: *CI_HELPER_VERSION
@@ -36,3 +38,4 @@ versions:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
+    platforms: *base_platforms

@@ -1,6 +1,11 @@
 Versions
 ========
 
+2022-02-10
+----------
+
+* Add multi-arch support to all images.
+
 2022-02-28
 ----------
 

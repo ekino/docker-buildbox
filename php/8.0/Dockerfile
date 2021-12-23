@@ -13,6 +13,7 @@ ARG REDIS_VERSION
 ARG SECURITY_CHECKER_VERSION
 ARG SSH2_VERSION
 ARG XDEBUG_VERSION
+ARG TARGETARCH
 
 # iconv issue https://github.com/docker-library/php/issues/240
 

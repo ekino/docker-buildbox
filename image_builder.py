@@ -1,5 +1,6 @@
-import click
 from os.path import exists
+
+import click
 
 import src.config as config
 import src.docker_image as docker
@@ -27,14 +28,15 @@ def build(image, version, debug):
     # Set the subdirectory in path because we want dockerfile_directory (aka the build context) to be the parent image directory
     dockerfile_path = prefixed_dockerfile_path if exists(f"{dockerfile_directory}/{prefixed_dockerfile_path}") else "Dockerfile"
 
-    # Build image fullname (registry + repository + tag)
-    image_fullname = config.get_image_fullname(image, version, image_conf, env_conf)
+    # Build image tags list (base tag + archs)
+    image_tags = config.get_image_tags(image, version, image_conf, env_conf)
+    image_fullname = image_tags["fullname"]
 
     # Build docker image
-    docker.build_image(image_conf, image_fullname, dockerfile_directory, dockerfile_path, debug)
+    docker.build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, debug)
 
     # Run defined test command
-    docker.run_image(image_fullname, image_conf, debug)
+    # docker.run_image(image_fullname, image_conf, debug)
 
     # Push to registry in case of:
     # - tag

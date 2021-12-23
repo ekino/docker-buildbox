@@ -11,7 +11,7 @@ apt-get -qq -y install build-essential curl git make openssh-client jq
 echo "Done Install base!"
 
 echo "Install CI Helper"
-curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper
+curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-${TARGETARCH}-gitlab-ci-helper -o /usr/bin/ci-helper
 chmod 755 /usr/bin/ci-helper
 echo "Done Install CI Helper"
 

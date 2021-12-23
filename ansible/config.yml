@@ -1,24 +1,28 @@
 test_config: &test_config
   cmd:
-        - python --version
-        - pip --version
-        - ansible --version
-        - ansible-playbook --version
+    - python --version
+    - pip --version
+    - ansible --version
+    - ansible-playbook --version
 
 versions:
   "2.9":
     build_args:
       ANSIBLE_VERSION: "2.9"
     test_config: *test_config
+    platforms: *base_platforms
   "2.10":
     build_args:
       ANSIBLE_VERSION: "2.10"
     test_config: *test_config
+    platforms: *base_platforms
   "3":
     build_args:
       ANSIBLE_VERSION: "3"
     test_config: *test_config
+    platforms: *base_platforms
   "4":
     build_args:
       ANSIBLE_VERSION: "4"
     test_config: *test_config
+    platforms: *base_platforms

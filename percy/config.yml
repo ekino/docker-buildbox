@@ -3,3 +3,5 @@ versions:
     test_config:
       cmd:
         - percy --version
+        - node --version
+    platforms: *base_platforms
