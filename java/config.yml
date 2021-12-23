@@ -9,5 +9,7 @@ test_config: &test_config
 versions:
   "11":
     test_config: *test_config
+    platforms: *base_platforms
   "17":
     test_config: *test_config
+    platforms: *base_platforms

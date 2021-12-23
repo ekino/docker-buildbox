@@ -9,3 +9,4 @@ versions:
         - platform --version
         - python --version
         - pip --version
+    platforms: *base_platforms

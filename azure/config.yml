@@ -3,3 +3,4 @@ versions:
     test_config:
       cmd:
         - az --version
+    platforms: *base_platforms

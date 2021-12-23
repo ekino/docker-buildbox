@@ -11,3 +11,4 @@ versions:
     build_args:
       ANSIBLE_VERSION: "5"
     test_config: *test_config
+    platforms: *base_platforms

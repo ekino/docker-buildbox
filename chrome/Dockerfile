@@ -3,8 +3,7 @@ LABEL maintainer="opensource@ekino.com"
 
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
-
-
+ARG TARGETARCH
 
 # Based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-on-alpine
 
@@ -22,9 +21,6 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Puppeteer v1.11.0 works with Chromium 72.
 RUN yarn add puppeteer@1.13.0
-
-
-
 
 RUN apk add --update curl git grep make ncurses tzdata && \
     echo "Install Taskfile" && \

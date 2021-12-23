@@ -11,3 +11,4 @@ versions:
         - npm --version
         - yarn --version
         - task --version
+    platforms: *base_platforms

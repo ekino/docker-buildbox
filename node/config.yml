@@ -17,6 +17,7 @@ versions:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
+    platforms: *base_platforms
   "16":
     build_args:
       NODE_VERSION: 16.11.0
@@ -25,6 +26,7 @@ versions:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
+    platforms: *base_platforms
   "18":
     build_args:
       NODE_VERSION: 18.2.0
@@ -33,3 +35,4 @@ versions:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
+    platforms: *base_platforms

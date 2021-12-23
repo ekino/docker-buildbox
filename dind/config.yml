@@ -13,3 +13,4 @@ versions:
         - docker-compose --version
         - task --version
         - trivy --version
+    platforms: *base_platforms

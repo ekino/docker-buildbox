@@ -11,3 +11,4 @@ versions:
         - rsync --version
         - zip --version
         - task --version
+    platforms: *base_platforms

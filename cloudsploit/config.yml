@@ -4,3 +4,4 @@ versions:
       cmd:
         - aws --version
         - cloudsploit -h
+    platforms: *base_platforms

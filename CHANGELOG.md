@@ -60,6 +60,10 @@ No specific change this month, just standard dependencies updates. Happy summer 
 * PyNode: switch from AWScli v1 to v2
 * Terraform: switch from AWScli v1 to v2
 * Java: switch from AWScli v1 to v2
+2022-02-10
+----------
+
+* Add multi-arch support to all images.
 
 2022-02-28
 ----------

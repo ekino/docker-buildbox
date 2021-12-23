@@ -8,3 +8,4 @@ versions:
       cmd:
         - java -version
         - sonar-scanner -v
+    platforms: *base_platforms

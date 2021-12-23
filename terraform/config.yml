@@ -17,3 +17,4 @@ versions:
       TERRAGRUNT_VERSION: 0.37.1
       INFRACOST_VERSION: 0.10.0
     test_config: *test_config
+    platforms: *base_platforms
