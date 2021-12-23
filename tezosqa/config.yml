@@ -6,4 +6,5 @@ versions:
     test_config:
       cmd:
         - /root/smartpy-cli/SmartPy.sh --version
+    platforms: *base_platforms
 

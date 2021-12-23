@@ -19,3 +19,4 @@ versions:
       KUBEVAL_VERSION: 0.16.1
       KUSTOMIZATION_VERSION: 4.5.5
       TRIVY_VERSION: "0.28.1"
+    platforms: *base_platforms

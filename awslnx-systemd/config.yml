@@ -4,3 +4,4 @@ versions:
       cmd:
         - python --version
         - pip --version
+    platforms: *base_platforms

@@ -1,21 +1,16 @@
 import os
 import pprint
+import subprocess
 
-from docker import DockerClient
-from docker.errors import APIError, BuildError, ContainerError
-from src.config import load_base_config
+from python_on_whales import docker
+from python_on_whales.exceptions import DockerException
 
-base_config = load_base_config()
-docker_sock_path = base_config["DOCKER_SOCK_PATH"]
-if('DOCKER_HOST' in os.environ):
-    docker_sock_path = os.environ['DOCKER_HOST']
+from .config import parse_platform
 
 
-docker_client = DockerClient(base_url=docker_sock_path, timeout=base_config["DOCKER_TIMEOUT"])
+def build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, debug):
 
-
-def build_image(image_conf, image_fullname, dockerfile_directory, dockerfile_path, debug):
-    print("> [Info] Building: " + image_fullname)
+    print("> [Info] Building: " + image_tags["fullname"])
     try:
         if debug:
             pp = pprint.PrettyPrinter(indent=1)
@@ -29,29 +24,63 @@ def build_image(image_conf, image_fullname, dockerfile_directory, dockerfile_pat
             print(dockerfile_path)
             print("\n")
 
-        docker_client.images.build(
-            path=dockerfile_directory,
-            dockerfile=dockerfile_path,
-            tag=image_fullname,
-            quiet=True,
-            nocache=True,
-            buildargs=image_conf["build_args"] if "build_args" in image_conf else {},
-            forcerm=True,
-        )
-        print("Build successful")
-    except BuildError as build_error:
-        print("> [Error] Build failed\n")
-        for line in build_error.build_log:
-            if "stream" in line:
-                print(line["stream"].strip())
+        builder = docker.buildx.create(use=True)
+
+        for platform in image_conf["platforms"]:
+            print("> [Info] Building arch image: " + image_tags["platforms"][platform])
+            docker.buildx.build(
+                builder=builder,
+                file=os.path.join(dockerfile_directory, dockerfile_path),
+                context_path=dockerfile_directory,
+                tags=image_tags["platforms"][platform],
+                cache=False,
+                push=False,
+                build_args=image_conf["build_args"] if "build_args" in image_conf else {},
+                platforms=[platform],
+            )
+
+        builder.remove()
+
+    except DockerException as docker_exception:
+        print("> [Error] Build error - " + str(docker_exception))
         exit(1)
-    except APIError as api_error:
-        print("> [Error] API error - " + str(api_error))
+
+    create_image_manifest(image_tags, debug)
+
+    for platform in image_conf["platforms"]:
+        annotate_image_manifest(platform, image_tags)
+
+    print("Build successful")
+
+
+def create_image_manifest(image_tags, debug):
+    # TODO: Replace `subprocess.run` with python-on-whales interface when it supports manifest
+    arch_tags = list(image_tags["platforms"].values())
+    create_manifest_cmd = ["docker", "manifest", "create", image_tags["fullname"]] + arch_tags
+
+    try:
+        result = subprocess.run(create_manifest_cmd, check=True, capture_output=True, text=True)
+        if debug:
+            print(result.stdout)
+    except subprocess.CalledProcessError as subprocess_exception:
+        print("> [Error] Error creating manifest - " + str(subprocess_exception))
+        exit(1)
+
+
+def annotate_image_manifest(platform, image_tags, debug):
+    _os, _arch, _variant = parse_platform(platform)
+    annotate_manifest_cmd = ["docker", "manifest", "annotate", image_tags["fullname"], image_tags["platforms"][platform], "--arch", _arch]
+    try:
+        result = subprocess.run(annotate_manifest_cmd, check=True, capture_output=True, text=True)
+        if debug:
+            print(result.stdout)
+    except subprocess.CalledProcessError as subprocess_exception:
+        print("> [Error] Error annotating manifest - " + str(subprocess_exception))
         exit(1)
 
 
 def run_image(image_fullname, image_conf, debug):
-    volume = {}
+    volume = []
 
     print("> [Info] Testing " + image_fullname)
 
@@ -61,60 +90,46 @@ def run_image(image_fullname, image_conf, debug):
             if "volume" in test_config:
                 # Split path:directory string and build volume dict
                 splitted_volume = test_config["volume"].split(":")
-                volume[f"{os.getcwd()}/{splitted_volume[0]}"] = {
-                    "bind": splitted_volume[1],
-                    "mode": "ro",
-                }
+                volume = [(f"{os.getcwd()}/{splitted_volume[0]}",
+                          splitted_volume[1],
+                          "ro")]
             for cmd in test_config["cmd"]:
+                cmd_list = cmd.split(" ")
                 if debug:
-                    print(">> Running test: " + cmd)
-                container = docker_client.containers.run(
+                    print(">> Running test: " + str(cmd_list))
+                container_output = docker.container.run(
                     image=image_fullname,
-                    command=cmd,
-                    volumes=volume,
-                    stdout=True,
-                    stderr=True
+                    command=cmd_list,
+                    volumes=volume
                 )
                 if debug:
-                    for line in container.decode('utf-8').split('\n'):
-                        print(line)
+                    print(container_output)
         print("Tests successful")
-    except ContainerError as container_error:
-        print(f"'{container_error.command}' command failed")
-        for line in container_error.stderr.decode('utf-8').split('\n'):
-            print(line)
-        exit(1)
-    except APIError as api_error:
-        print("> [Error] Command test failed - " + str(api_error))
+    except DockerException as e:
+        print("> [Error] Command test failed - " + str(e))
         exit(1)
     finally:
-        docker_client.containers.prune()
+        docker.container.prune()
 
 
 def login_to_registry(env_conf):
     print("> [Info] Login to registry")
     try:
-        docker_client.login(
+        docker.login(
             username=env_conf["docker_reg_username"], password=env_conf["docker_reg_password"]
         )
         print("Login successful")
-    except APIError as api_error:
-        print("> [Error] Login failed - " + str(api_error))
+    except DockerException as docker_exception:
+        print("> [Error] Login failed - " + str(docker_exception))
         exit(1)
 
 
 def push_image(image_fullname):
     print("> [Info] Pushing " + image_fullname)
     try:
-        for line in docker_client.images.push(image_fullname, stream=True, decode=True):
-            # Keep 1st and last line of push cmd
-            if "status" in line and "progressDetail" not in line:
-                print(f"{line['status']}")
-            if "error" in line:
-                print(line["error"])
-                exit(1)
+        docker.images.push(image_fullname)
         print("Push successful")
-    except APIError as api_error:
-        print("> [Error] Push failed - " + str(api_error))
+    except DockerException as docker_exception:
+        print("> [Error] Push failed - " + str(docker_exception))
         exit(1)
         

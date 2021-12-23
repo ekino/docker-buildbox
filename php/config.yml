@@ -25,9 +25,12 @@ versions:
   "7.4":
     build_args: *build_args
     test_config: *test_config
+    platforms: *base_platforms
   "8.0":
     build_args: *build_args
     test_config: *test_config
+    platforms: *base_platforms
   "8.1":
     build_args: *build_args
     test_config: *test_config
+    platforms: *base_platforms
