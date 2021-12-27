@@ -1,4 +1,4 @@
-FROM debian:11.1-slim
+FROM debian:11.2-slim
 LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive \
