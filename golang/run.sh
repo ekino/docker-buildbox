@@ -67,6 +67,6 @@ tar -xzf testfixtures_linux_amd64.tar.gz -C /usr/local/bin
 rm testfixtures_linux_amd64.tar.gz
 echo "Successfully installed testfixtures\n"
 
-go get golang.org/x/tools/cmd/goimports github.com/shuLhan/go-bindata/...
+go get golang.org/x/tools/cmd/goimports github.com/shuLhan/go-bindata/... github.com/boumenot/gocover-cobertura
 
 echo "Done!";
