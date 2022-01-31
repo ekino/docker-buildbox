@@ -1,9 +1,8 @@
 Versions
 ========
 
-2022-01
--------
-
+2022-01-31
+----------
 * Golang: add gocover-cobertura
 
 2021-12-31
