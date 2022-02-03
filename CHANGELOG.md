@@ -1,8 +1,14 @@
 Versions
 ========
 
+2022-02-28
+----------
+
+* PHP: workaround for installing sockets and zip extensions
+
 2022-01-31
 ----------
+
 * Golang: add gocover-cobertura
 
 2021-12-31

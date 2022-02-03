@@ -24,7 +24,12 @@ echo "Done Install Modd"
 echo "Starting PHP with $version"
 
 docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+
+CFLAGS_PREVIOUS=$CFLAGS
+export CFLAGS="$CFLAGS -D_GNU_SOURCE"
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip
+export CFLAGS=$CFLAGS_PREVIOUS
+
 pecl install apcu-${APCU_VERSION}
 pecl install memcached-${MEMCACHED_VERSION}
 pecl install pcov
