@@ -59,6 +59,7 @@ def load_image_config(image_type, version):
 
 def get_image_tags(image_name, version, image_conf, env_conf):
     image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    local_repo_name_base = f"localhost:5000/ci-{image_name}"
     version_tag = f'{version}-' if version != "1" else ""
 
     if env_conf["tag"]:
@@ -72,6 +73,7 @@ def get_image_tags(image_name, version, image_conf, env_conf):
 
     tags = {
         "fullname": f"{image_repo_name_base}:{version_tag}",
+        "localname": f"{local_repo_name_base}:{version_tag}",
         "platforms": {},
     }
     for platform in image_conf["platforms"]:
