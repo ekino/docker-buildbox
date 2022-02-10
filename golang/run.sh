@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Starting...\n"
 
 echo "Installing packages..."
@@ -8,8 +10,10 @@ apt-get -qq -y install rsync
 echo "Successfully installed packages\n"
 
 echo "Installing AWS CLI..."
-apt-get -qq -y install groff-base python3-pip
-pip install -q -U awscli
+apt-get -qq -y install groff-base python3-pip  && \
+python3 -m ensurepip && \
+pip3 install --no-cache --upgrade pip setuptools wheel && \
+pip install -q -U awscli && \
 echo "Successfully installed AWS CLI\n"
 
 echo "Installing CI Helper..."

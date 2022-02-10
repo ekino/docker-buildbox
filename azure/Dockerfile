@@ -4,7 +4,7 @@ LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 
 ADD requirements.txt .
 
-RUN apt-get update -qq && apt-get install -qq -y ca-certificates curl apt-transport-https gcc wget unzip \
+RUN apt-get update -qq && apt-get install -qq -y ca-certificates curl apt-transport-https gcc wget unzip libpython3-dev build-essential \
     && pip install -r requirements.txt \
     && apt-get remove -y unzip gcc && apt-get -qq -y autoremove \
     && apt-get -qq -y clean && apt-get -y -qq purge\
