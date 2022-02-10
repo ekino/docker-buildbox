@@ -1,6 +1,10 @@
 Versions
 ========
 
+2022-03-31
+----------
+* Ansible: dropping support for 2.x & 3.x, adding a new 5.x.X image
+
 2022-02-28
 ----------
 
