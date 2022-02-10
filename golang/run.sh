@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Starting...\n"
 
 echo "Installing packages..."
@@ -8,9 +10,10 @@ apt-get -qq -y install rsync zip
 echo "Successfully installed packages\n"
 
 echo "Installing AWS CLI..."
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-./aws/install
+apt-get -qq -y install groff-base python3-pip  && \
+python3 -m ensurepip && \
+pip3 install --no-cache --upgrade pip setuptools wheel && \
+pip install -q -U awscli && \
 echo "Successfully installed AWS CLI\n"
 
 echo "Adding an up to date mime-types definition file"
