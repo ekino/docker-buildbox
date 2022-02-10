@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Starting ..."
 
 if [ "${TARGETARCH}" = "arm64" ]; then

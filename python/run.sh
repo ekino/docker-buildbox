@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Install system dependencies for python and pip"
 pip install -U pip
 echo "Done base install!"
