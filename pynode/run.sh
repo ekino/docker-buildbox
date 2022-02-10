@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Starting ..."
 apt-get update -qq
 apt-get install -qq -y curl unzip groff less

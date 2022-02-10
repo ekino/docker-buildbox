@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Install system dependencies for python and pip"
 apt-get update -y
 apt-get install curl unzip groff less -y

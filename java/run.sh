@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 echo "Starting ..."
 
 echo "Updating packages using sources :"
