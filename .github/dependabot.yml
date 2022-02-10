@@ -18,29 +18,7 @@ updates:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: "pip"
-    directory: "/ansible/2.9"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "ansible"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "pip"
-    directory: "/ansible/2.10"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "ansible"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "pip"
-    directory: "/ansible/3"
+    directory: "/ansible/4"
     schedule:
       interval: "weekly"
     labels:
@@ -51,7 +29,7 @@ updates:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: "pip"
-    directory: "/ansible/4"
+    directory: "/ansible/5"
     schedule:
       interval: "weekly"
     labels:
