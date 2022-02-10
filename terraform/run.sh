@@ -37,6 +37,7 @@ echo "Installing infracost" &&
     && tar xvf infracost.tar.gz \
     && mv infracost-linux-amd64 /usr/bin/infracost
     && wget https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh -O /opt/diff.sh \
-    && chmod +x /opt/diff.sh
+    && chmod +x /opt/diff.sh \
+    && echo "Done installing Infracost!"
 
 echo "Finished!"
