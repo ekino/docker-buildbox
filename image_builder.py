@@ -3,7 +3,7 @@ from os.path import exists
 import click
 
 import src.config as config
-import src.docker_image as docker
+import src.docker_tools as docker_tools
 
 
 @click.command()
@@ -30,26 +30,30 @@ def build(image, version, debug):
 
     # Build image tags list (base tag + archs)
     image_tags = config.get_image_tags(image, version, image_conf, env_conf)
-    image_fullname = image_tags["fullname"]
 
-    # Build docker image
-    docker.build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, debug)
+    with docker_tools.start_local_registry() as local_registry:
 
-    # Run defined test command
-    # docker.run_image(image_fullname, image_conf, debug)
+        # Build docker image
+        docker_tools.build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, debug)
 
-    # Push to registry in case of:
-    # - tag
-    # - push to master
-    # - nightly build
-    if (
-        env_conf["tag"] != ""
-        or (env_conf["event_type"] != "pull_request" and env_conf["branch"] == "master")
-        or env_conf["event_type"] == "schedule"
-    ):
-        # Login to registry
-        docker.login_to_registry(env_conf)
-        docker.push_image(image_fullname)
+        # Run defined test command
+        docker_tools.run_image(image_tags["localname"], image_conf, debug)
+
+        # Push to registry in case of:
+        # - tag
+        # - push to master
+        # - nightly build
+        if (
+            env_conf["tag"] != ""
+            or (env_conf["event_type"] != "pull_request" and env_conf["branch"] == "master")
+            or env_conf["event_type"] == "schedule"
+        ):
+            # Re-tag image with DockerHub registry name
+            docker_tools.tag_image(image_tags["localname"], image_tags["fullname"])
+
+            # Login to registry and push
+            docker_tools.login_to_registry(env_conf)
+            docker_tools.push_image(image_tags["fullname"])
 
 
 @click.group()
