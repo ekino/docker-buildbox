@@ -7,6 +7,7 @@ Versions
 * PHP: workaround for installing sockets and zip extensions
 * Ansible: dropping support for 2.x & 3.x, adding a new 5.x.X image
 * Terraform: updating TF to 1.1.x, along with associated tools
+* PHP: bump to PHP 7.4.28, PHP 8.0.16 and PHP 8.1.3 (security update)
 
 2022-01-31
 ----------
