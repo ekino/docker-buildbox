@@ -7,8 +7,9 @@ echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/reposi
 echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 echo "@edge-community-3.13 http://nl.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories
 apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-    gnu-libiconv@edge-community-3.13==${ICONV_VERSION} icu-dev@edge-main jq libcrypto1.1 libjpeg-turbo-dev libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 \
-    libxml2-dev libzip-dev make musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
+    gnu-libiconv@edge-community-3.13==${ICONV_VERSION} icu-dev jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
+    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev make \
+    musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
 echo "Done base install!"
 
 echo "Install CI Helper"
@@ -27,7 +28,7 @@ docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/inclu
 
 CFLAGS_PREVIOUS=$CFLAGS
 export CFLAGS="$CFLAGS -D_GNU_SOURCE"
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets zip
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets xsl zip
 export CFLAGS=$CFLAGS_PREVIOUS
 
 pecl install apcu-${APCU_VERSION}

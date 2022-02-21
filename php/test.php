@@ -143,7 +143,7 @@ EOF
         $errors                    = [];
         $commonExtensionsExpected  = [
             'apcu', 'bcmath', 'blackfire', 'exif', 'gd', 'iconv', 'intl', 'mbstring', 'memcached', 'mysqli', 'pcntl',
-            'pcov', 'pdo_mysql', 'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'ssh2', 'xdebug', 'Zend OPcache',
+            'pcov', 'pdo_mysql', 'pdo_pgsql', 'pgsql', 'redis', 'soap', 'sockets', 'ssh2', 'xdebug', 'xsl', 'Zend OPcache',
             'zip',
         ];
         $unreadyNextMajorExtensions = ['ssh2'];
