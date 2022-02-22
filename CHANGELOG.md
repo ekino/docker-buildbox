@@ -1,6 +1,12 @@
 Versions
 ========
 
+2022-03
+-------
+
+* Tezosqa: Version 1.0 that use version 0.9.0 of smartpy
+* expose docker variables in image building workflow
+
 2022-03-31
 ----------
 
