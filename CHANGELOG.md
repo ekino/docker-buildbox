@@ -4,6 +4,7 @@ Versions
 2022-02-28
 ----------
 
+* PHP: installing xsl extension
 * PHP: workaround for installing sockets and zip extensions
 * Ansible: dropping support for 2.x & 3.x, adding a new 5.x.X image
 * Terraform: updating TF to 1.1.x, along with associated tools
