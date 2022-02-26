@@ -9,6 +9,7 @@ Versions
 * Ansible: dropping support for 2.x & 3.x, adding a new 5.x.X image
 * Terraform: updating TF to 1.1.x, along with associated tools
 * PHP: bump to PHP 7.4.28, PHP 8.0.16 and PHP 8.1.3 (security update)
+* Java: upgrade Java 11 to 11.0.14 and 17 to 17.0.2
 
 2022-01-31
 ----------
