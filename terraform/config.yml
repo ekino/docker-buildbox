@@ -2,7 +2,6 @@ test_config: &test_config
   cmd:
     - terraform version
     - terragrunt --version
-    - terraspace version
     - terraform-compliance --version
     - python --version
     - aws --version
