@@ -3,6 +3,7 @@ test_config: &test_config
     - terraform version
     - terragrunt --version
     - terraform-compliance --version
+    - terraspace version
     - python --version
     - aws --version
     - git --version
