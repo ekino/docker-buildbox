@@ -5,11 +5,12 @@ LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
 ARG TERRAFORM_VERSION
 ARG TERRAGRUNT_VERSION
 ARG INFRACOST_VERSION
+ARG TERRASPACE_VERSION
 
 ADD requirements.txt .
 
 RUN apt-get update -qq \
-    && apt-get -y -qq install unzip wget git jq bc gcc curl gnupg \
+    && apt-get -y -qq install unzip wget git jq bc gcc gnupg \
     && pip install -U pip \
     && pip install awscli boto3 pipenv \
     && pip install -r requirements.txt \
@@ -31,6 +32,6 @@ RUN wget https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERS
     && chmod +x /opt/diff.sh
 
 RUN echo "deb https://apt.boltops.com stable main" > /etc/apt/sources.list.d/boltops.list \
-    && curl -s https://apt.boltops.com/boltops-key.public | apt-key add - \
+    && wget -q -O - https://apt.boltops.com/boltops-key.public | apt-key add - \
     && apt-get update \
-    && apt-get install -y terraspace
+    && apt-get install -y terraspace=${TERRASPACE_VERSION}
