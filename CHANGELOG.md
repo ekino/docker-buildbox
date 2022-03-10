@@ -1,6 +1,11 @@
 Versions
 ========
 
+2022-03-10
+----------
+
+* Terraform: adding Terraspace v1.1.5 to terraform Docker image
+
 2022-02-28
 ----------
 
