@@ -1,6 +1,11 @@
 Versions
 ========
 
+2022-03-31
+----------
+
+* Ansible: switch from AWScli v1 to v2
+
 2022-02-28
 ----------
 
