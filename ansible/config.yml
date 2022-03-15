@@ -4,6 +4,7 @@ test_config: &test_config
         - pip --version
         - ansible --version
         - ansible-playbook --version
+        - aws --version
 
 versions:
   "4":
