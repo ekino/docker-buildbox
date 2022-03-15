@@ -8,6 +8,7 @@ Versions
 * AWS: switch from AWScli v1 to v2
 * Dind: switch from AWScli v1 to v2
 * Node: dropping support for NodeJs 12
+* Golang: switch from AWScli v1 to v2
 
 2022-02-28
 ----------
