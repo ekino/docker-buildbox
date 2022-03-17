@@ -5,6 +5,7 @@ Versions
 ----------
 
 * Ansible: switch from AWScli v1 to v2
+* Ansible: dropping support for 4.x.x
 * AWS: switch from AWScli v1 to v2
 * Dind: switch from AWScli v1 to v2
 * Node: dropping support for NodeJs 12
