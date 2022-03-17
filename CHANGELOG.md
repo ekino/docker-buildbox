@@ -9,6 +9,7 @@ Versions
 * Dind: switch from AWScli v1 to v2
 * Node: dropping support for NodeJs 12
 * Golang: switch from AWScli v1 to v2
+* Golang: adding new 1.18 flavor
 
 2022-02-28
 ----------
