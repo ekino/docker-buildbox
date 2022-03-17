@@ -1,5 +1,5 @@
 FROM eclipse-temurin:17.0.2_8-jdk-focal
-LABEL maintainer="ekino"
+LABEL maintainer="opensource@ekino.com"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8

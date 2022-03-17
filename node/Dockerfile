@@ -1,5 +1,5 @@
 FROM debian:11.2-slim
-LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
+LABEL maintainer="opensource@ekino.com"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \

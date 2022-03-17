@@ -1,5 +1,5 @@
 FROM node:10-alpine
-LABEL maintainer="Guillaume AMAT <guillaume.amat@ekino.com>"
+LABEL maintainer="opensource@ekino.com"
 
 ARG CI_HELPER_VERSION
 ARG MODD_VERSION
