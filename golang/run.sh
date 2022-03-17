@@ -4,12 +4,13 @@ echo "Starting...\n"
 
 echo "Installing packages..."
 apt-get update -q
-apt-get -qq -y install rsync
+apt-get -qq -y install rsync zip
 echo "Successfully installed packages\n"
 
 echo "Installing AWS CLI..."
-apt-get -qq -y install groff-base python3-pip
-pip install -q -U awscli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
 echo "Successfully installed AWS CLI\n"
 
 echo "Installing CI Helper..."
