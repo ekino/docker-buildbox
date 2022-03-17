@@ -4,7 +4,6 @@ LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
 ARG HELM_DIFF_VERSION
 ARG HELM_VERSION
 ARG KUBECTL_VERSION
-ARG KUBECTX_VERSION
 ARG KUBENT_VERSION
 ARG KUBESCORE_VERSION
 ARG KUBEVAL_VERSION
@@ -25,13 +24,6 @@ RUN apk add ca-certificates curl bash wget ncurses && \
 RUN wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZATION_VERSION}/kustomize_v${KUSTOMIZATION_VERSION}_linux_amd64.tar.gz && \
     tar -xf kustomize_v${KUSTOMIZATION_VERSION}_linux_amd64.tar.gz && \
     mv ./kustomize /usr/bin/kustomize
-
-RUN wget https://raw.githubusercontent.com/ahmetb/kubectx/v${KUBECTX_VERSION}/kubectx && \
-    chmod +x kubectx && \
-    mv kubectx /usr/bin/kubectx && \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/v${KUBECTX_VERSION}/kubens && \
-    chmod +x kubens && \
-    mv kubens /usr/bin/kubens
 
 RUN wget https://github.com/zegl/kube-score/releases/download/v${KUBESCORE_VERSION}/kube-score_${KUBESCORE_VERSION}_linux_amd64 && \
     chmod +x kube-score_${KUBESCORE_VERSION}_linux_amd64 && \
