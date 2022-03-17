@@ -1,5 +1,5 @@
 FROM amazonlinux:2.0.20220218.1
-LABEL maintainer="Maxime Sibellas"
+LABEL maintainer="opensource@ekino.com"
 ENV container=docker
 
 RUN yum makecache fast \

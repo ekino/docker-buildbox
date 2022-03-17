@@ -1,6 +1,6 @@
 FROM python:3.10.3-slim-buster
 
-LABEL maintainer="Maxime Sibellas <maxime.sibellas@ekino.com>"
+LABEL maintainer="opensource@ekino.com"
 
 ADD requirements.txt .
 
