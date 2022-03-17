@@ -5,6 +5,7 @@ Versions
 ----------
 
 * Ansible: switch from AWScli v1 to v2
+* AWS: switch from AWScli v1 to v2
 
 2022-02-28
 ----------
