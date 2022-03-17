@@ -5,11 +5,11 @@ test_config: &test_config
     - aws --version
 
 versions:
-  "3.6":
-    test_config: *test_config
   "3.7":
     test_config: *test_config
   "3.8":
     test_config: *test_config
   "3.9":
+    test_config: *test_config
+  "3.10":
     test_config: *test_config
