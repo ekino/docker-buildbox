@@ -18,17 +18,6 @@ updates:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: "pip"
-    directory: "/ansible/4"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "ansible"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "pip"
     directory: "/ansible/5"
     schedule:
       interval: "weekly"
