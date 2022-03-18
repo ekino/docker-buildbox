@@ -5,7 +5,7 @@ apt-get update -qq
 apt-get install -qq -y curl
 
 echo "Install system dependencies for node"
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
+curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-get install -y nodejs
 echo "Done base install!"
 

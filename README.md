@@ -183,7 +183,7 @@ Contains Python with PIP and PIPENV.
 ### Pynode
 https://hub.docker.com/r/ekino/ci-pynode/tags
 
-Based on Python image, contains Nodejs 12. Used for serverless and CDK use cases, with tools installed in a
+Based on Python image, contains Nodejs 14. Used for serverless and CDK use cases, with tools installed in a
 `package-lock.json` file.
 
 ### Ruby
