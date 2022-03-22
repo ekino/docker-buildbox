@@ -1,5 +1,5 @@
 FROM debian:11.2-slim
-LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
+LABEL maintainer="opensource@ekino.com"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
@@ -42,9 +42,10 @@ RUN echo "Starting ..." && \
     apt-get update && apt-get install yarn --no-install-recommends && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
-    apt-get -qq -y install python3-pip groff-base && \
-    pip3 install -q -U awscli && \
-    echo "Done AWS!" && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    echo "Done installing AWS" && \
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \

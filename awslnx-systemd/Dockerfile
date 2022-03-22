@@ -1,5 +1,5 @@
-FROM amazonlinux:2.0.20220121.0
-LABEL maintainer="Maxime Sibellas"
+FROM amazonlinux:2.0.20220316.0
+LABEL maintainer="opensource@ekino.com"
 ENV container=docker
 
 RUN yum makecache fast \

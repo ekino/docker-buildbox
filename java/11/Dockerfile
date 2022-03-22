@@ -1,5 +1,5 @@
-FROM eclipse-temurin:11.0.12_7-jdk-focal
-LABEL maintainer="Stephane Leclercq <leclercq@ekino.com>"
+FROM eclipse-temurin:11.0.14.1_1-jdk-focal
+LABEL maintainer="opensource@ekino.com"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8

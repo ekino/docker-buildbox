@@ -4,12 +4,9 @@ test_config: &test_config
         - pip --version
         - ansible --version
         - ansible-playbook --version
+        - aws --version
 
 versions:
-  "4":
-    build_args:
-      ANSIBLE_VERSION: "4"
-    test_config: *test_config
   "5":
     build_args:
       ANSIBLE_VERSION: "5"

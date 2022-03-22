@@ -1,5 +1,5 @@
-FROM golang:1.16.14
-LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
+FROM golang:1.16.15
+LABEL maintainer="opensource@ekino.com"
 
 ARG CI_HELPER_VERSION
 ARG GITLEAKS_VERSION

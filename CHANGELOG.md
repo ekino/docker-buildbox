@@ -1,13 +1,31 @@
 Versions
 ========
 
+2022-03-31
+----------
+
+* Ansible: switch from AWScli v1 to v2
+* Ansible: dropping support for 4.x.x
+* AWS: switch from AWScli v1 to v2
+* Dind: switch from AWScli v1 to v2
+* Node: dropping support for NodeJs 12
+* Node: switch from AWScli v1 to v2
+* Golang: switch from AWScli v1 to v2
+* Golang: adding new 1.18 flavor
+* Cloudsploit: switch from AWScli v1 to v2
+* Python: dropping support for 3.6, adding support for 3.10
+* Kubectl: Bumping kubectl to 1.23.x. Updating Helm & misc tools. Removing kubectx & kubens
+* PyNode: switching from node 12.x to 14.x
+
 2022-02-28
 ----------
 
+* PHP: installing xsl extension
 * PHP: workaround for installing sockets and zip extensions
 * Ansible: dropping support for 2.x & 3.x, adding a new 5.x.X image
 * Terraform: updating TF to 1.1.x, along with associated tools
 * PHP: bump to PHP 7.4.28, PHP 8.0.16 and PHP 8.1.3 (security update)
+* Java: upgrade Java 11 to 11.0.14 and 17 to 17.0.2
 
 2022-01-31
 ----------

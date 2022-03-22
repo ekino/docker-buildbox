@@ -1,5 +1,5 @@
-FROM alpine:3.15.0
-LABEL maintainer="Thomas Rabaix <rabaix@ekino.com>"
+FROM alpine:3.15.1
+LABEL maintainer="opensource@ekino.com"
 
 ARG SONARSCANNER_VERSION
 

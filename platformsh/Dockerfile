@@ -1,5 +1,5 @@
 FROM php:8.0.13-cli-alpine3.13
-LABEL maintainer="Maxime Sibellas<maxime.sibellas@ekino.com>"
+LABEL maintainer="opensource@ekino.com"
 
 ARG PLATFORMSH_CLI_VERSION
 ARG PLATFORMSH_CLI_SHASUM

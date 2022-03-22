@@ -1,6 +1,6 @@
-FROM python:3.10.2-slim-buster
+FROM python:3.10.3-slim-buster
 
-LABEL maintainer="Julien Pierini <julien.pierini@ekino.com>"
+LABEL maintainer="opensource@ekino.com"
 
 ARG TERRAFORM_VERSION
 ARG TERRAGRUNT_VERSION

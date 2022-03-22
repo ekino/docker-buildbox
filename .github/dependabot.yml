@@ -18,17 +18,6 @@ updates:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: "pip"
-    directory: "/ansible/4"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "ansible"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "pip"
     directory: "/ansible/5"
     schedule:
       interval: "weekly"
@@ -176,6 +165,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  - package-ecosystem: "docker"
+    directory: "/golang/1.18"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "golang"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
   # Java
   - package-ecosystem: "docker"
     directory: "/java/11"
@@ -314,17 +314,6 @@ updates:
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
   # Python
   - package-ecosystem: "docker"
-    directory: "/python/3.6"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "python"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
     directory: "/python/3.7"
     schedule:
       interval: "weekly"
@@ -348,6 +337,17 @@ updates:
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
   - package-ecosystem: "docker"
     directory: "/python/3.9"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "python"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  - package-ecosystem: "docker"
+    directory: "/python/3.10"
     schedule:
       interval: "weekly"
     labels:
