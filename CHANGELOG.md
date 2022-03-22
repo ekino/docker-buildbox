@@ -9,6 +9,7 @@ Versions
 * AWS: switch from AWScli v1 to v2
 * Dind: switch from AWScli v1 to v2
 * Node: dropping support for NodeJs 12
+* Node: switch from AWScli v1 to v2
 * Golang: switch from AWScli v1 to v2
 * Golang: adding new 1.18 flavor
 * Cloudsploit: switch from AWScli v1 to v2

@@ -3,6 +3,7 @@ test_config: &test_config
     - *ci_helper_test
     - node --version
     - npm --version
+    - aws --version
     - yarn --version
     - sass --version
     - modd --version
