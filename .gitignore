@@ -2,3 +2,6 @@
 .idea
 *.iml
 .vscode
+
+# Python cache files
+src/__pycache__/*
