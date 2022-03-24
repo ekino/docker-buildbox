@@ -18,6 +18,7 @@ Versions
 * Kubectl: Bumping kubectl to 1.23.x. Updating Helm & misc tools. Removing kubectx & kubens
 * Kubectl: switch from AWScli v1 to v2
 * PyNode: switching from node 12.x to 14.x
+* PyNode: switch from AWScli v1 to v2
 
 
 2022-02-28
