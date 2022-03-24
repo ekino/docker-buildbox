@@ -4,6 +4,7 @@ test_config: &test_config
     - *ci_helper_test
     - php --version
     - composer --version
+    - aws --version
     - modd --version
     - php-cs-fixer --version
     - security-checker -help

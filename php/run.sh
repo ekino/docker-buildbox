@@ -6,16 +6,18 @@ version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")
 echo "@edge-main https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 echo "@edge-community-3.13 http://nl.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories
-apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-    gnu-libiconv@edge-community-3.13==${ICONV_VERSION} icu-dev jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
-    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev make \
-    musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
+apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl unzip groff less zlib freetype-dev gettext git \
+gnu-libiconv@edge-community-3.13==${ICONV_VERSION} icu-dev jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
+libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev make \
+musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
 echo "Done base install!"
 
 echo "Install CI Helper"
 curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper
 chmod 755 /usr/bin/ci-helper
 echo "Done install CI Helper"
+
+
 
 echo "Install Modd"
 curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd
@@ -71,9 +73,39 @@ curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd
 mv /tmp/blackfire-client/blackfire /usr/bin/blackfire
 echo "Done PHP!"
 
+# AWS Tools
+# install glibc & aws compatibility for alpine
 echo "Starting AWS"
-apk add groff py-pip
-pip install -q -U awscli
+export GLIBC_VER=2.31-r0
+
+# install glibc compatibility for alpine
+apk --no-cache add \
+binutils \
+curl \
+&& curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
+&& curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VER/glibc-$GLIBC_VER.apk \
+&& curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VER/glibc-bin-$GLIBC_VER.apk \
+&& curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VER/glibc-i18n-$GLIBC_VER.apk \
+&& apk add --no-cache \
+glibc-$GLIBC_VER.apk \
+glibc-bin-$GLIBC_VER.apk \
+glibc-i18n-$GLIBC_VER.apk \
+&& /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 \
+&& curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
+&& unzip awscliv2.zip \
+&& aws/install \
+&& rm -rf \
+awscliv2.zip \
+aws \
+/usr/local/aws-cli/v2/current/dist/aws_completer \
+/usr/local/aws-cli/v2/current/dist/awscli/data/ac.index \
+/usr/local/aws-cli/v2/current/dist/awscli/examples \
+glibc-*.apk \
+&& find /usr/local/aws-cli/v2/current/dist/awscli/botocore/data -name examples-1.json -delete \
+&& apk --no-cache del \
+binutils \
+curl \
+&& rm -rf /var/cache/apk/*
 echo "Done AWS!"
 
 echo "Adding an up to date mime-types definition file"
