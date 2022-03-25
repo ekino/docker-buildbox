@@ -7,7 +7,7 @@ cat /etc/apt/sources.list
 apt-get -qq clean -qq && apt-get -qq update
 
 echo "Install base"
-apt-get -qq -y install build-essential curl git make openssh-client jq
+apt-get -qq -y install build-essential curl git make openssh-client jq unzip groff less
 echo "Done Install base!"
 
 echo "Install CI Helper"
@@ -15,10 +15,11 @@ curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPE
 chmod 755 /usr/bin/ci-helper
 echo "Done Install CI Helper"
 
-echo "Install AWS"
-apt-get -qq -y install python3-pip
-pip3 install -q -U awscli
-echo "Done Install AWS!"
+echo "Installing AWS CLIv2" 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
+unzip awscliv2.zip
+./aws/install 
+echo "Done installing awscliv2!"
 
 echo "Install graphviz"
 apt-get -qq -y install graphviz

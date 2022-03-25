@@ -20,6 +20,7 @@ Versions
 * PyNode: switching from node 12.x to 14.x
 * PyNode: switch from AWScli v1 to v2
 * Terraform: switch from AWScli v1 to v2
+* Java: switch from AWScli v1 to v2
 
 2022-02-28
 ----------
