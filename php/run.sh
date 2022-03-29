@@ -84,6 +84,19 @@ apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 python3 -m ensurepip
 pip3 install --no-cache --upgrade pip setuptools
 
+# install glibc compatibility for alpine
+apk --no-cache add \
+binutils \
+curl \
+&& curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
+&& curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VER/glibc-$GLIBC_VER.apk \
+&& curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VER/glibc-bin-$GLIBC_VER.apk \
+&& curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VER/glibc-i18n-$GLIBC_VER.apk \
+&& apk add --no-cache \
+glibc-$GLIBC_VER.apk \
+glibc-bin-$GLIBC_VER.apk \
+glibc-i18n-$GLIBC_VER.apk \
+
 apk update 
 apk add --no-cache curl gcc gcompat zip groff less 
 curl -s https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && \
