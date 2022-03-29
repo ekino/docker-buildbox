@@ -78,11 +78,10 @@ echo "Done PHP!"
 echo "Installing AWS"
 export GLIBC_VER=2.31-r0
 
-# install glibc compatibility for alpine
-apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff zip
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-./aws/install
+apk update 
+apk add --no-cache curl gcompat zip 
+curl -s https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && \
+unzip awscliv2.zip && ./aws/install
 echo "Done AWS!"
 
 echo "Adding an up to date mime-types definition file"
