@@ -77,14 +77,8 @@ echo "Done PHP!"
 # install glibc & aws compatibility for alpine
 echo "Installing AWS"
 export GLIBC_VER=2.31-r0
-
-# Install python/pip
-PYTHONUNBUFFERED=1
-apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-python3 -m ensurepip
-pip3 install --no-cache --upgrade pip setuptools
-
 # install glibc compatibility for alpine
+echo "Installing glibc...."
 apk --no-cache add \
 binutils \
 curl \
@@ -97,8 +91,11 @@ glibc-$GLIBC_VER.apk \
 glibc-bin-$GLIBC_VER.apk \
 glibc-i18n-$GLIBC_VER.apk \
 
+echo "Installing gcc gcompat etc...."
 apk update 
 apk add --no-cache curl gcc gcompat zip groff less 
+
+echo "Installing awscliv2...."
 curl -s https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && \
 unzip awscliv2.zip && ./aws/install
 echo "Done AWS!"
