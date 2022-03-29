@@ -78,8 +78,14 @@ echo "Done PHP!"
 echo "Installing AWS"
 export GLIBC_VER=2.31-r0
 
+# Install python/pip
+PYTHONUNBUFFERED=1
+apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+python3 -m ensurepip
+pip3 install --no-cache --upgrade pip setuptools
+
 apk update 
-apk add --no-cache curl gcompat zip 
+apk add --no-cache curl gcompat zip groff less 
 curl -s https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && \
 unzip awscliv2.zip && ./aws/install
 echo "Done AWS!"
