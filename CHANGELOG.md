@@ -20,8 +20,13 @@ Versions
 * Golang: adding new 1.18 flavor
 * Cloudsploit: switch from AWScli v1 to v2
 * Python: dropping support for 3.6, adding support for 3.10
+* Python: switch from AWScli v1 to v2
 * Kubectl: Bumping kubectl to 1.23.x. Updating Helm & misc tools. Removing kubectx & kubens
+* Kubectl: switch from AWScli v1 to v2
 * PyNode: switching from node 12.x to 14.x
+* PyNode: switch from AWScli v1 to v2
+* Terraform: switch from AWScli v1 to v2
+* Java: switch from AWScli v1 to v2
 
 2022-02-28
 ----------
