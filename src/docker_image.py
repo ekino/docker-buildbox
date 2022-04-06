@@ -7,7 +7,7 @@ from src.config import load_base_config
 
 base_config = load_base_config()
 docker_sock_path = base_config["DOCKER_SOCK_PATH"]
-if(os.environ['DOCKER_HOST'] != ''):
+if('DOCKER_HOST' in os.environ):
     docker_sock_path = os.environ['DOCKER_HOST']
 
 
