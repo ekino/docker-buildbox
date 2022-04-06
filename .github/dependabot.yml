@@ -401,3 +401,15 @@ updates:
       - "dependencies"
       - "pip"
       - "terraform"
+  # Tezosqa
+  - package-ecosystem: "docker"
+    directory: "/tezosqa"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "tezosqa"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]

@@ -1,7 +1,9 @@
 versions:
-  "0.1":
+  "1.0":
     build_args:
-      SMARTPY_VERSION: 20201128-b860cdfdedfe18b3c3538d581fb7d175284a8136
+      SMARTPY_VERSION: 20220208-48ec25e86a7834c3098dd72313c6d539acba201a
+      SMARTPY_PATH: /root/smartpy-cli
     test_config:
       cmd:
-        - /opt/SmartPy/SmartPy.sh --version
+        - /root/smartpy-cli/SmartPy.sh --version
+

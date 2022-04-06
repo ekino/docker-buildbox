@@ -3,8 +3,15 @@ import pprint
 
 from docker import DockerClient
 from docker.errors import APIError, BuildError, ContainerError
+from src.config import load_base_config
 
-docker_client = DockerClient(base_url="unix://var/run/docker.sock", timeout=600)
+base_config = load_base_config()
+docker_sock_path = base_config["DOCKER_SOCK_PATH"]
+if('DOCKER_HOST' in os.environ):
+    docker_sock_path = os.environ['DOCKER_HOST']
+
+
+docker_client = DockerClient(base_url=docker_sock_path, timeout=base_config["DOCKER_TIMEOUT"])
 
 
 def build_image(image_conf, image_fullname, dockerfile_directory, dockerfile_path, debug):
@@ -110,3 +117,4 @@ def push_image(image_fullname):
     except APIError as api_error:
         print("> [Error] Push failed - " + str(api_error))
         exit(1)
+        

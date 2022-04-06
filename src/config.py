@@ -25,6 +25,12 @@ def load_ci_env(debug):
     return build_info
 
 
+def load_base_config():
+    with open(f"base_config.yml") as base_config_file:
+        base_config = base_config_file.read()
+    return yaml.load(base_config, Loader=Loader)
+
+
 def load_image_config(image_type, version):
     config_path = "config.yml"
     base_config_path = f"base_{config_path}"
@@ -71,3 +77,4 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
         image_tag += "latest" if version != "1" else "latest"
 
     return f"{image_repo_name_base}:{image_tag}"
+
