@@ -1,6 +1,10 @@
 Versions
 ========
 
+2022-04-21
+----------
+* bumping image version for bitcoind to 22.0
+
 2022-03
 -------
 
