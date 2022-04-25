@@ -3,8 +3,9 @@ FROM debian:buster-slim as builder
 
 ARG BITCOIN_VERSION
 ARG BITCOIN_SHA256
+ARG BITCOIN_ARCH
 
-ENV BITCOIN_URL https://bitcoin.org/bin/bitcoin-core-${BITCOIN_VERSION}/bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
+ENV BITCOIN_URL https://bitcoincore.org/bin/bitcoin-core-${BITCOIN_VERSION}/bitcoin-${BITCOIN_VERSION}-${BITCOIN_ARCH}-linux-gnu.tar.gz
 
 RUN set -ex \
 	&& apt-get update \
