@@ -6,6 +6,7 @@ Versions
 
 * Tezosqa: Version 1.0 that use version 0.9.0 of smartpy
 * expose docker variables in image building workflow
+* Java: upgrade Java 11 to 11.0.15 and 17 to 17.0.3
 
 2022-03-31
 ----------
