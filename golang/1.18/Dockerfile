@@ -1,4 +1,4 @@
-FROM golang:1.18.1
+FROM golang:1.18.2
 LABEL maintainer="opensource@ekino.com"
 
 ARG CI_HELPER_VERSION
