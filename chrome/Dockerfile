@@ -1,7 +1,6 @@
 FROM node:10-alpine
 LABEL maintainer="opensource@ekino.com"
 
-ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
 
@@ -28,10 +27,6 @@ RUN yarn add puppeteer@1.13.0
 
 
 RUN apk add --update curl git grep make ncurses tzdata && \
-    echo "Install CI Helper" && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
-    chmod 755 /usr/bin/ci-helper && \
-    echo "Done install CI Helper" && \
     echo "Install Taskfile" && \
     curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
     echo "Done Install Taskfile" && \

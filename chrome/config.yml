@@ -2,11 +2,9 @@ versions:
   "1":
     build_args:
       MODD_VERSION: *MODD_VERSION
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
-        - *ci_helper_test
         - google-chrome --no-sandbox --version
         - google-chrome-unstable --no-sandbox --version
         - node --version

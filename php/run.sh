@@ -12,11 +12,6 @@ apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cy
     musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
 echo "Done base install!"
 
-echo "Install CI Helper"
-curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper
-chmod 755 /usr/bin/ci-helper
-echo "Done install CI Helper"
-
 echo "Install Modd"
 curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd
 chmod 755 /usr/bin/modd

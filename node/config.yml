@@ -1,6 +1,5 @@
 test_config: &test_config
   cmd:
-    - *ci_helper_test
     - node --version
     - npm --version
     - aws --version
@@ -12,7 +11,6 @@ test_config: &test_config
 versions:
   "14":
     build_args:
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
       NODE_VERSION: 14.17.6
       NPM_VERSION: 6.14.5
       NVM_VERSION: 0.35.3
@@ -21,7 +19,6 @@ versions:
     test_config: *test_config
   "16":
     build_args:
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
       NODE_VERSION: 16.11.0
       NPM_VERSION: 8.0.0
       NVM_VERSION: 0.39.0

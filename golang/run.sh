@@ -13,11 +13,6 @@ unzip awscliv2.zip
 ./aws/install
 echo "Successfully installed AWS CLI\n"
 
-echo "Installing CI Helper..."
-curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper
-chmod 755 /usr/bin/ci-helper
-echo "Successfully installed CI Helper\n"
-
 echo "Adding an up to date mime-types definition file"
 curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types
 

@@ -1,7 +1,6 @@
 FROM docker:20.10.15-dind
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
-ARG CI_HELPER_VERSION
 ARG GLIBC_VERSION
 ARG PIP_VERSION
 ARG TASKFILE_VERSION
@@ -26,10 +25,6 @@ RUN echo "Install AWS & Azure CLIs" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     echo "Done installing AWS & Azure CLIs" && \
-    echo "Install CI Helper" && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
-    chmod 755 /usr/bin/ci-helper && \
-    echo "Done install CI Helper" && \
     echo "Install Taskfile" && \
     curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
     echo "Done Install Taskfile" && \

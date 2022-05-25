@@ -3,7 +3,16 @@ Versions
 
 2022-05-31
 ----------
+
+* Chrome: removing ci-helper binary
+* Dind: removing ci-helper binary
 * Dind: changing docker-compose installation method to apk.
+* Golang: removing ci-helper binary
+* Java: removing ci-helper binary
+* Node: removing ci-helper binary
+* Php: removing ci-helper binary
+* Ruby: removing ci-helper binary
+* Sonar: removing ci-helper binary
 
 2022-04-30
 ----------
