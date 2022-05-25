@@ -1,8 +1,12 @@
 Versions
 ========
 
-2022-03
--------
+2022-05-31
+----------
+* Dind: changing docker-compose installation method to apk.
+
+2022-04-30
+----------
 
 * Tezosqa: Version 1.0 that use version 0.9.0 of smartpy
 * expose docker variables in image building workflow
