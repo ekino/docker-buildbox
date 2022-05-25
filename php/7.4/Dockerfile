@@ -2,7 +2,6 @@ FROM php:7.4.29-cli-alpine3.15
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG APCU_VERSION
-ARG CI_HELPER_VERSION
 ARG COMPOSER_VERSION
 ARG ICONV_VERSION
 ARG MEMCACHED_VERSION

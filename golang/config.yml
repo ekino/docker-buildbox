@@ -1,6 +1,5 @@
 test_config: &test_config
   cmd:
-    - *ci_helper_test
     - aws --version
     - gitleaks --version
     - go version
@@ -16,7 +15,6 @@ versions:
   "1.16":
     test_config: *test_config
     build_args:
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
       GOLANGCILINT_VERSION: 1.38.0
       GOMODUPGRADE_VERSION: 0.4.0
@@ -28,7 +26,6 @@ versions:
   "1.17":
     test_config: *test_config
     build_args:
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
       GOLANGCILINT_VERSION: 1.38.0
       GOMODUPGRADE_VERSION: 0.4.0
@@ -40,7 +37,6 @@ versions:
   "1.18":
     test_config: *test_config
     build_args:
-      CI_HELPER_VERSION: *CI_HELPER_VERSION
       GITLEAKS_VERSION: 7.3.0
       GOLANGCILINT_VERSION: 1.38.0
       GOMODUPGRADE_VERSION: 0.4.0

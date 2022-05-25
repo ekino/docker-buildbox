@@ -9,7 +9,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ARG NODE_VERSION
 ARG NPM_VERSION
 ARG NVM_VERSION
-ARG CI_HELPER_VERSION
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
 
@@ -19,11 +18,7 @@ RUN echo "Starting ..." && \
       libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ && \
     gem install rb-inotify:'~> 0.9.10' sass --verbose && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
-    echo "Done base install!" && \
-    echo "Install CI Helper" && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/linux-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
-    chmod 755 /usr/bin/ci-helper && \
-    echo "Done install CI Helper" && \
+  echo "Done base install!" && \
     echo "Install Modd" && \
     curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
     chmod 755 /usr/bin/modd && \

@@ -5,7 +5,6 @@ ARG SONARSCANNER_VERSION
 
 ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-ARG CI_HELPER_VERSION
 ARG GLIBC_VERSION
 ARG SONARSCANNER_VERSION
 ARG ZLIB_VERSION
@@ -27,10 +26,6 @@ RUN echo "Starting ..." && \
     rm sonarscanner.zip && \
     mv sonar-scanner-${SONARSCANNER_VERSION}-linux sonar-scanner && \
     echo "Done Sonar Scanner!" && \
-    echo "Install CI Helper" && \
-    curl -sSL https://github.com/rande/gitlab-ci-helper/releases/download/${CI_HELPER_VERSION}/alpine-amd64-gitlab-ci-helper -o /usr/bin/ci-helper && \
-    chmod 755 /usr/bin/ci-helper && \
-    echo "Done install CI Helper" && \
     echo "Cleaning files!" && \
     rm -rf /tmp/* /var/cache/apk/* && \
     echo "Done!"
