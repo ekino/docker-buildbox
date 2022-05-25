@@ -13,6 +13,8 @@ Versions
 * Php: removing ci-helper binary
 * Ruby: removing ci-helper binary
 * Sonar: removing ci-helper binary
+* Kubectl: updating to 1.24, along with associated tools
+
 
 2022-04-30
 ----------
