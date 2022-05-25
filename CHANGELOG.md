@@ -15,6 +15,7 @@ Versions
 * Php: removing ci-helper binary
 * Ruby: removing ci-helper binary
 * Sonar: removing ci-helper binary
+* Sonar: updating to sonar-scanner-cli 4.7.x
 * Kubectl: updating to 1.24, along with associated tools
 * Platformsh: updating to the latest 3.79.x CLI
 
