@@ -7,6 +7,7 @@ Versions
 * Chrome: removing ci-helper binary
 * Dind: removing ci-helper binary
 * Dind: changing docker-compose installation method to apk.
+* Dind: bumping Trivy's version
 * Golang: removing ci-helper binary
 * Golang: golang 1.16 is now EOL, removing this image's flavor
 * Java: removing ci-helper binary
