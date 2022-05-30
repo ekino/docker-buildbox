@@ -1,8 +1,8 @@
 versions:
-  "4.6":
+  "4.7":
     build_args:
       GLIBC_VERSION: 2.32-r0
-      SONARSCANNER_VERSION: 4.6.2.2472
+      SONARSCANNER_VERSION: 4.7.0.2747
       ZLIB_VERSION: 1.2.11-3
     test_config:
       cmd:
