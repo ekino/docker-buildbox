@@ -12,7 +12,7 @@ test_config: &test_config
 versions:
   "1.1.5":
     build_args:
-      TERRAFORM_VERSION: 1.1.5
-      TERRAGRUNT_VERSION: 0.36.1
-      INFRACOST_VERSION: 0.9.17
+      TERRAFORM_VERSION: 1.2.1
+      TERRAGRUNT_VERSION: 0.37.1
+      INFRACOST_VERSION: 0.10.0
     test_config: *test_config
