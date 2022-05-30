@@ -4,6 +4,7 @@ versions:
       GLIBC_VERSION: 2.32-r0
       SONARSCANNER_VERSION: 4.7.0.2747
       ZLIB_VERSION: 1.2.11-3
+      ZLIB_URL:
     test_config:
       cmd:
         - java -version

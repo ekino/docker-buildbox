@@ -8,5 +8,3 @@ ADD package.json .
 
 COPY run.sh .
 RUN sh run.sh
-
-CMD [ "npm install && ln -s /node_modules/cloudsploit/index.js /usr/local/bin/cloudsploit" ]
