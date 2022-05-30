@@ -1,5 +1,5 @@
 versions:
-  "1":
+  "2":
     build_args:
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
