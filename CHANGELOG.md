@@ -11,11 +11,11 @@ Versions
 * Golang: golang 1.16 is now EOL, removing this image's flavor
 * Java: removing ci-helper binary
 * Node: removing ci-helper binary
+* Node: adding new 18.x flavor
 * Php: removing ci-helper binary
 * Ruby: removing ci-helper binary
 * Sonar: removing ci-helper binary
 * Kubectl: updating to 1.24, along with associated tools
-
 
 2022-04-30
 ----------
