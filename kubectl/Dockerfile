@@ -8,6 +8,7 @@ ARG KUBENT_VERSION
 ARG KUBESCORE_VERSION
 ARG KUBEVAL_VERSION
 ARG KUSTOMIZATION_VERSION
+ARG TRIVY_VERSION
 
 ENV PATH="${PATH}:/usr/bin"
 
@@ -68,6 +69,10 @@ RUN wget https://github.com/instrumenta/kubeval/releases/download/v${KUBEVAL_VER
 RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     mv linux-amd64/helm /usr/local/bin/helm
+
+RUN wget https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz && \
+    tar xf trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz && \
+    mv trivy /usr/bin/trivy
 
 RUN apk add git && \
     helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff
