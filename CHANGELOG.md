@@ -16,6 +16,7 @@ Versions
 * Ruby: removing ci-helper binary
 * Sonar: removing ci-helper binary
 * Kubectl: updating to 1.24, along with associated tools
+* Platformsh: updating to the latest 3.79.x CLI
 
 2022-04-30
 ----------
