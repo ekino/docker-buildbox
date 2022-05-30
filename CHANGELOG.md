@@ -17,6 +17,7 @@ Versions
 * Sonar: removing ci-helper binary
 * Sonar: updating to sonar-scanner-cli 4.7.x
 * Kubectl: updating to 1.24, along with associated tools
+* Kubectl: adding Trivy, which now supports scanning kubernetes resources
 * Platformsh: updating to the latest 3.79.x CLI
 * Terraform: bump terraform to 1.2.1, along with associated tools
 * Terraform: adding Google Cloud CLI
