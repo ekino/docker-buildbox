@@ -82,12 +82,12 @@ Do not forget to add an entry in `.github/dependabot.yml` too if you want it to 
 ### Ansible
 https://hub.docker.com/r/ekino/ci-ansible/tags
 
-Contains Ansible, CI Helper and Python 2.7
+Contains Ansible and Python 3.x
 
 ### AWS
 https://hub.docker.com/r/ekino/ci-aws/tags
 
-Contains AWS Cli, AWS EB Cli, CI Helper and jq.
+Contains AWS Cli, AWS EB Cli, and jq.
 
 ### AWSLinux systemd
 https://hub.docker.com/r/ekino/ci-awslnx-systemd/tags
@@ -117,7 +117,7 @@ Contains Aquasecurity's Cloudsploit Scanner.
 ### DIND
 https://hub.docker.com/r/ekino/ci-dind/tags
 
-Adds AWS Cli, Azure Cli & CI Helper to GitLab's dind image (to run docker in a GitLab runner).
+Adds AWS Cli & Azure Cli to GitLab's dind image (to run docker in a GitLab runner).
 
 Use case:
 ```yaml
@@ -137,22 +137,22 @@ test:
 ### Golang
 https://hub.docker.com/r/ekino/ci-golang/tags
 
-Based upon official Golang image, contains AWS Cli, CI Helper, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd, rsync and testfixtures.
+Based upon official Golang image, contains AWS Cli, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd, rsync and testfixtures.
 
 ### Java
 https://hub.docker.com/r/ekino/ci-java/tags
 
-Contains AWS Cli, CI Helper, Maven, Graphviz, jq, psql and Java.
+Contains AWS Cli, Maven, Graphviz, jq, psql and Java.
 
 ### Kubectl
 https://hub.docker.com/r/ekino/ci-kubectl/tags
 
-Contains kubectl, kubens, kubectx, kube-score, eksctl.
+Contains kubectl, helm, kubens, kubectx, kube-score.
 
 ### Node
 https://hub.docker.com/r/ekino/ci-node/tags
 
-Contains node (installed in the NODE_VERSION env var value), CI Helper and AWS Cli.
+Contains node (installed in the NODE_VERSION env var value) and AWS Cli.
 
 ### Percy
 https://hub.docker.com/r/ekino/ci-percy/tags
@@ -162,7 +162,7 @@ Contains [Percy CLI](https://docs.percy.io/docs/cli-overview), used to manage ht
 ### PHP
 https://hub.docker.com/r/ekino/ci-php/tags
 
-Contains PHP (installed from official alpine in the PHP_VERSION env var value) within Blackfire, Composer, PHP CS Fixer, Security Checker, AWS Cli and CI Helper.
+Contains PHP (installed from official alpine in the PHP_VERSION env var value) within Blackfire, Composer, PHP CS Fixer, Security Checker and AWS Cli.
 
 About Blackfire, please read the official documentation to install the agent https://blackfire.io/docs/integrations/docker, then you should be able to profile a PHP script like this:
 
@@ -189,17 +189,17 @@ Based on Python image, contains Nodejs 14. Used for serverless and CDK use cases
 ### Ruby
 https://hub.docker.com/r/ekino/ci-ruby/tags
 
-Contains Ruby (installed from official alpine) and CI Helper.
+Contains Ruby (installed from official alpine).
 
 ### SonarQube Scanner
 https://hub.docker.com/r/ekino/ci-sonar/tags
 
-Contains SonarQube Scanner and CI Helper.
+Contains SonarQube Scanner.
 
 ### Terraform
 https://hub.docker.com/r/ekino/ci-terraform/tags
 
-Contains Terraform and AWS Cli.
+Contains Terraform, Terragrunt and AWS Cli.
 
 ### TezosQA
 https://hub.docker.com/r/ekino/ci-tezosqa/tags
