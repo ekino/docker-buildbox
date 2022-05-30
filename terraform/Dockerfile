@@ -9,7 +9,7 @@ ARG INFRACOST_VERSION
 ADD requirements.txt .
 
 RUN apt-get update -qq \
-    && apt-get -y -qq install unzip wget curl git jq bc gcc groff less \
+    && apt-get -y -qq install unzip wget curl git jq bc gcc groff less apt-transport-https ca-certificates gnupg \
     && pip install -U pip \
     && pip install boto3 pipenv \
     && pip install -r requirements.txt \
@@ -20,10 +20,13 @@ RUN apt-get update -qq \
     && chmod +x /usr/bin/terraform
 
 RUN echo "Installing AWS CLIv2" \
-    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \ 
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
     && echo "Done installing awscliv2!"
+
+RUN echo "Installing gcloud CLI" \
+    && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
 
 RUN wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt \
     && mv terragrunt /usr/bin \
