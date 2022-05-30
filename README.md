@@ -199,7 +199,7 @@ Contains SonarQube Scanner.
 ### Terraform
 https://hub.docker.com/r/ekino/ci-terraform/tags
 
-Contains Terraform, Terragrunt and AWS Cli.
+Contains Terraform, Terragrunt, and CLIs for Google Cloud, Azure, AWS.
 
 ### TezosQA
 https://hub.docker.com/r/ekino/ci-tezosqa/tags

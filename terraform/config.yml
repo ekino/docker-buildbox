@@ -8,6 +8,7 @@ test_config: &test_config
     - git --version
     - infracost --version
     - az --version
+    - gcloud --version
 
 versions:
   "1.1.5":

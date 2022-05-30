@@ -19,6 +19,7 @@ Versions
 * Kubectl: updating to 1.24, along with associated tools
 * Platformsh: updating to the latest 3.79.x CLI
 * Terraform: bump terraform to 1.2.1, along with associated tools
+* Terraform: adding Google Cloud CLI
 
 2022-04-30
 ----------
