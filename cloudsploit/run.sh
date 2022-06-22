@@ -2,13 +2,6 @@
 
 set -ex
 
-echo "Defining parameters..." &&
-    if [ "${TARGETARCH}" = "arm64" ]; then
-        AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
-    else
-        AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
-    fi
-
 echo "Installing tools..." &&
     apt-get update -qq && apt-get install -y wget zip curl &&
     pip install -U pip &&

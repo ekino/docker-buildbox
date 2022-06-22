@@ -3,7 +3,6 @@ LABEL maintainer="opensource@ekino.com"
 
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
-ARG TARGETARCH
 
 # Based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-on-alpine
 
