@@ -1,4 +1,4 @@
-FROM amazonlinux:2.0.20220426.0
+FROM amazonlinux:2.0.20220606.1
 LABEL maintainer="opensource@ekino.com"
 ENV container=docker
 
