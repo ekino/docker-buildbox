@@ -9,10 +9,6 @@ ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
 
 FROM base-$TARGETARCH
 ADD ${ANSIBLE_VERSION}/requirements.txt .
-RUN apt update && apt install -y curl zip &&\
-    pip install -U pip pipenv boto3 &&\
-    pip install -r requirements.txt &&\
-    rm -rf /var/cache/apk/* &&\
-    curl "${AWSCLI_URL}" -o "awscliv2.zip" &&\
-    unzip awscliv2.zip &&\
-    ./aws/install
+ADD run.sh .
+RUN sh run.sh
+
