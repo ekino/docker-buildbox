@@ -1,6 +1,10 @@
 Versions
 ========
 
+2022-06-30
+----------
+No specific change this month, just standard dependencies updates. Happy summer !
+
 2022-05-31
 ----------
 
