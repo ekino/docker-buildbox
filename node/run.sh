@@ -40,13 +40,15 @@ echo "Starting Javascript..." &&
     echo "Done JS!"
 
 echo "Starting AWS" &&
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" &&
+    curl $AWSCLI_URL -o "awscliv2.zip" &&
     unzip awscliv2.zip &&
     ./aws/install &&
     echo "Done installing AWS"
+
 echo "Adding an up to date mime-types definition file" &&
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types &&
-    echo "Cleaning files!" &&
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types
+
+echo "Cleaning files!" &&
     rm -rf /tmp/* &&
     apt-get -qq -y remove --purge emacsen-common fakeroot file firebird3.0-common firebird3.0-common-doc \
         firebird3.0-server firebird3.0-server-core man-db manpages manpages-dev \

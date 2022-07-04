@@ -24,7 +24,7 @@ versions:
       MOCKGEN_VERSION: 1.6.0
       MODD_VERSION: 0.8
       TESTFIXTURES_VERSION: 3.5.0
-      platforms: *base_platforms
+    platforms: *base_platforms
   "1.18":
     test_config: *test_config
     platforms: *base_platforms

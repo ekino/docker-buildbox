@@ -4,13 +4,7 @@ set -ex
 
 echo "Starting ..." &&
     apk --update upgrade && apk add curl make tzdata unzip &&
-    if ["${TARGETARCH}" = "arm64"]; then
-        ZLIB_URL="http://mirror.archlinuxarm.org/aarch64/core/zlib-1%3A{$ZLIB_VERSION}-aarch64.pkg.tar.xz" &&
-            echo "Done base arm64 install!"
-    else
-        ZLIB_URL="https://archive.archlinux.org/packages/z/zlib/zlib-1%3A{$ZLIB_VERSION}-x86_64.pkg.tar.xz" &&
-            echo "Done base amd64 install!"
-    fi
+    echo "Done base install!"
 
 echo "Installing glib..." &&
     curl -sSL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub &&

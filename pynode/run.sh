@@ -12,7 +12,7 @@ apt-get install -y nodejs
 echo "Done base install!"
 
 echo "Installing AWS CLIv2"
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+curl $AWSCLI_URL -o "awscliv2.zip"
 unzip awscliv2.zip
 ./aws/install
 echo "Done installing awscliv2!"
