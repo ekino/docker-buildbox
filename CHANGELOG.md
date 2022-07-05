@@ -1,8 +1,14 @@
 Versions
 ========
 
+2022-07-31
+----------
+
+* PHP: updating tools
+
 2022-06-30
 ----------
+
 No specific change this month, just standard dependencies updates. Happy summer !
 
 2022-05-31
@@ -17,7 +23,7 @@ No specific change this month, just standard dependencies updates. Happy summer 
 * Java: removing ci-helper binary
 * Node: removing ci-helper binary
 * Node: adding new 18.x flavor
-* Php: removing ci-helper binary
+* PHP: removing ci-helper binary
 * Ruby: removing ci-helper binary
 * Sonar: removing ci-helper binary
 * Sonar: updating to sonar-scanner-cli 4.7.x
