@@ -20,7 +20,7 @@ echo "install glibc compatibility for alpine" &&
         glibc-bin-${GLIBC_VER}.apk \
         glibc-i18n-${GLIBC_VER}.apk &&
     /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 &&
-    curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip &&
+    curl -sL https://awscli.amazonaws.com/awscli-exe-linux-${AWSCLI_ARCH}.zip -o awscliv2.zip &&
     unzip awscliv2.zip &&
     aws/install &&
     rm -rf \
@@ -38,22 +38,22 @@ echo "install glibc compatibility for alpine" &&
 
 echo "installing kustomize..." &&
     wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZATION_VERSION}/kustomize_v${KUSTOMIZATION_VERSION}_linux_amd64.tar.gz &&
-    tar -xf kustomize_v${KUSTOMIZATION_VERSION}_linux_amd64.tar.gz &&
+    tar -xf kustomize_v${KUSTOMIZATION_VERSION}_${KUSTOMIZATION_ARCH}.tar.gz &&
     mv ./kustomize /usr/bin/kustomize
 
 echo "installing kube-score..." &&
     wget https://github.com/zegl/kube-score/releases/download/v${KUBESCORE_VERSION}/kube-score_${KUBESCORE_VERSION}_linux_amd64 &&
     chmod +x kube-score_${KUBESCORE_VERSION}_linux_amd64 &&
-    mv kube-score_${KUBESCORE_VERSION}_linux_amd64 /usr/bin/kube-score
+    mv kube-score_${KUBESCORE_VERSION}_${KUBESCORE_ARCH} /usr/bin/kube-score
 
 echo "installing kubent..." &&
     wget https://github.com/doitintl/kube-no-trouble/releases/download/${KUBENT_VERSION}/kubent-${KUBENT_VERSION}-linux-amd64.tar.gz &&
-    tar xf kubent-${KUBENT_VERSION}-linux-amd64.tar.gz &&
+    tar xf kubent-${KUBENT_VERSION}-${KUBENT_ARCH}.tar.gz &&
     mv kubent /usr/bin/kubent
 
 echo "installing trivy..." &&
     wget https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz &&
-    tar xf trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz &&
+    tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz &&
     mv trivy /usr/bin/trivy
 
 echo "installing helm-diff..." &&
