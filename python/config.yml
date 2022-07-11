@@ -13,6 +13,7 @@ versions:
     platforms: *base_platforms
   "3.9":
     test_config: *test_config
+    platforms: *base_platforms
   "3.10":
     test_config: *test_config
     platforms: *base_platforms
