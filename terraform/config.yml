@@ -1,14 +1,14 @@
 test_config: &test_config
   cmd:
     - terraform version
-    - terragrunt --version
     - terraform-compliance --version
     - python --version
     - aws --version
     - git --version
-    - infracost --version
     - az --version
     - gcloud --version
+    - infracost --version
+    - terragrunt --version
 
 versions:
   "1.1.5":
