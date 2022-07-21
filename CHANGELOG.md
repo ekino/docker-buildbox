@@ -5,6 +5,7 @@ Versions
 ----------
 
 * PHP: updating tools
+* Terraform: bump terraform to 1.2.5, along with associated tools
 
 2022-06-30
 ----------
