@@ -11,9 +11,9 @@ test_config: &test_config
     - gcloud --version
 
 versions:
-  "1.1.5":
+  "1.2.5":
     build_args:
-      TERRAFORM_VERSION: 1.2.1
-      TERRAGRUNT_VERSION: 0.37.1
-      INFRACOST_VERSION: 0.10.0
+      TERRAFORM_VERSION: 1.2.5
+      TERRAGRUNT_VERSION: 0.38.5
+      INFRACOST_VERSION: 0.10.8
     test_config: *test_config
