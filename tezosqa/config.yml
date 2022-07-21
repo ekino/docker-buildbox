@@ -1,5 +1,7 @@
 versions:
   "1.0":
+    platforms: 
+      - linux/amd64
     build_args:
       SMARTPY_VERSION: 20220208-48ec25e86a7834c3098dd72313c6d539acba201a
       SMARTPY_PATH: /root/smartpy-cli

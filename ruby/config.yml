@@ -1,5 +1,7 @@
 versions:
   "2.6":
+    platforms: 
+      - linux/amd64
     test_config:
       cmd:
         - bundle --version

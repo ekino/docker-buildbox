@@ -8,6 +8,10 @@ test_config: &test_config
 
 versions:
   "11":
+    platforms: 
+      - linux/amd64
     test_config: *test_config
   "17":
+    platforms: 
+      - linux/amd64
     test_config: *test_config

@@ -23,11 +23,17 @@ build_args: &build_args
 
 versions:
   "7.4":
+    platforms: 
+      - linux/amd64
     build_args: *build_args
     test_config: *test_config
   "8.0":
+    platforms: 
+      - linux/amd64
     build_args: *build_args
     test_config: *test_config
   "8.1":
+    platforms: 
+      - linux/amd64
     build_args: *build_args
     test_config: *test_config

@@ -1,5 +1,7 @@
 versions:
   "1":
+    platforms: 
+      - linux/amd64
     build_args:
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:

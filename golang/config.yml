@@ -13,6 +13,8 @@ test_config: &test_config
 
 versions:
   "1.17":
+    platforms: 
+      - linux/amd64
     test_config: *test_config
     build_args:
       GITLEAKS_VERSION: 7.3.0
@@ -24,6 +26,8 @@ versions:
       MODD_VERSION: 0.8
       TESTFIXTURES_VERSION: 3.5.0
   "1.18":
+    platforms: 
+      - linux/amd64
     test_config: *test_config
     build_args:
       GITLEAKS_VERSION: 7.3.0

@@ -1,5 +1,16 @@
 Versions
 ========
+2022-07-21
+----------
+**Improvements**
+* Python SRC : Change python docker module from docker to python-on-whales
+* Python SRC : Build amd64 images with docker buildx
+* Python SRC Config : Add linux/amd64 and linux/arm64 as values for the new config property base_platforms
+* CI : use docker/setup-qemu-action@v2 and docker/setup-buildx-action@v1 as gitflows step actions
+* Images : Only [OCI images](https://github.com/opencontainers/image-spec/blob/main/spec.md) for amd64 architecture are built
+
+**Issues**
+
 
 2022-07-31
 ----------

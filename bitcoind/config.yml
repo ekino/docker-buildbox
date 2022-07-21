@@ -1,5 +1,7 @@
 versions:
   "0.21.1":
+    platforms: 
+      - linux/amd64
     build_args:
       BITCOIN_VERSION: 0.21.1
       BITCOIN_SHA256: 366eb44a7a0aa5bd342deea215ec19a184a11f2ca22220304ebb20b9c8917e2b
