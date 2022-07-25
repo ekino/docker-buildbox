@@ -10,8 +10,7 @@ test_config: &test_config
 
 versions:
   "14":
-    platforms: 
-      - linux/amd64
+    platforms: *base_platforms
     build_args:
       NODE_VERSION: 14.17.6
       NPM_VERSION: 6.14.5

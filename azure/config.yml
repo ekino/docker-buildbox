@@ -1,7 +1,6 @@
 versions:
   "2":
-    platforms: 
-      - linux/amd64
+    platforms: *base_platforms
     test_config:
       cmd:
         - az --version

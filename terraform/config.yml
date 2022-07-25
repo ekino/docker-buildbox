@@ -12,8 +12,7 @@ test_config: &test_config
 
 versions:
   "1.2.5":
-    platforms: 
-      - linux/amd64
+    platforms: *base_platforms
     build_args:
       TERRAFORM_VERSION: 1.2.5
       TERRAGRUNT_VERSION: 0.38.5
