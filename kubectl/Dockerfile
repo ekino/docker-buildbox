@@ -1,4 +1,4 @@
-FROM alpine:3.16.0
+FROM alpine:3.16.1
 LABEL maintainer="opensource@ekino.com"
 
 ARG HELM_DIFF_VERSION
