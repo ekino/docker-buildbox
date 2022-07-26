@@ -68,13 +68,13 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
     image_tag = f'{version}-' if version != "1" else  ""
 
     if env_conf["tag"]:
-        image_tag += env_conf["tag"] if version != "1" else env_conf["tag"]
+        image_tag += env_conf["tag"]
     elif env_conf["event_type"] == "schedule":
-        image_tag += "nightly" if version != "1" else "nightly"
+        image_tag += "nightly"
     elif env_conf["branch"] in ["master"]:
-        image_tag += "latest" if version != "1" else "latest"
+        image_tag += "latest"
     else:
-        image_tag += "latest" if version != "1" else "latest"
+        image_tag += "latest"
 
     return f"{image_repo_name_base}:{image_tag}"
 
@@ -85,13 +85,13 @@ def get_image_tags(image_name, version, image_conf, env_conf):
     version_tag = f'{version}-' if version != "1" else ""
 
     if env_conf["tag"]:
-        version_tag += env_conf["tag"] if version != "1" else env_conf["tag"]
+        version_tag += env_conf["tag"]
     elif env_conf["event_type"] == "schedule":
-        version_tag += "nightly" if version != "1" else "nightly"
+        version_tag += "nightly"
     elif env_conf["branch"] in ["master"]:
-        version_tag += "latest" if version != "1" else "latest"
+        version_tag += "latest"
     else:
-        version_tag += "latest" if version != "1" else "latest"
+        version_tag += "latest"
 
     tags = {
         "fullname": f"{image_repo_name_base}:{version_tag}",
