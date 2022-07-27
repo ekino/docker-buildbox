@@ -104,7 +104,7 @@ def login_to_registry(env_conf):
 def push_image(image_fullname):
     print("> [Info] Pushing " + image_fullname)
     try:
-        docker.images.push(image_fullname)
+        docker.image.push(image_fullname)
         print("Push successful")
     except DockerException as docker_exception:
         print("> [Error] Push failed - " + str(docker_exception))
