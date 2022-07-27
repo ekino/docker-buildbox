@@ -1,5 +1,6 @@
 versions:
   "2":
+    platforms: *base_platforms
     test_config:
       cmd:
         - aws --version

@@ -1,5 +1,6 @@
 versions:
   "1":
+    platforms: *base_platforms
     build_args:
       GLIBC_VERSION: 2.29-r0
       PIP_VERSION: 21.2.1

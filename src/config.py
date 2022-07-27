@@ -68,13 +68,45 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
     image_tag = f'{version}-' if version != "1" else  ""
 
     if env_conf["tag"]:
-        image_tag += env_conf["tag"] if version != "1" else env_conf["tag"]
+        image_tag += env_conf["tag"]
     elif env_conf["event_type"] == "schedule":
-        image_tag += "nightly" if version != "1" else "nightly"
+        image_tag += "nightly"
     elif env_conf["branch"] in ["master"]:
-        image_tag += "latest" if version != "1" else "latest"
+        image_tag += "latest"
     else:
-        image_tag += "latest" if version != "1" else "latest"
+        image_tag += "latest"
 
     return f"{image_repo_name_base}:{image_tag}"
+
+
+def get_image_tags(image_name, version, image_conf, env_conf):
+    image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    local_repo_name_base = f"localhost:5000/ci-{image_name}"
+    version_tag = f'{version}-' if version != "1" else ""
+
+    if env_conf["tag"]:
+        version_tag += env_conf["tag"]
+    elif env_conf["event_type"] == "schedule":
+        version_tag += "nightly"
+    elif env_conf["branch"] in ["master"]:
+        version_tag += "latest"
+    else:
+        version_tag += "latest"
+
+    tags = {
+        "fullname": f"{image_repo_name_base}:{version_tag}",
+        "localname": f"{local_repo_name_base}:{version_tag}",
+        "platforms": {},
+    }
+    for platform in image_conf["platforms"]:
+        _os, _arch, _variant = parse_platform(platform)
+        tags["platforms"][platform] = f"{image_repo_name_base}-{_arch}:{version_tag}"
+
+    return tags
+
+def parse_platform(platform):
+    parts = platform.split("/")
+    parts.extend([None])
+
+    return parts[0:3]
 

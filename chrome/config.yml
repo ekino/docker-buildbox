@@ -1,5 +1,6 @@
 versions:
   "1":
+    platforms: *base_platforms
     build_args:
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION

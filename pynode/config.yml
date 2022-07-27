@@ -8,6 +8,8 @@ test_config: &test_config
 
 versions:
   "3.8":
+    platforms: *base_platforms
     test_config: *test_config
   "3.9":
+    platforms: *base_platforms
     test_config: *test_config

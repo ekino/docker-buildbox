@@ -1,5 +1,6 @@
 versions:
   "3.67":
+    platforms: *base_platforms
     build_args:
       PLATFORMSH_CLI_VERSION: "3.79.7"
       PLATFORMSH_CLI_SHASUM: "cfe3b0ae7c3a2929fe7ddc51ed4619084c52924c3c6055826cd7c03da44a4d66"

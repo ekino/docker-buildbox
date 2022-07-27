@@ -1,5 +1,6 @@
 versions:
   "1.24":
+    platforms: *base_platforms
     test_config:
       cmd:
         - kube-score version
