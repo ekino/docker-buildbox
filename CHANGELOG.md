@@ -12,6 +12,7 @@ Versions
 * Golang : Remove version 1.17. Image does not exist for arch arm64
 * Node : build arm64 docker image
 * Java : build arm64 docker image
+* Cloudsploit : build arm64 docker image
 
 2022-08-31
 ----------
