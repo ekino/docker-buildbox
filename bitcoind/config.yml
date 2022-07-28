@@ -1,9 +1,12 @@
 versions:
-  "0.21.1":
-    platforms: *base_platforms
+  "23.0":
+    platforms: 
+      - linux/amd64
+      - linux/arm64
     build_args:
-      BITCOIN_VERSION: 0.21.1
-      BITCOIN_SHA256: 366eb44a7a0aa5bd342deea215ec19a184a11f2ca22220304ebb20b9c8917e2b
+      BITCOIN_VERSION: 23.0
+      SHA256_ARM64: 06f4c78271a77752ba5990d60d81b1751507f77efda1e5981b4e92fd4d9969fb
+      SHA256_AMD64: 2cca490c1f2842884a3c5b0606f179f9f937177da4eadd628e3f7fd7e25d26d0
     test_config:
       cmd:
         - bitcoind --version
