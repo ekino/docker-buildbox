@@ -1,6 +1,8 @@
 versions:
   "1":
-    platforms: *base_platforms
+    platforms:
+      - linux/amd64
+      - linux/arm64           # to fix error comment this line
     build_args:
       GLIBC_VERSION: 2.29-r0
       TRIVY_VERSION: "0.36.1"
