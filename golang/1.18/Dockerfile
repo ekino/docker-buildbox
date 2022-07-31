@@ -1,6 +1,5 @@
-FROM golang:1.18.6
+FROM golang:1.18.6 as base
 LABEL maintainer="opensource@ekino.com"
-
 ARG GITLEAKS_VERSION
 ARG GOLANGCILINT_VERSION
 ARG GOMODUPGRADE_VERSION
@@ -10,5 +9,29 @@ ARG MOCKGEN_VERSION
 ARG MODD_VERSION
 ARG TESTFIXTURES_VERSION
 
+FROM base as base-amd64
+ARG AWSCLI_ARCH="linux-x86_64"
+ARG GITLEAKS_ARCH="linux_x64"
+ARG GOLANGCILINT_ARCH="linux-amd64"
+ARG GOMODUPGRADE_ARCH "Linux_x86_64" 
+ARG GOSWAGGER_ARCH="linux_amd64"
+ARG GOMIGRATE_ARCH="linux-amd64"
+ARG MOCKGEN_ARCH="linux_amd64"
+ARG MODD_ARCH="linux64"
+ARG TESTFIXTURES_ARCH="linux_amd64"
+
+FROM base as base-arm64
+ARG AWSCLI_ARCH="linux-aarch64"
+ARG GITLEAKS_ARCH="linux_arm64"
+ARG GOLANGCILINT_ARCH="linux-arm64"
+ARG GOMODUPGRADE_ARCH "Linux_arm64"
+ARG GOSWAGGER_ARCH="linux_arm64"
+ARG GOMIGRATE_ARCH="linux-arm64"
+ARG MOCKGEN_ARCH="linux_arm64"
+ARG MODD_ARCH="linuxARM"
+# Binary for arm64 does not exist for the moment
+ARG TESTFIXTURES_ARCH="linux_arm64"
+
+FROM base-$TARGETARCH
 COPY run.sh .
 RUN sh run.sh
