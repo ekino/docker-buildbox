@@ -1,6 +1,8 @@
 versions:
   "1.24":
-    platforms: *base_platforms
+    platforms:
+      - linux/amd64
+      - linux/arm64
     test_config:
       cmd:
         - kube-score version
@@ -17,6 +19,6 @@ versions:
       KUBECTL_VERSION: 1.24.0
       KUBENT_VERSION: 0.5.1
       KUBESCORE_VERSION: 1.14.0
-      KUBEVAL_VERSION: 0.16.1
+      KUBEVAL_VERSION: 0.16.7
       KUSTOMIZATION_VERSION: 4.5.5
       TRIVY_VERSION: "0.28.1"

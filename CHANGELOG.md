@@ -1,6 +1,11 @@
 Versions
 ========
 
+2022-09-31
+----------
+* Kubectl : build arm64 docker image
+
+
 2022-08-31
 ----------
 
