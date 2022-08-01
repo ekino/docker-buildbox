@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-07-31
+----------
+* Dind : build arm64 docker image
+
 2023-06-30
 ----------
 * PHP : update tools version (composer, PHP CS Fixer, Xdebug)
@@ -108,7 +112,6 @@ Versions
 * Python SRC Config : Add linux/amd64 and linux/arm64 as values for the new config property base_platforms
 * CI : use docker/setup-qemu-action@v2 and docker/setup-buildx-action@v2 as gitflows step actions
 * Images : Only [OCI images](https://github.com/opencontainers/image-spec/blob/main/spec.md) for amd64 architecture are built
-* Dind : build arm64 docker image
 
 
 2022-06-30
