@@ -25,7 +25,20 @@ versions:
       MODD_VERSION: 0.8
       TESTFIXTURES_VERSION: 3.5.0
   "1.18":
-    platforms: 
+    platforms:
+      - linux/amd64
+    test_config: *test_config
+    build_args:
+      GITLEAKS_VERSION: 7.3.0
+      GOLANGCILINT_VERSION: 1.38.0
+      GOMODUPGRADE_VERSION: 0.4.0
+      GOSWAGGER_VERSION: 0.26.1
+      MIGRATE_VERSION: 4.14.1
+      MOCKGEN_VERSION: 1.5.0
+      MODD_VERSION: 0.8
+      TESTFIXTURES_VERSION: 3.5.0
+  "1.19":
+    platforms:
       - linux/amd64
     test_config: *test_config
     build_args:

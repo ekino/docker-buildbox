@@ -165,6 +165,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  - package-ecosystem: "docker"
+    directory: "/golang/1.19"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "golang"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
   # Java
   - package-ecosystem: "docker"
     directory: "/java/11"
