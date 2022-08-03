@@ -5,6 +5,7 @@ Versions
 ----------
 
 * Java: upgrade Java 11 to 11.0.16 and 17 to 17.0.4
+* AWS : Build arm64 docker image
 
 2022-07-31
 ----------
@@ -16,7 +17,6 @@ Versions
 * Python SRC Config : Add linux/amd64 and linux/arm64 as values for the new config property base_platforms
 * CI : use docker/setup-qemu-action@v2 and docker/setup-buildx-action@v1 as gitflows step actions
 * Images : Only [OCI images](https://github.com/opencontainers/image-spec/blob/main/spec.md) for amd64 architecture are built
-* AWS : Build arm64 docker image
 
 2022-06-30
 ----------
