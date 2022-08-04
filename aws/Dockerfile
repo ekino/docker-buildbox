@@ -1,14 +1,22 @@
-FROM python:3.10.5-slim-buster
+FROM python:3.10.5-slim-buster as base
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
-
 ARG TASKFILE_VERSION
+
+FROM base as base-amd64
+ARG AWSCLI_ARCH="x86_64"
+
+FROM base as base-arm64
+ARG AWSCLI_ARCH="aarch64"
+
+FROM base-$TARGETARCH
+ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-${AWSCLI_ARCH}.zip"
 
 RUN echo "Installing AWS" && \
     apt-get update -qq && apt-get install -qq -y curl git make rsync zip jq gcc && \
     pip install -U pip && \
     pip install pipenv boto3 awsebcli PyYAML && \
     curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    curl ${AWSCLI_URL} -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     echo "Done installing AWS" && \
