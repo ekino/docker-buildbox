@@ -19,6 +19,7 @@ RUN echo "Installing AWS" && \
     curl ${AWSCLI_URL} -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
+    rm -f awscliv2.zip && rm -rf aws && \
     echo "Done installing AWS" && \
     apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
