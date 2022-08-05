@@ -9,6 +9,7 @@ Versions
 * Bitcoind : Build arm64 image
 * AWS : Build arm64 docker image
 * Golang: adding new 1.19 flavor
+* Platformsh: updating base image, and CLI to the latest 3.81.x
 
 2022-07-31
 ----------

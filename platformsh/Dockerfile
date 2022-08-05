@@ -1,4 +1,4 @@
-FROM php:8.0.13-cli-alpine3.13
+FROM php:8.1.9-cli-alpine3.16
 LABEL maintainer="opensource@ekino.com"
 
 ARG PLATFORMSH_CLI_VERSION
