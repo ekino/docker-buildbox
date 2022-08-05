@@ -1,4 +1,4 @@
-FROM golang:1.18.4
+FROM golang:1.18.5
 LABEL maintainer="opensource@ekino.com"
 
 ARG GITLEAKS_VERSION
