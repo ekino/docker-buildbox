@@ -4,6 +4,7 @@ import click
 
 import src.config as config
 import src.docker_tools as docker_tools
+from python_on_whales import docker
 
 
 @click.command()
@@ -38,9 +39,22 @@ def build(image, version, debug):
         # Build docker image
         docker_tools.build_image(
             image_conf, image_tags, dockerfile_directory, dockerfile_path, debug)
+        
 
         # Run defined test command
         docker_tools.run_image(image_tags["localname"], image_conf, debug)
+
+
+        localTagManifest = docker.buildx.imagetools.inspect(image_tags["localname"])
+        print("local tag manifest")
+        print(localTagManifest)
+
+        docker_tools.tag_image(image_tags["localname"], image_tags["fullname"])
+        #docker.buildx.imagetools.create(image_tags["localname"], tags=image_tags["fullname"])
+
+        remoteTagManifest = docker.buildx.imagetools.inspect(image_tags["fullname"])
+        print("remote tag manifest")
+        print(remoteTagManifest)
 
         # Push to registry in case of:
         # - tag

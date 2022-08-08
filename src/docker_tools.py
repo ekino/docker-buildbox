@@ -33,9 +33,8 @@ def build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, d
             cache=False,
             push=True,
             build_args=image_conf["build_args"] if "build_args" in image_conf else {
-            },
-            platforms=image_conf["platforms"]
-        )
+            }, platforms=image_conf["platforms"]
+        )  
 
     except DockerException as docker_exception:
         print("> [Error] Build error - " + str(docker_exception))
