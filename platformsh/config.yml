@@ -1,9 +1,9 @@
 versions:
-  "3.67":
+  "3.81":
     platforms: *base_platforms
     build_args:
-      PLATFORMSH_CLI_VERSION: "3.79.7"
-      PLATFORMSH_CLI_SHASUM: "cfe3b0ae7c3a2929fe7ddc51ed4619084c52924c3c6055826cd7c03da44a4d66"
+      PLATFORMSH_CLI_VERSION: "3.81.0"
+      PLATFORMSH_CLI_SHASUM: "3960b1cf697cb6d6c076bf02d4f5b7d0dcf2cdd9511ca75694545f29b86316e6"
     test_config:
       cmd:
         - php --version
