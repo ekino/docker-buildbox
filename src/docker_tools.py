@@ -5,8 +5,8 @@ from python_on_whales import docker
 from python_on_whales.exceptions import DockerException
 
 
-def build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, debug):
-    print("> [Info] Building: " + image_tags["fullname"])
+def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug):
+    print("> [Info] Building: " + image_tag)
     try:
         if debug:
             pp = pprint.PrettyPrinter(indent=1)
@@ -29,7 +29,7 @@ def build_image(image_conf, image_tags, dockerfile_directory, dockerfile_path, d
             builder=builder,
             file=os.path.join(dockerfile_directory, dockerfile_path),
             context_path=dockerfile_directory,
-            tags=image_tags["localname"],
+            tags=image_tag,
             cache=False,
             push=True,
             build_args=image_conf["build_args"] if "build_args" in image_conf else {

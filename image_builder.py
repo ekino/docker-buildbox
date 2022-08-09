@@ -36,25 +36,12 @@ def build(image, version, debug):
 
     with docker_tools.start_local_registry() as local_registry:
 
-        # Build docker image
-        docker_tools.build_image(
-            image_conf, image_tags, dockerfile_directory, dockerfile_path, debug)
+        # Build, tag and push docker image to local registry
+        docker_tools.build_image(image_conf, image_tags["localname"], dockerfile_directory, dockerfile_path, debug)
         
 
         # Run defined test command
         docker_tools.run_image(image_tags["localname"], image_conf, debug)
-
-
-        localTagManifest = docker.buildx.imagetools.inspect(image_tags["localname"])
-        print("local tag manifest")
-        print(localTagManifest)
-
-        docker_tools.tag_image(image_tags["localname"], image_tags["fullname"])
-        #docker.buildx.imagetools.create(image_tags["localname"], tags=image_tags["fullname"])
-
-        remoteTagManifest = docker.buildx.imagetools.inspect(image_tags["fullname"])
-        print("remote tag manifest")
-        print(remoteTagManifest)
 
         # Push to registry in case of:
         # - tag
@@ -65,13 +52,11 @@ def build(image, version, debug):
             or (env_conf["event_type"] != "pull_request" and env_conf["branch"] == "master")
             or env_conf["event_type"] == "schedule"
         ):
-            # Re-tag image with DockerHub registry name
-            docker_tools.tag_image(
-                image_tags["localname"], image_tags["fullname"])
-
             # Login to registry and push
             docker_tools.login_to_registry(env_conf)
-            docker_tools.push_image(image_tags["fullname"])
+
+            # Build, tag and push docker image to remote registry (Docker hub)
+            docker_tools.build_image(image_conf, image_tags["fullname"], dockerfile_directory, dockerfile_path, debug)
 
 
 @click.group()
