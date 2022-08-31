@@ -4,13 +4,13 @@ Versions
 2022-08-31
 ----------
 
-* Java: upgrade Java 11 to 11.0.16 and 17 to 17.0.4
-* Bitcoind : Updating to bitcoind to 23.0
-* Bitcoind : Build arm64 image
 * AWS : Build arm64 docker image
-* Golang: adding new 1.19 flavor
-* Platformsh: updating base image, and CLI to the latest 3.81.x
 * AWS : Fix tagging issue preventing the push of multiple architectures to docker hub
+* Bitcoind : Build arm64 image
+* Bitcoind : Updating to bitcoind to 23.0
+* Golang: adding new 1.19 flavor
+* Java: upgrade Java 11 to 11.0.16 and 17 to 17.0.4
+* Platformsh: updating base image, and CLI to the latest 3.81.x
 
 2022-07-31
 ----------
