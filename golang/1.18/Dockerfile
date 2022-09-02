@@ -29,7 +29,6 @@ ARG GOSWAGGER_ARCH="linux_arm64"
 ARG GOMIGRATE_ARCH="linux-arm64"
 ARG MOCKGEN_ARCH="linux_arm64"
 ARG MODD_ARCH="linuxARM"
-# Binary for arm64 does not exist for the moment
 ARG TESTFIXTURES_ARCH="linux_arm64"
 
 FROM base-$TARGETARCH
