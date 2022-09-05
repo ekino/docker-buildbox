@@ -1,6 +1,5 @@
-FROM php:7.4.30-cli-alpine3.15
+FROM php:7.4.30-cli-alpine3.15 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
-
 ARG APCU_VERSION
 ARG COMPOSER_VERSION
 ARG ICONV_VERSION
@@ -13,13 +12,20 @@ ARG SECURITY_CHECKER_VERSION
 ARG SSH2_VERSION
 ARG XDEBUG_VERSION
 
-# iconv issue https://github.com/docker-library/php/issues/240
+FROM base AS base-amd64
+ARG MODD_ARCH="linux64"
+ARG SECURITY_CHECKER_ARCH="linux_amd64"
 
+FROM base AS base-arm64
+ARG MODD_ARCH="linuxARM"
+ARG SECURITY_CHECKER_ARCH="linux_arm64"
+
+FROM base-$TARGETARCH
+# iconv issue https://github.com/docker-library/php/issues/240
 ENV COMPOSER_NO_INTERACTION=1 \
     COMPOSER_MEMORY_LIMIT=-1 \
     TERM=xterm \
     LD_PRELOAD="/usr/lib/preloadable_libiconv.so php" \
     PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
-
 COPY run.sh .
 RUN sh run.sh
