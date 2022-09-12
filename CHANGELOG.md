@@ -1,6 +1,10 @@
 Versions
 ========
 
+2022-09-31
+----------
+* Percy : build arm64 docker image
+
 2022-08-31
 ----------
 
@@ -11,7 +15,7 @@ Versions
 * Golang: adding new 1.19 flavor
 * Java: upgrade Java 11 to 11.0.16 and 17 to 17.0.4
 * Platformsh: updating base image, and CLI to the latest 3.81.x
-
+  
 2022-07-31
 ----------
 
