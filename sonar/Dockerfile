@@ -15,7 +15,7 @@ RUN echo "Starting ..." && \
     echo "Starting Sonar Scanner" && \
     curl -sSL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
-    apk add -q glibc-${GLIBC_VERSION}.apk && \
+    apk add -q --force-overwrite glibc-${GLIBC_VERSION}.apk && \
     rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk && \
     curl -LfsS https://archive.archlinux.org/packages/z/zlib/zlib-1%3A{$ZLIB_VERSION}-x86_64.pkg.tar.xz -o /tmp/libz.tar.xz && \
     mkdir /tmp/libz && \
