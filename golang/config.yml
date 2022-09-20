@@ -9,7 +9,6 @@ test_config: &test_config
     - modd --version
     - rsync --version
     - swagger version
-    #- testfixtures --version
 
 versions:
   "1.18":
