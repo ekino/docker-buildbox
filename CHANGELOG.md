@@ -4,6 +4,12 @@ Versions
 2022-09-31
 ----------
 * Percy : build arm64 docker image
+* Golang : build arm64 docker image 
+* Golang : Updating Gitleaks to 8.11.2
+* Golang : Updating Mockgen to 1.6
+* Golang : Updating Go-testfixtures to 3.8.0
+* Golang : Remove testfixtures test. Binary does not exist for arch arm64
+* Golang : Remove version 1.17. Image does not exist for arch arm64
 
 2022-08-31
 ----------
