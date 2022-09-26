@@ -14,6 +14,7 @@ Versions
 * Java : build arm64 docker image
 * Cloudsploit : build arm64 docker image
 * Chrome : build arm64 docker image
+* Azure : build arm64 azure docker image
 
 2022-08-31
 ----------
