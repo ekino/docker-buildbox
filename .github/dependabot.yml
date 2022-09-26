@@ -199,6 +199,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "docker"
+    directory: "/java/18"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "java"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Kubectl
   - package-ecosystem: "docker"
     directory: "/kubectl"

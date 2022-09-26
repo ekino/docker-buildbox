@@ -4,7 +4,7 @@ Versions
 2022-09-31
 ----------
 * Percy : build arm64 docker image
-* Golang : build arm64 docker image 
+* Golang : build arm64 docker image
 * Golang : Updating Gitleaks to 8.11.2
 * Golang : Updating Mockgen to 1.6
 * Golang : Updating Go-testfixtures to 3.8.0
@@ -12,6 +12,7 @@ Versions
 * Golang : Remove version 1.17. Image does not exist for arch arm64
 * Node : build arm64 docker image
 * Java : build arm64 docker image
+* Java : adding java 18 flavor
 * Cloudsploit : build arm64 docker image
 * Chrome : build arm64 docker image
 * Azure : build arm64 azure docker image
@@ -26,7 +27,7 @@ Versions
 * Golang: adding new 1.19 flavor
 * Java: upgrade Java 11 to 11.0.16 and 17 to 17.0.4
 * Platformsh: updating base image, and CLI to the latest 3.81.x
-  
+
 2022-07-31
 ----------
 
