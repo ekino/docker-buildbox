@@ -1,17 +1,24 @@
-FROM debian:11.5-slim
+FROM debian:11.5-slim as base
 LABEL maintainer="opensource@ekino.com"
-
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     NVM_DIR=/root/.nvm \
     PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 ARG NODE_VERSION
 ARG NPM_VERSION
 ARG NVM_VERSION
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
 
+FROM base as base-amd64
+ARG MODD_ARCH="linux64"
+ARG AWSCLI_ARCH="linux-x86_64"
+
+FROM base as base-arm64
+ARG MODD_ARCH="linuxARM"
+ARG AWSCLI_ARCH="linux-aarch64"
+
+FROM base-$TARGETARCH
 RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install libssl-dev curl git imagemagick make gnupg \
@@ -20,7 +27,7 @@ RUN echo "Starting ..." && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
   echo "Done base install!" && \
     echo "Install Modd" && \
-    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-linux64.tgz | tar -xOvzf - modd-${MODD_VERSION}-linux64/modd > /usr/bin/modd  && \
+    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz | tar -xOvzf - modd-${MODD_VERSION}-${MODD_ARCH}/modd > /usr/bin/modd  && \
     chmod 755 /usr/bin/modd && \
     echo "Done Install Modd" && \
     echo "Install Taskfile" && \
@@ -37,7 +44,7 @@ RUN echo "Starting ..." && \
     apt-get update && apt-get install yarn --no-install-recommends && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    curl https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
     unzip awscliv2.zip && \
     ./aws/install && \
   rm -f awscliv2.zip && rm -rf aws && \
