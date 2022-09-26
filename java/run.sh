@@ -11,7 +11,7 @@ apt-get -qq -y install build-essential curl git make openssh-client jq unzip gro
 echo "Done Install base!"
 
 echo "Installing AWS CLIv2"
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+curl https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip
 unzip awscliv2.zip
 ./aws/install
 rm -f awscliv2.zip
