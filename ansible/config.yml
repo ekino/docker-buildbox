@@ -8,7 +8,9 @@ test_config: &test_config
 
 versions:
   "5":
-    platforms: *base_platforms
+    platforms: 
+      - linux/amd64
+      - linux/arm64
     build_args:
       ANSIBLE_VERSION: "5"
     test_config: *test_config
