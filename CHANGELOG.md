@@ -5,6 +5,19 @@ Versions
 ----------
 * Golang : Creating golang version 1.20
 
+=======
+2022-11-30
+----------
+* AWS : Adding kubectl & associated tools
+* AWS : removing taskfile, kube-no-trouble and kube-score
+* Azure : Adding kubectl & associated tools
+* Azure : always install the latest CLI
+* Azure : removing taskfile, kube-no-trouble and kube-score
+* Kubectl : removing this image, the tools are now included in AWS & Azure images
+
+2022-10-31
+----------
+* Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18
 
 2022-09-30
 ----------
