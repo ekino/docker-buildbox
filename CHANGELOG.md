@@ -5,7 +5,6 @@ Versions
 ----------
 * Golang : Creating golang version 1.20
 
-=======
 2022-12-31
 ----------
 * Node: Adding jq command
@@ -25,6 +24,10 @@ Versions
 2022-10-31
 ----------
 * Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18
+=======
+2022-10-31
+----------
+* Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18 
 
 2022-09-30
 ----------
