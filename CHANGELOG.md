@@ -25,10 +25,6 @@ Versions
 ----------
 * Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18
 
-2022-10-31
-----------
-* Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18
-
 2022-09-30
 ----------
 * Ansible : Build arm64 docker image
