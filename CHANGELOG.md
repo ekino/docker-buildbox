@@ -14,6 +14,7 @@ Versions
 * Azure : always install the latest CLI
 * Azure : removing taskfile, kube-no-trouble and kube-score
 * Kubectl : removing this image, the tools are now included in AWS & Azure images
+* PHP : build arm64 docker image
 
 2022-10-31
 ----------
