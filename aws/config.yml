@@ -4,13 +4,19 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      TASKFILE_VERSION: *TASKFILE_VERSION
+      HELM_DIFF_VERSION: 3.5.0
+      HELM_VERSION: 3.9.0
+      KUBECTL_VERSION: 1.24.0
+      KUSTOMIZATION_VERSION: 4.5.5
+      TRIVY_VERSION: "0.28.1"
     test_config:
       cmd:
         - aws --version
+        - git --version
+        - helm diff version
+        - helm version
+        - kustomize version
         - pip --version
         - pipenv --version
-        - git --version
-        - rsync --version
+        - trivy --version
         - zip --version
-        - task --version
