@@ -1,4 +1,4 @@
-FROM python:3.10.7-slim-buster as base
+FROM python:3.11.0-slim-buster as base
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG HELM_DIFF_VERSION
