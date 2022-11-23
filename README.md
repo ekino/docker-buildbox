@@ -144,11 +144,6 @@ https://hub.docker.com/r/ekino/ci-java/tags
 
 Contains AWS Cli, Maven, Graphviz, jq, psql and Java.
 
-### Kubectl
-https://hub.docker.com/r/ekino/ci-kubectl/tags
-
-Contains kubectl, helm, kubens, kubectx, kube-score.
-
 ### Node
 https://hub.docker.com/r/ekino/ci-node/tags
 
