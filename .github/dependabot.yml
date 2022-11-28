@@ -334,18 +334,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  # Ruby
-  - package-ecosystem: "docker"
-    directory: "/ruby"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "ruby"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
   # Sonar
   - package-ecosystem: "docker"
     directory: "/sonar"
