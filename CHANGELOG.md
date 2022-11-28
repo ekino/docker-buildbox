@@ -15,6 +15,7 @@ Versions
 * Azure : removing taskfile, kube-no-trouble and kube-score
 * Kubectl : removing this image, the tools are now included in AWS & Azure images
 * PHP : build arm64 docker image
+* Ruby : dropping support for this flavor
 
 2022-10-31
 ----------
