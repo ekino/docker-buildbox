@@ -22,7 +22,7 @@ FROM base-$TARGETARCH
 RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install libssl-dev curl git imagemagick make gnupg \
-      libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ && \
+      libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ jq && \
     gem install rb-inotify:'~> 0.9.10' sass --verbose && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
   echo "Done base install!" && \
