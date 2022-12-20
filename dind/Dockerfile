@@ -2,10 +2,8 @@ FROM docker:20.10.21-dind
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG GLIBC_VERSION
-ARG PIP_VERSION
 ARG TASKFILE_VERSION
 ARG TRIVY_VERSION
-ENV PYTHON_PIP_VERSION ${PIP_VERSION}
 
 ADD requirements.txt .
 
@@ -13,8 +11,8 @@ RUN echo "Install AWS & Azure CLIs" && \
     apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff zip && \
     python3 -m ensurepip && \
     pip3 install --no-cache --upgrade pip setuptools wheel && \
-    pip -q install boto3 PyYAML && \
-    pip install -r requirements.txt && \
+    pip3 -q install boto3 PyYAML && \
+    pip3 install -r requirements.txt && \
     apk del libc6-compat && \
     curl -sSL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
