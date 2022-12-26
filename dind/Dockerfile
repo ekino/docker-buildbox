@@ -1,4 +1,4 @@
-FROM docker:20.10.21-dind
+FROM docker:20.10.22-dind
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG GLIBC_VERSION
