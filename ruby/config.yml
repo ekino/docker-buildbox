@@ -1,7 +1,0 @@
-versions:
-  "2.6":
-    platforms: *base_platforms
-    test_config:
-      cmd:
-        - bundle --version
-        - ruby --version
