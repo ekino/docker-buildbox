@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-01-09
+----------
+* Golang : Creating golang version 1.20
+
 2022-09-30
 ----------
 * Ansible : Build arm64 docker image
