@@ -1,55 +1,9 @@
 Versions
 ========
 
-2023-03-31
+2023-01-09
 ----------
-* PHP: update some packages versions
-
-2023-02-28
-----------
-* AWS: switching from python 3.10 to 3.11
-* Azure: switching from python 3.10 to 3.11
-* Java: upgrade Java images
-* Platform: switching from python 3.8 to 3.11
-
-2023-01-31
-----------
-* Ansible: bumping from 5.x.x to 7.x.x
-* Ansible: switching base image from debian buster to bullseye
-* AWS: bumping kubectl, kustomize, helm, trivy versions
-* AWS: switching base image from debian buster to bullseye
-* Azure: bumping kubectl, kustomize, helm, trivy versions
-* Azure: switching base image from debian buster to bullseye
-* Cloudsploit: switching base image from debian buster to bullseye
-* Dind: bumping kubectl, kustomize, helm, trivy versions
-* PHP: adding support for php 8.2 and removing for 7.4. Php-cs-fixer isn't officially supported in 8.2 as of now, use it with care.
-* Platform: switching to the new 4.x.x Golang CLI
-* Platform: build arm64 docker image
-* Pynode: switching base image from debian buster to bullseye
-* Python: switching base image from debian buster to bullseye
-* Terraform: switching base image from debian buster to bullseye
-* Terraform: bumping to TF 1.3.x. Updating terragrunt & infracost
-* Tezosqa: switching base image from debian buster to bullseye
-
-2022-12-31
-----------
-* Node: Adding jq command
-* Python : adding support for python 3.11
-
-2022-11-30
-----------
-* AWS : Adding kubectl & associated tools
-* AWS : removing taskfile, kube-no-trouble and kube-score
-* Azure : Adding kubectl & associated tools
-* Azure : always install the latest CLI
-* Azure : removing taskfile, kube-no-trouble and kube-score
-* Kubectl : removing this image, the tools are now included in AWS & Azure images
-* PHP : build arm64 docker image
-* Ruby : dropping support for this flavor
-
-2022-10-31
-----------
-* Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18
+* Golang : Creating golang version 1.20
 
 2022-09-30
 ----------
