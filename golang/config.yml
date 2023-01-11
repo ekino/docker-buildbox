@@ -9,7 +9,9 @@ test_config: &test_config
     - modd --version
     - rsync --version
     - swagger version
-
+before_script:
+  - echo "Generating Dockerfilered"
+  - ./render.sh
 versions:
   "1.18":
     platforms:
