@@ -64,17 +64,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-  - package-ecosystem: "pip"
-    directory: "/azure"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "azure"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
   # Bitcoind
   - package-ecosystem: "docker"
     directory: "/bitcoind"
@@ -196,18 +185,6 @@ updates:
       - "dependencies"
       - "docker"
       - "java"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  # Kubectl
-  - package-ecosystem: "docker"
-    directory: "/kubectl"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "kubectl"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -357,15 +334,14 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  # Ruby
   - package-ecosystem: "docker"
-    directory: "/ruby"
+    directory: "/python/3.11"
     schedule:
       interval: "weekly"
     labels:
       - "dependencies"
       - "docker"
-      - "ruby"
+      - "python"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]

@@ -1,4 +1,4 @@
-FROM python:3.10.7-slim-buster
+FROM python:3.10.9-slim-buster
 
 COPY run.sh .
 RUN sh run.sh

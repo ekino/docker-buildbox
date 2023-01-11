@@ -5,6 +5,26 @@ Versions
 ----------
 * Golang : Creating golang version 1.20
 
+2022-12-31
+----------
+* Node: Adding jq command
+* Python : adding support for python 3.11
+
+2022-11-30
+----------
+* AWS : Adding kubectl & associated tools
+* AWS : removing taskfile, kube-no-trouble and kube-score
+* Azure : Adding kubectl & associated tools
+* Azure : always install the latest CLI
+* Azure : removing taskfile, kube-no-trouble and kube-score
+* Kubectl : removing this image, the tools are now included in AWS & Azure images
+* PHP : build arm64 docker image
+* Ruby : dropping support for this flavor
+
+2022-10-31
+----------
+* Golang : Updating golangci-lint to 1.49.0 to handle go1.19 & go1.18
+
 2022-09-30
 ----------
 * Ansible : Build arm64 docker image

@@ -1,4 +1,4 @@
-FROM python:3.10.7-slim-buster
+FROM python:3.11.1-slim-buster
 
 LABEL maintainer="opensource@ekino.com"
 
