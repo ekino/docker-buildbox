@@ -7,7 +7,7 @@ name = "pypi"
 pyyaml = "==5.4"
 click = "==7.0"
 python-on-whales = "==0.32.0"
-gitpython = "==3.1.18"
+gitpython = "==3.1.30"
 
 [dev-packages]
 
