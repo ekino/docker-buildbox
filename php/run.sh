@@ -8,7 +8,7 @@ echo "@edge-community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/a
 echo "@edge-community-3.13 http://nl.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories
 apk add --update --upgrade alpine-sdk apk-tools@edge-main autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
     gnu-libiconv@edge-community-3.13==${ICONV_VERSION} icu-dev jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
-    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev make \
+    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev linux-headers make \
     musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata
 echo "Done base install!"
 
@@ -32,11 +32,6 @@ pecl install pcov
 docker-php-ext-enable pcov
 docker-php-ext-enable memcached
 docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
-
-if [ "$version" = "74" ]; then
-    pecl install ssh2-${SSH2_VERSION};
-    docker-php-ext-enable ssh2;
-fi
 
 echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
