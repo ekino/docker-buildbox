@@ -7,10 +7,10 @@ test_config: &test_config
         - aws --version
 
 versions:
-  "5":
-    platforms: 
+  "7":
+    platforms:
       - linux/amd64
       - linux/arm64
     build_args:
-      ANSIBLE_VERSION: "5"
+      ANSIBLE_VERSION: "7"
     test_config: *test_config
