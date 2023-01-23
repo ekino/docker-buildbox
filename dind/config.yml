@@ -3,7 +3,7 @@ versions:
     platforms: *base_platforms
     build_args:
       GLIBC_VERSION: 2.29-r0
-      TRIVY_VERSION: "0.28.1"
+      TRIVY_VERSION: "0.36.1"
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
