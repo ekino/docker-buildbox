@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-01-31
+----------
+* Ansible: bumping from 5.x.x to 7.x.x
+
 2022-12-31
 ----------
 * Node: Adding jq command
