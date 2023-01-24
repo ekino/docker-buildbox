@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim-bullseye
 
 ARG SMARTPY_VERSION
 ARG SMARTPY_PATH
@@ -34,5 +34,4 @@ RUN smartpy_version_year=$(echo $SMARTPY_VERSION | cut -c 1-4) \
     && apt-get -q -y autoremove \
     && apt-get -q -y clean && apt-get -q -y purge \
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old \
-    && echo "Done!" 
-
+    && echo "Done!"
