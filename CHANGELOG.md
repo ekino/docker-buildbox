@@ -4,7 +4,10 @@ Versions
 2023-01-31
 ----------
 * Ansible: bumping from 5.x.x to 7.x.x
-* PHP: adding support for php 8.2 and removing for 7.4. Php-cs-fixer isn't officially supported in 8.2 as of now, use it with care. 
+* AWS: bumping kubectl, kustomize, helm, trivy versions
+* Azure: bumping kubectl, kustomize, helm, trivy versions
+* Dind: bumping kubectl, kustomize, helm, trivy versions
+* PHP: adding support for php 8.2 and removing for 7.4. Php-cs-fixer isn't officially supported in 8.2 as of now, use it with care.
 
 2022-12-31
 ----------
