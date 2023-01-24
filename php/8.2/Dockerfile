@@ -1,4 +1,4 @@
-FROM php:7.4.33-cli-alpine3.15 AS base
+FROM php:8.2.1-cli-alpine3.17 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG APCU_VERSION
@@ -28,7 +28,9 @@ ENV COMPOSER_NO_INTERACTION=1 \
     COMPOSER_MEMORY_LIMIT=-1 \
     TERM=xterm \
     LD_PRELOAD="/usr/lib/preloadable_libiconv.so php" \
-    PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
+    PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11" \
+    # TODO: remove this once php-cs-fixer is officially supporting PHP 8.2
+    PHP_CS_FIXER_IGNORE_ENV=1
 
 COPY run.sh .
 RUN sh run.sh
