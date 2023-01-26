@@ -1,4 +1,4 @@
-FROM python:3.10.7-slim-buster as base
+FROM python:3.10.7-slim-bullseye as base
 LABEL maintainer="Axel Pavageau <axel.pavageau@ekino.com>"
 
 FROM base as base-amd64
@@ -8,6 +8,8 @@ FROM base as base-arm64
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
 
 FROM base-$TARGETARCH
+WORKDIR /tmp
+
 ADD package.json .
 RUN apt-get update -qq && apt-get install -y wget zip curl \
     && pip install -U pip \
@@ -17,4 +19,4 @@ RUN apt-get update -qq && apt-get install -y wget zip curl \
     && unzip awscliv2.zip\
     && ./aws/install
 RUN npm install \
-    && ln -s /node_modules/cloudsploit/index.js /usr/local/bin/cloudsploit
+    && ln -s /tmp/node_modules/cloudsploit/index.js /usr/local/bin/cloudsploit
