@@ -4,10 +4,17 @@ Versions
 2023-01-31
 ----------
 * Ansible: bumping from 5.x.x to 7.x.x
+* Ansible: switching base image from debian buster to bullseye
 * AWS: bumping kubectl, kustomize, helm, trivy versions
+* AWS: switching base image from debian buster to bullseye
 * Azure: bumping kubectl, kustomize, helm, trivy versions
+* Azure: switching base image from debian buster to bullseye
 * Dind: bumping kubectl, kustomize, helm, trivy versions
 * PHP: adding support for php 8.2 and removing for 7.4. Php-cs-fixer isn't officially supported in 8.2 as of now, use it with care.
+* Pynode: switching base image from debian buster to bullseye
+* Python: switching base image from debian buster to bullseye
+* Terraform: switching base image from debian buster to bullseye
+* Tezosqa: switching base image from debian buster to bullseye
 
 2022-12-31
 ----------
