@@ -1,17 +1,15 @@
-FROM php:8.2.1-cli-alpine3.16
+FROM python:3.8.16-slim-bullseye as base
 LABEL maintainer="opensource@ekino.com"
 
-ARG PLATFORMSH_CLI_VERSION
-ARG PLATFORMSH_CLI_SHASUM
+ARG PLATFORM_VERSION
 
-ENV PATH="/usr/local/bin/:${PATH}"
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
+FROM base as base-amd64
+ARG PLATFORM_URL="https://github.com/platformsh/cli/releases/download/${PLATFORM_VERSION}/platformsh-cli_${PLATFORM_VERSION}_linux_amd64.deb"
 
-RUN apk add --update -q --no-cache bash build-base curl git libffi-dev make openldap-dev openssh-client python3-dev py3-pip && \
-    ln -s /usr/bin/python3 /usr/bin/python && \
-    pip install --upgrade pip pipenv
+FROM base as base-arm64
+ARG PLATFORM_URL="https://github.com/platformsh/cli/releases/download/${PLATFORM_VERSION}/platformsh-cli_${PLATFORM_VERSION}_linux_arm64.deb"
 
-# Install the Platform.sh CLI
-ADD install-cli.sh .
-RUN bash ./install-cli.sh ${PLATFORMSH_CLI_VERSION} ${PLATFORMSH_CLI_SHASUM}
+FROM base-$TARGETARCH
+RUN apt-get update -qq && apt-get install -y curl \
+    && curl -sSL $PLATFORM_URL -o /tmp/platform.deb \
+    && apt install -y /tmp/platform.deb
