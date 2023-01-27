@@ -17,6 +17,7 @@ Versions
 * Pynode: switching base image from debian buster to bullseye
 * Python: switching base image from debian buster to bullseye
 * Terraform: switching base image from debian buster to bullseye
+* Terraform: bumping to TF 1.3.x. Updating terragrunt & infracost
 * Tezosqa: switching base image from debian buster to bullseye
 
 2022-12-31
