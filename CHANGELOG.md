@@ -9,6 +9,7 @@ Versions
 * AWS: switching base image from debian buster to bullseye
 * Azure: bumping kubectl, kustomize, helm, trivy versions
 * Azure: switching base image from debian buster to bullseye
+* Cloudsploit: switching base image from debian buster to bullseye
 * Dind: bumping kubectl, kustomize, helm, trivy versions
 * PHP: adding support for php 8.2 and removing for 7.4. Php-cs-fixer isn't officially supported in 8.2 as of now, use it with care.
 * Platform: switching to the new 4.x.x Golang CLI
