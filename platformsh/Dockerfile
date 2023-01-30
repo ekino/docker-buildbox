@@ -1,4 +1,4 @@
-FROM python:3.8.16-slim-bullseye as base
+FROM python:3.11.1-slim-bullseye as base
 LABEL maintainer="opensource@ekino.com"
 
 ARG PLATFORM_VERSION
