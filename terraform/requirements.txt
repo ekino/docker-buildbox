@@ -1,2 +1,2 @@
 terraform-compliance==1.3.40
-azure-cli==2.44.1
+azure-cli==2.45.0
