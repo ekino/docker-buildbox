@@ -3,6 +3,7 @@ Versions
 
 2023-02-28
 ----------
+* Azure: switching from python 3.10 to 3.11
 * Java: upgrade Java images
 
 2023-01-31
