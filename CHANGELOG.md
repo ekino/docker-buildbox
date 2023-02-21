@@ -5,6 +5,7 @@ Versions
 ----------
 * Azure: switching from python 3.10 to 3.11
 * Java: upgrade Java images
+* Platform: switching from python 3.8 to 3.11
 
 2023-01-31
 ----------
