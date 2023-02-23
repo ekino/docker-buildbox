@@ -3,6 +3,7 @@ Versions
 
 2023-02-28
 ----------
+* AWS: switching from python 3.10 to 3.11
 * Azure: switching from python 3.10 to 3.11
 * Java: upgrade Java images
 * Platform: switching from python 3.8 to 3.11
