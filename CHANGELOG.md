@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-03-31
+----------
+* PHP: update some packages versions
+
 2023-02-28
 ----------
 * AWS: switching from python 3.10 to 3.11
