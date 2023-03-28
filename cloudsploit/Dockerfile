@@ -8,8 +8,6 @@ FROM base as base-arm64
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
 
 FROM base-$TARGETARCH
-WORKDIR /tmp
-
 ADD package.json .
 RUN apt-get update -qq && apt-get install -y wget zip curl \
     && pip install -U pip \

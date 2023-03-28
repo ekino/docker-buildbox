@@ -34,10 +34,10 @@ docker-php-ext-enable memcached
 docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 
 if [ "$version" = "74" ]; then
-     pecl install ssh2-${SSH2_VERSION};
-     docker-php-ext-enable ssh2;
- fi
- 
+    pecl install ssh2-${SSH2_VERSION};
+    docker-php-ext-enable ssh2;
+fi
+
 echo -e "\
 date.timezone=${PHP_TIMEZONE:-UTC} \n\
 short_open_tag=Off \n\
