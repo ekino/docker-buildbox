@@ -5,7 +5,6 @@ Versions
 ----------
 * Golang : Creating golang version 1.20
 
-=======
 2022-12-31
 ----------
 * Node: Adding jq command
