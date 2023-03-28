@@ -1,4 +1,4 @@
-FROM python:3.10.7-slim-bullseye as base
+FROM python:3.10.7-slim-buster as base
 LABEL maintainer="Axel Pavageau <axel.pavageau@ekino.com>"
 
 FROM base as base-amd64
@@ -19,4 +19,4 @@ RUN apt-get update -qq && apt-get install -y wget zip curl \
     && unzip awscliv2.zip\
     && ./aws/install
 RUN npm install \
-    && ln -s /tmp/node_modules/cloudsploit/index.js /usr/local/bin/cloudsploit
+    && ln -s /node_modules/cloudsploit/index.js /usr/local/bin/cloudsploit

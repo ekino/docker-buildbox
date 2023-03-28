@@ -1,4 +1,4 @@
-FROM python:3.11.2-slim-bullseye as base
+FROM python:3.11.1-slim-buster as base
 
 ARG ANSIBLE_VERSION
 
