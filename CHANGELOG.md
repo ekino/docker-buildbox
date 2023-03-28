@@ -15,11 +15,6 @@ Versions
 * Node: Adding jq command
 * Python : adding support for python 3.11
 
-2022-12-31
-----------
-* Node: Adding jq command
-* Python : adding support for python 3.11
-
 2022-11-30
 ----------
 * AWS : Adding kubectl & associated tools
