@@ -1,4 +1,4 @@
-FROM python:3.8-slim-bullseye
+FROM python:3.8-slim-buster
 
 ARG SMARTPY_VERSION
 ARG SMARTPY_PATH
