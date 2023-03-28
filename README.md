@@ -22,7 +22,6 @@ CI workflow:
 ### Local testing
 
 To contribute you will need docker, docker-buildx, python3.6 and pipenv (installed by `pip install pipenv`).
-For a golang image, the script render.sh must be launch to generate Dockerfile for each version
 
 - Clone the repo
 - Create your pipenv environnement
