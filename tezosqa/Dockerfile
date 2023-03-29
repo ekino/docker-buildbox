@@ -35,3 +35,4 @@ RUN smartpy_version_year=$(echo $SMARTPY_VERSION | cut -c 1-4) \
     && apt-get -q -y clean && apt-get -q -y purge \
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old \
     && echo "Done!"
+    
