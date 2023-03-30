@@ -1,5 +1,8 @@
 Versions
 ========
+2023-04-01
+----------
+* Golang : Creating golang version 1.20
 
 2023-03-31
 ----------
