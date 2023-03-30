@@ -21,7 +21,7 @@ CI workflow:
 
 ### Local testing
 
-To contribute you will need python3.6 and pipenv (installed by `pip install pipenv`).
+To contribute you will need docker, docker-buildx, python3.6 and pipenv (installed by `pip install pipenv`).
 
 - Clone the repo
 - Create your pipenv environnement
