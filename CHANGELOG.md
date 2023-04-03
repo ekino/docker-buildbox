@@ -6,6 +6,7 @@ Versions
 * AWS : adding terraform, tfenv and associated tools. Removing boto3. Bumping misc tools' verions
 * Azure : adding terraform, tfenv and associated tools. Bumping misc tools' verions
 * Terraform : dropping this image. Terraform tooling is now included directly in AWS & Azure images
+* Golang : update some packages versions
 
 2023-03-31
 ----------
