@@ -7,6 +7,8 @@ ARG HELM_VERSION
 ARG KUBECTL_VERSION
 ARG KUSTOMIZATION_VERSION
 ARG TRIVY_VERSION
+ARG TERRAGRUNT_VERSION
+ARG INFRACOST_VERSION
 
 FROM base as base-amd64
 ARG AWSCLI_ARCH="x86_64"
@@ -14,6 +16,8 @@ ARG HELM_ARCH="linux-amd64"
 ARG KUBECTL_ARCH="linux/amd64"
 ARG KUSTOMIZATION_ARCH="linux_amd64"
 ARG TRIVY_ARCH="Linux-64bit"
+ARG TERRAGRUNT_ARCH="amd64"
+ARG INFRACOST_ARCH="amd64"
 
 FROM base as base-arm64
 ARG AWSCLI_ARCH="aarch64"
@@ -21,6 +25,8 @@ ARG HELM_ARCH="linux-arm64"
 ARG KUBECTL_ARCH="linux/arm64"
 ARG KUSTOMIZATION_ARCH="linux_arm64"
 ARG TRIVY_ARCH="Linux-ARM64"
+ARG TERRAGRUNT_ARCH="arm64"
+ARG INFRACOST_ARCH="arm64"
 
 FROM base-$TARGETARCH
 
@@ -50,3 +56,18 @@ RUN curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VE
     mv trivy /usr/bin/trivy
 
 RUN helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff
+
+RUN curl -LO https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
+    mv terragrunt_linux_${TERRAGRUNT_ARCH} /usr/bin/terragrunt && \
+    chmod +x /usr/bin/terragrunt
+
+RUN curl -LO https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-${INFRACOST_ARCH}.tar.gz && \
+    tar xvf infracost-linux-${INFRACOST_ARCH}.tar.gz && \
+    mv infracost-linux-${INFRACOST_ARCH} /usr/bin/infracost
+
+RUN curl -LO https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh && \
+    mv diff.sh /opt/diff.sh && \
+    chmod +x /opt/diff.sh
+
+RUN git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv && \
+    ln -s ~/.tfenv/bin/* /usr/local/bin

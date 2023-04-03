@@ -5,10 +5,12 @@ versions:
       - linux/arm64
     build_args:
       HELM_DIFF_VERSION: 3.6.0
-      HELM_VERSION: 3.11.0
-      KUBECTL_VERSION: 1.26.1
-      KUSTOMIZATION_VERSION: 4.5.7
-      TRIVY_VERSION: "0.36.1"
+      HELM_VERSION: 3.11.2
+      KUBECTL_VERSION: 1.26.3
+      KUSTOMIZATION_VERSION: 5.0.1
+      TRIVY_VERSION: "0.38.3"
+      TERRAGRUNT_VERSION: "0.45.0"
+      INFRACOST_VERSION: "0.10.19"
     test_config:
       cmd:
         - aws --version
@@ -20,3 +22,6 @@ versions:
         - pipenv --version
         - trivy --version
         - zip --version
+        - terragrunt --version
+        - infracost --version
+        - tfenv init
