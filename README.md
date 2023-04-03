@@ -87,7 +87,7 @@ Contains Ansible and Python 3.x
 ### AWS
 https://hub.docker.com/r/ekino/ci-aws/tags
 
-Contains AWS Cli, AWS EB Cli, and jq.
+Contains AWS Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 ### AWSLinux systemd
 https://hub.docker.com/r/ekino/ci-awslnx-systemd/tags
@@ -97,7 +97,7 @@ Amazon Linux based image containing Systemd for service management in docker con
 ### Azure
 https://hub.docker.com/r/ekino/ci-azure/tags
 
-Contains Azure Cli and Terraform.
+Contains Azure Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 ### Bitcoind
 https://hub.docker.com/r/ekino/ci-bitcoind/tags
@@ -185,11 +185,6 @@ Based on Python image, contains Nodejs 14. Used for serverless and CDK use cases
 https://hub.docker.com/r/ekino/ci-sonar/tags
 
 Contains SonarQube Scanner.
-
-### Terraform
-https://hub.docker.com/r/ekino/ci-terraform/tags
-
-Contains Terraform, Terragrunt, and CLIs for Google Cloud, Azure, AWS.
 
 ### TezosQA
 https://hub.docker.com/r/ekino/ci-tezosqa/tags
