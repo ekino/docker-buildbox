@@ -357,26 +357,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-  # Terraform
-  - package-ecosystem: "docker"
-    directory: "/terraform"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "terraform"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "pip"
-    directory: "/terraform"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "terraform"
   # Tezosqa
   - package-ecosystem: "docker"
     directory: "/tezosqa"
