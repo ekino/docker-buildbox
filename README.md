@@ -79,11 +79,6 @@ Do not forget to add an entry in `.github/dependabot.yml` too if you want it to 
 
 ## Available images
 
-### Ansible
-https://hub.docker.com/r/ekino/ci-ansible/tags
-
-Contains Ansible and Python 3.x
-
 ### AWS
 https://hub.docker.com/r/ekino/ci-aws/tags
 

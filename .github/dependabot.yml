@@ -5,29 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-  # Ansible
-  - package-ecosystem: "docker"
-    directory: "/ansible"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "ansible"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "pip"
-    directory: "/ansible/5"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "pip"
-      - "ansible"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
   # AWS
   - package-ecosystem: "docker"
     directory: "/aws"
