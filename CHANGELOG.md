@@ -1,7 +1,12 @@
 Versions
 ========
 
-2023-04-30
+2023-04-06
+* AWS : Adding yq binary to help parsing yaml files
+* Azure : Adding yq binary to help parsing yaml files
+----------
+
+2023-03-30
 ----------
 * Ansible : dropping this image.
 * AWS : adding terraform, tfenv and associated tools. Removing boto3. Bumping misc tools' verions

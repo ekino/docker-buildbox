@@ -18,6 +18,7 @@ ARG KUSTOMIZATION_ARCH="linux_amd64"
 ARG TRIVY_ARCH="Linux-64bit"
 ARG TERRAGRUNT_ARCH="amd64"
 ARG INFRACOST_ARCH="amd64"
+ARG JQ_ARCH="amd64"
 
 FROM base as base-arm64
 ARG AWSCLI_ARCH="aarch64"
@@ -27,15 +28,19 @@ ARG KUSTOMIZATION_ARCH="linux_arm64"
 ARG TRIVY_ARCH="Linux-ARM64"
 ARG TERRAGRUNT_ARCH="arm64"
 ARG INFRACOST_ARCH="arm64"
+ARG JQ_ARCH="arm64"
 
 FROM base-$TARGETARCH
 
-RUN apt-get update -qq && apt-get install -qq -y curl git gcc jq\
+RUN apt-get update -qq && apt-get install -qq -y curl git gcc jq wget\
     && pip install -U pip \
     && pip install pipenv azure-cli \
     && apt-get remove -y gcc && apt-get -qq -y autoremove \
     && apt-get -qq -y clean && apt-get -y -qq purge\
-    && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old
+    && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old\
+    && echo "Adding yq bin" \
+    && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq \
+    && chmod +x /usr/bin/yq
 
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/${KUBECTL_ARCH}/kubectl && \
     chmod +x ./kubectl && \
