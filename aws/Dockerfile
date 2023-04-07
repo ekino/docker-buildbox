@@ -17,6 +17,7 @@ ARG KUSTOMIZATION_ARCH="linux_amd64"
 ARG TRIVY_ARCH="Linux-64bit"
 ARG TERRAGRUNT_ARCH="amd64"
 ARG INFRACOST_ARCH="amd64"
+ARG JQ_ARCH="amd64"
 
 FROM base as base-arm64
 ARG AWSCLI_ARCH="aarch64"
@@ -26,17 +27,21 @@ ARG KUSTOMIZATION_ARCH="linux_arm64"
 ARG TRIVY_ARCH="Linux-ARM64"
 ARG TERRAGRUNT_ARCH="arm64"
 ARG INFRACOST_ARCH="arm64"
+ARG JQ_ARCH="arm64"
 
 FROM base-$TARGETARCH
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-${AWSCLI_ARCH}.zip"
 
 
-RUN apt-get update -qq && apt-get install -qq -y curl git zip jq && \
+RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     echo "Adding an up to date mime-types definition file" && \
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types
+    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    echo "Adding yq bin" && \
+    wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq && \
+    chmod +x /usr/bin/yq
 
 RUN pip install -U pip && \
     pip install pipenv
