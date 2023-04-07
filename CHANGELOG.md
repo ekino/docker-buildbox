@@ -1,16 +1,11 @@
 Versions
 ========
 
-2023-04-06
-* AWS : Adding yq binary to help parsing yaml files
-* Azure : Adding yq binary to help parsing yaml files
-----------
-
-2023-03-30
+2023-04-30
 ----------
 * Ansible : dropping this image.
-* AWS : adding terraform, tfenv and associated tools. Removing boto3. Bumping misc tools' verions
-* Azure : adding terraform, tfenv and associated tools. Bumping misc tools' verions
+* AWS : adding yq, terraform, tfenv and associated tools. Removing boto3. Bumping misc tools' verions
+* Azure : adding yq, terraform, tfenv and associated tools. Bumping misc tools' verions
 * Terraform : dropping this image. Terraform tooling is now included directly in AWS & Azure images
 * Golang : Bump Golang-ci-lint version
 
