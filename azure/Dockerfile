@@ -1,4 +1,4 @@
-FROM python:3.11.2-slim-bullseye as base
+FROM python:3.11.3-slim-bullseye as base
 
 LABEL maintainer="opensource@ekino.com"
 
