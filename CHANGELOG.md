@@ -4,6 +4,7 @@ Versions
 2023-05-31
 ----------
 * PHP: bump musl-dev version
+* Tezosqa : version 2.0 : Update smartpy and ligo installation process, switch base image from python:3.8-slim-bullseye to docker:20.10.24-dind, add compatibility with arm64
 
 2023-04-30
 ----------
