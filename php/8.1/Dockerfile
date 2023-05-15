@@ -1,4 +1,4 @@
-FROM php:8.1.18-cli-alpine3.17 AS base
+FROM php:8.1.19-cli-alpine3.17 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG APCU_VERSION
