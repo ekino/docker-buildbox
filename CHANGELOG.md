@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-05-31
+----------
+* PHP: bump musl-dev version
+
 2023-04-30
 ----------
 * Ansible : dropping this image.

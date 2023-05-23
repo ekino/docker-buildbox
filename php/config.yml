@@ -28,17 +28,17 @@ versions:
     platforms: *platforms
     build_args:
       <<: *build_args
-      MUSL_VERSION: 1.2.3-r2
+      MUSL_VERSION: 1.2.3-r3
     test_config: *test_config
   "8.1":
     platforms: *platforms
     build_args:
       <<: *build_args
-      MUSL_VERSION: 1.2.3-r4
+      MUSL_VERSION: 1.2.3-r5
     test_config: *test_config
   "8.2":
     platforms: *platforms
     build_args:
       <<: *build_args
-      MUSL_VERSION: 1.2.3-r4
+      MUSL_VERSION: 1.2.3-r5
     test_config: *test_config
