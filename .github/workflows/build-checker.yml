@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Wait for commit statuses
         id: status
-        uses: WyriHaximus/github-action-wait-for-status@v1.7.1
+        uses: WyriHaximus/github-action-wait-for-status@v1.8.0
         with:
           ignoreActions: check
           checkInterval: 60
