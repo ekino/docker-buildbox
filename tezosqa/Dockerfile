@@ -1,37 +1,27 @@
-FROM python:3.8-slim-bullseye
+FROM docker:20.10.24-dind 
 
-ARG SMARTPY_VERSION
-ARG SMARTPY_PATH
+WORKDIR /tezos
 
-ENV SMARTPY_INSTALL_URL https://smartpy.io/releases/${SMARTPY_VERSION}/cli
-
-RUN smartpy_version_year=$(echo $SMARTPY_VERSION | cut -c 1-4) \
-    && echo "Install system dependencies for python and pip" \
-    && pip install -U pip \
-    && echo "Done base install!" \
-    && echo "Install basics Python tools" \
-    && pip install pipenv \
+RUN echo "Install python3 and pip3" \
+    && apk  --no-cache --update add python3 py3-pip\
     && echo "Done!" \
-    && echo "Install crypto libs" \
-    && apt-get update -q -y && apt-get install -q -y libsodium-dev libsecp256k1-dev libgmp-dev gcc git g++ make \
+    && echo "Install basics Python tools" \
+    && pip3 install -U pipenv \
+    && echo "Done!" \
+    && echo "Install crypto libs and various tools" \
+    && apk add -q libsodium-dev pkgconfig libsecp256k1-dev gmp-dev python3-dev libffi-dev gcc git g++ make wget bash musl-dev linux-headers\
     && echo "Done!" \
     && echo "Install SmartPyDev" \
-    && apt-get install -q -y curl \
-    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
-    && apt-get install -y nodejs \
-    && curl -s "${SMARTPY_INSTALL_URL}/install.sh" | bash /dev/stdin --prefix ${SMARTPY_PATH} --from ${SMARTPY_INSTALL_URL} --yes \
-    && echo "export PATH=${SMARTPY_PATH}:\$PATH" >> /etc/profile \
+    && wget https://smartpy.io/smartpy \
+    && chmod +x smartpy && mv smartpy /usr/local/bin \
     && echo "Done!" \
     && echo "Install ligo" \
-    && curl https://ligolang.org/bin/linux/ligo -o ./ligo \
-    && chmod +x ./ligo && mv ./ligo /usr/local/bin \
+    && wget https://gitlab.com/ligolang/ligo/-/jobs/4260236028/artifacts/raw/ligo \
+    && chmod +x ./ligo && mv ligo /usr/bin \
     && echo "Done!" \
-    && echo "Install Pytezos" \
-    && apt-get install -q -y pkg-config \
-    && pip install pytezos pytest ipython fire pysodium secp256k1 'fastecdsa<2.0.0' \
+    && echo "Install Pytezos and other python libs" \
+    && pip install pytezos pytest ipython fire pysodium secp256k1 \
     && echo "Done!" \
     && echo "Cleanup" \
-    && apt-get -q -y autoremove \
-    && apt-get -q -y clean && apt-get -q -y purge \
-    && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old \
+    && rm -rf /var/cache/apk/* && pip cache purge \
     && echo "Done!"
