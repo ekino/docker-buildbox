@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-06-30
+----------
+* PHP: update tools version (composer, PHP CS Fixer, Xdebug)
+
 2023-05-31
 ----------
 * PHP: bump musl-dev version
