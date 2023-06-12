@@ -1,4 +1,4 @@
-FROM python:3.11.3-slim-bullseye as base
+FROM python:3.11.4-slim-bullseye as base
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG HELM_DIFF_VERSION
