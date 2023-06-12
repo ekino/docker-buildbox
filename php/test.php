@@ -7,25 +7,7 @@
  */
 class Logger
 {
-    /**
-     * @var resource
-     */
-    private $stdOut;
-
-    /**
-     * @var resource
-     */
-    private $stdErr;
-
-    /**
-     * @param resource $stdOut
-     * @param resource $stdErr
-     */
-    public function __construct($stdOut, $stdErr)
-    {
-        $this->stdOut = $stdOut;
-        $this->stdErr = $stdErr;
-    }
+    public function __construct(private mixed $stdOut, private mixed $stdErr) {}
 
     /**
      * Closes the opened streams.
@@ -38,33 +20,24 @@ class Logger
 
     /**
      * Logs the given message as info.
-     *
-     * @param string $message
-     * @param bool   $appendBreakingLine
      */
-    public function info($message, $appendBreakingLine = true)
+    public function info(string $message, bool $appendBreakingLine = true): void
     {
         fwrite($this->stdOut, sprintf("\033[36m%s\033[39m%s", $message, $appendBreakingLine ? "\n" : ""));
     }
 
     /**
      * Logs the given message as success.
-     *
-     * @param string $message
-     * @param bool   $appendBreakingLine
      */
-    public function success($message, $appendBreakingLine = true)
+    public function success(string $message, bool $appendBreakingLine = true): void
     {
         fwrite($this->stdOut, sprintf("\033[32m%s\033[39m%s", $message, $appendBreakingLine ? "\n" : ""));
     }
 
     /**
      * Logs the given message as failure.
-     *
-     * @param string $message
-     * @param bool   $appendBreakingLine
      */
-    public function failure($message, $appendBreakingLine = true)
+    public function failure(string $message, bool $appendBreakingLine = true): void
     {
         fwrite($this->stdErr, sprintf("\033[31m%s\033[39m%s", $message, $appendBreakingLine ? "\n" : ""));
     }
@@ -77,30 +50,12 @@ class Logger
  */
 class Checker
 {
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    /**
-     * @var int
-     */
-    private $exitStatus = 0;
-
-    /**
-     * @param Logger $logger
-     */
-    public function __construct(Logger $logger)
-    {
-        $this->logger = $logger;
-    }
+    public function __construct(private Logger $logger, private int $exitStatus = 0) {}
 
     /**
      * Checks the PHP installation.
-     *
-     * @return int
      */
-    public function check()
+    public function check(): int
     {
         $this->logger->info(<<<"EOF"
                       _    _
@@ -136,7 +91,7 @@ EOF
     /**
      * Checks PHP extensions.
      */
-    private function checkExtensions()
+    private function checkExtensions(): void
     {
         $this->logger->info('> PHP extensions: ', false);
 
@@ -174,7 +129,7 @@ EOF
     /**
      * Checks ini configuration.
      */
-    private function checkIniConfig()
+    private function checkIniConfig(): void
     {
         $this->logger->info('> PHP configuration: ', false);
 

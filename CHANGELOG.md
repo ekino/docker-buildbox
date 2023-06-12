@@ -3,8 +3,9 @@ Versions
 
 2023-06-30
 ----------
-* PHP: update tools version (composer, PHP CS Fixer, Xdebug)
+* PHP : update tools version (composer, PHP CS Fixer, Xdebug)
 * PHP : bump Alpine, Iconv and Musl for PHP 8.1 and 8.2
+* PHP : type hint update
 
 2023-05-31
 ----------
