@@ -1,4 +1,4 @@
-FROM python:3.7.16-slim-bullseye
+FROM python:3.7.17-slim-bullseye
 
 COPY run.sh .
 RUN sh run.sh
