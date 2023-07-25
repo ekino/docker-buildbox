@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-07-31
+----------
+* Dind : build arm64 docker image
+
 2023-06-30
 ----------
 * PHP : update tools version (composer, PHP CS Fixer, Xdebug)
