@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-08-31
+----------
+* Cloudsploit : bumping to 3.0.0
+
 2023-07-31
 ----------
 * Dind : build arm64 docker image
