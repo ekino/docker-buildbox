@@ -1,5 +1,5 @@
 {
     "dependencies": {
-        "cloudsploit": "git+https://git@github.com/aquasecurity/cloudsploit.git#v2.0.0"
+        "cloudsploit": "git+https://git@github.com/aquasecurity/cloudsploit.git#v3.0.0"
     }
 }
