@@ -1,4 +1,4 @@
-FROM alpine:3.18.2
+FROM alpine:3.18.3
 LABEL maintainer="opensource@ekino.com"
 
 ARG SONARSCANNER_VERSION
