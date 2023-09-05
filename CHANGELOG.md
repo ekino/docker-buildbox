@@ -4,6 +4,8 @@ Versions
 2023-08-31
 ----------
 * Cloudsploit : bumping to 3.0.0
+* Pynode : removing this image, use python instead
+* Python : dropping support for 3.7 (now EOL)
 
 2023-07-31
 ----------
