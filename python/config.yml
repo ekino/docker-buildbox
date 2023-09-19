@@ -7,6 +7,7 @@ test_config: &test_config
     - pip --version
     - python --version
     - aws --version
+    - poetry --version
 
 versions:
   "3.8":
