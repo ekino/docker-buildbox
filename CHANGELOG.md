@@ -4,6 +4,7 @@ Versions
 2023-09-30
 ----------
 * Node: dropping support for 14.x (EOL), adding 20.x. Bumping minor versions
+* Python : build arm64 docker image
 
 2023-08-31
 ----------
