@@ -1,6 +1,8 @@
 FROM python:3.10.13-slim-bullseye AS base
 
 ARG TARGETARCH
+ARG POETRY_VERSION
+ARG POETRY_HOME
 
 FROM base AS base-amd64
 ARG ARCH="x86_64"

@@ -21,3 +21,7 @@ apt-get -qq -y autoremove
 apt-get -qq clean && apt-get -qq purge
 rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old
 echo "Done!"
+
+echo "Install Poetry"
+curl -sSL https://install.python-poetry.org | python3 - --version $POETRY_VERSION
+echo "Done installing Poetry!"

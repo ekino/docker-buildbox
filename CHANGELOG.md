@@ -5,6 +5,7 @@ Versions
 ----------
 * Node: dropping support for 14.x (EOL), adding 20.x. Bumping minor versions
 * Python : build arm64 docker image
+* Python : adding poetry
 
 2023-08-31
 ----------

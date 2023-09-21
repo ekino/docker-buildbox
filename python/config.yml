@@ -7,17 +7,26 @@ test_config: &test_config
     - pip --version
     - python --version
     - aws --version
+    - poetry --version
+
+build_args: &build_args
+  POETRY_VERSION: 1.6.1
+  POETRY_HOME: "/usr/local"
 
 versions:
   "3.8":
+    build_args: *build_args
     platforms: *platforms
     test_config: *test_config
   "3.9":
+    build_args: *build_args
     platforms: *platforms
     test_config: *test_config
   "3.10":
+    build_args: *build_args
     platforms: *platforms
     test_config: *test_config
   "3.11":
+    build_args: *build_args
     platforms: *platforms
     test_config: *test_config
