@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-10-31
+----------
+* Python : adding 3.12 support
+
 2023-09-30
 ----------
 * Node: dropping support for 14.x (EOL), adding 20.x. Bumping minor versions
