@@ -3,6 +3,7 @@ Versions
 
 2023-10-31
 ----------
+* Golang : adding 1.21 support
 * Python : adding 3.12 support
 
 2023-09-30
