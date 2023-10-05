@@ -4,7 +4,6 @@ LABEL maintainer="opensource@ekino.com"
 ARG TARGETARCH
 ARG SONARSCANNER_VERSION
 ARG GLIBC_VERSION
-ARG SONARSCANNER_VERSION
 ARG ZLIB_VERSION
 
 FROM base AS base-amd64
@@ -17,7 +16,7 @@ ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bi
 
 
 RUN echo "Starting ..." && \
-    apk --update upgrade && apk add curl make tzdata unzip && \
+    apk --update upgrade && apk add curl make tzdata unzip zlib && \
     echo "Done base install!" && \
     echo "Starting Sonar Scanner" && \
     curl -sSL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
