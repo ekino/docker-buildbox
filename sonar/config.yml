@@ -1,9 +1,9 @@
 versions:
-  "4.7":
+  "5.0":
     platforms: *base_platforms
     build_args:
       GLIBC_VERSION: 2.32-r0
-      SONARSCANNER_VERSION: 4.7.0.2747
+      SONARSCANNER_VERSION: 5.0.1.3006
       ZLIB_VERSION: 1.2.11-3
     test_config:
       cmd:

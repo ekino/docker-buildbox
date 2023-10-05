@@ -5,6 +5,7 @@ Versions
 ----------
 * Golang : adding 1.21 support
 * Python : adding 3.12 support
+* Sonar : bumping CLI from 4.7 to 5.0
 
 2023-09-30
 ----------
