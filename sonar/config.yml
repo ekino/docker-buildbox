@@ -1,3 +1,7 @@
+platforms: &platforms
+  - linux/amd64
+  - linux/arm64
+
 versions:
   "5.0":
     platforms: *base_platforms

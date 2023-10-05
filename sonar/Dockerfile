@@ -1,13 +1,20 @@
 FROM alpine:3.19.0
 LABEL maintainer="opensource@ekino.com"
 
+ARG TARGETARCH
 ARG SONARSCANNER_VERSION
-
-ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 ARG GLIBC_VERSION
 ARG SONARSCANNER_VERSION
 ARG ZLIB_VERSION
+
+FROM base AS base-amd64
+ARG ARCH="x86_64"
+
+FROM base AS base-arm64
+ARG ARCH="aarch64"
+
+ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 
 RUN echo "Starting ..." && \
     apk --update upgrade && apk add curl make tzdata unzip && \
@@ -17,7 +24,7 @@ RUN echo "Starting ..." && \
     curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
     apk add -q --force-overwrite glibc-${GLIBC_VERSION}.apk && \
     rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk && \
-    curl -LfsS https://archive.archlinux.org/packages/z/zlib/zlib-1%3A{$ZLIB_VERSION}-x86_64.pkg.tar.xz -o /tmp/libz.tar.xz && \
+    curl -LfsS https://archive.archlinux.org/packages/z/zlib/zlib-1%3A{$ZLIB_VERSION}-${ARCH}.pkg.tar.xz -o /tmp/libz.tar.xz && \
     mkdir /tmp/libz && \
     tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
     mv /tmp/libz/usr/lib/libz.so* /usr/glibc-compat/lib && \

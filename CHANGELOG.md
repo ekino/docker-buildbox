@@ -27,7 +27,7 @@ Versions
 * Golang : adding 1.21 support
 * Java : adding Java 21 support
 * Python : adding 3.12 support
-* Sonar : bumping CLI from 4.7 to 5.0
+* Sonar : bumping CLI from 4.7 to 5.0. Adding arm64 version.
 
 2023-09-30
 ----------
