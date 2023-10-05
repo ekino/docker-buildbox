@@ -16,7 +16,7 @@ ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bi
 
 
 RUN echo "Starting ..." && \
-    apk --update upgrade && apk add curl make tzdata unzip zlib && \
+    apk --update upgrade && apk add curl make tzdata unzip zlib zlib-dev && \
     echo "Done base install!" && \
     echo "Starting Sonar Scanner" && \
     curl -sSL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
