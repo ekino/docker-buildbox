@@ -3,6 +3,7 @@ Versions
 
 2023-10-31
 ----------
+* Cloudsploit : bumping to 3.1.0. Also bumping node to 20
 * Golang : adding 1.21 support
 * Python : adding 3.12 support
 * Sonar : bumping CLI from 4.7 to 5.0
