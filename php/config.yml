@@ -35,12 +35,12 @@ versions:
     build_args:
       <<: *build_args
       ICONV_VERSION: 1.17-r1
-      MUSL_VERSION: 1.2.4-r3
+      MUSL_VERSION: 1.2.4-r2
     test_config: *test_config
   "8.2":
     platforms: *platforms
     build_args:
       <<: *build_args
       ICONV_VERSION: 1.17-r1
-      MUSL_VERSION: 1.2.4-r3
+      MUSL_VERSION: 1.2.4-r2
     test_config: *test_config
