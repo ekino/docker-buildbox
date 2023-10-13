@@ -158,6 +158,17 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: "docker"
+    directory: "/java/21"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "java"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Node
   - package-ecosystem: "docker"
     directory: "/node"
