@@ -1,4 +1,4 @@
-FROM golang:1.21.2 as base
+FROM golang:1.21.3 as base
 LABEL maintainer="opensource@ekino.com"
 ARG GITLEAKS_VERSION
 ARG GOLANGCILINT_VERSION
