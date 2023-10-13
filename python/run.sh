@@ -8,10 +8,11 @@ echo "Done base install!"
 
 echo "Installing AWS CLIv2"
 curl "https://awscli.amazonaws.com/awscli-exe-linux-{$ARCH}.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+unzip -q awscliv2.zip
 ./aws/install
 awscliv2.zip
 rm -rf aws
+rm -f awscliv2.zip
 echo "Done installing awscliv2!"
 
 
