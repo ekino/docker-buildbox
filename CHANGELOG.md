@@ -9,6 +9,7 @@ Versions
 * Dind : bumping Trivy version
 * Golang : adding 1.21 support
 * Java : adding Java 21 support
+* Node : dropping Node 16, adding Node 21
 * Python : adding 3.12 support
 * Sonar : bumping CLI from 4.7 to 5.0
 
