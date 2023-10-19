@@ -3,7 +3,10 @@ Versions
 
 2023-10-31
 ----------
+* AWS : bumping Trivy version
+* Azure : bumping Trivy version
 * Cloudsploit : bumping to 3.1.0. Also bumping node to 20
+* Dind : bumping Trivy version
 * Golang : adding 1.21 support
 * Java : adding Java 21 support
 * Python : adding 3.12 support
