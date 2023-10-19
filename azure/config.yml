@@ -8,7 +8,7 @@ versions:
       HELM_VERSION: 3.11.2
       KUBECTL_VERSION: 1.26.3
       KUSTOMIZATION_VERSION: 5.0.1
-      TRIVY_VERSION: "0.38.3"
+      TRIVY_VERSION: "0.46.0"
       TERRAGRUNT_VERSION: "0.45.0"
       INFRACOST_VERSION: "0.10.19"
     test_config:
