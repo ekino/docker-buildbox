@@ -1,9 +1,0 @@
-versions:
-  "2":
-    platforms:
-      - linux/amd64
-      - linux/arm64
-    test_config:
-      cmd:
-        - python --version
-        - pip --version
