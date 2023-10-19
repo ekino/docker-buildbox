@@ -4,6 +4,7 @@ Versions
 2023-10-31
 ----------
 * AWS : bumping Trivy version. Bumping kubernetes tooling versions.
+* AWSLinux-systemd : dropping support of this image
 * Azure : bumping Trivy version. Bumping kubernetes tooling versions.
 * Cloudsploit : bumping to 3.1.0. Also bumping node to 20
 * Dind : bumping Trivy version

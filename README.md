@@ -84,11 +84,6 @@ https://hub.docker.com/r/ekino/ci-aws/tags
 
 Contains AWS Cli, Terraform, Kubectl, Helm, Python & misc tools
 
-### AWSLinux systemd
-https://hub.docker.com/r/ekino/ci-awslnx-systemd/tags
-
-Amazon Linux based image containing Systemd for service management in docker container.
-
 ### Azure
 https://hub.docker.com/r/ekino/ci-azure/tags
 
