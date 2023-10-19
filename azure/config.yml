@@ -4,10 +4,10 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      HELM_DIFF_VERSION: 3.6.0
-      HELM_VERSION: 3.11.2
-      KUBECTL_VERSION: 1.26.3
-      KUSTOMIZATION_VERSION: 5.0.1
+      HELM_DIFF_VERSION: 3.8.1
+      HELM_VERSION: 3.13.1
+      KUBECTL_VERSION: 1.86.3
+      KUSTOMIZATION_VERSION: 5.1.1
       TRIVY_VERSION: "0.46.0"
       TERRAGRUNT_VERSION: "0.45.0"
       INFRACOST_VERSION: "0.10.19"
