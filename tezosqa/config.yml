@@ -7,4 +7,5 @@ versions:
       cmd:
         - ligo --version
         - pytezos --version
+        - python --version
 
