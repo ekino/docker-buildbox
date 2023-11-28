@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-11-30
+----------
+* Tezosqa : fix pytezos installation error
+
 2023-10-31
 ----------
 * AWS : bumping Trivy version. Bumping kubernetes tooling versions.
