@@ -3,6 +3,8 @@ Versions
 
 2023-11-30
 ----------
+* AWS : bumping Kubectl version
+* Azure : bumping Kubectl version
 * Tezosqa : fix pytezos installation error
 
 2023-10-31
