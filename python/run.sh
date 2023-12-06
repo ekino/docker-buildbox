@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eo pipefail
 
 echo "Install system dependencies for python and pip"
 apt-get update -y
