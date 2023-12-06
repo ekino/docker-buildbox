@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eo pipefail
 
 echo "Install system dependencies for python and pip"
