@@ -9,17 +9,6 @@ test_config: &test_config
     - task --version
 
 versions:
-  "16":
-    platforms:
-      - linux/amd64
-      - linux/arm64
-    build_args:
-      NODE_VERSION: 16.20.2
-      NPM_VERSION: 9.6.7
-      NVM_VERSION: 0.39.5
-      MODD_VERSION: *MODD_VERSION
-      TASKFILE_VERSION: *TASKFILE_VERSION
-    test_config: *test_config
   "18":
     platforms:
       - linux/amd64
