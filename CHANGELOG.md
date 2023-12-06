@@ -1,6 +1,10 @@
 Versions
 ========
 
+2023-12-31
+----------
+* Node : dropping EoL Node 16 support
+
 2023-11-30
 ----------
 * AWS : bumping Kubectl version
