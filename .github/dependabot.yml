@@ -194,17 +194,6 @@ updates:
         update-types: ["version-update:semver-major"]
   # Php
   - package-ecosystem: "docker"
-    directory: "/php/8.0"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "php"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
     directory: "/php/8.1"
     schedule:
       interval: "weekly"
@@ -217,6 +206,17 @@ updates:
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
   -   package-ecosystem: "docker"
       directory: "/php/8.2"
+      schedule:
+        interval: "weekly"
+      labels:
+        - "dependencies"
+        - "docker"
+        - "php"
+      ignore:
+        -   dependency-name: "*"
+            update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
+  -   package-ecosystem: "docker"
+      directory: "/php/8.3"
       schedule:
         interval: "weekly"
       labels:

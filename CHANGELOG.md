@@ -4,6 +4,7 @@ Versions
 2023-12-31
 ----------
 * Node : dropping EoL Node 16 support
+* PHP : adding 8.3 image, dropping 8.0
 
 2023-11-30
 ----------

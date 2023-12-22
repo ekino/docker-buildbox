@@ -14,33 +14,28 @@ test_config: &test_config
 
 build_args: &build_args
   APCU_VERSION: 5.1.22
-  COMPOSER_VERSION: 2.5.7
+  COMPOSER_VERSION: 2.6.5
   MEMCACHED_VERSION: 3.2.0
   MODD_VERSION: *MODD_VERSION
-  PHP_CS_FIXER_VERSION: 3.17.0
+  PHP_CS_FIXER_VERSION: 3.41.1
   REDIS_VERSION: 5.3.7
   SECURITY_CHECKER_VERSION: 2.0.6
-  XDEBUG_VERSION: 3.2.1
-
+  XDEBUG_VERSION: 3.3.1
+  ICONV_VERSION: 1.17-r1
+  MUSL_VERSION: 1.2.4-r2
 versions:
-  "8.0":
-    platforms: *platforms
-    build_args:
-      <<: *build_args
-      ICONV_VERSION: 1.15-r3
-      MUSL_VERSION: 1.2.3-r3
-    test_config: *test_config
   "8.1":
     platforms: *platforms
     build_args:
       <<: *build_args
-      ICONV_VERSION: 1.17-r1
-      MUSL_VERSION: 1.2.4-r2
     test_config: *test_config
   "8.2":
     platforms: *platforms
     build_args:
       <<: *build_args
-      ICONV_VERSION: 1.17-r1
-      MUSL_VERSION: 1.2.4-r2
+    test_config: *test_config
+  "8.3":
+    platforms: *platforms
+    build_args:
+      <<: *build_args
     test_config: *test_config
