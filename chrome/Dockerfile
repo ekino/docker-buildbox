@@ -4,7 +4,8 @@ LABEL maintainer="opensource@ekino.com"
 ARG MODD_VERSION
 ARG TASKFILE_VERSION
 
-
+# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-on-alpine
 
@@ -15,18 +16,10 @@ RUN apk update && apk upgrade && \
       harfbuzz \
       freetype \
       ttf-freefont \
-      nss
-
-# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
-# Puppeteer v1.11.0 works with Chromium 72.
-RUN yarn add puppeteer@1.13.0
-
-
-
-
-RUN apk add --update curl git grep make ncurses tzdata && \
+      nss && \
+    # Puppeteer v1.11.0 works with Chromium 72.
+    yarn add puppeteer@1.13.0 && \
+    apk add --update curl git grep make ncurses tzdata && \
     echo "Install Taskfile" && \
     curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
     echo "Done Install Taskfile" && \
