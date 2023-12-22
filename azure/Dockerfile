@@ -40,39 +40,30 @@ RUN apt-get update -qq && apt-get install -qq -y curl git gcc jq wget\
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old\
     && echo "Adding yq bin" \
     && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq \
-    && chmod +x /usr/bin/yq
-
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/${KUBECTL_ARCH}/kubectl && \
+    && chmod +x /usr/bin/yq && \
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/${KUBECTL_ARCH}/kubectl && \
     chmod +x ./kubectl && \
-    mv ./kubectl /usr/bin/kubectl
-
-RUN curl -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZATION_VERSION}/kustomize_v${KUSTOMIZATION_VERSION}_${KUSTOMIZATION_ARCH}.tar.gz && \
+    mv ./kubectl /usr/bin/kubectl && \
+    curl -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZATION_VERSION}/kustomize_v${KUSTOMIZATION_VERSION}_${KUSTOMIZATION_ARCH}.tar.gz && \
     tar -xf kustomize_v${KUSTOMIZATION_VERSION}_${KUSTOMIZATION_ARCH}.tar.gz && \
     rm kustomize_v${KUSTOMIZATION_VERSION}_${KUSTOMIZATION_ARCH}.tar.gz && \
-    mv ./kustomize /usr/bin/kustomize
-
-RUN curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
+    mv ./kustomize /usr/bin/kustomize && \
+    curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
     tar xf helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && rm helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
-    mv ${HELM_ARCH}/helm /usr/local/bin/helm
-
-RUN curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
+    mv ${HELM_ARCH}/helm /usr/local/bin/helm && \
+    curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
-    mv trivy /usr/bin/trivy
-
-RUN helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff
-
-RUN curl -LO https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
+    mv trivy /usr/bin/trivy && \
+    helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff && \
+    curl -LO https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
     mv terragrunt_linux_${TERRAGRUNT_ARCH} /usr/bin/terragrunt && \
-    chmod +x /usr/bin/terragrunt
-
-RUN curl -LO https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-${INFRACOST_ARCH}.tar.gz && \
+    chmod +x /usr/bin/terragrunt && \
+    curl -LO https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-${INFRACOST_ARCH}.tar.gz && \
     tar xvf infracost-linux-${INFRACOST_ARCH}.tar.gz && \
-    mv infracost-linux-${INFRACOST_ARCH} /usr/bin/infracost
-
-RUN curl -LO https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh && \
+    mv infracost-linux-${INFRACOST_ARCH} /usr/bin/infracost && \
+    curl -LO https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh && \
     mv diff.sh /opt/diff.sh && \
-    chmod +x /opt/diff.sh
-
-RUN git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv && \
+    chmod +x /opt/diff.sh && \
+    git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv && \
     ln -s ~/.tfenv/bin/* /usr/local/bin
