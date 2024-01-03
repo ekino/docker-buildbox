@@ -3,11 +3,9 @@ FROM docker:24.0.7-dind
 WORKDIR /tezos
 
 RUN echo "Install basics Python tools" \
-    apk update && \
-    apk add --no-cache python3 && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --no-cache --upgrade pip setuptools
+    && apk update \
+    && apk add --no-cache python3 py3-pip
+
 
 RUN echo "Install crypto libs and various tools" \
     && apk --no-cache add -q libsodium-dev pkgconfig libsecp256k1-dev gmp-dev python3-dev wget build-base libffi-dev \
@@ -23,8 +21,10 @@ RUN echo "Install ligo" \
     && chmod +x ./ligo && cp ligo /usr/bin \
     && echo "Done!"
 
+ENV PATH="/venv/bin:$PATH"
 RUN echo "Install Pytezos and other python libs" \
-    && pip install pytezos \
+    && python3 -m venv /venv \
+    && pip3 install pytezos \
     && echo "Done!"
 
 RUN echo "Cleanup" \
