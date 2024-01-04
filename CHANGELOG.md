@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-01-31
+----------
+* Node : bumping minor versions
+
 2023-12-31
 ----------
 * Node : dropping EoL Node 16 support
