@@ -1,6 +1,6 @@
 platforms: &platforms
   - linux/amd64
-  - linux/arm64
+  # - linux/arm64
 
 versions:
   "5.0":
@@ -11,5 +11,5 @@ versions:
       ZLIB_VERSION: 1.2.11-3
     test_config:
       cmd:
-        - /sonar-scanner/jre/bin/java/java -version
+        - java -version
         - sonar-scanner -v
