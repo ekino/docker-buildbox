@@ -7,7 +7,6 @@ ARG GOSWAGGER_VERSION
 ARG MIGRATE_VERSION
 ARG MOCKGEN_VERSION
 ARG MODD_VERSION
-ARG TESTFIXTURES_VERSION
 
 FROM base as base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
@@ -18,7 +17,6 @@ ARG GOSWAGGER_ARCH="linux_amd64"
 ARG GOMIGRATE_ARCH="linux-amd64"
 ARG MOCKGEN_ARCH="linux_amd64"
 ARG MODD_ARCH="linux64"
-ARG TESTFIXTURES_ARCH="linux_amd64"
 
 FROM base as base-arm64
 ARG AWSCLI_ARCH="linux-aarch64"
@@ -29,7 +27,6 @@ ARG GOSWAGGER_ARCH="linux_arm64"
 ARG GOMIGRATE_ARCH="linux-arm64"
 ARG MOCKGEN_ARCH="linux_arm64"
 ARG MODD_ARCH="linuxARM"
-ARG TESTFIXTURES_ARCH="linux_arm64"
 
 FROM base-$TARGETARCH
 
@@ -61,7 +58,7 @@ RUN apt-get update -q && \
     mv swagger_${GOSWAGGER_ARCH} /usr/local/bin/swagger && chmod +x /usr/local/bin/swagger && \
     # Install migrate
     wget -q https://github.com/golang-migrate/migrate/releases/download/v${MIGRATE_VERSION}/migrate.${GOMIGRATE_ARCH}.tar.gz && \
-    tar -xzf migrate.${GOMIGRATE_ARCH}.tar.gz -C /usr/local/bin && mv /usr/local/bin/migrate.${GOMIGRATE_ARCH} /usr/local/bin/migrate && \
+    tar -xzf migrate.${GOMIGRATE_ARCH}.tar.gz -C /usr/local/bin && \
     rm migrate.${GOMIGRATE_ARCH}.tar.gz && \
     # Install mockgen
     wget -q https://github.com/golang/mock/releases/download/v${MOCKGEN_VERSION}/mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}.tar.gz && \
