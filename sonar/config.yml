@@ -4,7 +4,7 @@ platforms: &platforms
 
 versions:
   "5.0":
-    platforms: *base_platforms
+    platforms: *platforms
     build_args:
       GLIBC_VERSION: 2.32-r0
       SONARSCANNER_VERSION: 5.0.1.3006
