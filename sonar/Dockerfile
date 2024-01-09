@@ -12,9 +12,9 @@ ARG ARCH="x86_64"
 FROM base AS base-arm64
 ARG ARCH="aarch64"
 
-ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 FROM base-$TARGETARCH
+
+ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN echo "Starting ..." && \
     apk --update upgrade && apk add curl make tzdata unzip zlib zlib-dev && \
