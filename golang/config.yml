@@ -17,25 +17,23 @@ versions:
       - linux/arm64
     test_config: *test_config
     build_args:
-      GITLEAKS_VERSION: 8.11.2
-      GOLANGCILINT_VERSION: 1.52.2
-      GOMODUPGRADE_VERSION: 0.4.0
-      GOSWAGGER_VERSION: 0.26.1
-      MIGRATE_VERSION: 4.14.1
+      GITLEAKS_VERSION: 8.18.1
+      GOLANGCILINT_VERSION: 1.55.2
+      GOMODUPGRADE_VERSION: 0.9.1
+      GOSWAGGER_VERSION: 0.30.5
+      MIGRATE_VERSION: 4.17.0
       MOCKGEN_VERSION: 1.6.0
       MODD_VERSION: 0.8
-      TESTFIXTURES_VERSION: 3.8.0
   "1.21":
     platforms:
       - linux/amd64
       - linux/arm64
     test_config: *test_config
     build_args:
-      GITLEAKS_VERSION: 8.11.2
-      GOLANGCILINT_VERSION: 1.52.2
-      GOMODUPGRADE_VERSION: 0.4.0
-      GOSWAGGER_VERSION: 0.26.1
-      MIGRATE_VERSION: 4.14.1
+      GITLEAKS_VERSION: 8.18.1
+      GOLANGCILINT_VERSION: 1.55.2
+      GOMODUPGRADE_VERSION: 0.9.1
+      GOSWAGGER_VERSION: 0.30.5
+      MIGRATE_VERSION: 4.17.0
       MOCKGEN_VERSION: 1.6.0
       MODD_VERSION: 0.8
-      TESTFIXTURES_VERSION: 3.8.0
