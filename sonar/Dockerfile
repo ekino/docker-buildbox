@@ -1,6 +1,8 @@
 FROM alpine:3.19.0 as base
 LABEL maintainer="opensource@ekino.com"
 
+ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 ARG TARGETARCH
 ARG SONARSCANNER_VERSION
 ARG GLIBC_VERSION
@@ -14,7 +16,7 @@ ARG ARCH="aarch64"
 
 FROM base-$TARGETARCH
 
-ENV PATH=/sonar-scanner/bin:/sonar-scanner/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 
 RUN echo "Starting ..." && \
     apk --update upgrade && apk add curl make tzdata unzip zlib zlib-dev && \
