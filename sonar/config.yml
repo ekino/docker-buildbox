@@ -11,5 +11,5 @@ versions:
       ZLIB_VERSION: 1.2.11-3
     test_config:
       cmd:
-        - java -version
+        - /sonar-scanner/jre/bin/java/java -version
         - sonar-scanner -v
