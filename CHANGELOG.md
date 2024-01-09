@@ -5,6 +5,7 @@ Versions
 ----------
 * Golang : removing go-bindata. Bumping misc tools' versions.
 * Node : bumping minor versions
+* Sonar : Adding arm64 version.
 
 2023-12-31
 ----------
