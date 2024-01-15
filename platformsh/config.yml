@@ -1,12 +1,13 @@
 versions:
-  "4":
+  "5":
     platforms:
       - linux/amd64
       - linux/arm64
     build_args:
-      PLATFORM_VERSION: "4.0.2"
+      PLATFORM_VERSION: "5.0.6"
     test_config:
       cmd:
         - platform --version
         - python --version
         - pip --version
+        - pipenv --version
