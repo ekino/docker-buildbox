@@ -5,6 +5,7 @@ Versions
 ----------
 * Golang : removing go-bindata. Bumping misc tools' versions.
 * Node : bumping minor versions
+* Platform: bumping CLI to 5.x.x
 
 2023-12-31
 ----------
