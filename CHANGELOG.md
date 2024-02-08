@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-02-29
+----------
+* Golang : adding 1.22, dropping 1.20
+
 2024-01-31
 ----------
 * Golang : removing go-bindata. Bumping misc tools' versions.
