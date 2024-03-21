@@ -1,0 +1,14 @@
+test_config: &test_config
+  cmd:
+    - aws --version
+
+versions:
+  "1":
+    platforms: 
+      #- linux/amd64
+      - linux/arm64
+    test_config: *test_config
+    build_args:
+      ALPINE_VERSION: 3.17
+      AWS_CLI_VERSION: 2.11.11
+      GLIBC_VERSION: 2.29-r0
