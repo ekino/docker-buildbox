@@ -14,7 +14,7 @@ test_config: &test_config
 
 build_args: &build_args
   APCU_VERSION: 5.1.22
-  COMPOSER_VERSION: 2.6.5
+  COMPOSER_VERSION: 2.7.2
   MEMCACHED_VERSION: 3.2.0
   MODD_VERSION: *MODD_VERSION
   PHP_CS_FIXER_VERSION: 3.41.1
