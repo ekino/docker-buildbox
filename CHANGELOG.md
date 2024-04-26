@@ -1,6 +1,12 @@
 Versions
 ========
 
+2024-04-30
+----------
+* DIND : updating trivy
+* AWS : updating tooling (kubectl, kustomize, helm, helm-diff, terragrunt, trivy, infracost)
+* Azure : updating tooling (kubectl, kustomize, helm, helm-diff, terragrunt, trivy, infracost)
+
 2024-02-29
 ----------
 * Golang : adding 1.22, dropping 1.20

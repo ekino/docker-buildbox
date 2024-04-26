@@ -5,7 +5,7 @@ versions:
       - linux/arm64
     build_args:
       GLIBC_VERSION: 2.29-r0
-      TRIVY_VERSION: "0.46.0"
+      TRIVY_VERSION: "0.50.4"
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
