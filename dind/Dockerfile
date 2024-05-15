@@ -1,6 +1,5 @@
 FROM docker:20.10.24-dind as base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
-ARG GLIBC_VERSION
 ARG TASKFILE_VERSION
 ARG TRIVY_VERSION
 
@@ -15,28 +14,8 @@ RUN echo "Install AWS & Azure CLIs" && \
     pip3 -q install boto3 PyYAML && \
     pip3 install -r requirements.txt && \
     apk del libc6-compat && \
-    curl -sSL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
-    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O && \
-    curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O && \
-    apk add --update -q --force-overwrite glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk && \
-    rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk && \
-    curl https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
-    unzip -q awscliv2.zip && \
-    ./aws/install && \
-    rm -f awscliv2.zip && rm -rf aws && \
+    apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
-
-FROM python:3.11-alpine@sha256:4e8e9a59bf1b3ca8e030244bc5f801f23e41e37971907371da21191312087a07 AS aws-builder
-ARG AWSCLI_VERSION=2.11.18
-RUN apk add --no-cache curl make cmake gcc g++ libc-dev libffi-dev openssl-dev && \
-    pip3 install --no-cache --upgrade pip setuptools wheel
-RUN curl https://awscli.amazonaws.com/awscli-$AWSCLI_VERSION.tar.gz | tar -xz && \
-    cd awscli-$AWSCLI_VERSION && \
-   ./configure --bindir=/usr/local/bin --prefix=/aws-cli/ --with-download-deps --with-install-type=portable-exe && \
-    make && \
-    make install
-# reduce image size
-RUN rm -rf awscli-$AWSCLI_VERSION
 
 FROM base as base-arm64
 ARG TRIVY_ARCH="Linux-ARM64"
@@ -48,9 +27,8 @@ RUN echo "Install AWS & Azure CLIs" && \
     pip3 -q install boto3 PyYAML && \
     pip3 install -r requirements.txt && \
     apk del libc6-compat && \
+    apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
-COPY --from=aws-builder aws-cli/lib/aws-cli/ /usr/local/lib/aws-cli/
-RUN ln -s /usr/local/lib/aws-cli/aws /usr/local/bin/aws
 
 FROM base-$TARGETARCH
 RUN echo "Install Taskfile" && \
