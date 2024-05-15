@@ -76,8 +76,7 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux/${TARGETARCH} | tar zxp -C /tmp/blackfire-client && \
     mv /tmp/blackfire-client/blackfire /usr/bin/blackfire && \
     # Starting AWS
-    apk add groff py-pip && \
-    pip install -q -U awscli && \
+    apk add aws-cli && \
     # Adding an up to date mime-types definition file
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
     # Cleaning files

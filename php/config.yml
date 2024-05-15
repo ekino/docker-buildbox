@@ -11,7 +11,7 @@ test_config: &test_config
     - php-cs-fixer --version
     - security-checker -help
     - php /tmp/test.php
-
+    - aws --version
 build_args: &build_args
   APCU_VERSION: 5.1.22
   COMPOSER_VERSION: 2.7.2
