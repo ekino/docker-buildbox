@@ -1,8 +1,12 @@
+platforms: &platforms
+  - linux/amd64
+  # - linux/arm64
+
 versions:
   "5.0":
-    platforms: *base_platforms
+    platforms: *platforms
     build_args:
-      GLIBC_VERSION: 2.32-r0
+      GLIBC_VERSION: 2.35-r1
       SONARSCANNER_VERSION: 5.0.1.3006
       ZLIB_VERSION: 1.2.11-3
     test_config:
