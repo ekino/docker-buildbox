@@ -3,7 +3,7 @@ Versions
 
 2024-05-31
 ----------
-* PHP : adding **gettext** extension and **gettext-dev** package for PHP 8.1 image
+* PHP : adding **icu-data-full** package for PHP 8.1|8.2|8.3 image
 
 2024-04-30
 ----------
