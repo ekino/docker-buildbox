@@ -32,8 +32,8 @@ ENV COMPOSER_NO_INTERACTION=1 \
 
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
-    apk add --update --upgrade alpine-sdk apk-tools autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext gettext-dev git \
-    gnu-libiconv==${ICONV_VERSION} icu-dev jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
+    apk add --update --upgrade alpine-sdk apk-tools autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
+    gnu-libiconv==${ICONV_VERSION} icu-dev icu-data-full jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
     libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev linux-headers make \
     musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
     # Install Modd"
@@ -43,7 +43,7 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     CFLAGS_PREVIOUS=$CFLAGS && \
     export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl gettext mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets xsl zip && \
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets xsl zip && \
     export CFLAGS=$CFLAGS_PREVIOUS && \
     pecl install apcu-${APCU_VERSION} && \
     pecl install memcached-${MEMCACHED_VERSION} && \

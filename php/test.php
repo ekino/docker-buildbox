@@ -74,6 +74,7 @@ EOF
 
         $this->logger->info(sprintf('> PHP version: %s', PHP_VERSION));
 
+        $this->checkI18n();
         $this->checkExtensions();
         $this->checkIniConfig();
 
@@ -86,6 +87,36 @@ EOF
         }
 
         return $this->exitStatus;
+    }
+
+    private function checkI18n(): void
+    {
+        $this->logger->info('> Locale functionality: ', false);
+
+        $errors    = [];
+        $testCases = [
+            ['expected' => 'Français (France)', 'locale' => 'fr-FR', 'displayLocale' => 'fr'],
+            ['expected' => 'French (France)', 'locale' => 'fr-FR', 'displayLocale' => 'en'],
+            ['expected' => 'Französisch (Frankreich)', 'locale' => 'fr-FR', 'displayLocale' => 'de'],
+        ];
+
+        foreach ($testCases as $testCase) {
+            $translation = ucfirst(\Locale::getDisplayName($testCase['locale'], $testCase['displayLocale']));
+
+            if ($testCase['expected'] === $translation) {
+                continue;
+            }
+
+            $errors[] = sprintf('Expected: "%s" => Given: "%s"', $testCase['expected'], $translation);
+        }
+
+        if ($errors) {
+            $this->logger->failure(sprintf("\n%s", implode("\n", $errors)));
+
+            ++$this->exitStatus;
+        } else {
+            $this->logger->success('Locale functionality validated!');
+        }
     }
 
     /**

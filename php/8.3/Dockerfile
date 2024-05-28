@@ -32,7 +32,7 @@ ENV COMPOSER_NO_INTERACTION=1 \
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     apk add --update --upgrade alpine-sdk apk-tools autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-    gnu-libiconv==${ICONV_VERSION} icu-dev jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
+    gnu-libiconv==${ICONV_VERSION} icu-dev icu-data-full jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
     libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev linux-headers make \
     musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
     # Install Modd"
