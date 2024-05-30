@@ -21,8 +21,6 @@ build_args: &build_args
   REDIS_VERSION: 5.3.7
   SECURITY_CHECKER_VERSION: 2.0.6
   XDEBUG_VERSION: 3.3.1
-  ICONV_VERSION: 1.17-r1
-  MUSL_VERSION: 1.2.4-r2
 versions:
   "8.1":
     platforms: *platforms
