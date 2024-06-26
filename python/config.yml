@@ -10,7 +10,6 @@ test_config: &test_config
     - poetry --version
 
 build_args: &build_args
-  POETRY_VERSION: 1.6.1
   POETRY_HOME: "/usr/local"
 
 versions:
