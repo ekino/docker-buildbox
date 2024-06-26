@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-06-30
+----------
+* Python : updating Poetry version to the latest for all Python images
+
 2024-05-31
 ----------
 * PHP : adding **icu-data-full** package for PHP 8.1|8.2|8.3 image
