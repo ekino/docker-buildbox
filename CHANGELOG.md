@@ -4,6 +4,7 @@ Versions
 2024-06-30
 ----------
 * Python : updating Poetry version to the latest for all Python images
+* Tezosqa : deprecating this image
 
 2024-05-31
 ----------

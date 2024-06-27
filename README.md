@@ -169,8 +169,3 @@ Contains Python with PIP and PIPENV.
 https://hub.docker.com/r/ekino/ci-sonar/tags
 
 Contains SonarQube Scanner.
-
-### TezosQA
-https://hub.docker.com/r/ekino/ci-tezosqa/tags
-
-Contains ligo, SmartPy, and Pytezos.
