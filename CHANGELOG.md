@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-07-31
+----------
+* PHP : updating base images from alpine 3.18 to 3.19
+
 2024-06-30
 ----------
 * Python : updating Poetry version to the latest for all Python images

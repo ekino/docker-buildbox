@@ -1,12 +1,10 @@
-FROM php:8.3.6-cli-alpine3.18 AS base
+FROM php:8.3.6-cli-alpine3.19 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG APCU_VERSION
 ARG COMPOSER_VERSION
-ARG ICONV_VERSION
 ARG MEMCACHED_VERSION
 ARG MODD_VERSION
-ARG MUSL_VERSION
 ARG PHP_CS_FIXER_VERSION
 ARG REDIS_VERSION
 ARG SECURITY_CHECKER_VERSION
@@ -32,9 +30,9 @@ ENV COMPOSER_NO_INTERACTION=1 \
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     apk add --update --upgrade alpine-sdk apk-tools autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
-    gnu-libiconv==${ICONV_VERSION} icu-dev icu-data-full jq libgcrypt-dev libcrypto1.1 libjpeg-turbo-dev \
-    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libssl1.1 libxml2-dev libxslt-dev libzip-dev linux-headers make \
-    musl-dev==${MUSL_VERSION} mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
+    icu-dev icu-data-full jq libgcrypt-dev libjpeg-turbo-dev \
+    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev libxslt-dev libzip-dev linux-headers make \
+    mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
     # Install Modd"
     curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz | tar -xOvzf - modd-${MODD_VERSION}-${MODD_ARCH}/modd > /usr/bin/modd && \
     chmod 755 /usr/bin/modd && \
