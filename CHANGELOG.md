@@ -3,7 +3,7 @@ Versions
 
 2024-07-31
 ----------
-* PHP : updating base images from alpine 3.18 to 3.19
+* PHP : updating base images from alpine 3.18 to 3.20
 
 2024-06-30
 ----------
