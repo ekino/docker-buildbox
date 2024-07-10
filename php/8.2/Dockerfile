@@ -1,4 +1,4 @@
-FROM php:8.2.18-cli-alpine3.19 AS base
+FROM php:8.2.19-cli-alpine3.20 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG APCU_VERSION
@@ -26,7 +26,7 @@ ENV COMPOSER_NO_INTERACTION=1 \
     COMPOSER_MEMORY_LIMIT=-1 \
     TERM=xterm \
     LD_PRELOAD="/usr/lib/preloadable_libiconv.so php" \
-    PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
+    PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++17"
 
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
