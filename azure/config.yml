@@ -4,13 +4,13 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      HELM_DIFF_VERSION: 3.9.5
-      HELM_VERSION: 3.14.4
-      KUBECTL_VERSION: 1.29.4
-      KUSTOMIZATION_VERSION: 5.4.1
-      TRIVY_VERSION: "0.50.4"
-      TERRAGRUNT_VERSION: "0.57.9"
-      INFRACOST_VERSION: "0.10.35"
+      HELM_DIFF_VERSION: 3.9.9
+      HELM_VERSION: 3.15.3
+      KUBECTL_VERSION: 1.30.4
+      KUSTOMIZATION_VERSION: 5.4.3
+      TRIVY_VERSION: "0.53.0"
+      TERRAGRUNT_VERSION: "0.64.1"
+      INFRACOST_VERSION: "0.10.38"
     test_config:
       cmd:
         - az --version
