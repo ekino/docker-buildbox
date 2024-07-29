@@ -5,6 +5,7 @@ Versions
 ----------
 * AWS : updating tooling (kubectl, kustomize, helm, helm-diff, terragrunt, trivy, infracost)
 * Azure : updating tooling (kubectl, kustomize, helm, helm-diff, terragrunt, trivy, infracost)
+* Cloudsploit : updating to 3.5.x
 * DIND : updating trivy
 * PHP : updating base images from alpine 3.18 to 3.20
 
