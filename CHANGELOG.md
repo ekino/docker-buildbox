@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-08-31
+----------
+* Platform : adding git. Bumping platform-cli version.
+
 2024-07-31
 ----------
 * AWS : updating tooling (kubectl, kustomize, helm, helm-diff, terragrunt, trivy, infracost)
