@@ -5,7 +5,7 @@ Versions
 ----------
 * Cloudsploit : bumping python version from 3.10.x to 3.12.x
 * Sonar: bumping Sonar CLI from 5.0.1.3006 to 6.1.0.4477
-* Platform : adding git. Bumping platform-cli version.
+* Platform : adding git. Bumping platform-cli version. Bumping python version from 3.11.x to 3.12.x
 
 2024-07-31
 ----------
