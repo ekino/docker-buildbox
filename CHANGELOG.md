@@ -3,6 +3,7 @@ Versions
 
 2024-08-31
 ----------
+* Sonar: bumping Sonar CLI from 5.0.1.3006 to 6.1.0.4477
 * Platform : adding git. Bumping platform-cli version.
 
 2024-07-31
