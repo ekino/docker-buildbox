@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-09-02
+----------
+* Sonar: fix analysis for amd64
+
 2024-08-31
 ----------
 * AWS : bumping python version from 3.11.x to 3.12.x

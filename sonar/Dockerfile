@@ -5,6 +5,7 @@ ARG SONARSCANNER_HOME=/sonar-scanner
 ARG SONARSCANNER_VERSION
 
 ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${SONARSCANNER_HOME}/jre/lib/server \
+    LD_PRELOAD=/lib/libgcompat.so.0 \
     PATH=${SONARSCANNER_HOME}/bin:${SONARSCANNER_HOME}/jre/bin:${PATH}
 
 FROM base as base-amd64
