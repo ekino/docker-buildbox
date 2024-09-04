@@ -9,7 +9,6 @@ test_config: &test_config
     - composer --version
     - modd --version
     - php-cs-fixer --version
-    - security-checker -help
     - php /tmp/test.php
     - aws --version
 build_args: &build_args
@@ -19,7 +18,6 @@ build_args: &build_args
   MODD_VERSION: *MODD_VERSION
   PHP_CS_FIXER_VERSION: 3.41.1
   REDIS_VERSION: 5.3.7
-  SECURITY_CHECKER_VERSION: 2.0.6
   XDEBUG_VERSION: 3.3.1
 versions:
   "8.1":
