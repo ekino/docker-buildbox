@@ -7,7 +7,6 @@ ARG MEMCACHED_VERSION
 ARG MODD_VERSION
 ARG PHP_CS_FIXER_VERSION
 ARG REDIS_VERSION
-ARG SECURITY_CHECKER_VERSION
 ARG SSH2_VERSION
 ARG XDEBUG_VERSION
 ARG TARGETARCH
@@ -15,11 +14,9 @@ ARG TARGETARCH
 # iconv issue https://github.com/docker-library/php/issues/240
 FROM base AS base-amd64
 ARG MODD_ARCH="linux64"
-ARG SECURITY_CHECKER_ARCH="linux_amd64"
 
 FROM base AS base-arm64
 ARG MODD_ARCH="linuxARM"
-ARG SECURITY_CHECKER_ARCH="linux_arm64"
 
 FROM base-$TARGETARCH
 ENV COMPOSER_NO_INTERACTION=1 \
@@ -56,8 +53,6 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     " > /usr/local/etc/php/php.ini && \
     curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
     curl -sSL https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VERSION}/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
-    curl -sSL https://github.com/fabpot/local-php-security-checker/releases/download/v${SECURITY_CHECKER_VERSION}/local-php-security-checker_${SECURITY_CHECKER_VERSION}_${SECURITY_CHECKER_ARCH} -o /usr/local/bin/local-php-security-checker && chmod a+x /usr/local/bin/local-php-security-checker && \
-    ln -s local-php-security-checker /usr/local/bin/security-checker && \
     curl -sSL https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp && \
     cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make install && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \

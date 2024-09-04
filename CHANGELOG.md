@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-09-30
+----------
+* PHP: remove local-php-security-checker on all images (abandoned, now use composer audit)
+
 2024-09-02
 ----------
 * Sonar: fix analysis for amd64
