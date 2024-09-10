@@ -1,4 +1,4 @@
-FROM debian:11.10-slim as base
+FROM debian:11.11-slim as base
 LABEL maintainer="opensource@ekino.com"
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
