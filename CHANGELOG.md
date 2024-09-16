@@ -3,6 +3,7 @@ Versions
 
 2024-09-30
 ----------
+* Golang: adding version 1.23
 * PHP: remove local-php-security-checker on all images (abandoned, now use composer audit)
 
 2024-09-02
