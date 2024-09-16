@@ -69,5 +69,5 @@ RUN apt-get update -q && \
     tar -xzf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
     rm -rf modd-${MODD_VERSION}-${MODD_ARCH}* && \
     # Install go tools
-    go install golang.org/x/tools/cmd/goimports@latest && \
+    go install golang.org/x/tools/cmd/goimports@v0.24.0 && \
     go install github.com/boumenot/gocover-cobertura@latest
