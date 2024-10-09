@@ -248,17 +248,6 @@ updates:
       - "platformsh"
   # Python
   - package-ecosystem: "docker"
-    directory: "/python/3.8"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "python"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
     directory: "/python/3.9"
     schedule:
       interval: "weekly"
