@@ -1,6 +1,10 @@
 Versions
 ========
 
+2024-10-31
+----------
+* Python : 3.8 is now deprecated
+
 2024-09-30
 ----------
 * Golang: adding version 1.23
