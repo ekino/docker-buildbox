@@ -3,7 +3,7 @@ Versions
 
 2024-10-31
 ----------
-* Python : 3.8 is now deprecated
+* Python : 3.8 is now deprecated. Adding version 3.13.
 
 2024-09-30
 ----------
