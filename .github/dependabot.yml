@@ -33,18 +33,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-  # Bitcoind
-  - package-ecosystem: "docker"
-    directory: "/bitcoind"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "bitcoind"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
   # Chrome
   - package-ecosystem: "docker"
     directory: "/chrome"
