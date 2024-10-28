@@ -5,6 +5,7 @@ Versions
 ----------
 * Bitcoind: deprecating this image
 * Python : 3.8 is now deprecated. Adding version 3.13.
+* Sonar: updating to 6.2.x
 
 2024-09-30
 ----------
