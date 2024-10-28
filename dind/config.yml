@@ -4,7 +4,7 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      TRIVY_VERSION: "0.53.0"
+      TRIVY_VERSION: "0.56.2"
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
