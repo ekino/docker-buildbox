@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.4_7-jdk-jammy as base
+FROM eclipse-temurin:21.0.5_11-jdk-jammy as base
 
 LABEL maintainer="opensource@ekino.com"
 ENV DEBIAN_FRONTEND=noninteractive \
