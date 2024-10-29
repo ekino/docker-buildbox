@@ -3,7 +3,10 @@ Versions
 
 2024-10-31
 ----------
+* AWS: updating kubectl and associated infra tools
+* Azure: updating kubectl and associated infra tools
 * Bitcoind: deprecating this image
+* DIND: updating kubectl and associated infra tools
 * Python : 3.8 is now deprecated. Adding version 3.13.
 * Sonar: updating to 6.2.x
 
