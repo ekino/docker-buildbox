@@ -14,9 +14,9 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      NODE_VERSION: 18.19.0
-      NPM_VERSION: 10.2.5
-      NVM_VERSION: 0.39.7
+      NODE_VERSION: 18.20.4
+      NPM_VERSION: 10.9.0
+      NVM_VERSION: 0.40.1
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
@@ -25,9 +25,20 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      NODE_VERSION: 20.10.0
-      NPM_VERSION: 10.2.5
-      NVM_VERSION: 0.39.7
+      NODE_VERSION: 20.18.0
+      NPM_VERSION: 10.9.0
+      NVM_VERSION: 0.40.1
+      MODD_VERSION: *MODD_VERSION
+      TASKFILE_VERSION: *TASKFILE_VERSION
+    test_config: *test_config
+  "22":
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    build_args:
+      NODE_VERSION: 22.11.0
+      NPM_VERSION: 10.9.0
+      NVM_VERSION: 0.40.1
       MODD_VERSION: *MODD_VERSION
       TASKFILE_VERSION: *TASKFILE_VERSION
     test_config: *test_config
