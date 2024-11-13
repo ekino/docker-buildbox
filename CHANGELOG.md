@@ -3,6 +3,7 @@ Versions
 
 2024-11-30
 ----------
+* Azure: installing zip to use tfenv
 * Node : adding 22.x.x image. Updating tooling
 
 2024-10-31

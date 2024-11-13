@@ -32,7 +32,7 @@ ARG JQ_ARCH="arm64"
 
 FROM base-$TARGETARCH
 
-RUN apt-get update -qq && apt-get install -qq -y curl git gcc jq wget\
+RUN apt-get update -qq && apt-get install -qq -y curl git gcc zip jq wget\
     && pip install -U pip \
     && pip install pipenv azure-cli \
     && apt-get remove -y gcc && apt-get -qq -y autoremove \
