@@ -24,3 +24,5 @@ versions:
         - terragrunt --version
         - infracost --version
         - tfenv init
+        - unzip -v
+        - zip --version
