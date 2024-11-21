@@ -3,7 +3,6 @@ LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 ARG HELM_DIFF_VERSION
 ARG HELM_VERSION
-ARG KUBECTL_VERSION
 ARG KUSTOMIZATION_VERSION
 ARG TRIVY_VERSION
 ARG TERRAGRUNT_VERSION
@@ -12,7 +11,7 @@ ARG INFRACOST_VERSION
 FROM base as base-amd64
 ARG AWSCLI_ARCH="x86_64"
 ARG HELM_ARCH="linux-amd64"
-ARG KUBECTL_ARCH="linux/amd64"
+ARG KUBECTL_ARCH="amd64"
 ARG KUSTOMIZATION_ARCH="linux_amd64"
 ARG TRIVY_ARCH="Linux-64bit"
 ARG TERRAGRUNT_ARCH="amd64"
@@ -22,7 +21,7 @@ ARG JQ_ARCH="amd64"
 FROM base as base-arm64
 ARG AWSCLI_ARCH="aarch64"
 ARG HELM_ARCH="linux-arm64"
-ARG KUBECTL_ARCH="linux/arm64"
+ARG KUBECTL_ARCH="arm64"
 ARG KUSTOMIZATION_ARCH="linux_arm64"
 ARG TRIVY_ARCH="Linux-ARM64"
 ARG TERRAGRUNT_ARCH="arm64"
@@ -49,7 +48,7 @@ RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && rm -rf aws && \
-    curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/${KUBECTL_ARCH}/kubectl && \
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" && \
     chmod +x ./kubectl && \
     mv ./kubectl /usr/bin/kubectl && \
     curl -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZATION_VERSION}/kustomize_v${KUSTOMIZATION_VERSION}_${KUSTOMIZATION_ARCH}.tar.gz && \
