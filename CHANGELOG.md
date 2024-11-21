@@ -1,6 +1,11 @@
 Versions
 ========
 
+2024-12-31
+----------
+* AWS: fixing download path for kubectl, and adding a check. We'll now use the latest version automatically
+* Azure: fixing download path for kubectl, and adding a check. We'll now use the latest version automatically
+
 2024-11-30
 ----------
 * Azure: installing zip to use tfenv
