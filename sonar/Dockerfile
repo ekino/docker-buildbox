@@ -1,4 +1,4 @@
-FROM alpine:3.20.3 as base
+FROM alpine:3.21.0 as base
 LABEL maintainer="opensource@ekino.com"
 
 ARG SONARSCANNER_HOME=/sonar-scanner
