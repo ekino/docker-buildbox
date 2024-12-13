@@ -7,6 +7,7 @@ Versions
 * Azure: fixing download path for kubectl, and adding a check. We'll now use the latest version automatically
 * Azure: installing zip to use tfenv
 * Node : adding 22.x.x image. Updating tooling
+* PHP: adding PHP 8.4
 
 2024-10-31
 ----------
