@@ -1,6 +1,14 @@
 Versions
 ========
 
+2024-12-31
+----------
+* Chrome: using the latest versions of Taskfile and Modd
+* DIND: using the latest versions of Taskfile and Modd
+* Golang: using the latest versions of Taskfile and Modd
+* Node: using the latest versions of Taskfile and Modd
+* PHP: using the latest versions of Taskfile and Modd
+
 2024-11-30
 ----------
 * AWS: fixing download path for kubectl, and adding a check. We'll now use the latest version automatically
