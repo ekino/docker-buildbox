@@ -4,7 +4,6 @@ LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 ARG APCU_VERSION
 ARG COMPOSER_VERSION
 ARG MEMCACHED_VERSION
-ARG MODD_VERSION
 ARG PHP_CS_FIXER_VERSION
 ARG REDIS_VERSION
 ARG SSH2_VERSION
@@ -31,8 +30,11 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev libxslt-dev libzip-dev linux-headers make \
     mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
     # Install Modd"
-    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz | tar -xOvzf - modd-${MODD_VERSION}-${MODD_ARCH}/modd > /usr/bin/modd && \
-    chmod 755 /usr/bin/modd && \
+    MODD_VERSION=$(curl -s https://api.github.com/repos/cortesi/modd/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    curl -LO https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
+    tar -xf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
+    mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
+    rm modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
     echo "Starting PHP with $version" && \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     CFLAGS_PREVIOUS=$CFLAGS && \

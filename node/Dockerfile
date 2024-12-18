@@ -1,4 +1,4 @@
-FROM debian:11.11-slim as base
+FROM debian:11.11-slim AS base
 LABEL maintainer="opensource@ekino.com"
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
@@ -7,14 +7,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ARG NODE_VERSION
 ARG NPM_VERSION
 ARG NVM_VERSION
-ARG MODD_VERSION
-ARG TASKFILE_VERSION
 
-FROM base as base-amd64
+FROM base AS base-amd64
 ARG MODD_ARCH="linux64"
 ARG AWSCLI_ARCH="linux-x86_64"
 
-FROM base as base-arm64
+FROM base AS base-arm64
 ARG MODD_ARCH="linuxARM"
 ARG AWSCLI_ARCH="linux-aarch64"
 
@@ -25,13 +23,16 @@ RUN echo "Starting ..." && \
       libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ jq && \
     gem install rb-inotify:'~> 0.9.10' sass --verbose && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
-  echo "Done base install!" && \
+    echo "Done base install!" && \
     echo "Install Modd" && \
-    curl -sSL https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz | tar -xOvzf - modd-${MODD_VERSION}-${MODD_ARCH}/modd > /usr/bin/modd  && \
-    chmod 755 /usr/bin/modd && \
+    MODD_VERSION=$(curl -s https://api.github.com/repos/cortesi/modd/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+  curl -LO https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
+  tar -xf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
+  mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
+  rm modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
     echo "Done Install Modd" && \
     echo "Install Taskfile" && \
-    curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
+    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Starting Javascript..." && \
     git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${NVM_VERSION} && \
