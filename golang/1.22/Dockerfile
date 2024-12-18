@@ -6,7 +6,6 @@ ARG GOMODUPGRADE_VERSION
 ARG GOSWAGGER_VERSION
 ARG MIGRATE_VERSION
 ARG MOCKGEN_VERSION
-ARG MODD_VERSION
 
 FROM base as base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
@@ -66,9 +65,10 @@ RUN apt-get update -q && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
     rm -rf mock* && \
     # Install modd
-    wget -q https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-    tar -xzf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
-    rm -rf modd-${MODD_VERSION}-${MODD_ARCH}* && \
+    MODD_VERSION=$(curl -s https://api.github.com/repos/cortesi/modd/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    curl -LO https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tar.gz && \
+    tar -xf modd-${MODD_VERSION}-${MODD_ARCH}.tar.gz && \
+    rm modd-${MODD_VERSION}-${MODD_ARCH}.tar.gz && \
     # Install go tools
     go install golang.org/x/tools/cmd/goimports@latest && \
     go install github.com/boumenot/gocover-cobertura@latest

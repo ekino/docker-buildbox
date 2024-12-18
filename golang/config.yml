@@ -23,7 +23,6 @@ versions:
       GOSWAGGER_VERSION: 0.30.5
       MIGRATE_VERSION: 4.17.0
       MOCKGEN_VERSION: 1.6.0
-      MODD_VERSION: 0.8
   "1.22":
     platforms:
       - linux/amd64
@@ -36,7 +35,6 @@ versions:
       GOSWAGGER_VERSION: 0.30.5
       MIGRATE_VERSION: 4.17.0
       MOCKGEN_VERSION: 1.6.0
-      MODD_VERSION: 0.8
   "1.23":
     platforms:
       - linux/amd64
@@ -49,4 +47,3 @@ versions:
       GOSWAGGER_VERSION: 0.30.5
       MIGRATE_VERSION: 4.17.0
       MOCKGEN_VERSION: 1.6.0
-      MODD_VERSION: 0.8

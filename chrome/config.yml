@@ -3,9 +3,6 @@ versions:
     platforms:
       - linux/amd64
       - linux/arm64
-    build_args:
-      MODD_VERSION: *MODD_VERSION
-      TASKFILE_VERSION: *TASKFILE_VERSION
     test_config:
       cmd:
         - google-chrome --no-sandbox --version
