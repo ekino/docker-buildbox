@@ -1,6 +1,11 @@
 Versions
 ========
 
+2024-12-31
+----------
+* AWS: automatically use the latest version of included tools.
+* Azure: automatically use the latest version of included tools.
+
 2024-11-30
 ----------
 * AWS: fixing download path for kubectl, and adding a check. We'll now use the latest version automatically
