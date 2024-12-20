@@ -1,9 +1,6 @@
 FROM node:10-alpine
 LABEL maintainer="opensource@ekino.com"
 
-ARG MODD_VERSION
-ARG TASKFILE_VERSION
-
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
@@ -21,7 +18,7 @@ RUN apk update && apk upgrade && \
     yarn add puppeteer@1.13.0 && \
     apk add --update curl git grep make ncurses tzdata && \
     echo "Install Taskfile" && \
-    curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
+    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \

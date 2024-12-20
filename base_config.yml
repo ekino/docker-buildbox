@@ -3,9 +3,5 @@ docker_hub_namespace: ekino
 DOCKER_SOCK_PATH: unix://var/run/docker.sock
 DOCKER_TIMEOUT: 600
 
-# Common build_vars
-MODD_VERSION: &MODD_VERSION 0.5
-TASKFILE_VERSION: &TASKFILE_VERSION 3.2.2
-
 base_platforms: &base_platforms
   - linux/amd64

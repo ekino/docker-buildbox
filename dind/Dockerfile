@@ -1,6 +1,5 @@
 FROM docker:20.10.24-dind as base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
-ARG TASKFILE_VERSION
 ARG TRIVY_VERSION
 
 FROM base as base-amd64
@@ -32,7 +31,7 @@ RUN echo "Install AWS & Azure CLIs" && \
 
 FROM base-$TARGETARCH
 RUN echo "Install Taskfile" && \
-    curl -sSL https://taskfile.dev/install.sh | sh -s v${TASKFILE_VERSION} && \
+    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Install Docker Compose" && \
     apk add --update docker-compose && \
