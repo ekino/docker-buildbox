@@ -1,6 +1,5 @@
 FROM docker:20.10.24-dind as base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
-ARG TRIVY_VERSION
 
 FROM base as base-amd64
 ARG TRIVY_ARCH="Linux-64bit"
@@ -38,9 +37,12 @@ RUN echo "Install Taskfile" && \
     docker-compose --version && \
     echo "Done install Docker Compose" && \
     echo "Install Trivy" && \
-    apk add -q curl && \
-    curl -sSL https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz -o trivy_${TRIVY_ARCH}.tar.gz && \
-    tar -zxf trivy_${TRIVY_ARCH}.tar.gz -C /usr/bin/ && \
+    # Downloading latest trivy
+    TRIVY_VERSION=$(curl -s https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
+    tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
+    rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
+    mv trivy /usr/bin/trivy && \
     echo "Done install Trivy" && \
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
