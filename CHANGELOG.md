@@ -6,7 +6,7 @@ Versions
 * AWS: automatically use the latest version of included tools.
 * Azure: automatically use the latest version of included tools.
 * Chrome: using the latest versions of Taskfile and Modd
-* DIND: using the latest versions of Taskfile and Modd
+* DIND: automatically use the latest version of included tools.
 * Golang: using the latest versions of Taskfile and Modd
 * Node: using the latest versions of Taskfile and Modd
 * PHP: using the latest versions of Taskfile and Modd
