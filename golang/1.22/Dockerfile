@@ -11,7 +11,7 @@ FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
 ARG GITLEAKS_ARCH="linux_x64"
 ARG GOLANGCILINT_ARCH="linux-amd64"
-ARG GOMODUPGRADE_ARCH="Linux_x86_64"
+ARG GOMODUPGRADE_ARCH="Linux_amd64"
 ARG GOSWAGGER_ARCH="linux_amd64"
 ARG GOMIGRATE_ARCH="linux-amd64"
 ARG MOCKGEN_ARCH="linux_amd64"
@@ -41,25 +41,31 @@ RUN apt-get update -q && \
     # Add an up to date mime-types definition file
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
     # Install gitleaks
-    wget -q https://github.com/zricethezav/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_${GITLEAKS_ARCH}.tar.gz && \
+    GITLEAKS_VERSION=$(curl -s https://api.github.com/repos/gitleaks/gitleaks/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    wget -q https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_${GITLEAKS_ARCH}.tar.gz && \
     tar -xzf gitleaks_${GITLEAKS_VERSION}_${GITLEAKS_ARCH}.tar.gz && \
     mv gitleaks /usr/local/bin && \
     # Install golangci-lint
+    GOLANGCILINT_VERSION=$(curl -s https://api.github.com/repos/golangci/golangci-lint/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     wget -q https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT_VERSION}/golangci-lint-${GOLANGCILINT_VERSION}-${GOLANGCILINT_ARCH}.tar.gz && \
     tar -xzf golangci-lint-${GOLANGCILINT_VERSION}-${GOLANGCILINT_ARCH}.tar.gz && \
     mv golangci-lint-${GOLANGCILINT_VERSION}-${GOLANGCILINT_ARCH}/golangci-lint /usr/local/bin && \
     rm -rf golangci-lint* && \
     # Install go-mod-upgrade
-    wget -q https://github.com/oligot/go-mod-upgrade/releases/download/v${GOMODUPGRADE_VERSION}/go-mod-upgrade_${GOMODUPGRADE_VERSION}_${GOMODUPGRADE_ARCH}.tar.gz && \
-    tar -xzf go-mod-upgrade_${GOMODUPGRADE_VERSION}_${GOMODUPGRADE_ARCH}.tar.gz -C /usr/local/bin && rm go-mod-upgrade* && \
+    GOMODUPGRADE_VERSION=$(curl -s https://api.github.com/repos/oligot/go-mod-upgrade/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    wget -q https://github.com/oligot/go-mod-upgrade/releases/download/v${GOMODUPGRADE_VERSION}/go-mod-upgrade_${GOMODUPGRADE_ARCH}.tar.gz && \
+    tar -xzf go-mod-upgrade_${GOMODUPGRADE_ARCH}.tar.gz -C /usr/local/bin && rm go-mod-upgrade* && \
     # Install go-swagger
+    GOSWAGGER_VERSION=$(curl -s https://api.github.com/repos/go-swagger/go-swagger/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     wget -q https://github.com/go-swagger/go-swagger/releases/download/v${GOSWAGGER_VERSION}/swagger_${GOSWAGGER_ARCH} && \
     mv swagger_${GOSWAGGER_ARCH} /usr/local/bin/swagger && chmod +x /usr/local/bin/swagger && \
     # Install migrate
+    MIGRATE_VERSION=$(curl -s https://api.github.com/repos/golang-migrate/migrate/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     wget -q https://github.com/golang-migrate/migrate/releases/download/v${MIGRATE_VERSION}/migrate.${GOMIGRATE_ARCH}.tar.gz && \
     tar -xzf migrate.${GOMIGRATE_ARCH}.tar.gz -C /usr/local/bin && \
     rm migrate.${GOMIGRATE_ARCH}.tar.gz && \
     # Install mockgen
+    MOCKGEN_VERSION=$(curl -s https://api.github.com/repos/golang/mock/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     wget -q https://github.com/golang/mock/releases/download/v${MOCKGEN_VERSION}/mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}.tar.gz && \
     tar -xzf mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}.tar.gz && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
