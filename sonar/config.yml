@@ -3,8 +3,6 @@ versions:
     platforms:
       - linux/amd64
       - linux/arm64
-    build_args:
-      SONARSCANNER_VERSION: 6.2.1.4610
     test_config:
       cmd:
         - java -version
