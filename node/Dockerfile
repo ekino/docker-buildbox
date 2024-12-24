@@ -35,8 +35,7 @@ RUN echo "Starting ..." && \
   echo "Starting Javascript..." && \
   git clone https://github.com/creationix/nvm.git /root/.nvm && \
   . /root/.nvm/nvm.sh && \
-  nvm install ${NODE_VERSION} && nvm alias default ${NODE_VERSION} && \
-  ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
+  nvm install ${NODE_VERSION} --default && \
   npm install -g npm@latest && \
   curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \

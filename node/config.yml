@@ -11,21 +11,21 @@ test_config: &test_config
 versions:
   "18":
     platforms:
-      - linux/amd64
+      # - linux/amd64
       - linux/arm64
     build_args:
       NODE_VERSION: 18
     test_config: *test_config
   "20":
     platforms:
-      - linux/amd64
+      # - linux/amd64
       - linux/arm64
     build_args:
       NODE_VERSION: 20
     test_config: *test_config
   "22":
     platforms:
-      - linux/amd64
+      # - linux/amd64
       - linux/arm64
     build_args:
       NODE_VERSION: 22
