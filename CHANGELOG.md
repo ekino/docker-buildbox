@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-09-30
+----------
+* Sonar: automatically use the latest version of sonar-scanner-cli
+
 2025-08-31
 ----------
 * Golang: adding support for 1.25, removing 1.23

@@ -1,10 +1,8 @@
 versions:
-  "7.2":
+  '7.2':
     platforms:
       - linux/amd64
       - linux/arm64
-    build_args:
-      SONARSCANNER_VERSION: 7.2.0.5079
     test_config:
       cmd:
         - java -version
