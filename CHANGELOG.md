@@ -8,7 +8,7 @@ Versions
 * Chrome: using the latest versions of Taskfile and Modd
 * DIND: automatically use the latest version of included tools.
 * Golang: automatically use the latest version of included tools.
-* Node: using the latest versions of Taskfile and Modd
+* Node: using the latest versions of Taskfile and Modd. Upgrading to Debian 12.
 * PHP: using the latest versions of Taskfile and Modd
 
 2024-11-30
