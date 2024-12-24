@@ -34,3 +34,12 @@ versions:
     build_args:
       <<: *build_args
     test_config: *test_config
+  "8.4":
+    platforms: *platforms
+    build_args:
+      <<: *build_args
+      APCU_VERSION: 5.1.24
+      REDIS_VERSION: 6.1.0
+      XDEBUG_VERSION: 3.4.0
+      PHP_CS_FIXER_VERSION: 3.65.0
+    test_config: *test_config
