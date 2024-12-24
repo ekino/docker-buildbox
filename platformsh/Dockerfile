@@ -1,16 +1,16 @@
-FROM python:3.13.1-slim-bullseye as base
+FROM python:3.13.1-slim-bullseye AS base
 LABEL maintainer="opensource@ekino.com"
 
-ARG PLATFORM_VERSION
+FROM base AS base-amd64
+ARG PLATFORM_ARCH="linux_amd64"
 
-FROM base as base-amd64
-ARG PLATFORM_URL="https://github.com/platformsh/cli/releases/download/${PLATFORM_VERSION}/platformsh-cli_${PLATFORM_VERSION}_linux_amd64.deb"
-
-FROM base as base-arm64
-ARG PLATFORM_URL="https://github.com/platformsh/cli/releases/download/${PLATFORM_VERSION}/platformsh-cli_${PLATFORM_VERSION}_linux_arm64.deb"
+FROM base AS base-arm64
+ARG PLATFORM_ARCH="linux_arm64"
 
 FROM base-$TARGETARCH
 RUN apt-get update -qq && apt-get install -y curl python3-dev gcc ldap-utils libldap2-dev libsasl2-dev git \
     && pip install pipenv \
-    && curl -sSL $PLATFORM_URL -o /tmp/platform.deb \
-    && apt install -y /tmp/platform.deb
+    && PLATFORM_VERSION=$(curl -s https://api.github.com/repos/platformsh/cli/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
+    && curl -sSL https://github.com/platformsh/cli/releases/download/${PLATFORM_VERSION}/platformsh-cli_${PLATFORM_VERSION}_${PLATFORM_ARCH}.deb -o /tmp/platform.deb \
+    && apt install -y /tmp/platform.deb \
+    && rm /tmp/platform.deb
