@@ -7,3 +7,4 @@ versions:
       cmd:
         - java -version
         - sonar-scanner -v
+        - output$(sonar-scanner -v) && echo $output | grep "SonarScanner CLI 6.2"
