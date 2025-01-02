@@ -5,7 +5,6 @@ test_config: &test_config
     - aws --version
     - yarn --version
     - sass --version
-    - modd --version
     - task --version
 
 versions:

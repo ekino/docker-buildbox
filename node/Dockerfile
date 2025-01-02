@@ -9,28 +9,19 @@ ARG NPM_VERSION
 ARG NVM_VERSION
 
 FROM base AS base-amd64
-ARG MODD_ARCH="linux64"
 ARG AWSCLI_ARCH="linux-x86_64"
 
 FROM base AS base-arm64
-ARG MODD_ARCH="linuxARM"
 ARG AWSCLI_ARCH="linux-aarch64"
 
 FROM base-$TARGETARCH
 RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install libssl-dev curl git imagemagick make gnupg \
-      libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ jq && \
+    libmcrypt-dev libreadline-dev ruby-full openssh-client ocaml libelf-dev bzip2 gcc g++ jq && \
     gem install rb-inotify:'~> 0.9.10' sass --verbose && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
     echo "Done base install!" && \
-    echo "Install Modd" && \
-    MODD_VERSION=$(curl -s https://api.github.com/repos/cortesi/modd/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-  curl -LO https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-  tar -xf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-  mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
-  rm modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-    echo "Done Install Modd" && \
     echo "Install Taskfile" && \
     sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
@@ -46,18 +37,18 @@ RUN echo "Starting ..." && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
     curl https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
-  unzip -q awscliv2.zip && \
+    unzip -q awscliv2.zip && \
     ./aws/install && \
-  rm -f awscliv2.zip && rm -rf aws && \
+    rm -f awscliv2.zip && rm -rf aws && \
     echo "Done installing AWS" && \
     echo "Adding an up to date mime-types definition file" && \
     curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -qq -y remove --purge emacsen-common fakeroot file firebird3.0-common firebird3.0-common-doc \
-      firebird3.0-server firebird3.0-server-core man-db manpages manpages-dev \
-      default-mysql-client mysql-common default-mysql-server default-mysql-server-core odbcinst odbcinst1debian2 \
-      patch po-debconf psmisc xauth xtrans-dev xz-utils zlib1g-dev && \
+    firebird3.0-server firebird3.0-server-core man-db manpages manpages-dev \
+    default-mysql-client mysql-common default-mysql-server default-mysql-server-core odbcinst odbcinst1debian2 \
+    patch po-debconf psmisc xauth xtrans-dev xz-utils zlib1g-dev && \
     apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \

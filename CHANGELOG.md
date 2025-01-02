@@ -1,6 +1,12 @@
 Versions
 ========
 
+2025-01-31
+----------
+* Golang: removing modd
+* Node: removing modd
+* PHP: removing modd
+
 2024-12-31
 ----------
 * AWS: automatically use the latest version of included tools.

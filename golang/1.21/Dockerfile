@@ -9,7 +9,6 @@ ARG GOMODUPGRADE_ARCH="Linux_amd64"
 ARG GOSWAGGER_ARCH="linux_amd64"
 ARG GOMIGRATE_ARCH="linux-amd64"
 ARG MOCKGEN_ARCH="linux_amd64"
-ARG MODD_ARCH="linux64"
 
 FROM base AS base-arm64
 ARG AWSCLI_ARCH="linux-aarch64"
@@ -19,7 +18,6 @@ ARG GOMODUPGRADE_ARCH="Linux_arm64"
 ARG GOSWAGGER_ARCH="linux_arm64"
 ARG GOMIGRATE_ARCH="linux-arm64"
 ARG MOCKGEN_ARCH="linux_arm64"
-ARG MODD_ARCH="linuxARM"
 
 FROM base-$TARGETARCH
 # Install packages
@@ -63,12 +61,6 @@ RUN apt-get update -q && \
     tar -xzf mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}.tar.gz && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
     rm -rf mock* && \
-    # Install modd
-    MODD_VERSION=$(curl -s https://api.github.com/repos/cortesi/modd/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-    tar -xf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-    mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
-    rm modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
     # Install go tools
     go install golang.org/x/tools/cmd/goimports@v0.24.0 && \
     go install github.com/boumenot/gocover-cobertura@latest

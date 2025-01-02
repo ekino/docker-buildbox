@@ -12,10 +12,8 @@ ARG TARGETARCH
 
 # iconv issue https://github.com/docker-library/php/issues/240
 FROM base AS base-amd64
-ARG MODD_ARCH="linux64"
 
 FROM base AS base-arm64
-ARG MODD_ARCH="linuxARM"
 
 FROM base-$TARGETARCH
 ENV COMPOSER_NO_INTERACTION=1 \
@@ -29,12 +27,6 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     icu-dev icu-data-full jq libgcrypt-dev libjpeg-turbo-dev \
     libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev libxslt-dev libzip-dev linux-headers make \
     mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
-    # Install Modd"
-    MODD_VERSION=$(curl -s https://api.github.com/repos/cortesi/modd/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/cortesi/modd/releases/download/v${MODD_VERSION}/modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-    tar -xf modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
-    mv modd-${MODD_VERSION}-${MODD_ARCH}/modd /usr/local/bin && \
-    rm modd-${MODD_VERSION}-${MODD_ARCH}.tgz && \
     echo "Starting PHP with $version" && \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     CFLAGS_PREVIOUS=$CFLAGS && \
