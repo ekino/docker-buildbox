@@ -122,7 +122,7 @@ test:
 ### Golang
 https://hub.docker.com/r/ekino/ci-golang/tags
 
-Based upon official Golang image, contains AWS Cli, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, modd, rsync and testfixtures.
+Based upon official Golang image, contains AWS Cli, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, rsync and testfixtures.
 
 ### Java
 https://hub.docker.com/r/ekino/ci-java/tags

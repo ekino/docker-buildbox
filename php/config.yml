@@ -7,7 +7,6 @@ test_config: &test_config
   cmd:
     - php --version
     - composer --version
-    - modd --version
     - php-cs-fixer --version
     - php /tmp/test.php
     - aws --version

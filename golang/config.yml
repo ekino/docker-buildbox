@@ -6,7 +6,6 @@ test_config: &test_config
     - golangci-lint --version
     - migrate -version
     - mockgen -version
-    - modd --version
     - rsync --version
     - swagger version
 
