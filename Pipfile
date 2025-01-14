@@ -8,7 +8,7 @@ pyyaml = "==6.0.2"
 click = "==8.1.8"
 python-on-whales = "==0.75.1"
 gitpython = "==3.1.44"
-pydantic = "2.10.4"
+pydantic = "2.10.5"
 
 [dev-packages]
 
