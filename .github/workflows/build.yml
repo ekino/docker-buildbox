@@ -17,7 +17,7 @@ concurrency:
 jobs:
 
   generate_matrix:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
 
     steps:
@@ -41,7 +41,7 @@ jobs:
       matrix: ${{ steps.run_script.outputs.matrix }}
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.matrix).include[0]
     needs: generate_matrix
 
