@@ -1,4 +1,4 @@
-FROM python:3.13.1-slim-bullseye AS base
+FROM python:3.13.2-slim-bullseye AS base
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 
 FROM base AS base-amd64
