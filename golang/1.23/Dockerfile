@@ -29,7 +29,7 @@ FROM base-$TARGETARCH
 
 # Install packages
 RUN apt-get update -q && \
-    apt-get -qq -y install rsync zip curl unzip wget && \
+    apt-get -qq -y install rsync zip curl unzip wget jq && \
     # Install AWS CLI
     curl "https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \

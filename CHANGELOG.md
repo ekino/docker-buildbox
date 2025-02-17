@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-02-28
+----------
+* Golang: add jq 
+
 2025-01-31
 ----------
 * Golang: removing modd
