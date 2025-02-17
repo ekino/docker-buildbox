@@ -10,7 +10,7 @@ FROM base as base-arm64
 ARG PLATFORM_URL="https://github.com/platformsh/cli/releases/download/${PLATFORM_VERSION}/platformsh-cli_${PLATFORM_VERSION}_linux_arm64.deb"
 
 FROM base-$TARGETARCH
-RUN apt-get update -qq && apt-get install -y curl python3-dev gcc ldap-utils libldap2-dev libsasl2-dev git \
+RUN apt-get update -qq && apt-get install -y curl python3-dev git \
     && pip install pipenv \
     && curl -sSL $PLATFORM_URL -o /tmp/platform.deb \
     && apt install -y /tmp/platform.deb

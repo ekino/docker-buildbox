@@ -4,6 +4,7 @@ Versions
 2025-02-28
 ----------
 * Golang: add jq 
+* Platform: removing unused packages
 
 2025-01-31
 ----------
