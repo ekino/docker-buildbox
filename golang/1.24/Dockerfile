@@ -1,5 +1,11 @@
-FROM golang:1.21.13 AS base
+FROM golang:1.24.0 AS base
 LABEL maintainer="opensource@ekino.com"
+ARG GITLEAKS_VERSION
+ARG GOLANGCILINT_VERSION
+ARG GOMODUPGRADE_VERSION
+ARG GOSWAGGER_VERSION
+ARG MIGRATE_VERSION
+ARG MOCKGEN_VERSION
 
 FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
@@ -20,6 +26,7 @@ ARG GOMIGRATE_ARCH="linux-arm64"
 ARG MOCKGEN_ARCH="linux_arm64"
 
 FROM base-$TARGETARCH
+
 # Install packages
 RUN apt-get update -q && \
     apt-get -qq -y install rsync zip curl unzip wget jq && \
@@ -62,5 +69,5 @@ RUN apt-get update -q && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
     rm -rf mock* && \
     # Install go tools
-    go install golang.org/x/tools/cmd/goimports@v0.24.0 && \
+    go install golang.org/x/tools/cmd/goimports@latest && \
     go install github.com/boumenot/gocover-cobertura@latest

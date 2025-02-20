@@ -3,7 +3,8 @@ Versions
 
 2025-02-28
 ----------
-* Golang: add jq 
+* Golang: add jq
+* Golang: adding support for 1.24. Removing 1.21 (EoL)
 * Platform: removing unused packages
 
 2025-01-31
