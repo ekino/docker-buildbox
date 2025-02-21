@@ -81,7 +81,8 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
 
 
 def get_image_tags(image_name, version, image_conf, env_conf):
-    image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    # image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    image_repo_name_base = f"ghcr.io/ekino/ci-{image_name}"
     local_repo_name_base = f"localhost:5000/ci-{image_name}"
     version_tag = f'{version}-' if version != "1" else ""
 
