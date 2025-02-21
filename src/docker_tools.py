@@ -91,10 +91,10 @@ def start_local_registry():
 def login_to_registry(env_conf):
     print("> [Info] Login to registry")
     try:
-        # docker.login(
-        #     username=env_conf["docker_reg_username"], password=env_conf["docker_reg_password"]
-        # )
-        # print("Login to Docker Hub successful")
+        docker.login(
+            username=env_conf["docker_reg_username"], password=env_conf["docker_reg_password"]
+        )
+        print("Login to Docker Hub successful")
 
         docker.login(
             server="ghcr.io", username="foobar", password=env_conf["github_token"]
