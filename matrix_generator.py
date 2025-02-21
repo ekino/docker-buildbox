@@ -47,7 +47,8 @@ def get_paths(changedFiles, unfilteredFiles):
 
 
 def generate_matrix(paths):
-    for image_folder in paths:
+    # for image_folder in paths:
+    for image_folder in set(['sonar']):
         with open("base_config.yml", 'r') as base_config:
             if exists("{}/config.yml".format(image_folder)):
                 with open("{}/config.yml".format(image_folder), 'r') as config:
