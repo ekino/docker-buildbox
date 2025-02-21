@@ -67,5 +67,6 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pipenv run python image_builder.py build -d --image ${{ matrix.image }} --version ${{ matrix.version }}

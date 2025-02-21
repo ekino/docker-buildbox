@@ -34,7 +34,7 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
             push=True,
             build_args=image_conf["build_args"] if "build_args" in image_conf else {
             }, platforms=image_conf["platforms"]
-        )  
+        )
 
     except DockerException as docker_exception:
         print("> [Error] Build error - " + str(docker_exception))
@@ -94,7 +94,12 @@ def login_to_registry(env_conf):
         docker.login(
             username=env_conf["docker_reg_username"], password=env_conf["docker_reg_password"]
         )
-        print("Login successful")
+        print("Login to Docker Hub successful")
+
+        docker.login(
+            server="ghcr.io", username="foobar", password=env_conf["github_token"]
+        )
+        print("Login to GHCR successful")
     except DockerException as docker_exception:
         print("> [Error] Login failed - " + str(docker_exception))
         exit(1)
