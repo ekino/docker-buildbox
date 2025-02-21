@@ -16,6 +16,7 @@ def load_ci_env(debug):
         "event_type": event,
         "docker_reg_username": os.environ.get("DOCKER_USERNAME", ""),
         "docker_reg_password": os.environ.get("DOCKER_PASSWORD", ""),
+        "github_token": os.environ.get("GITHUB_TOKEN", ""),
     }
     if debug:
         pp = pprint.PrettyPrinter(indent=1)
@@ -65,7 +66,7 @@ def load_image_config(image_type, version):
 
 def get_image_fullname(image_name, version, image_conf, env_conf):
     image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
-    image_tag = f'{version}-' if version != "1" else  ""
+    image_tag = f'{version}-' if version != "1" else ""
 
     if env_conf["tag"]:
         image_tag += env_conf["tag"]
@@ -80,7 +81,8 @@ def get_image_fullname(image_name, version, image_conf, env_conf):
 
 
 def get_image_tags(image_name, version, image_conf, env_conf):
-    image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    # image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    image_repo_name_base = f"ghcr.io/ekino/ci-{image_name}"
     local_repo_name_base = f"localhost:5000/ci-{image_name}"
     version_tag = f'{version}-' if version != "1" else ""
 
@@ -104,9 +106,9 @@ def get_image_tags(image_name, version, image_conf, env_conf):
 
     return tags
 
+
 def parse_platform(platform):
     parts = platform.split("/")
     parts.extend([None])
 
     return parts[0:3]
-
