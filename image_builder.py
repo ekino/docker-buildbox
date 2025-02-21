@@ -57,7 +57,9 @@ def build(image, version, debug):
             docker_tools.login_to_registry(env_conf)
 
             # Build, tag and push docker image to remote registry (Docker hub)
-            docker_tools.build_image(image_conf, image_tags["fullname"], dockerfile_directory, dockerfile_path, debug)
+            docker.tag(image_tags["localname"], image_tags["fullname"])
+            docker.push(image_tags["fullname"])
+            # docker_tools.build_image(image_conf, image_tags["fullname"], dockerfile_directory, dockerfile_path, debug)
 
 
 @click.group()
