@@ -3,6 +3,7 @@ Versions
 
 2025-02-28
 ----------
+* All images are now available on GitHub Container Registry in addition to Docker Hub
 * Golang: add jq
 * Golang: adding support for 1.24. Removing 1.21 (EoL)
 * Platform: removing unused packages

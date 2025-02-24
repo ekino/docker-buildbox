@@ -1,5 +1,7 @@
 FROM debian:12.9-slim AS base
 LABEL maintainer="opensource@ekino.com"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
+
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     NVM_DIR=/root/.nvm \

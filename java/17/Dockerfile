@@ -1,5 +1,7 @@
 FROM eclipse-temurin:17.0.14_7-jdk-jammy as base
 LABEL maintainer="opensource@ekino.com"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
+
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8
 

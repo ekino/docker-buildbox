@@ -6,7 +6,7 @@ from python_on_whales.exceptions import DockerException
 
 
 def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug):
-    print("> [Info] Building: " + image_tag)
+    print("> [Info] Building: " + image_tag[0])
     try:
         if debug:
             pp = pprint.PrettyPrinter(indent=1)
@@ -34,7 +34,7 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
             push=True,
             build_args=image_conf["build_args"] if "build_args" in image_conf else {
             }, platforms=image_conf["platforms"]
-        )  
+        )
 
     except DockerException as docker_exception:
         print("> [Error] Build error - " + str(docker_exception))
@@ -88,23 +88,21 @@ def start_local_registry():
     return docker.run("registry:2", detach=True, publish=[(5000, 5000)], restart='always', name='registry')
 
 
-def login_to_registry(env_conf):
-    print("> [Info] Login to registry")
+def login_to_registries(env_conf):
+    print("> [Info] Login to registries")
     try:
         docker.login(
             username=env_conf["docker_reg_username"], password=env_conf["docker_reg_password"]
         )
-        print("Login successful")
+        print("Login to docker hub successful")
     except DockerException as docker_exception:
         print("> [Error] Login failed - " + str(docker_exception))
         exit(1)
-
-
-def push_image(image_fullname):
-    print("> [Info] Pushing " + image_fullname)
     try:
-        docker.image.push(image_fullname)
-        print("Push successful")
+        docker.login(
+            server="ghcr.io", username="ci", password=env_conf["github_token"]
+        )
+        print("Login to GHCR successful")
     except DockerException as docker_exception:
-        print("> [Error] Push failed - " + str(docker_exception))
+        print("> [Error] Login failed - " + str(docker_exception))
         exit(1)

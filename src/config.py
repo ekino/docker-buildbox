@@ -16,6 +16,7 @@ def load_ci_env(debug):
         "event_type": event,
         "docker_reg_username": os.environ.get("DOCKER_USERNAME", ""),
         "docker_reg_password": os.environ.get("DOCKER_PASSWORD", ""),
+        "github_token": os.environ.get("GITHUB_TOKEN", ""),
     }
     if debug:
         pp = pprint.PrettyPrinter(indent=1)
@@ -58,29 +59,13 @@ def load_image_config(image_type, version):
         for arg, value in image_config["build_args"].items():
             image_config["build_args"][arg] = str(value)
 
-    image_config["docker_hub_namespace"] = config["docker_hub_namespace"]
+    image_config["namespace"] = config["namespace"]
 
     return image_config
 
 
-def get_image_fullname(image_name, version, image_conf, env_conf):
-    image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
-    image_tag = f'{version}-' if version != "1" else  ""
-
-    if env_conf["tag"]:
-        image_tag += env_conf["tag"]
-    elif env_conf["event_type"] == "schedule":
-        image_tag += "nightly"
-    elif env_conf["branch"] in ["master"]:
-        image_tag += "latest"
-    else:
-        image_tag += "latest"
-
-    return f"{image_repo_name_base}:{image_tag}"
-
-
 def get_image_tags(image_name, version, image_conf, env_conf):
-    image_repo_name_base = f"{image_conf['docker_hub_namespace']}/ci-{image_name}"
+    image_repo_name_base = f"{image_conf['namespace']}/ci-{image_name}"
     local_repo_name_base = f"localhost:5000/ci-{image_name}"
     version_tag = f'{version}-' if version != "1" else ""
 
@@ -94,7 +79,8 @@ def get_image_tags(image_name, version, image_conf, env_conf):
         version_tag += "latest"
 
     tags = {
-        "fullname": f"{image_repo_name_base}:{version_tag}",
+        "docker_fullname": f"{image_repo_name_base}:{version_tag}",
+        "gh_fullname": f"ghcr.io/{image_repo_name_base}:{version_tag}",
         "localname": f"{local_repo_name_base}:{version_tag}",
         "platforms": {},
     }
@@ -109,4 +95,3 @@ def parse_platform(platform):
     parts.extend([None])
 
     return parts[0:3]
-

@@ -1,4 +1,5 @@
 FROM python:3.13.2-slim-bullseye AS base
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG TARGETARCH
 ARG POETRY_HOME

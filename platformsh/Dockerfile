@@ -1,5 +1,6 @@
 FROM python:3.13.2-slim-bullseye as base
 LABEL maintainer="opensource@ekino.com"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG PLATFORM_VERSION
 

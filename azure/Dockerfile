@@ -1,6 +1,7 @@
 FROM python:3.13.2-slim-bullseye AS base
 
 LABEL maintainer="opensource@ekino.com"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 FROM base AS base-amd64
 ARG AWSCLI_ARCH="x86_64"

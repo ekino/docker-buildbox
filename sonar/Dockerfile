@@ -1,5 +1,6 @@
 FROM alpine:3.21.3 as base
 LABEL maintainer="opensource@ekino.com"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG SONARSCANNER_HOME=/sonar-scanner
 ARG SONARSCANNER_VERSION
