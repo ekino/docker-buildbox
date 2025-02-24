@@ -1,17 +1,16 @@
 from os.path import exists
 
 import click
+from python_on_whales import docker
 
 import src.config as config
 import src.docker_tools as docker_tools
-from python_on_whales import docker
 
 
 @click.command()
 @click.option("--image", "-i", default="aws", help="image to build")
 @click.option("--version", "-v", default="1", help="image version")
 @click.option("--debug", "-d", is_flag=True, help="debug")
-
 def build(image, version, debug):
 
     # Get env variables
@@ -38,7 +37,6 @@ def build(image, version, debug):
 
         # Build, tag and push docker image to local registry
         docker_tools.build_image(image_conf, image_tags["localname"], dockerfile_directory, dockerfile_path, debug)
-        
 
         # Run defined test command
         docker_tools.run_image(image_tags["localname"], image_conf, debug)
@@ -53,10 +51,17 @@ def build(image, version, debug):
             or env_conf["event_type"] == "schedule"
         ):
             # Login to registry and push
-            docker_tools.login_to_registry(env_conf)
+            docker_tools.login_to_registries(env_conf)
 
             # Build, tag and push docker image to remote registry (Docker hub)
-            docker_tools.build_image(image_conf, image_tags["fullname"], dockerfile_directory, dockerfile_path, debug)
+            docker_tools.build_image(image_conf,
+                                     [
+                                         image_tags["docker_fullname"],
+                                         image_tags["gh_fullname"]
+                                     ],
+                                     dockerfile_directory,
+                                     dockerfile_path,
+                                     debug)
 
 
 @click.group()
