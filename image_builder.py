@@ -1,10 +1,10 @@
 from os.path import exists
 
 import click
-from python_on_whales import docker
 
 import src.config as config
 import src.docker_tools as docker_tools
+from python_on_whales import docker
 
 
 @click.command()
@@ -38,7 +38,7 @@ def build(image, version, debug):
 
         # Build, tag and push docker image to local registry
         docker_tools.build_image(image_conf, image_tags["localname"], dockerfile_directory, dockerfile_path, debug)
-
+        
 
         # Run defined test command
         docker_tools.run_image(image_tags["localname"], image_conf, debug)
@@ -56,8 +56,7 @@ def build(image, version, debug):
             docker_tools.login_to_registry(env_conf)
 
             # Build, tag and push docker image to remote registry (Docker hub)
-            docker.tag(image_tags["localname"], image_tags["fullname"])
-            docker.push(image_tags["fullname"])
+            docker_tools.build_image(image_conf, image_tags["fullname"], dockerfile_directory, dockerfile_path, debug)
 
 
 @click.group()
