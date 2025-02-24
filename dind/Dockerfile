@@ -1,5 +1,6 @@
 FROM docker:20.10.24-dind as base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 FROM base as base-amd64
 ARG TRIVY_ARCH="Linux-64bit"

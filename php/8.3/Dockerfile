@@ -1,5 +1,6 @@
 FROM php:8.3.17-cli-alpine3.21 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
+LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG APCU_VERSION
 ARG COMPOSER_VERSION
