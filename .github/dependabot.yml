@@ -90,17 +90,6 @@ updates:
       - "dind"
   # Golang
   - package-ecosystem: "docker"
-    directory: "/golang/1.22"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "golang"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
     directory: "/golang/1.23"
     schedule:
       interval: "weekly"

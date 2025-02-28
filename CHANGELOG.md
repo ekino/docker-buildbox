@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-03-31
+----------
+* Golang: Removing 1.22 (EoL)
+
 2025-02-28
 ----------
 * All images are now available on GitHub Container Registry in addition to Docker Hub
