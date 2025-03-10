@@ -27,6 +27,7 @@ Versions
 * Golang: automatically use the latest version of included tools.
 * Node: using the latest versions of Taskfile and Modd. Upgrading to Debian 12.
 * PHP: using the latest versions of Taskfile and Modd
+* Sonar: automatically use the latest version of sonar-scanner-cli
 
 2024-11-30
 ----------
