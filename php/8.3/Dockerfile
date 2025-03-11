@@ -60,7 +60,7 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     mv /tmp/blackfire-probe/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so && \
     printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini && \
     mkdir -p /tmp/blackfire-client && \
-    curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux/${TARGETARCH} | tar zxp -C /tmp/blackfire-client && \
+    curl -A "Docker" -L https://blackfire.io/api/v1/releases/cli/linux/${TARGETARCH} | tar zxp -C /tmp/blackfire-client && \
     mv /tmp/blackfire-client/blackfire /usr/bin/blackfire && \
     # Starting AWS
     apk add aws-cli && \
