@@ -1,7 +1,3 @@
-platforms: &platforms
-  - linux/amd64
-  - linux/arm64
-
 test_config: &test_config
   volume: php:/tmp
   cmd:
@@ -19,17 +15,14 @@ build_args: &build_args
   XDEBUG_VERSION: 3.3.1
 versions:
   "8.1":
-    platforms: *platforms
     build_args:
       <<: *build_args
     test_config: *test_config
   "8.2":
-    platforms: *platforms
     build_args:
       <<: *build_args
     test_config: *test_config
   "8.3":
-    platforms: *platforms
     build_args:
       <<: *build_args
     test_config: *test_config

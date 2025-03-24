@@ -5,3 +5,4 @@ DOCKER_TIMEOUT: 600
 
 base_platforms: &base_platforms
   - linux/amd64
+  - linux/arm64

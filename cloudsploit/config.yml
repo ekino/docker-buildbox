@@ -1,8 +1,5 @@
 versions:
   "3":
-    platforms:
-      - linux/amd64
-      - linux/arm64
     test_config:
       cmd:
         - aws --version

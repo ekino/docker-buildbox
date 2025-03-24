@@ -6,9 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     NVM_DIR=/root/.nvm \
     PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ARG NODE_VERSION
-ARG NPM_VERSION
-ARG NVM_VERSION
 
 FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"

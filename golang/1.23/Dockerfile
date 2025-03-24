@@ -2,13 +2,6 @@ FROM golang:1.23.7 AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-ARG GITLEAKS_VERSION
-ARG GOLANGCILINT_VERSION
-ARG GOMODUPGRADE_VERSION
-ARG GOSWAGGER_VERSION
-ARG MIGRATE_VERSION
-ARG MOCKGEN_VERSION
-
 FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
 ARG GITLEAKS_ARCH="linux_x64"
