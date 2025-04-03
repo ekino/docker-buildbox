@@ -16,7 +16,7 @@ Versions
 ----------
 * Golang: removing modd
 * Node: removing modd
-* PHP: removing modd
+* PHP: removing modd. adding PHP 8.4.
 
 2024-12-31
 ----------
