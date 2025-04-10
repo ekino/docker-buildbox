@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-04-30
+----------
+* Scaleway: adding this new image
+
 2025-03-31
 ----------
 * Golang: Removing 1.22 (EoL)
