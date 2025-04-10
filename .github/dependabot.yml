@@ -279,6 +279,18 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  # Scaleway
+  - package-ecosystem: "docker"
+    directory: "/scaleway"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "scaleway"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   # Sonar
   - package-ecosystem: "docker"
     directory: "/sonar"

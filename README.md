@@ -172,6 +172,13 @@ Based on a python alpine image, contains platform.sh CLI.
 
 Contains Python with PIP and PIPENV.
 
+### Scaleway
+- https://hub.docker.com/r/ekino/ci-scaleway/tags
+- https://github.com/orgs/ekino/packages/container/package/ci-scaleway
+
+Contains SCW Cli, Terraform, Kubectl, Helm, Python & misc tools
+
+
 ### SonarQube Scanner
 - https://hub.docker.com/r/ekino/ci-sonar/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-sonar
