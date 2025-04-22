@@ -1,0 +1,19 @@
+versions:
+  '1':
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    test_config:
+      cmd:
+        - scw version
+        - git --version
+        - helm diff version
+        - helm version
+        - kustomize version
+        - pip --version
+        - pipenv --version
+        - trivy --version
+        - zip --version
+        - terragrunt --version
+        - tfenv init
+        - kubectl version --client
