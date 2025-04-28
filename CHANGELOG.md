@@ -4,6 +4,7 @@ Versions
 2025-04-30
 ----------
 * Java: deprecating version 11
+* Node: updating to the latest runtimes
 * Percy: removing this image
 * Platform: updating to the latest CLI version
 * Scaleway: adding this new image
