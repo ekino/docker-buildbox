@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.6_7-jdk-jammy as base
+FROM eclipse-temurin:21.0.7_6-jdk-jammy as base
 
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
