@@ -8,6 +8,7 @@ Versions
 * Percy: removing this image
 * Platform: updating to the latest CLI version
 * Scaleway: adding this new image
+* Sonar: updating to 7.1.x
 
 2025-03-31
 ----------
