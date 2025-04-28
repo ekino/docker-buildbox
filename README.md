@@ -142,12 +142,6 @@ Contains AWS Cli, Maven, Graphviz, jq, psql and Java.
 
 Contains node (installed in the NODE_VERSION env var value) and AWS Cli.
 
-### Percy
-- https://hub.docker.com/r/ekino/ci-percy/tags
-- https://github.com/orgs/ekino/packages/container/package/ci-percy
-
-Contains [Percy CLI](https://docs.percy.io/docs/cli-overview), used to manage https://percy.io/
-
 ### PHP
 - https://hub.docker.com/r/ekino/ci-php/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-php

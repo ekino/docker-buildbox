@@ -1,7 +1,0 @@
-{
-  "name": "@ekino/ci-percy",
-  "private": true,
-  "dependencies": {
-    "@percy/cli": "^1.0.0-beta.70"
-  }
-}

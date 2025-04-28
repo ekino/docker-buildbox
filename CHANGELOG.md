@@ -4,6 +4,7 @@ Versions
 2025-04-30
 ----------
 * Java: deprecating version 11
+* Percy: removing this image
 * Scaleway: adding this new image
 
 2025-03-31
