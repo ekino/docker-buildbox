@@ -7,11 +7,6 @@ test_config: &test_config
     - psql --version
 
 versions:
-  "11":
-    platforms:
-      - linux/amd64
-      - linux/arm64
-    test_config: *test_config
   "17":
     platforms:
       - linux/amd64
