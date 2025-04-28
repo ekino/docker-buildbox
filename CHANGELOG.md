@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-05-31
+----------
+* Node: removing node 18, now EoL
+
 2025-04-30
 ----------
 * Java: deprecating version 11
