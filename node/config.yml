@@ -8,15 +8,6 @@ test_config: &test_config
     - task --version
 
 versions:
-  "18":
-    platforms:
-      - linux/amd64
-      - linux/arm64
-    build_args:
-      NODE_VERSION: 18.20.8
-      NPM_VERSION: 10.9.2
-      NVM_VERSION: 0.40.3
-    test_config: *test_config
   "20":
     platforms:
       - linux/amd64
