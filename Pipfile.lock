@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "22fed01bec62e2935ac49f76ce2f9bc7f24d86efa405e78322a6547517caa14a"
+            "sha256": "8ec6eccd134b37d7961556c87ccacc3e7608dbaa741f439a46f2b8edd93af2c8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -302,12 +302,12 @@
         },
         "python-on-whales": {
             "hashes": [
-                "sha256:6ac4ea947a0466402a857a31ce3340b50be8a6f1f7e6075f74fbef410b4914cd",
-                "sha256:7a930ae25e9f07fd2bd3fb2f22c714a62105f7464f985ab342eeebc71c02c22c"
+                "sha256:de3e1f6360bd64a2d71643b615ae505e9b4672cd0903e90a674f18fd6842c2ed",
+                "sha256:fc5f45c7cab9d545a6a47abe9e0fb70b26f852c18c777f308f646f84fb7dce78"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8' and python_version < '4'",
-            "version": "==0.76.1"
+            "version": "==0.77.0"
         },
         "pyyaml": {
             "hashes": [
