@@ -11,6 +11,7 @@ excluded_files = [  # Changes to those files shouldn't trigger a build
     'CHANGELOG.md',
     'README.md',
     '.github/dependabot.yml',
+    '.github/copilot-instructions.md',
 ]
 
 
