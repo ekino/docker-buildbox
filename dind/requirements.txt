@@ -1,2 +1,2 @@
-pipenv==2025.0.2
+pipenv==2025.0.3
 azure-cli==2.73.0
