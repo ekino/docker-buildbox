@@ -1,4 +1,4 @@
-FROM python:3.11.12-slim-bullseye AS base
+FROM python:3.11.13-slim-bullseye AS base
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG TARGETARCH
