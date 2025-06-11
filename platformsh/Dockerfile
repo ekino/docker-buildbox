@@ -1,4 +1,4 @@
-FROM python:3.13.3-slim-bullseye as base
+FROM python:3.13.4-slim-bullseye as base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
