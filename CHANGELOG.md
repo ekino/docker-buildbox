@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-07-13
+----------
+* Python: Adding postgresql-client to 3.13 image
+
 2025-05-31
 ----------
 * Node: removing node 18, now EoL
