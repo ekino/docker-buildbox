@@ -1,25 +1,9 @@
-[![Build Status](https://github.com/ekino/docker-buildbox/acti```yaml
-versions: # List all the available versions
-  "1.0": # The version of your image. This must not change often, so try using major version if possible, or else minor.
-    platforms: # Optional: override base platforms, supports linux/amd64 and linux/arm64
-      - linux/amd64
-      - linux/arm64
-    test_config:
-      volume: ... # docker volume if needed, format: localdir:/path/to/mount
-      cmd: [...]  # shell commands run to be sure tools are well installed
-    build_args: [...]  # If ARG are defined in Dockerfile
-```flows/build.yml/badge.svg?branch=master)](https://github.com/ekino/docker-buildbox/actions?query=branch%3Amaster)
+[![Build Status](https://github.com/ekino/docker-buildbox/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/ekino/docker-buildbox/actions?query=branch%3Amaster)
 
 # BuildBox
 
 The repository provides a complete set of build tools for web developers. **These
 images MUST NOT be used in production**. The targeted usage of those images is GitlabCI.
-
-## Requirements
-
-- Docker with buildx support
-- Python 3.11
-- pipenv (install with `pip install pipenv`)
 
 ## Versions
 
@@ -37,7 +21,7 @@ CI workflow:
 
 ### Local testing
 
-To contribute you will need docker, docker-buildx, python3.11 and pipenv (installed by `pip install pipenv`).
+To contribute you will need docker, docker-buildx, python3.6 and pipenv (installed by `pip install pipenv`).
 
 - Clone the repo
 - Create your pipenv environnement
@@ -59,10 +43,10 @@ Options:
 ```
 
 ``` bash
-$ python image_builder.py build --image java --version 17
-> Building: ekino/ci-java:17-latest
+$ python image_builder.py build --image java --version 11
+> Building: ekino/ci-java:11-latest
 Build succesfull
-> Testing ekino/ci-java:17-latest
+> Testing ekino/ci-java:11-latest
 Tests successful
 ```
 
@@ -93,53 +77,19 @@ Do not forget to add an entry in `.github/dependabot.yml` too if you want it to 
 
 **Volume mounting** for test configuration only need the directory name as full local path is build by the script.
 
-## Multi-Architecture Support
-
-Most images support multi-architecture builds for both `linux/amd64` and `linux/arm64` platforms. This is configured per image version in the `config.yml` file:
-
-```yaml
-platforms:
-  - linux/amd64
-  - linux/arm64
-```
-
-Base platforms are defined in `base_config.yml` and can be overridden per image version.
-
-## Docker Registry
-
-Images are published to both:
-- **Docker Hub**: `https://hub.docker.com/r/ekino/ci-{IMAGE}/tags`
-- **GitHub Container Registry**: `https://github.com/orgs/ekino/packages/container/package/ci-{IMAGE}`
-
-## Project Structure
-
-The project is organized as follows:
-
-- `image_builder.py` - Main build script for individual images
-- `matrix_generator.py` - Generates build matrix for CI/CD (determines which images to build based on file changes)
-- `base_config.yml` - Base configuration shared across all images
-- `Pipfile` / `Pipfile.lock` - Python dependencies (pipenv-based)
-- `src/` - Core Python modules for configuration and Docker utilities
-- Each image has its own directory with:
-  - `config.yml` - Image-specific configuration
-  - `Dockerfile` - Single-version images OR
-  - `{version}/Dockerfile` - Multi-version images (e.g., `java/17/Dockerfile`, `java/21/Dockerfile`)
-
 ## Available images
-
-**Note**: All images are available on both Docker Hub and GitHub Container Registry. Most images support multi-architecture builds (linux/amd64 and linux/arm64).
 
 ### AWS
 - https://hub.docker.com/r/ekino/ci-aws/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-aws
 
-Contains AWS CLI, Terraform, Terragrunt, Kubectl, Helm, Kustomize, Python, Pipenv, Trivy, Infracost, tfenv, git, zip & misc tools
+Contains AWS Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 ### Azure
 - https://hub.docker.com/r/ekino/ci-azure/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-azure
 
-Contains Azure CLI, Terraform, Terragrunt, Kubectl, Helm, Kustomize, Python, Pipenv, Trivy, Infracost, tfenv, git, zip & misc tools
+Contains Azure Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 ### Chrome
 - https://hub.docker.com/r/ekino/ci-chrome/tags
@@ -178,15 +128,11 @@ test:
 - https://hub.docker.com/r/ekino/ci-golang/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-golang
 
-Available versions: 1.23, 1.24
-
-Based upon official Golang image, contains AWS Cli, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, rsync, jq and testfixtures.
+Based upon official Golang image, contains AWS Cli, Gitleaks, GolangCI-Lint, go-mod-upgrade, go-swagger, go-mock, goimports, migrate, rsync and testfixtures.
 
 ### Java
 - https://hub.docker.com/r/ekino/ci-java/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-java
-
-Available versions: 17, 21
 
 Contains AWS Cli, Maven, Graphviz, jq, psql and Java.
 
@@ -194,15 +140,11 @@ Contains AWS Cli, Maven, Graphviz, jq, psql and Java.
 - https://hub.docker.com/r/ekino/ci-node/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-node
 
-Available versions: 20, 22
-
-Contains Node.js (installed in the NODE_VERSION env var value), npm, yarn, sass, task and AWS Cli.
+Contains node (installed in the NODE_VERSION env var value) and AWS Cli.
 
 ### PHP
 - https://hub.docker.com/r/ekino/ci-php/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-php
-
-Available versions: 8.1, 8.2, 8.3
 
 Contains PHP (installed from official alpine in the PHP_VERSION env var value) within Blackfire, Composer, PHP CS Fixer, Security Checker and AWS Cli.
 
@@ -222,15 +164,13 @@ Based on a python alpine image, contains platform.sh CLI.
 - https://hub.docker.com/r/ekino/ci-python/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-python
 
-Available versions: 3.9, 3.10, 3.11, 3.12, 3.13
-
-Contains Python with PIP, PIPENV, Poetry and AWS CLI.
+Contains Python with PIP and PIPENV.
 
 ### Scaleway
 - https://hub.docker.com/r/ekino/ci-scaleway/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-scaleway
 
-Contains Scaleway CLI, Terraform, Terragrunt, Kubectl, Helm, Kustomize, Python, Pipenv, Trivy, tfenv, git, zip & misc tools
+Contains SCW Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 
 ### SonarQube Scanner
