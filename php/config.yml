@@ -11,12 +11,12 @@ test_config: &test_config
     - php /tmp/test.php
     - aws --version
 build_args: &build_args
-  APCU_VERSION: 5.1.22
-  COMPOSER_VERSION: 2.7.2
-  MEMCACHED_VERSION: 3.2.0
-  PHP_CS_FIXER_VERSION: 3.41.1
-  REDIS_VERSION: 5.3.7
-  XDEBUG_VERSION: 3.3.1
+  APCU_VERSION: 5.1.24
+  COMPOSER_VERSION: 2.8.10
+  MEMCACHED_VERSION: 3.3.0
+  PHP_CS_FIXER_VERSION: 3.84.0
+  REDIS_VERSION: 6.2.0
+  XDEBUG_VERSION: 3.4.5
 versions:
   "8.1":
     platforms: *platforms
@@ -29,6 +29,11 @@ versions:
       <<: *build_args
     test_config: *test_config
   "8.3":
+    platforms: *platforms
+    build_args:
+      <<: *build_args
+    test_config: *test_config
+  "8.4":
     platforms: *platforms
     build_args:
       <<: *build_args

@@ -180,6 +180,17 @@ updates:
       ignore:
         -   dependency-name: "*"
             update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
+  -   package-ecosystem: "docker"
+      directory: "/php/8.4"
+      schedule:
+        interval: "weekly"
+      labels:
+        - "dependencies"
+        - "docker"
+        - "php"
+      ignore:
+        -   dependency-name: "*"
+            update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
   # Platformsh
   - package-ecosystem: "docker"
     directory: "/platformsh"
