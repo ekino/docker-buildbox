@@ -62,9 +62,13 @@ jobs:
           pip install pip pipenv
           pipenv sync
       - name: Build and tests images
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 60
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: pipenv run python image_builder.py build -d --image ${{ matrix.image }} --version ${{ matrix.version }}
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
-          pipenv run python image_builder.py build -d --image ${{ matrix.image }} --version ${{ matrix.version }}
