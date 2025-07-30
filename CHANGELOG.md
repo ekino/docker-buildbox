@@ -4,6 +4,7 @@ Versions
 2025-07-31
 ----------
 * PHP: adding PHP 8.4. Updating associated tools & libraries for all PHP versions.
+* Python: Adding postgresql-client to 3.13 image
 
 2025-05-31
 ----------

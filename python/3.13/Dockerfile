@@ -14,7 +14,7 @@ FROM base-$TARGETARCH
 
 # Install system dependencies for python and pip
 RUN apt-get update -y && \
-    apt-get install curl unzip groff less -y  && \
+    apt-get install curl postgresql-client unzip groff less -y  && \
     pip install -U pip  && \
     # Installing AWS CLIv2
     curl "https://awscli.amazonaws.com/awscli-exe-linux-{$ARCH}.zip" -o "awscliv2.zip" && \

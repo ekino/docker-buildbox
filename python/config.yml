@@ -32,4 +32,10 @@ versions:
   "3.13":
     build_args: *build_args
     platforms: *platforms
-    test_config: *test_config
+    test_config:
+      cmd:
+        - pip --version
+        - python --version
+        - aws --version
+        - poetry --version
+        - psql --version
