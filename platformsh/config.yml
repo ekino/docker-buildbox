@@ -4,7 +4,7 @@ versions:
       - linux/amd64
       - linux/arm64
     build_args:
-      PLATFORM_VERSION: "5.0.23"
+      PLATFORM_VERSION: "5.2.0"
     test_config:
       cmd:
         - git --version
