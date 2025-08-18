@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-08-31
+----------
+* Golang: adding support for 1.25
+
 2025-07-31
 ----------
 * PHP: adding PHP 8.4. Updating associated tools & libraries for all PHP versions.

@@ -9,6 +9,37 @@ images MUST NOT be used in production**. The targeted usage of those images is G
 
 Please review the [CHANGELOG.md](CHANGELOG.md) file for versions per tag.
 
+## Release Process
+
+The project follows a monthly release schedule with releases happening on the last day of each month. All changes are documented in the [CHANGELOG.md](CHANGELOG.md) file.
+
+### CHANGELOG.md Format
+
+The changelog follows a chronological format organized by release date:
+
+```markdown
+## YYYY-MM-DD
+
+- ImageName: description of changes
+- AnotherImage: description of changes
+```
+
+**Guidelines for updating CHANGELOG.md:**
+
+- **Date Format**: Use `YYYY-MM-DD` format for release dates (always the last day of the month)
+- **Entry Format**: `* ImageName: description of change`
+- **Order**: Most recent entries at the top
+- **Sorting**: Within each date section, sort entries alphabetically by image name
+- **Scope**: Include all significant changes (version updates, new tools, deprecations)
+- **Clarity**: Be specific about what changed (e.g., "updating kubectl from 1.25 to 1.27")
+
+**Important Notes:**
+- CHANGELOG.md is in the excluded files list - changes to it don't trigger CI builds
+- Update the changelog when making changes to any image
+- Use past tense for descriptions ("updated", "added", "removed")
+- Group related changes under the same release date
+- Include deprecation notices for images being removed
+
 ## Testing
 
 Each box is tested and built using GitHub Actions.
