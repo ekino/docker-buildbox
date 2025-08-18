@@ -5,6 +5,7 @@ Versions
 ----------
 * Golang: adding support for 1.25, removing 1.23
 * Node: adding support for 24, updating Node 20 to 20.19.4, Node 22 to 22.18.0, and NPM to 11.5.2
+* PHP: updating APCu to 5.1.26, PHP-CS-Fixer to 3.86.0
 * Platform: updating CLI to 5.2.0
 
 2025-07-31
