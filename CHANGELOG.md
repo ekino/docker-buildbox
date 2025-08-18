@@ -4,6 +4,7 @@ Versions
 2025-08-31
 ----------
 * Golang: adding support for 1.25, removing 1.23
+* Node: adding support for 24, updating Node 20 to 20.19.4, Node 22 to 22.18.0, and NPM to 11.5.2
 
 2025-07-31
 ----------
