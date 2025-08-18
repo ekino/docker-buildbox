@@ -3,7 +3,7 @@ Versions
 
 2025-08-31
 ----------
-* Golang: adding support for 1.25
+* Golang: adding support for 1.25, removing 1.23
 
 2025-07-31
 ----------
