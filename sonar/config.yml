@@ -7,3 +7,12 @@ versions:
       cmd:
         - java -version
         - sonar-scanner -v
+        - |
+          VERSION=$(sonar-scanner -v 2>&1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1) && \
+          MAJOR=$(echo $VERSION | cut -d. -f1) && \
+          MINOR=$(echo $VERSION | cut -d. -f2) && \
+          if [ "$MAJOR" -gt 7 ] || ([ "$MAJOR" -eq 7 ] && [ "$MINOR" -gt 2 ]); then \
+            echo "ERROR: SonarScanner version $VERSION exceeds 7.2.x limit" && exit 1; \
+          else \
+            echo "SUCCESS: SonarScanner version $VERSION is within 7.2.x limit"; \
+          fi
