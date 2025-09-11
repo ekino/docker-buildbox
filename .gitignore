@@ -3,3 +3,4 @@
 *.iml
 .vscode
 src/__pycache__/*
+.claude/settings.local.json
