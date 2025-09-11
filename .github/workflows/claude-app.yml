@@ -44,4 +44,4 @@ jobs:
         with:
           github_token: ${{ steps.app-token.outputs.token }}
           use_bedrock: "true"
-          claude_args: "--model anthropic.claude-sonnet-4-20250514-v1:0 --max-turns 10"
+          claude_args: "--model arn:aws:bedrock:eu-west-3:947226147474:inference-profile/eu.anthropic.claude-sonnet-4-20250514-v1:0 --max-turns 10"
