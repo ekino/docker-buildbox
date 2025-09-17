@@ -6,9 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     NVM_DIR=/root/.nvm \
     PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ARG NODE_VERSION
-ARG NPM_VERSION
-ARG NVM_VERSION
+ARG VERSION
 
 FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
@@ -28,11 +26,20 @@ RUN echo "Starting ..." && \
     sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Starting Javascript..." && \
-    git clone https://github.com/creationix/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${NVM_VERSION} && \
+    echo "Fetching latest NVM version..." && \
+    LATEST_NVM_VERSION=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name' | sed 's/^v//') && \
+    echo "Using NVM version: ${LATEST_NVM_VERSION}" && \
+    echo "Fetching latest Node.js version for major version ${VERSION}..." && \
+    LATEST_NODE_VERSION=$(curl -s https://api.github.com/repos/nodejs/node/releases | jq -r --arg major "v${VERSION}" '[.[] | select(.tag_name | startswith($major)) | .tag_name] | sort_by(. | ltrimstr("v") | split(".") | map(tonumber)) | reverse | .[0]' | sed 's/^v//') && \
+    echo "Using Node.js version: ${LATEST_NODE_VERSION}" && \
+    git clone https://github.com/nvm-sh/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${LATEST_NVM_VERSION} && \
     . /root/.nvm/nvm.sh && \
-    nvm install ${NODE_VERSION} && nvm alias default ${NODE_VERSION} && \
-    ln -s /root/.nvm/versions/node/v${NODE_VERSION} /root/.nvm/versions/node/current && \
-    npm install -g npm@${NPM_VERSION} && \
+    nvm install ${LATEST_NODE_VERSION} && nvm alias default ${LATEST_NODE_VERSION} && \
+    ln -s /root/.nvm/versions/node/v${LATEST_NODE_VERSION} /root/.nvm/versions/node/current && \
+    echo "Fetching latest NPM version..." && \
+    LATEST_NPM_VERSION=$(curl -s https://api.github.com/repos/npm/cli/releases/latest | jq -r '.tag_name' | sed 's/^v//') && \
+    echo "Using NPM version: ${LATEST_NPM_VERSION}" && \
+    npm install -g npm@${LATEST_NPM_VERSION} && \
     curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn --no-install-recommends && \
