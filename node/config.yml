@@ -12,26 +12,14 @@ versions:
     platforms:
       - linux/amd64
       - linux/arm64
-    build_args:
-      NODE_VERSION: 20.19.4
-      NPM_VERSION: 11.5.2
-      NVM_VERSION: 0.40.3
     test_config: *test_config
   "22":
     platforms:
       - linux/amd64
       - linux/arm64
-    build_args:
-      NODE_VERSION: 22.18.0
-      NPM_VERSION: 11.5.2
-      NVM_VERSION: 0.40.3
     test_config: *test_config
   "24":
     platforms:
       - linux/amd64
       - linux/arm64
-    build_args:
-      NODE_VERSION: 24.6.0
-      NPM_VERSION: 11.5.2
-      NVM_VERSION: 0.40.3
     test_config: *test_config
