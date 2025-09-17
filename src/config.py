@@ -54,6 +54,11 @@ def load_image_config(image_type, version):
 
     image_config = config["versions"][version] or dict()
 
+    # Add version as a build arg automatically
+    if "build_args" not in image_config:
+        image_config["build_args"] = {}
+    image_config["build_args"]["VERSION"] = version
+
     # Make sure all args are used as strings for Docker API
     if "build_args" in image_config:
         for arg, value in image_config["build_args"].items():
