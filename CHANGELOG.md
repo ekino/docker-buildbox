@@ -1,6 +1,11 @@
 Versions
 ========
 
+2025-09-30
+----------
+* Platform: removed image, replaced by Upsun image which includes both Platform.sh and Upsun CLIs
+* Upsun: added new image with both Upsun CLI and Platform.sh CLI, automatically updated to latest versions
+
 2025-08-31
 ----------
 * Golang: adding support for 1.25, removing 1.23
