@@ -185,12 +185,6 @@ About Blackfire, please read the official documentation to install the agent htt
 docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-container blackfire run bin/console app:foo:bar
 ```
 
-### Platform.sh CLI
-- https://hub.docker.com/r/ekino/ci-platformsh/tags
-- https://github.com/orgs/ekino/packages/container/package/ci-platformsh
-
-Based on a python alpine image, contains platform.sh CLI.
-
 ### Python
 - https://hub.docker.com/r/ekino/ci-python/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-python
@@ -209,3 +203,9 @@ Contains SCW Cli, Terraform, Kubectl, Helm, Python & misc tools
 - https://github.com/orgs/ekino/packages/container/package/ci-sonar
 
 Contains SonarQube Scanner.
+
+### Upsun
+- https://hub.docker.com/r/ekino/ci-upsun/tags
+- https://github.com/orgs/ekino/packages/container/package/ci-upsun
+
+Based on a Python image, contains both Upsun CLI and Platform.sh CLI, git and pipenv.

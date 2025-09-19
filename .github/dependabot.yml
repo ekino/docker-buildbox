@@ -192,15 +192,6 @@ updates:
       ignore:
         -   dependency-name: "*"
             update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
-  # Platformsh
-  - package-ecosystem: "docker"
-    directory: "/platformsh"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "platformsh"
   # Python
   - package-ecosystem: "docker"
     directory: "/python/3.9"
@@ -278,6 +269,18 @@ updates:
       - "dependencies"
       - "docker"
       - "sonar"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  # Upsun
+  - package-ecosystem: "docker"
+    directory: "/upsun"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "upsun"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
