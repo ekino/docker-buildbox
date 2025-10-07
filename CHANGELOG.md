@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-10-31
+----------
+* Claude: added new image with Node.js 24 on Alpine Linux and Anthropic's Claude Code CLI tool
+
 2025-09-30
 ----------
 * Platform: removed image, replaced by Upsun image which includes both Platform.sh and Upsun CLIs
