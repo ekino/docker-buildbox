@@ -3,6 +3,7 @@ test_config: &test_config
     - node --version
     - npm --version
     - claude --version
+    - glab --version
 
 versions:
   '1':
