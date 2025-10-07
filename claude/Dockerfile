@@ -2,6 +2,8 @@ FROM node:24-alpine3.21
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
+RUN apk update && apk add --no-cache git curl bash jq
+
 # Create claude user and group
 RUN addgroup claude && \
     adduser -G claude -s /bin/sh -D claude
@@ -14,6 +16,3 @@ USER claude:claude
 
 # Set working directory to claude's home
 WORKDIR /home/claude
-
-# Set default command
-CMD ["claude", "--help"]
