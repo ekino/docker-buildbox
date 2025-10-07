@@ -128,6 +128,12 @@ Contains Azure Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 Contains Chromium browser and the latest Node LTS.
 
+### Claude
+- https://hub.docker.com/r/ekino/ci-claude/tags
+- https://github.com/orgs/ekino/packages/container/package/ci-claude
+
+Contains Node.js 24 on Alpine Linux with Anthropic's Claude Code CLI tool installed globally. Runs under a dedicated `claude:claude` user for security.
+
 ### Cloudsploit
 - https://hub.docker.com/r/ekino/ci-cloudsploit/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-cloudsploit

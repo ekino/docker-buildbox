@@ -1,0 +1,12 @@
+test_config: &test_config
+  cmd:
+    - node --version
+    - npm --version
+    - claude --version
+
+versions:
+  '1':
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    test_config: *test_config
