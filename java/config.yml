@@ -17,3 +17,8 @@ versions:
       - linux/amd64
       - linux/arm64
     test_config: *test_config
+  "25":
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    test_config: *test_config
