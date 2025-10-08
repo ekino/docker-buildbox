@@ -4,6 +4,7 @@ Versions
 2025-10-31
 ----------
 * Claude: added new image with Node.js 24 on Alpine Linux and Anthropic's Claude Code CLI tool
+* Java: added support for Java 25 LTS
 
 2025-09-30
 ----------
