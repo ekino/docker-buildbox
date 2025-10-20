@@ -1,4 +1,4 @@
-FROM golang:1.25.2 AS base
+FROM golang:1.25.3 AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
