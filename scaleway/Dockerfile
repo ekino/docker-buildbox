@@ -51,8 +51,8 @@ RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     tar -xf kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz && \
     rm kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz && \
     mv ./kustomize /usr/bin/kustomize && \
-    # Downloading latest helm
-    HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    # Downloading latest helm (3.x.x)
+    HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases | grep '"tag_name":' | grep -E 'v3\.[0-9]+\.[0-9]+' | head -1 | sed -E 's/.*"v([^"]+)".*/\1/') && \
     curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
     tar xf helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && rm helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
     mv ${HELM_ARCH}/helm /usr/local/bin/helm && \
