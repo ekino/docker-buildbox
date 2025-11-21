@@ -67,7 +67,7 @@ build_args: &build_args  # Optional: Docker build arguments
 versions:
   "version_name":
     platforms: *platforms
-    build_args: *build_args  
+    build_args: *build_args
     test_config: *test_config
 ```
 
@@ -82,7 +82,7 @@ Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md
 
 ### Available Images
 - **aws**: AWS CLI, Terraform, Kubectl, Helm, Python
-- **azure**: Azure CLI, Terraform, Kubectl, Helm, Python  
+- **azure**: Azure CLI, Terraform, Kubectl, Helm, Python
 - **chrome**: Chromium + Node.js LTS
 - **cloudsploit**: Aquasecurity's Cloudsploit Scanner
 - **dind**: Docker-in-Docker + AWS/Azure CLI
@@ -91,7 +91,7 @@ Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md
 - **node**: Node.js + AWS CLI
 - **php**: PHP 8.1/8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
 - **platformsh**: Platform.sh CLI
-- **python**: Python 3.9-3.13 + pip, pipenv
+- **python**: Python 3.10-3.13 + pip, pipenv
 - **scaleway**: Scaleway CLI + Terraform, Kubectl, Helm
 - **sonar**: SonarQube Scanner
 

@@ -38,7 +38,7 @@ Each image has its own directory with:
 8. **Node** (`node/`) - Node.js + AWS CLI
 9. **PHP** (`php/`) - PHP 8.1/8.2/8.3 + Composer, Blackfire, AWS CLI
 10. **Platform.sh** (`platformsh/`) - Platform.sh CLI
-11. **Python** (`python/`) - Python 3.9-3.13 + pip, pipenv
+11. **Python** (`python/`) - Python 3.10-3.13 + pip, pipenv
 12. **Scaleway** (`scaleway/`) - Scaleway CLI + Terraform, Kubectl, Helm
 13. **SonarQube** (`sonar/`) - SonarQube Scanner
 

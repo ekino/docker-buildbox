@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-11-30
+----------
+* Python: removing Python 3.9, now EoL
+
 2025-10-31
 ----------
 * Claude: added new image with Node.js 24 on Alpine Linux and Anthropic's Claude Code CLI tool
