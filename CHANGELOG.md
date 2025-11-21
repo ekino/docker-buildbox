@@ -3,6 +3,7 @@ Versions
 
 2025-11-30
 ----------
+* Python: adding Python 3.14
 * Python: removing Python 3.9, now EoL
 
 2025-10-31

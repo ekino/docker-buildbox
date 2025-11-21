@@ -35,3 +35,13 @@ versions:
         - aws --version
         - poetry --version
         - psql --version
+  "3.14":
+    build_args: *build_args
+    platforms: *platforms
+    test_config:
+      cmd:
+        - pip --version
+        - python --version
+        - aws --version
+        - poetry --version
+        - psql --version
