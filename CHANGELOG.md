@@ -7,6 +7,7 @@ Versions
 * Azure: Updating to Debian Trixie
 * Claude: Updating to Alpine 3.22
 * Cloudsploit: Updating to Debian Trixie
+* DIND: Updating Docker from 20.10.24 to 29.0.2
 * Java: Updating Java 17 and 21 to Ubuntu Noble
 * Node: Updating to Debian Trixie
 * PHP: Updating PHP 8.4 to Alpine 3.22
