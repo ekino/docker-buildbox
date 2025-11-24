@@ -6,6 +6,7 @@ Versions
 * AWS: Updating to Debian Trixie
 * Azure: Updating to Debian Trixie
 * Cloudsploit: Updating to Debian Trixie
+* Java: Updating Java 17 and 21 to Ubuntu Noble
 * Node: Updating to Debian Trixie
 * Python: adding Python 3.14
 * Python: removing Python 3.9, now EoL
