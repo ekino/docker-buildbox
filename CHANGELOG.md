@@ -4,8 +4,14 @@ Versions
 2025-11-30
 ----------
 * AWS: Updating to Debian Trixie
+* Azure: Updating to Debian Trixie
+* Cloudsploit: Updating to Debian Trixie
+* Node: Updating to Debian Trixie
 * Python: adding Python 3.14
 * Python: removing Python 3.9, now EoL
+* Python: Updating Python 3.10, 3.11, 3.12, and 3.13 to Debian Trixie
+* Scaleway: Updating to Debian Trixie
+* Upsun: Updating to Debian Trixie
 
 2025-10-31
 ----------

@@ -1,4 +1,4 @@
-FROM debian:12.12-slim AS base
+FROM debian:trixie-slim AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
