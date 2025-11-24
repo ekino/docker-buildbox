@@ -1,4 +1,4 @@
-FROM debian:12.12-slim AS base
+FROM debian:trixie-slim AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     NVM_DIR=/root/.nvm \
     PATH=/root/.nvm/versions/node/current/bin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ARG VERSION
+ARG TARGETARCH
 
 FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
@@ -40,8 +41,8 @@ RUN echo "Starting ..." && \
     LATEST_NPM_VERSION=$(curl -s https://api.github.com/repos/npm/cli/releases/latest | jq -r '.tag_name' | sed 's/^v//') && \
     echo "Using NPM version: ${LATEST_NPM_VERSION}" && \
     npm install -g npm@${LATEST_NPM_VERSION} && \
-    curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
+    curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/keyrings/yarn.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn --no-install-recommends && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
