@@ -1,4 +1,4 @@
-FROM docker:20.10.24-dind AS base
+FROM docker:29.0.2-dind AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
@@ -8,11 +8,11 @@ ARG AWSCLI_ARCH="linux-x86_64"
 ADD requirements.txt .
 RUN echo "Install AWS & Azure CLIs" && \
     apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff zip && \
+    rm -f /usr/lib/python*/EXTERNALLY-MANAGED && \
     python3 -m ensurepip && \
     pip3 install --no-cache --upgrade pip setuptools wheel && \
     pip3 -q install boto3 PyYAML && \
     pip3 install -r requirements.txt && \
-    apk del libc6-compat && \
     apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
 
@@ -21,11 +21,11 @@ ARG TRIVY_ARCH="Linux-ARM64"
 ADD requirements.txt .
 RUN echo "Install AWS & Azure CLIs" && \
     apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff zip && \
+    rm -f /usr/lib/python*/EXTERNALLY-MANAGED && \
     python3 -m ensurepip && \
     pip3 install --no-cache --upgrade pip setuptools wheel && \
     pip3 -q install boto3 PyYAML && \
     pip3 install -r requirements.txt && \
-    apk del libc6-compat && \
     apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
 
@@ -35,7 +35,6 @@ RUN echo "Install Taskfile" && \
     echo "Done Install Taskfile" && \
     echo "Install Docker Compose" && \
     apk add --update docker-compose && \
-    docker-compose --version && \
     echo "Done install Docker Compose" && \
     echo "Install Trivy" && \
     # Downloading latest trivy
