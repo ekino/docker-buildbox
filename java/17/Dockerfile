@@ -1,14 +1,14 @@
-FROM eclipse-temurin:17.0.17_10-jdk-noble as base
+FROM eclipse-temurin:17.0.17_10-jdk-noble AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8
 
-FROM base as base-amd64
+FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
 
-FROM base as base-arm64
+FROM base AS base-arm64
 ARG AWSCLI_ARCH="linux-aarch64"
 
 FROM base-${TARGETARCH}
@@ -16,23 +16,18 @@ FROM base-${TARGETARCH}
 # Updating packages using sources
 RUN cat /etc/apt/sources.list && \
     apt-get -qq clean -qq && apt-get -qq update && \
-
     # Install base
     apt-get -qq -y install build-essential curl git make openssh-client jq unzip groff less && \
-
     # Installing AWS CLIv2
     curl https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && \
     rm -rf aws && \
-
     # Install graphviz
     apt-get -qq -y install graphviz && \
-
     # Install postgresql-client
     apt-get -qq -y install postgresql-client && \
-
     # Cleaning files!
     rm -rf /tmp/* && \
     apt-get -y remove --purge dpkg-dev fakeroot file manpages manpages-dev patch xauth xz-utils && \

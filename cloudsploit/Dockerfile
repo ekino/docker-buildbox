@@ -1,11 +1,11 @@
-FROM python:3.13.6-slim-trixie as base
+FROM python:3.13.6-slim-trixie AS base
 LABEL maintainer="Axel Pavageau <axel.pavageau@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-FROM base as base-amd64
+FROM base AS base-amd64
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
 
-FROM base as base-arm64
+FROM base AS base-arm64
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
 
 FROM base-$TARGETARCH

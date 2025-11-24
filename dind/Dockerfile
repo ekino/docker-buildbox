@@ -1,8 +1,8 @@
-FROM docker:20.10.24-dind as base
+FROM docker:20.10.24-dind AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-FROM base as base-amd64
+FROM base AS base-amd64
 ARG TRIVY_ARCH="Linux-64bit"
 ARG AWSCLI_ARCH="linux-x86_64"
 ADD requirements.txt .
@@ -16,7 +16,7 @@ RUN echo "Install AWS & Azure CLIs" && \
     apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
 
-FROM base as base-arm64
+FROM base AS base-arm64
 ARG TRIVY_ARCH="Linux-ARM64"
 ADD requirements.txt .
 RUN echo "Install AWS & Azure CLIs" && \

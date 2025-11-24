@@ -1,13 +1,13 @@
-FROM python:3.13.6-slim-trixie as base
+FROM python:3.13.6-slim-trixie AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG VERSION
 
-FROM base as base-amd64
+FROM base AS base-amd64
 ARG CLI_ARCH="amd64"
 
-FROM base as base-arm64
+FROM base AS base-arm64
 ARG CLI_ARCH="arm64"
 
 FROM base-$TARGETARCH
