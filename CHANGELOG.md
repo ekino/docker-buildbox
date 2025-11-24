@@ -5,8 +5,10 @@ Versions
 ----------
 * AWS: Updating to Debian Trixie
 * Azure: Updating to Debian Trixie
+* Claude: Updating to Alpine 3.22
 * Cloudsploit: Updating to Debian Trixie
 * Node: Updating to Debian Trixie
+* PHP: Updating PHP 8.4 to Alpine 3.22
 * Python: adding Python 3.14
 * Python: removing Python 3.9, now EoL
 * Python: Updating Python 3.10, 3.11, 3.12, and 3.13 to Debian Trixie
