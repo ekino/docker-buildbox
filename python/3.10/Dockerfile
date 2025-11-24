@@ -1,4 +1,4 @@
-FROM python:3.10.18-slim-trixie AS base
+FROM python:3.10.19-slim-trixie AS base
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG TARGETARCH
