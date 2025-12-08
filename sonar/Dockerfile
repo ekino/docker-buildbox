@@ -1,4 +1,4 @@
-FROM alpine:3.22.2 AS base
+FROM alpine:3.23.0 AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
