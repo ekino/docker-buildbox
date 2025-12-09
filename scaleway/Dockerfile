@@ -1,4 +1,4 @@
-FROM python:3.14.0-slim-trixie AS base
+FROM python:3.14.1-slim-trixie AS base
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
