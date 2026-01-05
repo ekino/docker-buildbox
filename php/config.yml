@@ -18,11 +18,6 @@ build_args: &build_args
   REDIS_VERSION: 6.2.0
   XDEBUG_VERSION: 3.4.5
 versions:
-  "8.1":
-    platforms: *platforms
-    build_args:
-      <<: *build_args
-    test_config: *test_config
   "8.2":
     platforms: *platforms
     build_args:

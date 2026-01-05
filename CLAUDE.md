@@ -89,7 +89,7 @@ Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md
 - **golang**: Go + AWS CLI, Gitleaks, GolangCI-Lint, tools
 - **java**: Java 17/21 + AWS CLI, Maven, tools
 - **node**: Node.js + AWS CLI
-- **php**: PHP 8.1/8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
+- **php**: PHP 8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
 - **platformsh**: Platform.sh CLI
 - **python**: Python 3.10-3.14 + pip, pipenv
 - **scaleway**: Scaleway CLI + Terraform, Kubectl, Helm

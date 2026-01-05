@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-01-31
+----------
+* PHP: removing PHP 8.1, now EoL
+
 2025-12-31
 ----------
 * Standard dependencies updates. Happy new year !
