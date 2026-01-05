@@ -1,6 +1,10 @@
 Versions
 ========
 
+2025-12-31
+----------
+* Standard dependencies updates. Happy new year !
+
 2025-11-30
 ----------
 * AWS: Updating to Debian Trixie
