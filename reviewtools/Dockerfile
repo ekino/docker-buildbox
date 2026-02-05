@@ -30,5 +30,9 @@ COPY --chown=reviewtools:reviewtools skills/ /home/reviewtools/.claude/skills/
 # Switch to reviewtools user
 USER reviewtools:reviewtools
 
+# Create Gemini config with previewFeatures enabled
+RUN mkdir -p ~/.gemini && \
+    echo '{"security":{"auth":{"selectedType":"gemini-api-key"}},"general":{"previewFeatures":true}}' > ~/.gemini/settings.json
+
 # Set working directory
 WORKDIR /home/reviewtools
