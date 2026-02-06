@@ -249,6 +249,18 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  # Reviewtools
+  - package-ecosystem: 'docker'
+    directory: '/reviewtools'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'reviewtools'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Scaleway
   - package-ecosystem: 'docker'
     directory: '/scaleway'
