@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.17_10-jdk-noble AS base
+FROM eclipse-temurin:17.0.18_8-jdk-noble AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
