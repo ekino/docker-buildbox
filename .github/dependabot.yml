@@ -1,289 +1,287 @@
 version: 2
 updates:
   # Global
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pip"
-    directory: "/"
+      interval: 'weekly'
+  - package-ecosystem: 'pip'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
   # AWS
-  - package-ecosystem: "docker"
-    directory: "/aws"
+  - package-ecosystem: 'docker'
+    directory: '/aws'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "aws"
+      - 'dependencies'
+      - 'docker'
+      - 'aws'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Azure
-  - package-ecosystem: "docker"
-    directory: "/azure"
+  - package-ecosystem: 'docker'
+    directory: '/azure'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "azure"
+      - 'dependencies'
+      - 'docker'
+      - 'azure'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Chrome
-  - package-ecosystem: "docker"
-    directory: "/chrome"
+  - package-ecosystem: 'docker'
+    directory: '/chrome'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "chrome"
+      - 'dependencies'
+      - 'docker'
+      - 'chrome'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Claude
-  - package-ecosystem: "docker"
-    directory: "/claude"
+  - package-ecosystem: 'docker'
+    directory: '/claude'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "claude"
+      - 'dependencies'
+      - 'docker'
+      - 'claude'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Cloudsploit
-  - package-ecosystem: "docker"
-    directory: "/cloudsploit"
+  - package-ecosystem: 'docker'
+    directory: '/cloudsploit'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "cloudsploit"
+      - 'dependencies'
+      - 'docker'
+      - 'cloudsploit'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "npm"
-    directory: "/cloudsploit"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+  - package-ecosystem: 'npm'
+    directory: '/cloudsploit'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "npm"
-      - "cloudsploit"
+      - 'dependencies'
+      - 'npm'
+      - 'cloudsploit'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # DIND
-  - package-ecosystem: "docker"
-    directory: "/dind"
+  - package-ecosystem: 'docker'
+    directory: '/dind'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "dind"
+      - 'dependencies'
+      - 'docker'
+      - 'dind'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "pip"
-    directory: "/dind"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+  - package-ecosystem: 'pip'
+    directory: '/dind'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "pip"
-      - "dind"
+      - 'dependencies'
+      - 'pip'
+      - 'dind'
   # Golang
-  - package-ecosystem: "docker"
-    directory: "/golang/1.24"
+  - package-ecosystem: 'docker'
+    directory: '/golang/1.24'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "golang"
+      - 'dependencies'
+      - 'docker'
+      - 'golang'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
-    directory: "/golang/1.25"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/golang/1.25'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "golang"
+      - 'dependencies'
+      - 'docker'
+      - 'golang'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
 
   # Java
-  - package-ecosystem: "docker"
-    directory: "/java/17"
+  - package-ecosystem: 'docker'
+    directory: '/java/17'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "java"
+      - 'dependencies'
+      - 'docker'
+      - 'java'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "docker"
-    directory: "/java/21"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+  - package-ecosystem: 'docker'
+    directory: '/java/21'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "java"
+      - 'dependencies'
+      - 'docker'
+      - 'java'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Node
-  - package-ecosystem: "docker"
-    directory: "/node"
+  - package-ecosystem: 'docker'
+    directory: '/node'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "node"
+      - 'dependencies'
+      - 'docker'
+      - 'node'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Php
-  - package-ecosystem: "docker"
-    # php/8.1 removed
-  -   package-ecosystem: "docker"
-      directory: "/php/8.2"
-      schedule:
-        interval: "weekly"
-      labels:
-        - "dependencies"
-        - "docker"
-        - "php"
-      ignore:
-        -   dependency-name: "*"
-            update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
-  -   package-ecosystem: "docker"
-      directory: "/php/8.3"
-      schedule:
-        interval: "weekly"
-      labels:
-        - "dependencies"
-        - "docker"
-        - "php"
-      ignore:
-        -   dependency-name: "*"
-            update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
-  -   package-ecosystem: "docker"
-      directory: "/php/8.4"
-      schedule:
-        interval: "weekly"
-      labels:
-        - "dependencies"
-        - "docker"
-        - "php"
-      ignore:
-        -   dependency-name: "*"
-            update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
+  - package-ecosystem: 'docker'
+    directory: '/php/8.2'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'php'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/php/8.3'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'php'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/php/8.4'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'php'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
   # Python
-  - package-ecosystem: "docker"
-    directory: "/python/3.10"
+  - package-ecosystem: 'docker'
+    directory: '/python/3.10'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "python"
+      - 'dependencies'
+      - 'docker'
+      - 'python'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
-    directory: "/python/3.11"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/python/3.11'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "python"
+      - 'dependencies'
+      - 'docker'
+      - 'python'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
-    directory: "/python/3.12"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/python/3.12'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "python"
+      - 'dependencies'
+      - 'docker'
+      - 'python'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
-    directory: "/python/3.13"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/python/3.13'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "python"
+      - 'dependencies'
+      - 'docker'
+      - 'python'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "docker"
-    directory: "/python/3.14"
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/python/3.14'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "python"
+      - 'dependencies'
+      - 'docker'
+      - 'python'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
   # Scaleway
-  - package-ecosystem: "docker"
-    directory: "/scaleway"
+  - package-ecosystem: 'docker'
+    directory: '/scaleway'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "scaleway"
+      - 'dependencies'
+      - 'docker'
+      - 'scaleway'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Sonar
-  - package-ecosystem: "docker"
-    directory: "/sonar"
+  - package-ecosystem: 'docker'
+    directory: '/sonar'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "sonar"
+      - 'dependencies'
+      - 'docker'
+      - 'sonar'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Upsun
-  - package-ecosystem: "docker"
-    directory: "/upsun"
+  - package-ecosystem: 'docker'
+    directory: '/upsun'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     labels:
-      - "dependencies"
-      - "docker"
-      - "upsun"
+      - 'dependencies'
+      - 'docker'
+      - 'upsun'
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
