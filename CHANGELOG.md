@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-02-28
+----------
+* Reviewtools: added new image with AI code review tools
+
 2026-01-31
 ----------
 * PHP: removing PHP 8.1, now EoL
