@@ -4,6 +4,7 @@ Versions
 2026-02-28
 ----------
 * Reviewtools: added new image with AI code review tools
+* PHP: opcache is already enabled by default since https://github.com/docker-library/php/commit/2a5269015e47294d70bbd025facd38b6ac564990. No need to re-enable it ourselves.
 
 2026-01-31
 ----------
