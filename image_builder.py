@@ -51,7 +51,11 @@ def build(image, version, debug):
             or env_conf["event_type"] == "schedule"
         ):
             # Login to registry and push
-            docker_tools.login_to_registries(env_conf)
+            try:
+                docker_tools.login_to_registries(env_conf)
+            except Exception as e:
+                print(f"> [Error] Failed to login to registries after retries: {e}")
+                exit(1)
 
             # Build, tag and push docker image to remote registry (Docker hub)
             docker_tools.build_image(image_conf,
