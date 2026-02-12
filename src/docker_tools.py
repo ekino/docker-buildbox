@@ -1,10 +1,71 @@
 import os
 import pprint
+import time
+from functools import wraps
 
 from python_on_whales import docker
 from python_on_whales.exceptions import DockerException
 
+import src.config as config
 
+# Load retry configuration from base_config.yml
+_retry_config = None
+
+def get_retry_config():
+    global _retry_config
+    if _retry_config is None:
+        _retry_config = config.load_retry_config()
+    return _retry_config
+
+
+def retry_with_backoff(max_retries=None,
+                       initial_delay=None,
+                       max_delay=None,
+                       backoff_factor=None,
+                       exceptions=(DockerException,)):
+    """
+    Decorator that retries a function with exponential backoff.
+
+    Args:
+        max_retries: Maximum number of retry attempts (None = use config default)
+        initial_delay: Initial delay between retries in seconds (None = use config default)
+        max_delay: Maximum delay between retries in seconds (None = use config default)
+        backoff_factor: Multiplier for delay after each retry (None = use config default)
+        exceptions: Tuple of exceptions to catch and retry
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            # Load config defaults if not specified
+            retry_cfg = get_retry_config()
+            _max_retries = max_retries if max_retries is not None else retry_cfg["max_retries"]
+            _initial_delay = initial_delay if initial_delay is not None else retry_cfg["initial_delay"]
+            _max_delay = max_delay if max_delay is not None else retry_cfg["max_delay"]
+            _backoff_factor = backoff_factor if backoff_factor is not None else retry_cfg["backoff_factor"]
+
+            delay = _initial_delay
+            last_exception = None
+
+            for attempt in range(_max_retries + 1):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions as e:
+                    last_exception = e
+                    if attempt < _max_retries:
+                        print(f"> [Warning] Attempt {attempt + 1}/{_max_retries + 1} failed: {str(e)}")
+                        print(f"> [Info] Retrying in {delay} seconds...")
+                        time.sleep(delay)
+                        delay = min(delay * _backoff_factor, _max_delay)
+                    else:
+                        print(f"> [Error] All {_max_retries + 1} attempts failed")
+                        raise last_exception
+
+            return None
+        return wrapper
+    return decorator
+
+
+@retry_with_backoff()  # Uses config defaults
 def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug):
     print("> [Info] Building: " + image_tag[0])
     try:
@@ -45,6 +106,7 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
     print("Build successful")
 
 
+@retry_with_backoff(max_retries=2)  # Fewer retries for tests, other values from config
 def run_image(image_name, image_conf, debug):
     volume = []
 
@@ -88,6 +150,7 @@ def start_local_registry():
     return docker.run("registry:2", detach=True, publish=[(5000, 5000)], restart='always', name='registry')
 
 
+@retry_with_backoff()  # Uses config defaults
 def login_to_registries(env_conf):
     print("> [Info] Login to registries")
     try:
@@ -97,7 +160,7 @@ def login_to_registries(env_conf):
         print("Login to docker hub successful")
     except DockerException as docker_exception:
         print("> [Error] Login failed - " + str(docker_exception))
-        exit(1)
+        raise
     try:
         docker.login(
             server="ghcr.io", username="ci", password=env_conf["github_token"]
@@ -105,4 +168,4 @@ def login_to_registries(env_conf):
         print("Login to GHCR successful")
     except DockerException as docker_exception:
         print("> [Error] Login failed - " + str(docker_exception))
-        exit(1)
+        raise

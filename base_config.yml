@@ -3,5 +3,12 @@ namespace: ekino
 DOCKER_SOCK_PATH: unix://var/run/docker.sock
 DOCKER_TIMEOUT: 600
 
+# Retry configuration for Docker operations
+retry_config:
+  max_retries: 3
+  initial_delay: 2  # seconds
+  max_delay: 60  # seconds
+  backoff_factor: 2
+
 base_platforms: &base_platforms
   - linux/amd64
