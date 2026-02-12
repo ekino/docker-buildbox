@@ -100,3 +100,14 @@ def parse_platform(platform):
     parts.extend([None])
 
     return parts[0:3]
+
+
+def load_retry_config():
+    """Load retry configuration from base_config.yml"""
+    base_config = load_base_config()
+    return base_config.get("retry_config", {
+        "max_retries": 3,
+        "initial_delay": 2,
+        "max_delay": 60,
+        "backoff_factor": 2
+    })
