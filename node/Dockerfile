@@ -38,7 +38,7 @@ RUN echo "Starting ..." && \
     nvm install ${LATEST_NODE_VERSION} && nvm alias default ${LATEST_NODE_VERSION} && \
     ln -s /root/.nvm/versions/node/v${LATEST_NODE_VERSION} /root/.nvm/versions/node/current && \
     echo "Fetching latest NPM version..." && \
-    LATEST_NPM_VERSION=$(curl -s https://api.github.com/repos/npm/cli/releases/latest | jq -r '.tag_name' | sed 's/^v//') && \
+    LATEST_NPM_VERSION=$(curl -s https://api.github.com/repos/npm/cli/releases | jq -r '[.[] | select(.tag_name | test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))] | .[0].tag_name' | sed 's/^v//') && \
     echo "Using NPM version: ${LATEST_NPM_VERSION}" && \
     npm install -g npm@${LATEST_NPM_VERSION} && \
     curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/keyrings/yarn.gpg && \
