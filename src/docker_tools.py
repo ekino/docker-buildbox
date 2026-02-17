@@ -11,6 +11,7 @@ import src.config as config
 # Load retry configuration from base_config.yml
 _retry_config = None
 
+
 def get_retry_config():
     global _retry_config
     if _retry_config is None:
@@ -99,7 +100,7 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
 
     except DockerException as docker_exception:
         print("> [Error] Build error - " + str(docker_exception))
-        exit(1)
+        raise
     finally:
         builder.remove()
 
@@ -137,7 +138,7 @@ def run_image(image_name, image_conf, debug):
         print("Tests successful")
     except DockerException as e:
         print("> [Error] Command test failed - " + str(e))
-        exit(1)
+        raise
     finally:
         docker.container.prune()
 
