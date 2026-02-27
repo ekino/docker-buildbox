@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-03-31
+----------
+* Claude: removed image, replaced by Reviewtools
+
 2026-02-28
 ----------
 * Reviewtools: added new image with AI code review tools
