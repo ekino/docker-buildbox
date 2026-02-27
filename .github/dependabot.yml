@@ -45,18 +45,6 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
-  # Claude
-  - package-ecosystem: 'docker'
-    directory: '/claude'
-    schedule:
-      interval: 'weekly'
-    labels:
-      - 'dependencies'
-      - 'docker'
-      - 'claude'
-    ignore:
-      - dependency-name: '*'
-        update-types: ['version-update:semver-major']
   # Cloudsploit
   - package-ecosystem: 'docker'
     directory: '/cloudsploit'

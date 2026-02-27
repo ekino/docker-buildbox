@@ -128,11 +128,11 @@ Contains Azure Cli, Terraform, Kubectl, Helm, Python & misc tools
 
 Contains Chromium browser and the latest Node LTS.
 
-### Claude
-- https://hub.docker.com/r/ekino/ci-claude/tags
-- https://github.com/orgs/ekino/packages/container/package/ci-claude
+### ReviewTools
+- https://hub.docker.com/r/ekino/ci-reviewtools/tags
+- https://github.com/orgs/ekino/packages/container/package/ci-reviewtools
 
-Contains Node.js 24 on Alpine Linux with Anthropic's Claude Code CLI tool installed globally. Runs under a dedicated `claude:claude` user for security.
+Contains Node.js 24 on Alpine Linux with AI code review tools: Claude Code, OpenAI Codex, and Google Gemini CLI. Runs under a dedicated `reviewtools:reviewtools` user for security.
 
 ### Cloudsploit
 - https://hub.docker.com/r/ekino/ci-cloudsploit/tags
