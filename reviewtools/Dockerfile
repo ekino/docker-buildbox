@@ -2,7 +2,7 @@ FROM node:24-alpine3.22
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-RUN apk update && apk add --no-cache git curl bash jq python3 make g++
+RUN apk update && apk add --no-cache git curl bash jq python3 make g++ coreutils
 
 # Install GitLab CLI (glab)
 ARG TARGETARCH
