@@ -13,7 +13,7 @@ FROM base AS base-amd64
 ARG AWSCLI_ARCH="linux-x86_64"
 ARG GITLEAKS_ARCH="linux_x64"
 ARG GOLANGCILINT_ARCH="linux-amd64"
-ARG GOMODUPGRADE_ARCH="Linux_amd64"
+ARG GOMODUPGRADE_ARCH="linux_amd64"
 ARG GOSWAGGER_ARCH="linux_amd64"
 ARG GOMIGRATE_ARCH="linux-amd64"
 ARG MOCKGEN_ARCH="linux_amd64"
@@ -22,7 +22,7 @@ FROM base AS base-arm64
 ARG AWSCLI_ARCH="linux-aarch64"
 ARG GITLEAKS_ARCH="linux_arm64"
 ARG GOLANGCILINT_ARCH="linux-arm64"
-ARG GOMODUPGRADE_ARCH="Linux_arm64"
+ARG GOMODUPGRADE_ARCH="linux_arm64"
 ARG GOSWAGGER_ARCH="linux_arm64"
 ARG GOMIGRATE_ARCH="linux-arm64"
 ARG MOCKGEN_ARCH="linux_arm64"
@@ -71,5 +71,5 @@ RUN apt-get update -q && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
     rm -rf mock* && \
     # Install go tools
-    go install golang.org/x/tools/cmd/goimports@latest && \
+    go install golang.org/x/tools/cmd/goimports@v0.42.0 && \
     go install github.com/boumenot/gocover-cobertura@latest
