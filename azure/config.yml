@@ -12,7 +12,6 @@ versions:
         - kustomize version
         - pip --version
         - pipenv --version
-        - trivy --version
         - terragrunt --version
         - infracost --version
         - tfenv init

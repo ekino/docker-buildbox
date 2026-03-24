@@ -3,7 +3,11 @@ Versions
 
 2026-03-31
 ----------
+* AWS: removing trivy
+* Azure: removing trivy
 * Claude: removed image, replaced by Reviewtools
+* DIND: removing trivy
+* Scaleway: removing trivy
 
 2026-02-28
 ----------
