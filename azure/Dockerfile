@@ -8,7 +8,6 @@ ARG AWSCLI_ARCH="x86_64"
 ARG HELM_ARCH="linux-amd64"
 ARG KUBECTL_ARCH="amd64"
 ARG KUSTOMIZE_ARCH="linux_amd64"
-ARG TRIVY_ARCH="Linux-64bit"
 ARG TERRAGRUNT_ARCH="amd64"
 ARG INFRACOST_ARCH="amd64"
 ARG JQ_ARCH="amd64"
@@ -18,7 +17,6 @@ ARG AWSCLI_ARCH="aarch64"
 ARG HELM_ARCH="linux-arm64"
 ARG KUBECTL_ARCH="arm64"
 ARG KUSTOMIZE_ARCH="linux_arm64"
-ARG TRIVY_ARCH="Linux-ARM64"
 ARG TERRAGRUNT_ARCH="arm64"
 ARG INFRACOST_ARCH="arm64"
 ARG JQ_ARCH="arm64"
@@ -51,12 +49,6 @@ RUN apt-get update -qq && apt-get install -qq -y curl git gcc zip jq wget\
     # Downloading latest helm diff plugin
     HELM_DIFF_VERSION=$(curl -s https://api.github.com/repos/databus23/helm-diff/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff && \
-    # Downloading latest trivy
-    TRIVY_VERSION=$(curl -s https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
-    tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
-    rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
-    mv trivy /usr/bin/trivy && \
     # Downloading latest terragrunt
     TERRAGRUNT_VERSION=$(curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     curl -LO https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
