@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pyyaml = "==6.0.3"
-click = "==8.3.1"
+click = "==8.3.2"
 python-on-whales = "==0.81.0"
 gitpython = "==3.1.46"
 pydantic = "2.12.5"
