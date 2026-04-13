@@ -33,6 +33,18 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
+  # GCP
+  - package-ecosystem: 'docker'
+    directory: '/gcp'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'gcp'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Chrome
   - package-ecosystem: 'docker'
     directory: '/chrome'
