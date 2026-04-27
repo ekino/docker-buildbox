@@ -4,6 +4,7 @@ Versions
 2026-04-30
 ----------
 * Golang: adding support for 1.26, removing 1.24
+* PHP: adding PHP 8.5. Updating associated tools & libraries for all PHP versions.
 
 2026-03-31
 ----------
