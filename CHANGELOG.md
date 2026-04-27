@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-04-30
+----------
+* Golang: adding support for 1.26, removing 1.24
+
 2026-03-31
 ----------
 * AWS: removing trivy
