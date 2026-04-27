@@ -5,6 +5,7 @@ Versions
 ----------
 * Golang: adding support for 1.26, removing 1.24
 * PHP: adding PHP 8.5. Updating associated tools & libraries for all PHP versions.
+* Sonar: updating to 8.1
 
 2026-03-31
 ----------
