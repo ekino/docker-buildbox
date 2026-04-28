@@ -31,7 +31,7 @@ RUN echo "Starting ..." && \
     LATEST_NVM_VERSION=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name' | sed 's/^v//') && \
     echo "Using NVM version: ${LATEST_NVM_VERSION}" && \
     echo "Fetching latest Node.js version for major version ${VERSION}..." && \
-    LATEST_NODE_VERSION=$(curl -s https://api.github.com/repos/nodejs/node/releases | jq -r --arg major "v${VERSION}" '[.[] | select(.tag_name | startswith($major)) | .tag_name] | sort_by(. | ltrimstr("v") | split(".") | map(tonumber)) | reverse | .[0]' | sed 's/^v//') && \
+    LATEST_NODE_VERSION=$(curl -s "https://nodejs.org/dist/index.json" | jq -r --arg major "v${VERSION}." '[.[] | select(.version | startswith($major)) | .version] | .[0]' | sed 's/^v//') && \
     echo "Using Node.js version: ${LATEST_NODE_VERSION}" && \
     git clone https://github.com/nvm-sh/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${LATEST_NVM_VERSION} && \
     . /root/.nvm/nvm.sh && \

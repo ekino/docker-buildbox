@@ -8,17 +8,17 @@ test_config: &test_config
     - task --version
 
 versions:
-  "20":
-    platforms:
-      - linux/amd64
-      - linux/arm64
-    test_config: *test_config
   "22":
     platforms:
       - linux/amd64
       - linux/arm64
     test_config: *test_config
   "24":
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    test_config: *test_config
+  "26":
     platforms:
       - linux/amd64
       - linux/arm64

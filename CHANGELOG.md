@@ -3,6 +3,7 @@ Versions
 
 2026-05-31
 ----------
+* Node: adding support for 26, and dropping support for 20 (now EoL)
 * PHP: removing pcov, memcached and apcu extensions, and their associated dependencies (cyrus-sasl-dev, libmcrypt-dev, libmemcached-dev)
 
 2026-04-30
