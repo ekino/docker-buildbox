@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-04-30
+----------
+* GCP: added new image with GCloud CLI, Kubectl, Helm, Kustomize, Terragrunt, Infracost, Python & misc tools
+
 2026-03-31
 ----------
 * AWS: removing trivy
