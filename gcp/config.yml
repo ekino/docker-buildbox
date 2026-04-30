@@ -1,0 +1,20 @@
+versions:
+  '1':
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    test_config:
+      cmd:
+        - gcloud --version
+        - git --version
+        - helm diff version
+        - helm version
+        - kustomize version
+        - pip --version
+        - pipenv --version
+        - zip --version
+        - unzip -v
+        - terragrunt --version
+        - infracost --version
+        - tfenv init
+        - kubectl version --client
