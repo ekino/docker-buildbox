@@ -4,6 +4,9 @@ Versions
 2026-04-30
 ----------
 * GCP: added new image with GCloud CLI, Kubectl, Helm, Kustomize, Terragrunt, Infracost, Python & misc tools
+* Golang: adding support for 1.26, removing 1.24
+* PHP: adding PHP 8.5. Updating associated tools & libraries for all PHP versions.
+* Sonar: updating to 8.1
 
 2026-03-31
 ----------

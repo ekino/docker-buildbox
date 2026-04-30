@@ -1,4 +1,4 @@
-FROM golang:1.24.13 AS base
+FROM golang:1.26.2 AS base
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
@@ -71,5 +71,5 @@ RUN apt-get update -q && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
     rm -rf mock* && \
     # Install go tools
-    go install golang.org/x/tools/cmd/goimports@v0.42.0 && \
+    go install golang.org/x/tools/cmd/goimports@latest && \
     go install github.com/boumenot/gocover-cobertura@latest
