@@ -11,9 +11,7 @@ test_config: &test_config
     - php /tmp/test.php
     - aws --version
 build_args: &build_args
-  APCU_VERSION: 5.1.28
   COMPOSER_VERSION: 2.9.7
-  MEMCACHED_VERSION: 3.4.0
   PHP_CS_FIXER_VERSION: 3.95.1
   REDIS_VERSION: 6.3.0
   XDEBUG_VERSION: 3.5.1

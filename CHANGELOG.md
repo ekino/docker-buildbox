@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-05-31
+----------
+* PHP: removing pcov, memcached and apcu extensions, and their associated dependencies (cyrus-sasl-dev, libmcrypt-dev, libmemcached-dev)
+
 2026-04-30
 ----------
 * GCP: added new image with GCloud CLI, Kubectl, Helm, Kustomize, Terragrunt, Infracost, Python & misc tools

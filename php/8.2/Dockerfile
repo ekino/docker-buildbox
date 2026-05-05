@@ -2,9 +2,7 @@ FROM php:8.2.29-cli-alpine3.21 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-ARG APCU_VERSION
 ARG COMPOSER_VERSION
-ARG MEMCACHED_VERSION
 ARG PHP_CS_FIXER_VERSION
 ARG REDIS_VERSION
 ARG SSH2_VERSION
@@ -25,9 +23,9 @@ ENV COMPOSER_NO_INTERACTION=1 \
 
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
-    apk add --update --upgrade alpine-sdk apk-tools autoconf bash bzip2 cyrus-sasl-dev curl freetype-dev gettext git \
+    apk add --update --upgrade alpine-sdk apk-tools autoconf bash bzip2 curl freetype-dev gettext git \
     icu-dev icu-data-full jq libgcrypt-dev libjpeg-turbo-dev \
-    libmcrypt-dev libmemcached-dev libpng-dev libssh2-dev libxml2-dev libxslt-dev libzip-dev linux-headers make \
+    libpng-dev libssh2-dev libxml2-dev libxslt-dev libzip-dev linux-headers make \
     mysql-client openssh-client patch postgresql-client postgresql-dev rsync tzdata && \
     echo "Starting PHP with $version" && \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
@@ -35,16 +33,10 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql pgsql soap sockets xsl zip && \
     export CFLAGS=$CFLAGS_PREVIOUS && \
-    pecl install apcu-${APCU_VERSION} && \
-    pecl install memcached-${MEMCACHED_VERSION} && \
-    pecl install pcov && \
-    docker-php-ext-enable pcov && \
-    docker-php-ext-enable memcached && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     echo -e "\
     date.timezone=${PHP_TIMEZONE:-UTC} \n\
     short_open_tag=Off \n\
-    extension=apcu.so \n\
     " > /usr/local/etc/php/php.ini && \
     curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
     curl -sSL https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VERSION}/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
