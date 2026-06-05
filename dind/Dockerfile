@@ -1,4 +1,4 @@
-FROM docker:29.5.2-dind AS base
+FROM docker:29.5.3-dind AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
