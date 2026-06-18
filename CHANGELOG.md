@@ -1,6 +1,13 @@
 Versions
 ========
 
+2026-06-30
+----------
+* AWS: re-adding trivy
+* Azure: re-adding trivy
+* DIND: re-adding trivy
+* Scaleway: re-adding trivy
+
 2026-05-31
 ----------
 * Node: adding support for 26, and dropping support for 20 (now EoL)

@@ -10,3 +10,4 @@ versions:
         - docker --version
         - docker-compose --version
         - task --version
+        - trivy --version
