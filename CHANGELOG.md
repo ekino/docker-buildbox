@@ -6,6 +6,7 @@ Versions
 * AWS: re-adding trivy
 * Azure: re-adding trivy
 * DIND: re-adding trivy
+* GCP: adding trivy
 * Scaleway: re-adding trivy
 
 2026-05-31

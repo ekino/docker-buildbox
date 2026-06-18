@@ -14,6 +14,7 @@ versions:
         - pipenv --version
         - zip --version
         - unzip -v
+        - trivy --version
         - terragrunt --version
         - infracost --version
         - tfenv init
