@@ -7,6 +7,7 @@ FROM base AS base-amd64
 ARG HELM_ARCH="linux-amd64"
 ARG KUBECTL_ARCH="amd64"
 ARG KUSTOMIZE_ARCH="linux_amd64"
+ARG TRIVY_ARCH="Linux-64bit"
 ARG TERRAGRUNT_ARCH="amd64"
 ARG INFRACOST_ARCH="amd64"
 ARG JQ_ARCH="amd64"
@@ -15,6 +16,7 @@ FROM base AS base-arm64
 ARG HELM_ARCH="linux-arm64"
 ARG KUBECTL_ARCH="arm64"
 ARG KUSTOMIZE_ARCH="linux_arm64"
+ARG TRIVY_ARCH="Linux-ARM64"
 ARG TERRAGRUNT_ARCH="arm64"
 ARG INFRACOST_ARCH="arm64"
 ARG JQ_ARCH="arm64"
@@ -43,6 +45,12 @@ RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certific
     && tar -xf kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz \
     && rm kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz \
     && mv ./kustomize /usr/bin/kustomize \
+    # Downloading latest trivy
+    && TRIVY_VERSION=$(curl -s https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') \
+    && curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
+    && tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
+    && rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
+    && mv trivy /usr/bin/trivy \
     # Downloading latest helm (3.x.x)
     && HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases | grep '"tag_name":' | grep -E 'v3\.[0-9]+\.[0-9]+' | head -1 | sed -E 's/.*"v([^"]+)".*/\1/') \
     && curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz \
