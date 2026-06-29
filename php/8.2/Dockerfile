@@ -1,4 +1,4 @@
-FROM php:8.2.29-cli-alpine3.21 AS base
+FROM php:8.2.31-cli-alpine3.24 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
