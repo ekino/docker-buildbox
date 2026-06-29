@@ -11,10 +11,10 @@ test_config: &test_config
     - php /tmp/test.php
     - aws --version
 build_args: &build_args
-  COMPOSER_VERSION: 2.9.7
-  PHP_CS_FIXER_VERSION: 3.95.1
+  COMPOSER_VERSION: 2.10.1
+  PHP_CS_FIXER_VERSION: 3.95.11
   REDIS_VERSION: 6.3.0
-  XDEBUG_VERSION: 3.5.1
+  XDEBUG_VERSION: 3.5.3
 versions:
   "8.2":
     platforms: *platforms
