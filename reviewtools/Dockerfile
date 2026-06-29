@@ -1,4 +1,4 @@
-FROM node:24-alpine3.22
+FROM node:24-alpine3.24
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 

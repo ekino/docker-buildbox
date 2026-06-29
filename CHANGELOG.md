@@ -7,7 +7,8 @@ Versions
 * Azure: re-adding trivy
 * DIND: re-adding trivy
 * GCP: adding trivy
-* PHP: bumping composer (2.10.1), php-cs-fixer (3.95.11) and xdebug (3.5.3)
+* PHP: updating base images to Alpine 3.24. Bumping composer (2.10.1), php-cs-fixer (3.95.11) and xdebug (3.5.3)
+* Reviewtools: updating base image to Alpine 3.24
 * Scaleway: re-adding trivy
 
 2026-05-31
