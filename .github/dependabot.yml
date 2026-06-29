@@ -146,6 +146,17 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
+  - package-ecosystem: 'docker'
+    directory: '/java/25'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'java'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # Node
   - package-ecosystem: 'docker'
     directory: '/node'
@@ -183,6 +194,17 @@ updates:
         update-types: ['version-update:semver-major', 'version-update:semver-minor']
   - package-ecosystem: 'docker'
     directory: '/php/8.4'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'php'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/php/8.5'
     schedule:
       interval: 'weekly'
     labels:
