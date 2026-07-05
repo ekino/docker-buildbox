@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-07-31
+----------
+* DIND: adding cosign, crane and syft
+
 2026-06-30
 ----------
 * AWS: re-adding trivy

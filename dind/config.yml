@@ -11,3 +11,6 @@ versions:
         - docker-compose --version
         - task --version
         - trivy --version
+        - cosign version
+        - crane version
+        - syft version
