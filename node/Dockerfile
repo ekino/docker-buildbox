@@ -51,7 +51,7 @@ RUN echo "Starting ..." && \
     rm -f awscliv2.zip && rm -rf aws && \
     echo "Done installing AWS" && \
     echo "Adding an up to date mime-types definition file" && \
-    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -qq -y remove --purge emacsen-common fakeroot file firebird3.0-common firebird3.0-common-doc \

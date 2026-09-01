@@ -22,7 +22,7 @@ RUN apk update && apk upgrade && \
     sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Adding an up to date mime-types definition file" && \
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     echo "Linking the Chrome executable with all the known/used names" && \
     ln -s /usr/bin/chromium-browser /usr/bin/google-chrome && \
     ln -s /usr/bin/chromium-browser /usr/bin/google-chrome-unstable && \

@@ -39,7 +39,7 @@ RUN apt-get update -q && \
     rm -f awscliv2.zip && \
     rm -rf aws && \
     # Add an up to date mime-types definition file
-    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     # Install gitleaks
     GITLEAKS_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/gitleaks/gitleaks/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
     : "${GITLEAKS_VERSION:?could not be resolved from the GitHub API}" && \

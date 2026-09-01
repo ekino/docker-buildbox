@@ -30,7 +30,7 @@ RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     # Adding an up to date mime-types definition file
-    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     # Adding yq bin
     wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq && \
     chmod +x /usr/bin/yq && \
