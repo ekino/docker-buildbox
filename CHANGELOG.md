@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-08-31
+----------
+* GCP: fixing build by switching to the google-cloud-cli-gke-gcloud-auth-plugin package, the legacy google-cloud-sdk-* names having been removed upstream
+
 2026-07-31
 ----------
 * DIND: adding cosign, crane and syft

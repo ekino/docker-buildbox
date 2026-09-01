@@ -27,7 +27,7 @@ RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certific
     && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list \
     && curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
     && apt-get update -qq \
-    && apt-get install -qq -y google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin \
+    && apt-get install -qq -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin \
     && apt-get -qq -y autoremove \
     && apt-get -qq -y clean && apt-get -y -qq purge \
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old \
