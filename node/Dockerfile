@@ -24,32 +24,34 @@ RUN echo "Starting ..." && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
     echo "Done base install!" && \
     echo "Install Taskfile" && \
-    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
+    sh -c "$(curl -f --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Starting Javascript..." && \
     echo "Fetching latest NVM version..." && \
-    LATEST_NVM_VERSION=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name' | sed 's/^v//') && \
+    LATEST_NVM_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name // empty' | sed 's/^v//') && \
+    : "${LATEST_NVM_VERSION:?could not be resolved from the GitHub API}" && \
     echo "Using NVM version: ${LATEST_NVM_VERSION}" && \
     echo "Fetching latest Node.js version for major version ${VERSION}..." && \
-    LATEST_NODE_VERSION=$(curl -s "https://nodejs.org/dist/index.json" | jq -r --arg major "v${VERSION}." '[.[] | select(.version | startswith($major)) | .version] | .[0]' | sed 's/^v//') && \
+    LATEST_NODE_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors "https://nodejs.org/dist/index.json" | jq -r --arg major "v${VERSION}." '[.[] | select(.version | startswith($major)) | .version] | .[0] // empty' | sed 's/^v//') && \
+    : "${LATEST_NODE_VERSION:?could not be resolved from nodejs.org}" && \
     echo "Using Node.js version: ${LATEST_NODE_VERSION}" && \
     git clone https://github.com/nvm-sh/nvm.git /root/.nvm && cd /root/.nvm && git checkout v${LATEST_NVM_VERSION} && \
     . /root/.nvm/nvm.sh && \
     nvm install ${LATEST_NODE_VERSION} && nvm alias default ${LATEST_NODE_VERSION} && \
     ln -s /root/.nvm/versions/node/v${LATEST_NODE_VERSION} /root/.nvm/versions/node/current && \
     nvm install-latest-npm && \
-    curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/keyrings/yarn.gpg && \
+    curl -fsSL --retry 3 --retry-delay 2 https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/keyrings/yarn.gpg && \
     echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn --no-install-recommends && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
-    curl https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
+    curl -f --retry 3 --retry-delay 2 https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && rm -rf aws && \
     echo "Done installing AWS" && \
     echo "Adding an up to date mime-types definition file" && \
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -qq -y remove --purge emacsen-common fakeroot file firebird3.0-common firebird3.0-common-doc \

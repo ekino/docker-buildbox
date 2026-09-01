@@ -3,6 +3,7 @@ Versions
 
 2026-08-31
 ----------
+* AWS, Azure, DIND, GCP, Golang, Node, Scaleway, Sonar & Upsun: tool version lookups now fail fast with an explicit error when the GitHub API is unavailable or rate-limited, instead of silently resolving to an empty version and downloading a 404 page. Remote lookups and downloads also retry on transient errors
 * GCP: fixing build by switching to the google-cloud-cli-gke-gcloud-auth-plugin package, the legacy google-cloud-sdk-* names having been removed upstream
 
 2026-07-31
