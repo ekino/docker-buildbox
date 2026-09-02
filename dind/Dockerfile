@@ -32,41 +32,45 @@ RUN echo "Install AWS & Azure CLIs" && \
 FROM base-$TARGETARCH
 ARG TARGETARCH
 RUN echo "Install Taskfile" && \
-    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d && \
+    sh -c "$(curl -f --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Install Docker Compose" && \
     apk add --update docker-compose && \
     echo "Done install Docker Compose" && \
     echo "Install Trivy" && \
     # Downloading latest trivy
-    TRIVY_VERSION=$(curl -s https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
+    TRIVY_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${TRIVY_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     mv trivy /usr/bin/trivy && \
     echo "Done install Trivy" && \
     echo "Install Cosign" && \
-    COSIGN_VERSION=$(curl -s https://api.github.com/repos/sigstore/cosign/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -Lo /usr/bin/cosign https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-${TARGETARCH} && \
+    COSIGN_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/sigstore/cosign/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${COSIGN_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -f --retry 3 --retry-delay 2 -Lo /usr/bin/cosign https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-${TARGETARCH} && \
     chmod +x /usr/bin/cosign && \
     echo "Done install Cosign" && \
     echo "Install Crane" && \
     CRANE_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "arm64" || echo "x86_64") && \
-    CRANE_VERSION=$(curl -s https://api.github.com/repos/google/go-containerregistry/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/google/go-containerregistry/releases/download/v${CRANE_VERSION}/go-containerregistry_Linux_${CRANE_ARCH}.tar.gz && \
+    CRANE_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/google/go-containerregistry/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${CRANE_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/google/go-containerregistry/releases/download/v${CRANE_VERSION}/go-containerregistry_Linux_${CRANE_ARCH}.tar.gz && \
     tar xf go-containerregistry_Linux_${CRANE_ARCH}.tar.gz crane && \
     rm go-containerregistry_Linux_${CRANE_ARCH}.tar.gz && \
     mv crane /usr/bin/crane && \
     echo "Done install Crane" && \
     echo "Install Syft" && \
-    SYFT_VERSION=$(curl -s https://api.github.com/repos/anchore/syft/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_${TARGETARCH}.tar.gz && \
+    SYFT_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/anchore/syft/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${SYFT_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_${TARGETARCH}.tar.gz && \
     tar xf syft_${SYFT_VERSION}_linux_${TARGETARCH}.tar.gz syft && \
     rm syft_${SYFT_VERSION}_linux_${TARGETARCH}.tar.gz && \
     mv syft /usr/bin/syft && \
     echo "Done install Syft" && \
     echo "Adding an up to date mime-types definition file" && \
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \
     rm -rf /tmp/* /var/cache/apk/* && \
     echo "Done!"

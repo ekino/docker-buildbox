@@ -56,7 +56,7 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     # Starting AWS
     apk add aws-cli && \
     # Adding an up to date mime-types definition file
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     # Cleaning files
     apk del --purge alpine-sdk autoconf && \
     rm -rf /tmp/* /usr/share/doc /var/cache/apk/*

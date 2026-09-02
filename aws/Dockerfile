@@ -30,51 +30,57 @@ RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     # Adding an up to date mime-types definition file
-    curl -sSL https://salsa.debian.org/debian/mime-support/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     # Adding yq bin
     wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq && \
     chmod +x /usr/bin/yq && \
     pip install -U pip && \
     pip install pipenv && \
     # Installing AWS Cli
-    curl ${AWSCLI_URL} -o "awscliv2.zip" && \
+    curl -f --retry 3 --retry-delay 2 ${AWSCLI_URL} -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && rm -rf aws && \
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" && \
+    curl -fLO --retry 3 --retry-delay 2 "https://dl.k8s.io/release/$(curl -fL -s --retry 3 --retry-delay 2 https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" && \
     chmod +x ./kubectl && \
     mv ./kubectl /usr/bin/kubectl && \
     # Downloading latest kustomize
-    KUSTOMIZE_VERSION=$(curl -s https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest | grep '"tag_name":' | sed -E 's/.*"kustomize\/v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz && \
+    KUSTOMIZE_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest | grep '"tag_name":' | sed -E 's/.*"kustomize\/v([^"]+)".*/\1/') && \
+    : "${KUSTOMIZE_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz && \
     tar -xf kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz && \
     rm kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz && \
     mv ./kustomize /usr/bin/kustomize && \
     # Downloading latest helm (3.x.x)
-    HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases | grep '"tag_name":' | grep -E 'v3\.[0-9]+\.[0-9]+' | head -1 | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
+    HELM_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/helm/helm/releases | grep '"tag_name":' | grep -E 'v3\.[0-9]+\.[0-9]+' | head -1 | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${HELM_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
     tar xf helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && rm helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && \
     mv ${HELM_ARCH}/helm /usr/local/bin/helm && \
     # Downloading latest helm diff plugin
-    HELM_DIFF_VERSION=$(curl -s https://api.github.com/repos/databus23/helm-diff/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    HELM_DIFF_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/databus23/helm-diff/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${HELM_DIFF_VERSION:?could not be resolved from the GitHub API}" && \
     helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff && \
     # Downloading latest trivy
-    TRIVY_VERSION=$(curl -s https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
+    TRIVY_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${TRIVY_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz && \
     mv trivy /usr/bin/trivy && \
     # Downloading latest terragrunt
-    TERRAGRUNT_VERSION=$(curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
+    TERRAGRUNT_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${TERRAGRUNT_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
     mv terragrunt_linux_${TERRAGRUNT_ARCH} /usr/bin/terragrunt && \
     chmod +x /usr/bin/terragrunt && \
     # Downloading latest infracost
-    INFRACOST_VERSION=$(curl -s https://api.github.com/repos/infracost/infracost/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
-    curl -LO https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-${INFRACOST_ARCH}.tar.gz && \
+    INFRACOST_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/infracost/infracost/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && \
+    : "${INFRACOST_VERSION:?could not be resolved from the GitHub API}" && \
+    curl -fLO --retry 3 --retry-delay 2 https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-${INFRACOST_ARCH}.tar.gz && \
     tar xvf infracost-linux-${INFRACOST_ARCH}.tar.gz && \
     mv infracost-linux-${INFRACOST_ARCH} /usr/bin/infracost && \
-    curl -LO https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh && \
+    curl -fLO --retry 3 --retry-delay 2 https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh && \
     mv diff.sh /opt/diff.sh && \
     chmod +x /opt/diff.sh && \
     git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv && \

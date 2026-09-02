@@ -1,6 +1,11 @@
 Versions
 ========
 
+2026-09-30
+----------
+* AWS, Azure, DIND, GCP, Golang, Node, Scaleway, Sonar & Upsun: tool version lookups now fail fast with an explicit error when the GitHub API is unavailable or rate-limited, instead of silently resolving to an empty version and downloading a 404 page. Remote lookups and downloads also retry on transient errors
+* AWS, Chrome, DIND, Golang, Node, PHP & Scaleway: fixing the mime.types source, the Debian mime-support repository having been renamed to media-types. The old URL had been returning 404 for a while, and its HTML error page was being written to /etc/mime.types
+
 2026-08-31
 ----------
 * GCP: fixing build by switching to the google-cloud-cli-gke-gcloud-auth-plugin package, the legacy google-cloud-sdk-* names having been removed upstream
