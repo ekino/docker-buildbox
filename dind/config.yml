@@ -3,6 +3,11 @@ versions:
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions:
+      COSIGN_VERSION: sigstore/cosign
+      CRANE_VERSION: google/go-containerregistry
+      SYFT_VERSION: anchore/syft
+      TRIVY_VERSION: aquasecurity/trivy
     test_config:
       cmd:
         - aws --version

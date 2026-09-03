@@ -3,6 +3,17 @@ versions:
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions:
+      HELM_DIFF_VERSION: databus23/helm-diff
+      HELM_VERSION:
+        repo: helm/helm
+        rule: latest_v3
+      KUSTOMIZE_VERSION:
+        repo: kubernetes-sigs/kustomize
+        rule: kustomize
+      SCW_VERSION: scaleway/scaleway-cli
+      TERRAGRUNT_VERSION: gruntwork-io/terragrunt
+      TRIVY_VERSION: aquasecurity/trivy
     test_config:
       cmd:
         - scw version

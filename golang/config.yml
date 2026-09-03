@@ -9,14 +9,24 @@ test_config: &test_config
     - rsync --version
     - swagger version
 
+github_versions: &github_versions
+  GITLEAKS_VERSION: gitleaks/gitleaks
+  GOLANGCILINT_VERSION: golangci/golangci-lint
+  GOMODUPGRADE_VERSION: oligot/go-mod-upgrade
+  GOSWAGGER_VERSION: go-swagger/go-swagger
+  MIGRATE_VERSION: golang-migrate/migrate
+  MOCKGEN_VERSION: golang/mock
+
 versions:
   "1.25":
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions: *github_versions
     test_config: *test_config
   "1.26":
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions: *github_versions
     test_config: *test_config

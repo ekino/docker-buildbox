@@ -64,12 +64,37 @@ test_config: &test_config
     - "tool --version"
 build_args: &build_args  # Optional: Docker build arguments
   TOOL_VERSION: "1.2.3"
+github_versions: &github_versions  # Optional: versions resolved from the GitHub API
+  TOOL_VERSION: owner/repo  # latest release, without its leading v
+  OTHER_VERSION:
+    repo: owner/repo
+    rule: latest  # or latest_tag, kustomize, latest_v3, highest_with_prefix
 versions:
   "version_name":
     platforms: *platforms
     build_args: *build_args
+    github_versions: *github_versions
     test_config: *test_config
 ```
+
+### Resolving tool versions
+`image_builder.py` resolves every `github_versions` entry before building and
+passes the results as build args, so the Dockerfiles never call the GitHub API
+themselves. Each entry needs a matching `ARG NAME` in the Dockerfile. Resolution
+rules live in `src/version_resolver.py`:
+
+| rule | picks |
+| --- | --- |
+| `latest` (default) | the latest release, minus a leading `v` |
+| `latest_tag` | the latest release tag verbatim |
+| `kustomize` | the latest `kustomize/vX.Y.Z` tag |
+| `latest_v3` | the newest stable `v3.x.y` release |
+| `highest_with_prefix` | the highest release tagged `<image version>.*` |
+
+Set `GH_AUTH_HEADER` (CI does, from a scoped GitHub App token) to get the
+authenticated rate limit; without it resolution still works, anonymously.
+Because the versions arrive as build args, a bare `docker build` fails with
+`NAME: must be passed as a build arg` - build through `image_builder.py`.
 
 ### CI/CD Matrix Logic
 The build system intelligently determines which images to build:

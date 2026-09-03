@@ -3,6 +3,10 @@ versions:
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions:
+      SONARSCANNER_VERSION:
+        repo: SonarSource/sonar-scanner-cli
+        rule: highest_with_prefix
     test_config:
       cmd:
         - java -version
