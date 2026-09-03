@@ -18,6 +18,9 @@ jobs:
 
   generate_matrix:
     runs-on: ubuntu-24.04
+    # Only needs to read the repository to diff it.
+    permissions:
+      contents: read
     if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
 
     steps:
@@ -42,6 +45,11 @@ jobs:
 
   build:
     runs-on: ubuntu-24.04
+    # GITHUB_TOKEN is used to log in to ghcr.io and push, so keep it to the
+    # minimum this job actually needs.
+    permissions:
+      contents: read
+      packages: write
     if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.matrix).include[0]
     needs: generate_matrix
 

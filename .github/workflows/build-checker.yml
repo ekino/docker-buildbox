@@ -12,6 +12,11 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-24.04
+    # Only polls the commit's combined status and check runs - all read-only.
+    permissions:
+      contents: read
+      statuses: read
+      checks: read
     steps:
       - name: Wait for commit statuses
         id: status
