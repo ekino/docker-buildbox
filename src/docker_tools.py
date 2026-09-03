@@ -1,6 +1,7 @@
 import os
 import pprint
 import time
+from contextlib import contextmanager
 from functools import wraps
 
 from python_on_whales import docker
@@ -66,9 +67,30 @@ def retry_with_backoff(max_retries=None,
     return decorator
 
 
+@contextmanager
+def build_builder():
+    """A buildx builder shared by every build of one image.
+
+    A publishing run builds twice: once to the local registry, which is what the
+    tests run against, and once to the remote registries. Sharing the builder
+    lets the second build reuse the layers the first one produced instead of
+    building the image again from scratch. The builder, and its cache, is
+    destroyed with the job, so nothing stale can reach another build.
+    """
+    builder = docker.buildx.create(use=True, driver_options=dict(network="host"))
+    try:
+        yield builder
+    finally:
+        builder.remove()
+
+
 @retry_with_backoff()  # Uses config defaults
-def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug):
-    print("> [Info] Building: " + image_tag[0])
+def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug, builder, cache=False):
+    # image_tag is a single tag for the local build and a list for the remote
+    # registries; normalise so the log names every tag rather than, for a bare
+    # string, its first character.
+    tags = [image_tag] if isinstance(image_tag, str) else image_tag
+    print("> [Info] Building: " + ", ".join(tags))
     try:
         if debug:
             pp = pprint.PrettyPrinter(indent=1)
@@ -82,17 +104,12 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
             print(dockerfile_path)
             print("\n")
 
-        # Create a buildx builder instance
-        builder = docker.buildx.create(
-            use=True, driver_options=dict(network="host"))
-
-        # Build and push to local registry
         docker.buildx.build(
             builder=builder,
             file=os.path.join(dockerfile_directory, dockerfile_path),
             context_path=dockerfile_directory,
-            tags=image_tag,
-            cache=False,
+            tags=tags,
+            cache=cache,
             push=True,
             build_args=image_conf["build_args"] if "build_args" in image_conf else {
             }, platforms=image_conf["platforms"]
@@ -101,8 +118,6 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
     except DockerException as docker_exception:
         print("> [Error] Build error - " + str(docker_exception))
         raise
-    finally:
-        builder.remove()
 
     print("Build successful")
 
