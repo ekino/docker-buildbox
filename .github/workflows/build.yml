@@ -69,10 +69,26 @@ jobs:
         run: |
           pip install pip pipenv
           pipenv sync
+      # image_builder.py resolves tool versions from the GitHub API, which allows
+      # only 60 requests/hour unauthenticated. This token lifts that to
+      # 5000/hour and is deliberately not GITHUB_TOKEN: it grants nothing beyond
+      # reading public metadata, expires within the hour, and the action revokes
+      # it once the job ends.
+      - name: Mint a scoped token for the GitHub API version lookups
+        id: gh_api_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-metadata: read
       - name: Build and tests images
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          # Used to log in to ghcr.io and push, nothing else.
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          # Read by src/version_resolver.py. It never reaches the builds, so
+          # nothing running inside an image can see it.
+          GH_AUTH_HEADER: "Authorization: Bearer ${{ steps.gh_api_token.outputs.token }}"
         run: |
           pipenv run python image_builder.py build -d --image ${{ matrix.image }} --version ${{ matrix.version }}
