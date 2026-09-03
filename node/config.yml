@@ -7,19 +7,25 @@ test_config: &test_config
     - sass --version
     - task --version
 
+github_versions: &github_versions
+  LATEST_NVM_VERSION: nvm-sh/nvm
+
 versions:
   "22":
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions: *github_versions
     test_config: *test_config
   "24":
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions: *github_versions
     test_config: *test_config
   "26":
     platforms:
       - linux/amd64
       - linux/arm64
+    github_versions: *github_versions
     test_config: *test_config

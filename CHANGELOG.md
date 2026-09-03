@@ -4,6 +4,8 @@ Versions
 2026-09-30
 ----------
 * AWS, Azure, DIND, GCP, Golang, Node, Scaleway, Sonar & Upsun: tool version lookups now fail fast with an explicit error when the GitHub API is unavailable or rate-limited, instead of silently resolving to an empty version and downloading a 404 page. Remote lookups and downloads also retry on transient errors
+* AWS, Azure, DIND, GCP, Golang, Node, Scaleway, Sonar & Upsun: tool versions are now resolved by the build script and passed as build args, instead of being looked up from inside the image. The lookups are authenticated when a token is available, raising the rate limit from 60 to at least 5000 requests/hour and removing the intermittent 403 build failures, and they now happen once per build instead of once per architecture. Both architectures and the pushed image are built from the same versions, those versions are visible in the image history, and no credential is present while the image builds
+* AWS, Azure, GCP & Scaleway: Helm is no longer a release candidate. The 3.x lookup matched any tag containing v3.x.y, so a published v3.x.y-rc.N was picked ahead of the newest stable release
 * AWS, Chrome, DIND, Golang, Node, PHP & Scaleway: fixing the mime.types source, the Debian mime-support repository having been renamed to media-types. The old URL had been returning 404 for a while, and its HTML error page was being written to /etc/mime.types
 
 2026-08-31

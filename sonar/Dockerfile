@@ -7,15 +7,13 @@ ARG VERSION
 
 ENV PATH=${SONARSCANNER_HOME}/bin:${PATH}
 
+# Tool versions, resolved from the GitHub API by image_builder.py
+ARG SONARSCANNER_VERSION
 RUN echo "Starting ..." && \
     apk --update upgrade && apk add curl gcompat make tzdata unzip openjdk21-jre jq && \
     echo "Done base install!" && \
     echo "Starting Sonar Scanner" && \
-    echo "Fetching latest version for major version ${VERSION}..." && \
-    SONARSCANNER_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/SonarSource/sonar-scanner-cli/releases | \
-        jq -r --arg major "${VERSION}" \
-        '[.[] | select(.tag_name | startswith($major)) | .tag_name] | sort_by(. | split(".") | map(tonumber)) | last // empty') && \
-    : "${SONARSCANNER_VERSION:?could not be resolved from the GitHub API}" && \
+    : "${SONARSCANNER_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
     echo "Using SonarScanner version: ${SONARSCANNER_VERSION}" && \
     curl -f --retry 3 --retry-delay 2 -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARSCANNER_VERSION}.zip && \
     unzip sonarscanner.zip && \

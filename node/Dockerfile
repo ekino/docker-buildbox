@@ -16,6 +16,8 @@ FROM base AS base-arm64
 ARG AWSCLI_ARCH="linux-aarch64"
 
 FROM base-$TARGETARCH
+# Tool versions, resolved from the GitHub API by image_builder.py
+ARG LATEST_NVM_VERSION
 RUN echo "Starting ..." && \
     apt-get -qq clean && apt-get -qq update && \
     apt-get -qq -y install libssl-dev curl git imagemagick make gnupg \
@@ -27,9 +29,7 @@ RUN echo "Starting ..." && \
     sh -c "$(curl -f --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Starting Javascript..." && \
-    echo "Fetching latest NVM version..." && \
-    LATEST_NVM_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name // empty' | sed 's/^v//') && \
-    : "${LATEST_NVM_VERSION:?could not be resolved from the GitHub API}" && \
+    : "${LATEST_NVM_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
     echo "Using NVM version: ${LATEST_NVM_VERSION}" && \
     echo "Fetching latest Node.js version for major version ${VERSION}..." && \
     LATEST_NODE_VERSION=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors "https://nodejs.org/dist/index.json" | jq -r --arg major "v${VERSION}." '[.[] | select(.version | startswith($major)) | .version] | .[0] // empty' | sed 's/^v//') && \

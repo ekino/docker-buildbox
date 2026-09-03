@@ -5,6 +5,7 @@ from python_on_whales import docker
 
 import src.config as config
 import src.docker_tools as docker_tools
+import src.version_resolver as version_resolver
 
 
 @click.command()
@@ -29,6 +30,18 @@ def build(image, version, debug):
     # Set the subdirectory in path because we want dockerfile_directory (aka the build context) to be the parent image directory
     dockerfile_path = prefixed_dockerfile_path if exists(
         f"{dockerfile_directory}/{prefixed_dockerfile_path}") else "Dockerfile"
+
+    # Resolve the tool versions the Dockerfile expects as build args. Doing it
+    # here rather than inside the build means one request per tool instead of one
+    # per architecture, and pins the tested image and the pushed one to the same
+    # versions.
+    try:
+        image_conf["build_args"].update(
+            version_resolver.resolve(image_conf.get("github_versions") or {}, version)
+        )
+    except version_resolver.VersionResolutionError as e:
+        print(f"> [Error] {e}")
+        exit(1)
 
     # Build image tags list (base tag + archs)
     image_tags = config.get_image_tags(image, version, image_conf, env_conf)
