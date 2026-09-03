@@ -46,10 +46,11 @@ def build(image, version, debug):
     # Build image tags list (base tag + archs)
     image_tags = config.get_image_tags(image, version, image_conf, env_conf)
 
-    with docker_tools.start_local_registry() as local_registry:
+    with docker_tools.start_local_registry(), docker_tools.build_builder() as builder:
 
         # Build, tag and push docker image to local registry
-        docker_tools.build_image(image_conf, image_tags["localname"], dockerfile_directory, dockerfile_path, debug)
+        docker_tools.build_image(image_conf, image_tags["localname"], dockerfile_directory, dockerfile_path, debug,
+                                 builder)
 
         # Run defined test command
         docker_tools.run_image(image_tags["localname"], image_conf, debug)
@@ -70,7 +71,10 @@ def build(image, version, debug):
                 print(f"> [Error] Failed to login to registries after retries: {e}")
                 exit(1)
 
-            # Build, tag and push docker image to remote registry (Docker hub)
+            # Push to the remote registries (Docker Hub and GHCR). Reusing the
+            # builder above means every layer is a cache hit, so this publishes
+            # the layers the tests just ran against instead of building the
+            # image a second time.
             docker_tools.build_image(image_conf,
                                      [
                                          image_tags["docker_fullname"],
@@ -78,7 +82,9 @@ def build(image, version, debug):
                                      ],
                                      dockerfile_directory,
                                      dockerfile_path,
-                                     debug)
+                                     debug,
+                                     builder,
+                                     cache=True)
 
 
 @click.group()
