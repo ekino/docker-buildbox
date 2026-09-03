@@ -1,7 +1,15 @@
 name: Build and test images
 
 on:
+  # push is limited to master on purpose. An unfiltered push trigger fired a
+  # second, identical run for every branch push that already had a pull request
+  # open - same matrix, same builds, nothing published either time - and fired a
+  # full run for tag pushes, which publish nothing because only the release
+  # event sets a tag. Use workflow_dispatch to build a branch with no pull
+  # request open.
   push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -9,8 +17,11 @@ on:
     types: [published]
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 concurrency:
+  # event_name stays in the group: it keeps the nightly run from cancelling a
+  # master build, since both are refs/heads/master.
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
