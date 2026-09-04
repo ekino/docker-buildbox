@@ -1,0 +1,19 @@
+[project]
+name = "docker-buildbox"
+version = "0.0.0"
+description = "Builds, tests and publishes the ekino CI images"
+requires-python = ">=3.11"
+dependencies = [
+    "click==8.4.2",
+    "gitpython==3.1.61",
+    "pydantic==2.13.4",
+    "python-on-whales==0.81.0",
+    "pyyaml==6.0.3",
+]
+
+[tool.uv]
+# The scripts run from the repository root and import `src.*` off the current
+# working directory - there is no src/__init__.py and nothing is installed.
+# Declaring the project as a non-package keeps `uv sync` from building it and
+# shadowing that layout.
+package = false

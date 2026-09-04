@@ -14,6 +14,7 @@ versions:
       SCW_VERSION: scaleway/scaleway-cli
       TERRAGRUNT_VERSION: gruntwork-io/terragrunt
       TRIVY_VERSION: aquasecurity/trivy
+      UV_VERSION: astral-sh/uv
     test_config:
       cmd:
         - scw version
@@ -23,6 +24,7 @@ versions:
         - kustomize version
         - pip --version
         - pipenv --version
+        - uv --version
         - trivy --version
         - zip --version
         - terragrunt --version

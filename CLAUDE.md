@@ -10,35 +10,34 @@ Docker BuildBox is a collection of Docker images designed for CI/CD pipelines (p
 
 ### Local Development Setup
 ```bash
-# Setup Python environment (requires Python 3.11)
-pipenv install
-pipenv shell
+# Create the environment from uv.lock (uv installs Python 3.11 itself if needed)
+uv sync
 ```
 
 ### Building and Testing Images
 ```bash
-# Build a specific image/version (must use pipenv shell or pipenv run)
+# Build a specific image/version (run it through uv, which uses .venv)
 # One invocation builds ONE architecture. --platform defaults to the host's.
-pipenv run python image_builder.py build --image IMAGE_NAME --version VERSION
+uv run python image_builder.py build --image IMAGE_NAME --version VERSION
 
 # Examples
-pipenv run python image_builder.py build --image java --version 17
-pipenv run python image_builder.py build --image php --version 8.3
-pipenv run python image_builder.py build --image aws --version 1 --debug
-pipenv run python image_builder.py build --image aws --version 1 --platform linux/amd64
+uv run python image_builder.py build --image java --version 17
+uv run python image_builder.py build --image php --version 8.3
+uv run python image_builder.py build --image aws --version 1 --debug
+uv run python image_builder.py build --image aws --version 1 --platform linux/amd64
 
 # Assemble the per-arch staging tags into the multi-arch tag (publishing runs only).
 # --markers-dir must hold one file per configured arch, named after it (amd64, arm64);
 # CI populates it from the build jobs' artifacts.
-pipenv run python image_builder.py merge --image aws --version 1 --markers-dir markers
+uv run python image_builder.py merge --image aws --version 1 --markers-dir markers
 
 # Generate build matrix (used by CI)
-pipenv run python matrix_generator.py
-
-# Alternative: activate pipenv environment first
-pipenv shell
-python image_builder.py build --image IMAGE_NAME --version VERSION
+uv run python matrix_generator.py
 ```
+
+Dependencies live in `pyproject.toml`, pinned in `uv.lock`. Use `uv sync --locked`
+(as CI does) to fail rather than re-resolve if the lockfile is stale, and
+`uv add`/`uv remove` to change a dependency.
 
 ### Testing Commands
 Tests are defined in each image's `config.yml` under `test_config.cmd` and run automatically during the build process. Each test verifies tool installations and basic functionality.
@@ -84,6 +83,36 @@ versions:
     test_config: *test_config
 ```
 
+### Python packages inside the images
+Every image that ships Python tooling installs those packages with `uv`, at a
+version resolved like any other tool (`UV_VERSION: astral-sh/uv` in the image's
+`github_versions`). uv arrives through a named stage:
+
+```dockerfile
+ARG UV_VERSION                                   # global: before the first FROM
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
+...
+COPY --from=uv /uv /uvx /usr/local/bin/
+```
+
+The stage is not decoration. **`COPY --from` cannot expand variables** -
+`COPY --from=ghcr.io/astral-sh/uv:${UV_VERSION}` fails with "variable expansion
+is not supported for --from" - and only a *global* ARG, declared before the
+first `FROM`, can be expanded by a `FROM`. `UV_VERSION` deliberately has no
+default, so a bare `docker build` fails rather than pulling an unpinned uv; each
+Dockerfile carries `# check=skip=InvalidDefaultArgInFrom` on its first line to
+silence the lint that complains about exactly that.
+
+The distroless image ships a statically linked musl binary, so one copy serves
+the Debian-slim images and Alpine `dind` alike. Install with
+`uv pip install --system --no-cache`: `--system` targets the image's own Python
+rather than a virtualenv, and `--no-cache` keeps uv's cache out of the layer.
+
+`pip`, `pipenv` and `poetry` are all still present for image consumers - uv
+replaced the *installer*, not what the images ship. `dind` keeps its
+`ensurepip` and `EXTERNALLY-MANAGED` removal for the same reason: they are what
+puts `pip3` in that image.
+
 ### Resolving tool versions
 Every `github_versions` entry is resolved before building and passed as a build
 arg, so the Dockerfiles never call the GitHub API themselves. Each entry needs a
@@ -109,7 +138,7 @@ Do not move this back into the build jobs. Two reasons:
   IP allow list that refuses authenticated requests from runners, and
   `version_resolver` then falls back to the anonymous 60/hour. That is what
   started failing builds. Central resolution plus the response cache in
-  `version_resolver` makes a full matrix **19** requests.
+  `version_resolver` makes a full matrix **20** requests.
 - **Consistency.** Two jobs resolving the same tool minutes apart can get
   different answers if a release lands between them, and `imagetools create`
   would assemble those two halves into one multi-arch tag without complaint.
@@ -122,7 +151,7 @@ authenticated rate limit; without it resolution still works, anonymously - a
 local `image_builder.py build` with no `--versions-file` resolves live.
 
 A **fork pull request** gets no secrets, so the token step is
-`continue-on-error` and resolution falls back to anonymous. That is why the 19
+`continue-on-error` and resolution falls back to anonymous. That is why the 20
 matters: a full matrix fits inside the anonymous 60/hour, where the 90 requests
 of the per-job scheme did not. It does mean roughly three fork pull request runs
 per hour share one runner IP's budget before lookups start failing.
@@ -136,7 +165,7 @@ The build system intelligently determines which images to build:
 - **Tag release**: Builds ALL images → pushes with version tags
 - **Nightly**: Builds ALL images → pushes as `nightly-IMAGE` tags
 
-Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md`, `README.md`, `handover.md`, `.github/dependabot.yml`, `.github/copilot-instructions.md`
+Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md`, `CLAUDE.md`, `README.md`, `handover.md`, `.github/dependabot.yml`, `.github/copilot-instructions.md`
 
 `matrix_generator.py` emits two matrices in one JSON object:
 - `build`: one entry per `(image, version, platform)`, carrying the `runner`
@@ -174,7 +203,7 @@ and the whole `merge` job key off it.
 - **node**: Node.js + AWS CLI
 - **php**: PHP 8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
 - **platformsh**: Platform.sh CLI
-- **python**: Python 3.10-3.14 + pip, pipenv
+- **python**: Python 3.10-3.14 + pip, pipenv, uv, Poetry
 - **scaleway**: Scaleway CLI + Terraform, Kubectl, Helm
 - **sonar**: SonarQube Scanner
 
@@ -199,7 +228,7 @@ and the whole `merge` job key off it.
 - There is no local `registry:2` container any more, and no `localname` tag.
 
 ## Dependencies
-- **Python 3.11** with pipenv
+- **Python 3.11** with uv (`pyproject.toml` + `uv.lock`)
 - **Key packages**: python-on-whales (Docker API), click (CLI), pyyaml, gitpython, pydantic
 
 ## Registry Publishing

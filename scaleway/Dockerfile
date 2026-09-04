@@ -1,3 +1,14 @@
+# check=skip=InvalidDefaultArgInFrom
+# UV_VERSION is resolved from the GitHub API by image_builder.py. It has to be a
+# global ARG, declared before the first FROM: FROM can expand one, but
+# `COPY --from` cannot expand variables at all, so uv arrives through a named
+# stage below. It deliberately has no default, so that a bare `docker build`
+# fails instead of silently pulling an unpinned uv - which is the lint the
+# check directive above skips.
+ARG UV_VERSION
+
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
+
 FROM python:3.14.7-slim-trixie AS base
 LABEL maintainer="Frank Pavageau <fpavageau@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
@@ -32,6 +43,10 @@ ARG KUSTOMIZE_VERSION
 ARG SCW_VERSION
 ARG TERRAGRUNT_VERSION
 ARG TRIVY_VERSION
+# uv installs the Python packages below, and stays in the image as a tool. The
+# distroless binaries are statically linked, so they are portable.
+COPY --from=uv /uv /uvx /usr/local/bin/
+
 RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     apt-get -qq -y autoremove && \
     apt-get -qq clean && apt-get -qq purge && \
@@ -41,8 +56,7 @@ RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     # Adding yq bin
     wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq && \
     chmod +x /usr/bin/yq && \
-    pip install -U pip && \
-    pip install pipenv && \
+    uv pip install --system --no-cache pipenv && \
     # Installing SCW Cli
     : "${SCW_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
     curl -fLO --retry 3 --retry-delay 2 https://github.com/scaleway/scaleway-cli/releases/download/v${SCW_VERSION}/scaleway-cli_${SCW_VERSION}_linux_${SCW_ARCH} && \

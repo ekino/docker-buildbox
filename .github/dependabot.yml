@@ -5,7 +5,9 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-  - package-ecosystem: 'pip'
+  # uv, not pip: the pip ecosystem cannot read uv.lock. The '/dind' entry below
+  # stays on pip - it feeds dind/requirements.txt into the image.
+  - package-ecosystem: 'uv'
     directory: '/'
     schedule:
       interval: 'weekly'

@@ -52,18 +52,18 @@ CI workflow:
 
 ### Local testing
 
-To contribute you will need docker, docker-buildx, python3.6 and pipenv (installed by `pip install pipenv`).
+To contribute you will need docker, docker-buildx and [uv](https://docs.astral.sh/uv/)
+(installed by `curl -LsSf https://astral.sh/uv/install.sh | sh`). uv provisions
+Python itself, so no system Python is required.
 
 - Clone the repo
-- Create your pipenv environnement
-  > pipenv install
-- Load your pipenv
-  > pipenv shell
+- Create the environment from the lockfile
+  > uv sync
 - Run the script
-  > python image_builder.py build --image image --version version
+  > uv run python image_builder.py build --image image --version version
 
 ``` bash
-$ python image_builder.py build --help
+$ uv run python image_builder.py build --help
 Usage: image_builder.py build [OPTIONS]
 
 Options:
@@ -76,7 +76,7 @@ Options:
 ```
 
 ``` bash
-$ python image_builder.py build --image java --version 21
+$ uv run python image_builder.py build --image java --version 21
 > Building linux/arm64: ekino/ci-java-arm64:21-latest
 Build successful
 > Testing ekino/ci-java-arm64:21-latest
@@ -98,7 +98,7 @@ command then assembles into the multi-arch tag users pull. `merge` only does
 anything on a publishing run, so you will rarely need it locally.
 
 ``` bash
-$ python image_builder.py merge --image java --version 21 --markers-dir markers
+$ uv run python image_builder.py merge --image java --version 21 --markers-dir markers
 > Creating ekino/ci-java:21-latest from ekino/ci-java-amd64:21-latest, ekino/ci-java-arm64:21-latest
 ```
 
@@ -221,7 +221,7 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 - https://hub.docker.com/r/ekino/ci-python/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-python
 
-Contains Python with PIP and PIPENV.
+Contains Python with PIP, PIPENV, UV and Poetry.
 
 ### Scaleway
 - https://hub.docker.com/r/ekino/ci-scaleway/tags
@@ -240,4 +240,4 @@ Contains SonarQube Scanner.
 - https://hub.docker.com/r/ekino/ci-upsun/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-upsun
 
-Based on a Python image, contains both Upsun CLI and Platform.sh CLI, git and pipenv.
+Based on a Python image, contains both Upsun CLI and Platform.sh CLI, git, pipenv and uv.
