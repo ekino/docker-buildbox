@@ -56,6 +56,13 @@ jobs:
 
   build:
     runs-on: ubuntu-24.04
+    # A QEMU-emulated arm64 step that dies of SIGILL does not fail the build, it
+    # wedges it: BuildKit never notices, and the job runs to GitHub's 6 hour
+    # ceiling. Two nightlies have burned 360 minutes that way. The slowest
+    # legitimate job is around 40 minutes, and was 80 before the publishing
+    # build started reusing the tested layers, so this leaves ample headroom
+    # while turning a wedge into a failure you can rerun.
+    timeout-minutes: 120
     # GITHUB_TOKEN is used to log in to ghcr.io and push, so keep it to the
     # minimum this job actually needs.
     permissions:
