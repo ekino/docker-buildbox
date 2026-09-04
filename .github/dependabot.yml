@@ -283,6 +283,26 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
+  # Prowler
+  - package-ecosystem: 'docker'
+    directory: '/prowler'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'prowler'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+  - package-ecosystem: 'pip'
+    directory: '/prowler'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'pip'
+      - 'prowler'
   # Upsun
   - package-ecosystem: 'docker'
     directory: '/upsun'
