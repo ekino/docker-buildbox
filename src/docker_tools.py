@@ -1,7 +1,6 @@
 import os
 import pprint
 import time
-from contextlib import contextmanager
 from functools import wraps
 
 from python_on_whales import docker
@@ -67,30 +66,27 @@ def retry_with_backoff(max_retries=None,
     return decorator
 
 
-@contextmanager
-def build_builder():
-    """A buildx builder shared by every build of one image.
-
-    A publishing run builds twice: once to the local registry, which is what the
-    tests run against, and once to the remote registries. Sharing the builder
-    lets the second build reuse the layers the first one produced instead of
-    building the image again from scratch. The builder, and its cache, is
-    destroyed with the job, so nothing stale can reach another build.
-    """
-    builder = docker.buildx.create(use=True, driver_options=dict(network="host"))
-    try:
-        yield builder
-    finally:
-        builder.remove()
-
-
 @retry_with_backoff()  # Uses config defaults
-def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug, builder, cache=False):
-    # image_tag is a single tag for the local build and a list for the remote
+def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, debug, platform,
+                load=False, push=False):
+    """Build one image for one platform.
+
+    A job builds a single architecture, natively, which is what makes `load`
+    possible: a multi-platform build cannot be loaded into the local daemon, so
+    the old code had to push to a throwaway `registry:2` container to have
+    something to test. Now a non-publishing run loads the image it just built
+    and tests exactly that, with no registry and no credentials in play.
+
+    A publishing run pushes instead of loading, because provenance attestations
+    are a BuildKit export artifact rather than part of the image - a `load`
+    followed by `docker push` would silently drop them. It then tests the tag it
+    pushed, so what gets merged is still what was tested.
+    """
+    # image_tag is a single tag for a local build and a list for the remote
     # registries; normalise so the log names every tag rather than, for a bare
     # string, its first character.
     tags = [image_tag] if isinstance(image_tag, str) else image_tag
-    print("> [Info] Building: " + ", ".join(tags))
+    print(f"> [Info] Building {platform}: " + ", ".join(tags))
     try:
         if debug:
             pp = pprint.PrettyPrinter(indent=1)
@@ -105,14 +101,13 @@ def build_image(image_conf, image_tag, dockerfile_directory, dockerfile_path, de
             print("\n")
 
         docker.buildx.build(
-            builder=builder,
             file=os.path.join(dockerfile_directory, dockerfile_path),
             context_path=dockerfile_directory,
             tags=tags,
-            cache=cache,
-            push=True,
+            load=load,
+            push=push,
             build_args=image_conf["build_args"] if "build_args" in image_conf else {
-            }, platforms=image_conf["platforms"]
+            }, platforms=[platform]
         )
 
     except DockerException as docker_exception:
@@ -141,15 +136,15 @@ def run_image(image_name, image_conf, debug):
                 cmd_list = cmd.split(" ")
                 if debug:
                     print(">> Running test: " + str(cmd_list))
-                for platform in image_conf["platforms"]:
-                    container_output = docker.container.run(
-                        image=image_name,
-                        platform=platform,
-                        command=cmd_list,
-                        volumes=volume
-                    )
-                    if debug:
-                        print(container_output)
+                # No platform argument: the image was built for this runner's
+                # own architecture, so it runs natively.
+                container_output = docker.container.run(
+                    image=image_name,
+                    command=cmd_list,
+                    volumes=volume
+                )
+                if debug:
+                    print(container_output)
         print("Tests successful")
     except DockerException as e:
         print("> [Error] Command test failed - " + str(e))
@@ -158,12 +153,37 @@ def run_image(image_name, image_conf, debug):
         docker.container.prune()
 
 
-def tag_image(image, tag):
-    docker.image.tag(image, tag)
+def manifest_exists(tag):
+    """Whether a tag resolves in its registry, without pulling it.
+
+    Deliberately not retried: a missing staging tag means the build job for that
+    architecture failed, and no amount of retrying will conjure it. This is a
+    pre-flight check so a broken image fails its own merge instead of producing
+    a multi-arch tag that quietly lost an architecture.
+    """
+    try:
+        docker.buildx.imagetools.inspect(tag)
+        return True
+    except DockerException as docker_exception:
+        print(f"> [Warning] {tag} could not be inspected - {docker_exception}")
+        return False
 
 
-def start_local_registry():
-    return docker.run("registry:2", detach=True, publish=[(5000, 5000)], restart='always', name='registry')
+@retry_with_backoff()  # Uses config defaults
+def create_manifest(sources, tag):
+    """Assemble the per-arch staging tags into the multi-arch tag users pull.
+
+    This writes an OCI index referencing manifests that are already in the
+    registry, so it moves no blobs and takes seconds. It is idempotent: rerunning
+    a failed merge job simply rewrites the index.
+    """
+    print(f"> [Info] Creating {tag} from " + ", ".join(sources))
+    try:
+        docker.buildx.imagetools.create(sources=sources, tags=[tag])
+    except DockerException as docker_exception:
+        print("> [Error] Manifest creation failed - " + str(docker_exception))
+        raise
+    print(f"Created {tag}")
 
 
 @retry_with_backoff()  # Uses config defaults

@@ -67,19 +67,45 @@ $ python image_builder.py build --help
 Usage: image_builder.py build [OPTIONS]
 
 Options:
-  --image TEXT    image to build
-  --version TEXT  image version
-  -d, --debug     debug
-  --help          Show this message and exit.
+  -i, --image TEXT     image to build
+  -v, --version TEXT   image version
+  -p, --platform TEXT  single platform to build, e.g. linux/arm64 (default:
+                       this machine's)
+  -d, --debug          debug
+  --help               Show this message and exit.
 ```
 
 ``` bash
-$ python image_builder.py build --image java --version 11
-> Building: ekino/ci-java:11-latest
-Build succesfull
-> Testing ekino/ci-java:11-latest
+$ python image_builder.py build --image java --version 21
+> Building linux/arm64: ekino/ci-java-arm64:21-latest
+Build successful
+> Testing ekino/ci-java-arm64:21-latest
 Tests successful
 ```
+
+A local build resolves its tool versions from the GitHub API as it goes. CI
+instead resolves them once for the whole run and passes `--versions-file`, so
+every architecture of an image gets identical versions.
+
+One invocation builds one architecture. `--platform` defaults to your own
+machine's, so a local build is native; pass it explicitly to build another
+architecture, which needs QEMU (`docker run --privileged --rm
+tonistiigi/binfmt --install all`) and is considerably slower.
+
+In CI each architecture is built on a runner of that architecture and pushed as
+a per-arch staging tag (`ekino/ci-java-amd64:21-latest`), which the `merge`
+command then assembles into the multi-arch tag users pull. `merge` only does
+anything on a publishing run, so you will rarely need it locally.
+
+``` bash
+$ python image_builder.py merge --image java --version 21 --markers-dir markers
+> Creating ekino/ci-java:21-latest from ekino/ci-java-amd64:21-latest, ekino/ci-java-arm64:21-latest
+```
+
+`--markers-dir` must contain one file per configured architecture, named after
+it (`amd64`, `arm64`). CI populates it from artifacts that each build job
+uploads only after its tests pass, so an architecture that failed has no marker
+and the merge refuses rather than publishing a tag that lost it.
 
 ## Contribution
 

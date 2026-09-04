@@ -18,12 +18,19 @@ pipenv shell
 ### Building and Testing Images
 ```bash
 # Build a specific image/version (must use pipenv shell or pipenv run)
+# One invocation builds ONE architecture. --platform defaults to the host's.
 pipenv run python image_builder.py build --image IMAGE_NAME --version VERSION
 
 # Examples
 pipenv run python image_builder.py build --image java --version 17
 pipenv run python image_builder.py build --image php --version 8.3
 pipenv run python image_builder.py build --image aws --version 1 --debug
+pipenv run python image_builder.py build --image aws --version 1 --platform linux/amd64
+
+# Assemble the per-arch staging tags into the multi-arch tag (publishing runs only).
+# --markers-dir must hold one file per configured arch, named after it (amd64, arm64);
+# CI populates it from the build jobs' artifacts.
+pipenv run python image_builder.py merge --image aws --version 1 --markers-dir markers
 
 # Generate build matrix (used by CI)
 pipenv run python matrix_generator.py
@@ -78,10 +85,10 @@ versions:
 ```
 
 ### Resolving tool versions
-`image_builder.py` resolves every `github_versions` entry before building and
-passes the results as build args, so the Dockerfiles never call the GitHub API
-themselves. Each entry needs a matching `ARG NAME` in the Dockerfile. Resolution
-rules live in `src/version_resolver.py`:
+Every `github_versions` entry is resolved before building and passed as a build
+arg, so the Dockerfiles never call the GitHub API themselves. Each entry needs a
+matching `ARG NAME` in the Dockerfile. Resolution rules live in
+`src/version_resolver.py`:
 
 | rule | picks |
 | --- | --- |
@@ -91,8 +98,28 @@ rules live in `src/version_resolver.py`:
 | `latest_v3` | the newest stable `v3.x.y` release |
 | `highest_with_prefix` | the highest release tagged `<image version>.*` |
 
-Set `GH_AUTH_HEADER` (CI does, from a scoped GitHub App token) to get the
-authenticated rate limit; without it resolution still works, anonymously.
+**In CI, resolution happens once per run, in `generate_matrix`**, which writes
+`versions.json` and uploads it as the `resolved-versions` artifact; each build
+job downloads it and passes `--versions-file`, making no API calls of its own.
+Do not move this back into the build jobs. Two reasons:
+
+- **Volume.** One request per tool per job was 45 for a full matrix, and the
+  per-architecture split doubled it to 90. Most requests are authenticated and
+  bounded by 5000/hour, but some repositories (`aquasecurity`, for one) run an
+  IP allow list that refuses authenticated requests from runners, and
+  `version_resolver` then falls back to the anonymous 60/hour. That is what
+  started failing builds. Central resolution plus the response cache in
+  `version_resolver` makes a full matrix **19** requests.
+- **Consistency.** Two jobs resolving the same tool minutes apart can get
+  different answers if a release lands between them, and `imagetools create`
+  would assemble those two halves into one multi-arch tag without complaint.
+  Resolving once means both architectures are handed identical versions by
+  construction.
+
+`generate_matrix` is consequently the only job that holds the API token. Set
+`GH_AUTH_HEADER` (CI does, from a scoped GitHub App token) to get the
+authenticated rate limit; without it resolution still works, anonymously - a
+local `image_builder.py build` with no `--versions-file` resolves live.
 Because the versions arrive as build args, a bare `docker build` fails with
 `NAME: must be passed as a build arg` - build through `image_builder.py`.
 
@@ -103,7 +130,33 @@ The build system intelligently determines which images to build:
 - **Tag release**: Builds ALL images → pushes with version tags
 - **Nightly**: Builds ALL images → pushes as `nightly-IMAGE` tags
 
-Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md`, `README.md`, `.github/dependabot.yml`, `.github/copilot-instructions.md`
+Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md`, `README.md`, `handover.md`, `.github/dependabot.yml`, `.github/copilot-instructions.md`
+
+`matrix_generator.py` emits two matrices in one JSON object:
+- `build`: one entry per `(image, version, platform)`, carrying the `runner`
+  label for that platform (`RUNNERS` maps `linux/amd64` → `ubuntu-24.04`,
+  `linux/arm64` → `ubuntu-24.04-arm`)
+- `merge`: one entry per `(image, version)`
+
+The `merge` job depends on `build` with `if: !cancelled()` rather than the
+default `success()`: `fail-fast` is off, so one image failing must not skip the
+other 26 merges. Isolation comes from **per-arch markers** instead: each build
+job writes `markers/<arch>` and uploads it as a `tested-<image>-<version>-<arch>`
+artifact, and that step only runs if the build-and-test step succeeded. `merge`
+downloads the markers matching its own image and refuses to publish unless every
+configured platform has one, so a broken image fails only its own merge.
+
+Do **not** gate the merge on staging-tag existence instead. A tag existing says
+nothing about which run put it there or whether its tests passed: the publishing
+path pushes *before* it tests, so the tag can hold an image whose tests then
+failed, and a tag left by last night's run outlives a build job that fails
+before pushing anything. Reading the digest back with `imagetools inspect` is
+not a fix either - Docker Hub's CDN served a stale digest for a tag during
+development of this.
+
+Whether a run publishes is decided once, by the `publishing` output of
+`generate_matrix`, which mirrors `config.is_publishing`. The build marker steps
+and the whole `merge` job key off it.
 
 ### Available Images
 - **aws**: AWS CLI, Terraform, Kubectl, Helm, Python
@@ -121,9 +174,24 @@ Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md
 - **sonar**: SonarQube Scanner
 
 ### Multi-Architecture Support
-- Default: `linux/amd64`
-- Many images support: `linux/amd64` + `linux/arm64`
-- Uses Docker Buildx with multi-platform builds
+- Default: `linux/amd64` (from `base_platforms` in `base_config.yml`, when a
+  version sets no `platforms` of its own)
+- Most images support: `linux/amd64` + `linux/arm64`
+- **Each architecture is built natively on a runner of that architecture, one
+  job per platform - there is no QEMU in the pipeline.** Emulated arm64 builds
+  intermittently died of SIGILL inside `npm install`; BuildKit never noticed its
+  child had gone, so the job ran silent to GitHub's 6-hour ceiling.
+- A single-platform build can be `--load`ed into the local daemon, so:
+  - **pull request run**: `--load`, test, push nothing (no credentials needed,
+    so fork pull requests build)
+  - **publishing run**: `--push` the per-arch staging tag, test *that tag*, then
+    `merge`. Pushing rather than loading preserves the provenance attestation,
+    which is a BuildKit export artifact and would be lost by a `load` + `push`.
+- The `merge` command runs `docker buildx imagetools create` over the per-arch
+  staging tags, gated on the markers described above. This writes an OCI index
+  referencing manifests already in the registry, so no blobs move; it is
+  idempotent and rerunnable.
+- There is no local `registry:2` container any more, and no `localname` tag.
 
 ## Dependencies
 - **Python 3.11** with pipenv
