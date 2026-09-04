@@ -165,7 +165,7 @@ jobs:
           pip install pip pipenv
           pipenv sync
       - name: Fetch the versions resolved for this run
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: resolved-versions
       # On a publishing run this pushes a per-arch staging tag and tests that
@@ -252,7 +252,7 @@ jobs:
       # which architectures are missing far more clearly than that would.
       - name: Collect the markers from the build jobs
         continue-on-error: true
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: tested-${{ matrix.image }}-${{ matrix.version }}-*
           path: markers
