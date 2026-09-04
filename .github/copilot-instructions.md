@@ -31,16 +31,15 @@ Each image has its own directory with:
 1. **AWS** (`aws/`) - AWS CLI, Terraform, Kubectl, Helm, Python
 2. **Azure** (`azure/`) - Azure CLI, Terraform, Kubectl, Helm, Python
 3. **Chrome** (`chrome/`) - Chromium browser + Node.js LTS
-4. **Cloudsploit** (`cloudsploit/`) - Aquasecurity's Cloudsploit Scanner
-5. **DIND** (`dind/`) - Docker-in-Docker with AWS/Azure CLI
-6. **Golang** (`golang/`) - Go + AWS CLI, Gitleaks, GolangCI-Lint, etc.
-7. **Java** (`java/`) - Java 17/21 + AWS CLI, Maven, tools
-8. **Node** (`node/`) - Node.js + AWS CLI
-9. **PHP** (`php/`) - PHP 8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
-10. **Platform.sh** (`platformsh/`) - Platform.sh CLI
-11. **Python** (`python/`) - Python 3.10-3.14 + pip, pipenv
-12. **Scaleway** (`scaleway/`) - Scaleway CLI + Terraform, Kubectl, Helm
-13. **SonarQube** (`sonar/`) - SonarQube Scanner
+4. **DIND** (`dind/`) - Docker-in-Docker with AWS/Azure CLI
+5. **Golang** (`golang/`) - Go + AWS CLI, Gitleaks, GolangCI-Lint, etc.
+6. **Java** (`java/`) - Java 17/21 + AWS CLI, Maven, tools
+7. **Node** (`node/`) - Node.js + AWS CLI
+8. **PHP** (`php/`) - PHP 8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
+9. **Platform.sh** (`platformsh/`) - Platform.sh CLI
+10. **Python** (`python/`) - Python 3.10-3.14 + pip, pipenv
+11. **Scaleway** (`scaleway/`) - Scaleway CLI + Terraform, Kubectl, Helm
+12. **SonarQube** (`sonar/`) - SonarQube Scanner
 
 ## Configuration Schema
 

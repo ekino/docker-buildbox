@@ -168,7 +168,6 @@ and the whole `merge` job key off it.
 - **aws**: AWS CLI, Terraform, Kubectl, Helm, Python
 - **azure**: Azure CLI, Terraform, Kubectl, Helm, Python
 - **chrome**: Chromium + Node.js LTS
-- **cloudsploit**: Aquasecurity's Cloudsploit Scanner
 - **dind**: Docker-in-Docker + AWS/Azure CLI
 - **golang**: Go + AWS CLI, Gitleaks, GolangCI-Lint, tools
 - **java**: Java 17/21 + AWS CLI, Maven, tools

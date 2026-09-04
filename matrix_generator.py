@@ -12,6 +12,7 @@ import src.version_resolver as version_resolver
 excluded_files = [  # Changes to those files shouldn't trigger a build
     '.gitignore',
     'CHANGELOG.md',
+    'CLAUDE.md',
     'README.md',
     'handover.md',
     '.github/dependabot.yml',

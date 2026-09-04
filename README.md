@@ -160,12 +160,6 @@ Contains Chromium browser and the latest Node LTS.
 
 Contains Node.js 24 on Alpine Linux with AI code review tools: Claude Code, OpenAI Codex, and Google Gemini CLI. Runs under a dedicated `reviewtools:reviewtools` user for security.
 
-### Cloudsploit
-- https://hub.docker.com/r/ekino/ci-cloudsploit/tags
-- https://github.com/orgs/ekino/packages/container/package/ci-cloudsploit
-
-Contains Aquasecurity's Cloudsploit Scanner.
-
 ### GCP
 - https://hub.docker.com/r/ekino/ci-gcp/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-gcp
