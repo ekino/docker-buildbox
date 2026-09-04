@@ -223,6 +223,12 @@ docker exec -it -e BLACKFIRE_CLIENT_ID -e BLACKFIRE_CLIENT_TOKEN my-php-containe
 
 Contains Python with PIP and PIPENV.
 
+### Prowler
+- https://hub.docker.com/r/ekino/ci-prowler/tags
+- https://github.com/orgs/ekino/packages/container/package/ci-prowler
+
+Contains Prowler and AWS CLI v2.
+
 ### Scaleway
 - https://hub.docker.com/r/ekino/ci-scaleway/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-scaleway
