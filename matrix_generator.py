@@ -1,9 +1,13 @@
+import argparse
 import json
+import sys
 from glob import glob
 from os.path import exists
 
 import yaml
 from git import Repo
+
+import src.version_resolver as version_resolver
 
 excluded_files = [  # Changes to those files shouldn't trigger a build
     '.gitignore',
@@ -107,10 +111,66 @@ def generate_matrix(paths):
                     "runner": RUNNERS[platform],
                 })
 
-    print(json.dumps({"build": {"include": build}, "merge": {"include": merge}}))
+    return {"build": {"include": build}, "merge": {"include": merge}}
 
+
+def resolve_versions(merge_entries):
+    """Resolve every tool version the selected images need, once for the run.
+
+    This used to happen inside each build job. That was one request per tool per
+    job, and splitting the matrix by architecture doubled the job count - 45
+    requests became 90. Most are authenticated and so bounded by a 5000/hour
+    limit, but some repositories (aquasecurity, for one) run an IP allow list
+    that refuses authenticated requests from CI runners, and the fallback is the
+    anonymous 60/hour. That is what started failing.
+
+    Resolving here spends one request per distinct tool for the whole run - 33
+    for a full matrix, fewer than before the split - and, more importantly,
+    means both architectures of an image are handed the *same* answers. Two jobs
+    resolving independently minutes apart could otherwise pick up different
+    versions if a release landed between them, and imagetools would assemble
+    those two halves into one multi-arch tag without complaint.
+    """
+    resolved = {}
+    for entry in merge_entries:
+        image, version = entry["image"], entry["version"]
+        image_config = load_config(image)
+        version_config = image_config["versions"][
+            next(v for v in image_config["versions"] if str(v) == version)
+        ] or {}
+        github_versions = version_config.get("github_versions") or {}
+        # An entry is written even when empty, so a missing key in the build job
+        # is unambiguously a mismatch rather than "this image needs nothing".
+        print(f"> [Info] Resolving {len(github_versions)} version(s) for {image} {version}",
+              file=sys.stderr)
+        resolved[f"{image}:{version}"] = version_resolver.resolve(github_versions, version)
+    return resolved
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--versions-file",
+    help="write the resolved tool versions here, for the build jobs to consume",
+)
+args = parser.parse_args()
 
 changedFiles = get_diff_files_list()
 filteredFiles = filter_excluded_files(changedFiles)
 paths = get_paths(filteredFiles, changedFiles)
-generate_matrix(paths)
+matrix = generate_matrix(paths)
+
+if args.versions_file:
+    # version_resolver logs to stdout, which is the matrix channel, so send the
+    # resolution chatter to stderr and keep stdout pure JSON.
+    stdout, sys.stdout = sys.stdout, sys.stderr
+    try:
+        versions = resolve_versions(matrix["merge"]["include"])
+    except version_resolver.VersionResolutionError as e:
+        print(f"> [Error] {e}", file=sys.stderr)
+        raise SystemExit(1)
+    finally:
+        sys.stdout = stdout
+    with open(args.versions_file, "w") as versions_file:
+        json.dump(versions, versions_file, indent=2, sort_keys=True)
+
+print(json.dumps(matrix))

@@ -59,14 +59,40 @@ jobs:
         run: |
           pip install pip pipenv
           pipenv sync
-      # Emits both matrices at once: one build entry per (image, version,
-      # platform) and one merge entry per (image, version).
+      # Version resolution now happens here, so this is the only job that holds
+      # the API token. This token grants nothing beyond reading public metadata,
+      # expires within the hour, and the action revokes it when the job ends. It
+      # is deliberately not GITHUB_TOKEN, which is capped at 1000 requests/hour
+      # per repository.
+      - name: Mint a scoped token for the GitHub API version lookups
+        id: gh_api_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-metadata: read
+      # Emits both matrices - one build entry per (image, version, platform) and
+      # one merge entry per (image, version) - and resolves every tool version
+      # the selected images need, once for the whole run. Resolving per job
+      # instead meant 90 API requests for a full matrix once the architecture
+      # split doubled the job count, and let the two architectures of one image
+      # pick up different versions.
       - name: Run script
         id: run_script
+        env:
+          # Read by src/version_resolver.py. It never reaches a build, so
+          # nothing running inside an image can see it.
+          GH_AUTH_HEADER: "Authorization: Bearer ${{ steps.gh_api_token.outputs.token }}"
         run: |
-          matrix="$(pipenv run python matrix_generator.py)"
+          matrix="$(pipenv run python matrix_generator.py --versions-file versions.json)"
           echo "build=$(echo "$matrix" | jq -c .build)" >> "$GITHUB_OUTPUT"
           echo "merge=$(echo "$matrix" | jq -c .merge)" >> "$GITHUB_OUTPUT"
+      - name: Upload the resolved versions for the build jobs
+        uses: actions/upload-artifact@v4
+        with:
+          name: resolved-versions
+          path: versions.json
+          retention-days: 1
 
       # Decided once, here, so the build steps, the merge job and
       # image_builder.py cannot disagree about whether this run publishes.
@@ -130,18 +156,10 @@ jobs:
         run: |
           pip install pip pipenv
           pipenv sync
-      # image_builder.py resolves tool versions from the GitHub API, which allows
-      # only 60 requests/hour unauthenticated. This token lifts that to
-      # 5000/hour and is deliberately not GITHUB_TOKEN: it grants nothing beyond
-      # reading public metadata, expires within the hour, and the action revokes
-      # it once the job ends.
-      - name: Mint a scoped token for the GitHub API version lookups
-        id: gh_api_token
-        uses: actions/create-github-app-token@v3
+      - name: Fetch the versions resolved for this run
+        uses: actions/download-artifact@v4
         with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          permission-metadata: read
+          name: resolved-versions
       # On a publishing run this pushes a per-arch staging tag and tests that
       # tag; otherwise it loads the image locally, tests it, and pushes nothing.
       - name: Build and test image
@@ -150,16 +168,14 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           # Used to log in to ghcr.io and push, nothing else.
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          # Read by src/version_resolver.py. It never reaches the builds, so
-          # nothing running inside an image can see it.
-          GH_AUTH_HEADER: "Authorization: Bearer ${{ steps.gh_api_token.outputs.token }}"
           # Empty for every trigger but a workflow_dispatch that asked for it.
           PUBLISH_TAG: ${{ inputs.publish_tag }}
         run: |
           pipenv run python image_builder.py build -d \
             --image ${{ matrix.image }} \
             --version ${{ matrix.version }} \
-            --platform ${{ matrix.platform }}
+            --platform ${{ matrix.platform }} \
+            --versions-file versions.json
       # Only reached when the step above succeeded, which means this
       # architecture built AND its tests passed. The merge job requires one
       # marker per configured platform before it will publish, because the

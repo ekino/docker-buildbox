@@ -1,3 +1,4 @@
+import json
 import platform as host_platform_module
 from os import listdir
 from os.path import exists, isdir
@@ -55,13 +56,44 @@ def load_config(image, version, debug):
     return env_conf, image_conf
 
 
+def resolve_build_args(image, version, image_conf, versions_file):
+    """The tool versions this Dockerfile expects as build args.
+
+    In CI these arrive pre-resolved from generate_matrix, for two reasons. One
+    request per tool per job meant the architecture split doubled the API
+    traffic, onto a limit that is only 60/hour for the repositories that refuse
+    authenticated requests from runners. And two jobs resolving the same tool
+    independently can get different answers if a release lands between them,
+    which would put different tool versions in the two halves of one multi-arch
+    tag.
+
+    Without --versions-file - a local build - it resolves live, which is fine
+    for one image.
+    """
+    if versions_file is None:
+        return version_resolver.resolve(image_conf.get("github_versions") or {}, version)
+
+    with open(versions_file) as handle:
+        resolved = json.load(handle)
+    key = f"{image}:{version}"
+    if key not in resolved:
+        raise version_resolver.VersionResolutionError(
+            f"{versions_file} has no entry for {key} - it was built from a different matrix"
+        )
+    for build_arg, value in sorted(resolved[key].items()):
+        print(f"> [Info] {build_arg}={value} (resolved once for this run)")
+    return resolved[key]
+
+
 @click.command()
 @click.option("--image", "-i", default="aws", help="image to build")
 @click.option("--version", "-v", default="1", help="image version")
+@click.option("--versions-file", default=None,
+              help="JSON of tool versions resolved once for the run (default: resolve live)")
 @click.option("--platform", "-p", default=None,
               help="single platform to build, e.g. linux/arm64 (default: this machine's)")
 @click.option("--debug", "-d", is_flag=True, help="debug")
-def build(image, version, platform, debug):
+def build(image, version, versions_file, platform, debug):
     """Build, test and - on a publishing run - push one architecture of one image.
 
     One invocation handles one platform, on a runner of that architecture. That
@@ -80,16 +112,15 @@ def build(image, version, platform, debug):
 
     dockerfile_directory, dockerfile_path = resolve_dockerfile(image, version)
 
-    # Resolve the tool versions the Dockerfile expects as build args. Doing it
-    # here rather than inside the build means one request per tool instead of one
-    # per architecture, and pins the tested image and the pushed one to the same
-    # versions.
     try:
         image_conf["build_args"].update(
-            version_resolver.resolve(image_conf.get("github_versions") or {}, version)
+            resolve_build_args(image, version, image_conf, versions_file)
         )
     except version_resolver.VersionResolutionError as e:
         print(f"> [Error] {e}")
+        exit(1)
+    except OSError as e:
+        print(f"> [Error] Could not read {versions_file}: {e}")
         exit(1)
 
     image_tags = config.get_image_tags(image, version, image_conf, env_conf)

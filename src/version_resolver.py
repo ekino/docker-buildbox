@@ -91,15 +91,28 @@ def _explain(url, http_error, authenticated):
     return VersionResolutionError(context)
 
 
+# Responses for the lifetime of the process. Resolving the whole matrix in one
+# go asks four images for Helm and five for Trivy, which was 45 requests where
+# 33 distinct URLs would do. Caching is not merely an optimisation here: every
+# image in a run must be handed the same answer for the same tool, and a cache
+# makes that true by construction rather than by the releases not moving.
+_response_cache = {}
+
+
 def _fetch(path):
     url = f"{API_ROOT}/{path}"
+    if url in _response_cache:
+        return _response_cache[url]
     if _auth_header() is None:
-        return _get(url, authenticated=False)
-    try:
-        return _get(url, authenticated=True)
-    except AuthRefused as refused:
-        print(f"> [Warning] {refused} - retrying anonymously")
-        return _get(url, authenticated=False)
+        response = _get(url, authenticated=False)
+    else:
+        try:
+            response = _get(url, authenticated=True)
+        except AuthRefused as refused:
+            print(f"> [Warning] {refused} - retrying anonymously")
+            response = _get(url, authenticated=False)
+    _response_cache[url] = response
+    return response
 
 
 def _latest_tag(repo):

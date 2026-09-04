@@ -85,10 +85,10 @@ versions:
 ```
 
 ### Resolving tool versions
-`image_builder.py` resolves every `github_versions` entry before building and
-passes the results as build args, so the Dockerfiles never call the GitHub API
-themselves. Each entry needs a matching `ARG NAME` in the Dockerfile. Resolution
-rules live in `src/version_resolver.py`:
+Every `github_versions` entry is resolved before building and passed as a build
+arg, so the Dockerfiles never call the GitHub API themselves. Each entry needs a
+matching `ARG NAME` in the Dockerfile. Resolution rules live in
+`src/version_resolver.py`:
 
 | rule | picks |
 | --- | --- |
@@ -98,8 +98,28 @@ rules live in `src/version_resolver.py`:
 | `latest_v3` | the newest stable `v3.x.y` release |
 | `highest_with_prefix` | the highest release tagged `<image version>.*` |
 
-Set `GH_AUTH_HEADER` (CI does, from a scoped GitHub App token) to get the
-authenticated rate limit; without it resolution still works, anonymously.
+**In CI, resolution happens once per run, in `generate_matrix`**, which writes
+`versions.json` and uploads it as the `resolved-versions` artifact; each build
+job downloads it and passes `--versions-file`, making no API calls of its own.
+Do not move this back into the build jobs. Two reasons:
+
+- **Volume.** One request per tool per job was 45 for a full matrix, and the
+  per-architecture split doubled it to 90. Most requests are authenticated and
+  bounded by 5000/hour, but some repositories (`aquasecurity`, for one) run an
+  IP allow list that refuses authenticated requests from runners, and
+  `version_resolver` then falls back to the anonymous 60/hour. That is what
+  started failing builds. Central resolution plus the response cache in
+  `version_resolver` makes a full matrix **19** requests.
+- **Consistency.** Two jobs resolving the same tool minutes apart can get
+  different answers if a release lands between them, and `imagetools create`
+  would assemble those two halves into one multi-arch tag without complaint.
+  Resolving once means both architectures are handed identical versions by
+  construction.
+
+`generate_matrix` is consequently the only job that holds the API token. Set
+`GH_AUTH_HEADER` (CI does, from a scoped GitHub App token) to get the
+authenticated rate limit; without it resolution still works, anonymously - a
+local `image_builder.py build` with no `--versions-file` resolves live.
 Because the versions arrive as build args, a bare `docker build` fails with
 `NAME: must be passed as a build arg` - build through `image_builder.py`.
 

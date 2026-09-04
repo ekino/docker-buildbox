@@ -83,6 +83,10 @@ Build successful
 Tests successful
 ```
 
+A local build resolves its tool versions from the GitHub API as it goes. CI
+instead resolves them once for the whole run and passes `--versions-file`, so
+every architecture of an image gets identical versions.
+
 One invocation builds one architecture. `--platform` defaults to your own
 machine's, so a local build is native; pass it explicitly to build another
 architecture, which needs QEMU (`docker run --privileged --rm
