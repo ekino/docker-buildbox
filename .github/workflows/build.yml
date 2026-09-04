@@ -18,6 +18,17 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+    inputs:
+      publish_tag:
+        description: >-
+          Publish under this throwaway tag instead of not publishing at all.
+          Leave empty to build and test only. A branch run is not on master, so
+          this is the only way to exercise the push and merge path before
+          merging - use something like "rollout-test", verify with
+          `docker buildx imagetools inspect ekino/ci-aws:rollout-test`, then
+          delete the tags.
+        required: false
+        default: ""
 
 concurrency:
   # event_name stays in the group: it keeps the nightly run from cancelling a
@@ -33,6 +44,7 @@ jobs:
     permissions:
       contents: read
     if: github.actor != 'dependabot[bot]' || github.event_name == 'pull_request'
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -47,30 +59,45 @@ jobs:
         run: |
           pip install pip pipenv
           pipenv sync
+      # Emits both matrices at once: one build entry per (image, version,
+      # platform) and one merge entry per (image, version).
       - name: Run script
         id: run_script
-        run: echo "::set-output name=matrix::$(pipenv run python matrix_generator.py)"
+        run: |
+          matrix="$(pipenv run python matrix_generator.py)"
+          echo "build=$(echo "$matrix" | jq -c .build)" >> "$GITHUB_OUTPUT"
+          echo "merge=$(echo "$matrix" | jq -c .merge)" >> "$GITHUB_OUTPUT"
 
     outputs:
-      matrix: ${{ steps.run_script.outputs.matrix }}
+      build: ${{ steps.run_script.outputs.build }}
+      merge: ${{ steps.run_script.outputs.merge }}
 
   build:
-    runs-on: ubuntu-24.04
+    # One architecture per job, on a runner of that architecture. QEMU is gone:
+    # emulated arm64 builds intermittently died of SIGILL inside npm, and
+    # BuildKit never noticed the child had gone, so the job ran silent to
+    # GitHub's 6-hour ceiling.
+    runs-on: ${{ matrix.runner }}
+    name: build ${{ matrix.image }} ${{ matrix.version }} (${{ matrix.arch }})
     # GITHUB_TOKEN is used to log in to ghcr.io and push, so keep it to the
-    # minimum this job actually needs.
+    # minimum this job actually needs. A pull request run pushes nothing and
+    # needs no credentials at all.
     permissions:
       contents: read
       packages: write
-    if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.matrix).include[0]
+    if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.build).include[0]
     needs: generate_matrix
+    # A native build of the slowest image takes well under this. The cap is here
+    # so a build that hangs becomes a rerunnable failure within the hour rather
+    # than occupying a runner until the 6-hour default.
+    timeout-minutes: 90
 
     strategy:
-      matrix: ${{fromJSON(needs.generate_matrix.outputs.matrix)}}
+      matrix: ${{fromJSON(needs.generate_matrix.outputs.build)}}
       fail-fast: false
 
     steps:
       - uses: actions/checkout@v7
-      - uses: docker/setup-qemu-action@v4
       - uses: docker/setup-buildx-action@v4
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -92,7 +119,9 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           permission-metadata: read
-      - name: Build and tests images
+      # On a publishing run this pushes a per-arch staging tag and tests that
+      # tag; otherwise it loads the image locally, tests it, and pushes nothing.
+      - name: Build and test image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -101,5 +130,68 @@ jobs:
           # Read by src/version_resolver.py. It never reaches the builds, so
           # nothing running inside an image can see it.
           GH_AUTH_HEADER: "Authorization: Bearer ${{ steps.gh_api_token.outputs.token }}"
+          # Empty for every trigger but a workflow_dispatch that asked for it.
+          PUBLISH_TAG: ${{ inputs.publish_tag }}
         run: |
-          pipenv run python image_builder.py build -d --image ${{ matrix.image }} --version ${{ matrix.version }}
+          pipenv run python image_builder.py build -d \
+            --image ${{ matrix.image }} \
+            --version ${{ matrix.version }} \
+            --platform ${{ matrix.platform }}
+
+  merge:
+    # Assembles the per-arch staging tags each build job pushed into the
+    # multi-arch tag users pull. Only publishing runs have anything to merge;
+    # image_builder.py merge is the source of truth for that and no-ops
+    # otherwise, but the condition below keeps a pull request from queueing 27
+    # jobs that would do nothing.
+    runs-on: ubuntu-24.04
+    name: merge ${{ matrix.image }} ${{ matrix.version }}
+    permissions:
+      contents: read
+      packages: write
+    needs: [generate_matrix, build]
+    # !cancelled() rather than success(): fail-fast is off, so one image failing
+    # to build must not skip the merge of the other 26. Each merge verifies its
+    # own sources exist, so a broken image fails only its own job. Using
+    # !cancelled() instead of always() still skips the merges when a run is
+    # cancelled, where publishing half a matrix is never what was wanted - and
+    # generate_matrix must still be checked explicitly, because !cancelled()
+    # would otherwise let this run with an empty matrix output that fromJSON
+    # cannot parse. The pull request case is excluded further down, so unlike
+    # the build job this needs no exception for dependabot pull requests.
+    if: |
+      !cancelled()
+      && needs.generate_matrix.result == 'success'
+      && github.actor != 'dependabot[bot]'
+      && fromJSON(needs.generate_matrix.outputs.merge).include[0]
+      && (github.event_name == 'release'
+          || github.event_name == 'schedule'
+          || (github.event_name != 'pull_request' && github.ref == 'refs/heads/master')
+          || (github.event_name == 'workflow_dispatch' && inputs.publish_tag != ''))
+    timeout-minutes: 15
+
+    strategy:
+      matrix: ${{fromJSON(needs.generate_matrix.outputs.merge)}}
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: 3.11
+      - name: Set up Pipenv
+        run: |
+          pip install pip pipenv
+          pipenv sync
+      - name: Merge per-arch tags into the multi-arch image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PUBLISH_TAG: ${{ inputs.publish_tag }}
+        run: |
+          pipenv run python image_builder.py merge -d \
+            --image ${{ matrix.image }} \
+            --version ${{ matrix.version }}

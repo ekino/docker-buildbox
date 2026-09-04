@@ -5,14 +5,25 @@ from os.path import exists
 import yaml
 from git import Repo
 
-matrix = {"include": []}
 excluded_files = [  # Changes to those files shouldn't trigger a build
     '.gitignore',
     'CHANGELOG.md',
     'README.md',
+    'handover.md',
     '.github/dependabot.yml',
     '.github/copilot-instructions.md',
 ]
+
+# The runner label that builds each platform natively. arm64 used to be built
+# under QEMU on an amd64 runner, where V8's JIT tripped emulation bugs: an
+# `npm install` died of SIGILL, BuildKit never noticed its child had gone, and
+# the job ran silent to GitHub's 6-hour ceiling. Building on the matching
+# architecture removes the emulator, so `docker/setup-qemu-action` is gone from
+# the workflow.
+RUNNERS = {
+    "linux/amd64": "ubuntu-24.04",
+    "linux/arm64": "ubuntu-24.04-arm",
+}
 
 
 def get_diff_files_list():
@@ -47,23 +58,56 @@ def get_paths(changedFiles, unfilteredFiles):
     return set(paths)
 
 
+def load_config(image):
+    with open("base_config.yml") as base_config, open(f"{image}/config.yml") as config:
+        return yaml.safe_load(f"{base_config.read()}\n{config.read()}")
+
+
 def generate_matrix(paths):
-    for image_folder in paths:
-        with open("base_config.yml", 'r') as base_config:
-            if exists("{}/config.yml".format(image_folder)):
-                with open("{}/config.yml".format(image_folder), 'r') as config:
-                    full_config = base_config.read() + config.read()
+    """Emit one build entry per (image, version, platform) and one merge entry
+    per (image, version).
 
-                    image_config = yaml.safe_load(full_config)
+    The build entries fan out across architectures because each one is now a
+    native, single-platform build. The merge entries reassemble the per-arch
+    tags those jobs push into the multi-arch tag users pull, so there is exactly
+    one of them per image the build jobs cover.
+    """
+    build = []
+    merge = []
 
-                    for version in image_config["versions"]:
-                        matrix["include"].append(
-                            {
-                                "image": image_folder.replace("/", ""),
-                                "version": str(version)
-                            }
-                        )
-    print(json.dumps(matrix))
+    for image_folder in sorted(paths):
+        image = image_folder.replace("/", "")
+        if not exists(f"{image}/config.yml"):
+            continue
+
+        image_config = load_config(image)
+        default_platforms = image_config.get("base_platforms") or []
+
+        for version, version_config in image_config["versions"].items():
+            version = str(version)
+            platforms = (version_config or {}).get("platforms") or default_platforms
+            if not platforms:
+                raise SystemExit(
+                    f"> [Error] {image} {version}: no platforms configured and no base_platforms to fall back on"
+                )
+
+            merge.append({"image": image, "version": version})
+
+            for platform in platforms:
+                if platform not in RUNNERS:
+                    raise SystemExit(
+                        f"> [Error] {image} {version}: no runner label known for platform {platform!r}"
+                        f" - known platforms are {', '.join(sorted(RUNNERS))}"
+                    )
+                build.append({
+                    "image": image,
+                    "version": version,
+                    "platform": platform,
+                    "arch": platform.split("/")[1],
+                    "runner": RUNNERS[platform],
+                })
+
+    print(json.dumps({"build": {"include": build}, "merge": {"include": merge}}))
 
 
 changedFiles = get_diff_files_list()

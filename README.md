@@ -67,18 +67,35 @@ $ python image_builder.py build --help
 Usage: image_builder.py build [OPTIONS]
 
 Options:
-  --image TEXT    image to build
-  --version TEXT  image version
-  -d, --debug     debug
-  --help          Show this message and exit.
+  -i, --image TEXT     image to build
+  -v, --version TEXT   image version
+  -p, --platform TEXT  single platform to build, e.g. linux/arm64 (default:
+                       this machine's)
+  -d, --debug          debug
+  --help               Show this message and exit.
 ```
 
 ``` bash
-$ python image_builder.py build --image java --version 11
-> Building: ekino/ci-java:11-latest
-Build succesfull
-> Testing ekino/ci-java:11-latest
+$ python image_builder.py build --image java --version 21
+> Building linux/arm64: ekino/ci-java-arm64:21-latest
+Build successful
+> Testing ekino/ci-java-arm64:21-latest
 Tests successful
+```
+
+One invocation builds one architecture. `--platform` defaults to your own
+machine's, so a local build is native; pass it explicitly to build another
+architecture, which needs QEMU (`docker run --privileged --rm
+tonistiigi/binfmt --install all`) and is considerably slower.
+
+In CI each architecture is built on a runner of that architecture and pushed as
+a per-arch staging tag (`ekino/ci-java-amd64:21-latest`), which the `merge`
+command then assembles into the multi-arch tag users pull. `merge` only does
+anything on a publishing run, so you will rarely need it locally.
+
+``` bash
+$ python image_builder.py merge --image java --version 21
+> Creating ekino/ci-java:21-latest from ekino/ci-java-amd64:21-latest, ekino/ci-java-arm64:21-latest
 ```
 
 ## Contribution

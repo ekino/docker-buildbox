@@ -18,12 +18,17 @@ pipenv shell
 ### Building and Testing Images
 ```bash
 # Build a specific image/version (must use pipenv shell or pipenv run)
+# One invocation builds ONE architecture. --platform defaults to the host's.
 pipenv run python image_builder.py build --image IMAGE_NAME --version VERSION
 
 # Examples
 pipenv run python image_builder.py build --image java --version 17
 pipenv run python image_builder.py build --image php --version 8.3
 pipenv run python image_builder.py build --image aws --version 1 --debug
+pipenv run python image_builder.py build --image aws --version 1 --platform linux/amd64
+
+# Assemble the per-arch staging tags into the multi-arch tag (publishing runs only)
+pipenv run python image_builder.py merge --image aws --version 1
 
 # Generate build matrix (used by CI)
 pipenv run python matrix_generator.py
@@ -103,7 +108,18 @@ The build system intelligently determines which images to build:
 - **Tag release**: Builds ALL images → pushes with version tags
 - **Nightly**: Builds ALL images → pushes as `nightly-IMAGE` tags
 
-Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md`, `README.md`, `.github/dependabot.yml`, `.github/copilot-instructions.md`
+Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md`, `README.md`, `handover.md`, `.github/dependabot.yml`, `.github/copilot-instructions.md`
+
+`matrix_generator.py` emits two matrices in one JSON object:
+- `build`: one entry per `(image, version, platform)`, carrying the `runner`
+  label for that platform (`RUNNERS` maps `linux/amd64` → `ubuntu-24.04`,
+  `linux/arm64` → `ubuntu-24.04-arm`)
+- `merge`: one entry per `(image, version)`
+
+The `merge` job depends on `build` with `if: !cancelled()` rather than the
+default `success()`: `fail-fast` is off, so one image failing must not skip the
+other 26 merges. Each merge verifies its own staging tags exist first, so a
+broken image fails only its own job.
 
 ### Available Images
 - **aws**: AWS CLI, Terraform, Kubectl, Helm, Python
@@ -121,9 +137,23 @@ Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md
 - **sonar**: SonarQube Scanner
 
 ### Multi-Architecture Support
-- Default: `linux/amd64`
-- Many images support: `linux/amd64` + `linux/arm64`
-- Uses Docker Buildx with multi-platform builds
+- Default: `linux/amd64` (from `base_platforms` in `base_config.yml`, when a
+  version sets no `platforms` of its own)
+- Most images support: `linux/amd64` + `linux/arm64`
+- **Each architecture is built natively on a runner of that architecture, one
+  job per platform - there is no QEMU in the pipeline.** Emulated arm64 builds
+  intermittently died of SIGILL inside `npm install`; BuildKit never noticed its
+  child had gone, so the job ran silent to GitHub's 6-hour ceiling.
+- A single-platform build can be `--load`ed into the local daemon, so:
+  - **pull request run**: `--load`, test, push nothing (no credentials needed,
+    so fork pull requests build)
+  - **publishing run**: `--push` the per-arch staging tag, test *that tag*, then
+    `merge`. Pushing rather than loading preserves the provenance attestation,
+    which is a BuildKit export artifact and would be lost by a `load` + `push`.
+- The `merge` command runs `docker buildx imagetools create` over the per-arch
+  staging tags. This writes an OCI index referencing manifests already in the
+  registry, so no blobs move; it is idempotent and rerunnable.
+- There is no local `registry:2` container any more, and no `localname` tag.
 
 ## Dependencies
 - **Python 3.11** with pipenv
