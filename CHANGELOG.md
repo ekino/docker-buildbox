@@ -5,13 +5,12 @@ Versions
 ----------
 * All images: arm64 images are now built on native arm64 runners instead of being emulated with QEMU. This removes a class of intermittent failures where an emulated `npm install` died of an illegal instruction without the build noticing, leaving the job to run silently for up to six hours, and makes every arm64 build substantially faster
 * All images: each architecture is built, tested and pushed as its own per-arch tag, and the multi-arch tag is then assembled from those tags. The image published for a given architecture is now exactly the one that was tested on that architecture, and publishing runs no longer build every image a second time after testing it
-* Prowler: added new image with Prowler and AWS CLI v2
-* All images: the image published to Docker Hub and GHCR is now built from the layers the tests ran against, instead of being rebuilt from scratch after testing. Publishing runs are correspondingly faster
 * AWS, Azure, DIND, GCP, Golang, Node, Scaleway, Sonar & Upsun: tool version lookups now fail fast with an explicit error when the GitHub API is unavailable or rate-limited, instead of silently resolving to an empty version and downloading a 404 page. Remote lookups and downloads also retry on transient errors
 * AWS, Azure, DIND, GCP, Golang, Node, Scaleway, Sonar & Upsun: tool versions are now resolved by the build script and passed as build args, instead of being looked up from inside the image. The lookups are authenticated when a token is available, raising the rate limit from 60 to at least 5000 requests/hour and removing the intermittent 403 build failures, and they now happen once per CI run rather than once per image per architecture - 19 requests for a full matrix where the Dockerfiles used to make 180. Every architecture of an image is built from the same resolved versions, those versions are visible in the image history, and no credential is present while the image builds
 * AWS, Azure, GCP & Scaleway: Helm is no longer a release candidate. The 3.x lookup matched any tag containing v3.x.y, so a published v3.x.y-rc.N was picked ahead of the newest stable release
 * AWS, Chrome, DIND, Golang, Node, PHP & Scaleway: fixing the mime.types source, the Debian mime-support repository having been renamed to media-types. The old URL had been returning 404 for a while, and its HTML error page was being written to /etc/mime.types
 * Cloudsploit: removing this image, as we're now using Prowler instead. Existing `ekino/ci-cloudsploit` tags are left in place but will no longer be rebuilt or receive updates
+* Prowler: added new image with Prowler and AWS CLI v2
 
 2026-08-31
 ----------
