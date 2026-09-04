@@ -1,4 +1,4 @@
-FROM php:8.4.24-cli-alpine3.24 AS base
+FROM php:8.4.25-cli-alpine3.24 AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 
 ARG COMPOSER_VERSION
