@@ -7,6 +7,7 @@ versions:
       CLI_VERSION:
         repo: platformsh/cli
         rule: latest_tag
+      UV_VERSION: astral-sh/uv
     test_config:
       cmd:
         - git --version
@@ -15,3 +16,4 @@ versions:
         - python --version
         - pip --version
         - pipenv --version
+        - uv --version

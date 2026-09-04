@@ -1,3 +1,14 @@
+# check=skip=InvalidDefaultArgInFrom
+# UV_VERSION is resolved from the GitHub API by image_builder.py. It has to be a
+# global ARG, declared before the first FROM: FROM can expand one, but
+# `COPY --from` cannot expand variables at all, so uv arrives through a named
+# stage below. It deliberately has no default, so that a bare `docker build`
+# fails instead of silently pulling an unpinned uv - which is the lint the
+# check directive above skips.
+ARG UV_VERSION
+
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
+
 FROM python:3.14.7-slim-trixie AS base
 
 LABEL maintainer="opensource@ekino.com"
@@ -30,6 +41,10 @@ ARG INFRACOST_VERSION
 ARG KUSTOMIZE_VERSION
 ARG TERRAGRUNT_VERSION
 ARG TRIVY_VERSION
+# uv installs the Python packages below, and stays in the image as a tool. The
+# distroless binaries are statically linked, so they are portable.
+COPY --from=uv /uv /uvx /usr/local/bin/
+
 RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certificates gnupg curl git zip unzip jq wget \
     && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list \
     && curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
@@ -40,8 +55,7 @@ RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certific
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old \
     && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${JQ_ARCH} -O /usr/bin/yq \
     && chmod +x /usr/bin/yq \
-    && pip install -U pip \
-    && pip install pipenv \
+    && uv pip install --system --no-cache pipenv \
     # Installing kubectl
     && curl -fLO --retry 3 --retry-delay 2 "https://dl.k8s.io/release/$(curl -fL -s --retry 3 --retry-delay 2 https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" \
     && chmod +x ./kubectl \

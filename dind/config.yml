@@ -8,6 +8,7 @@ versions:
       CRANE_VERSION: google/go-containerregistry
       SYFT_VERSION: anchore/syft
       TRIVY_VERSION: aquasecurity/trivy
+      UV_VERSION: astral-sh/uv
     test_config:
       cmd:
         - aws --version
@@ -19,3 +20,4 @@ versions:
         - cosign version
         - crane version
         - syft version
+        - uv --version
