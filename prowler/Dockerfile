@@ -1,6 +1,6 @@
 # Base image used for all architectures.
 # We start from the official Python slim image, then add metadata for the project.
-FROM python:3.12.13-slim-trixie AS base
+FROM python:3.13.15-slim-trixie AS base
 LABEL maintainer="Axel Pavageau <axel.pavageau@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
@@ -20,7 +20,7 @@ RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends \
         build-essential pkg-config libzstd-dev zlib1g-dev \
     && pip install --no-cache-dir -U pip \
     && pip install --no-cache-dir -r requirements.txt \
-    && curl "${AWSCLI_URL}" -o "awscliv2.zip" \
+    && curl -f --retry 3 --retry-delay 2 "${AWSCLI_URL}" -o "awscliv2.zip" \
     && unzip -q awscliv2.zip \
     && ./aws/install \
     && rm -f awscliv2.zip && rm -rf aws \

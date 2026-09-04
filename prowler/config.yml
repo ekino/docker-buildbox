@@ -5,5 +5,5 @@ versions:
       - linux/arm64
     test_config:
       cmd:
-        - prowler --version
+        - prowler aws --list-checks
         - aws --version
