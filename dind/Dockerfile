@@ -1,3 +1,14 @@
+# check=skip=InvalidDefaultArgInFrom
+# UV_VERSION is resolved from the GitHub API by image_builder.py. It has to be a
+# global ARG, declared before the first FROM: FROM can expand one, but
+# `COPY --from` cannot expand variables at all, so uv arrives through a named
+# stage below. It deliberately has no default, so that a bare `docker build`
+# fails instead of silently pulling an unpinned uv - which is the lint the
+# check directive above skips.
+ARG UV_VERSION
+
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
+
 FROM docker:29.7.2-dind AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
@@ -5,27 +16,31 @@ LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/
 FROM base AS base-amd64
 ARG TRIVY_ARCH="Linux-64bit"
 ARG AWSCLI_ARCH="linux-x86_64"
+# uv installs the Python packages below, and stays in the image as a tool. The
+# distroless binaries are statically linked, so they are portable.
+COPY --from=uv /uv /uvx /usr/local/bin/
+
 ADD requirements.txt .
 RUN echo "Install AWS & Azure CLIs" && \
     apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff zip && \
     rm -f /usr/lib/python*/EXTERNALLY-MANAGED && \
     python3 -m ensurepip && \
-    pip3 install --no-cache --upgrade pip setuptools wheel && \
-    pip3 -q install boto3 PyYAML && \
-    pip3 install -r requirements.txt && \
+    uv pip install --system --no-cache boto3 PyYAML -r requirements.txt && \
     apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
 
 FROM base AS base-arm64
 ARG TRIVY_ARCH="Linux-ARM64"
+# uv installs the Python packages below, and stays in the image as a tool. The
+# distroless binaries are statically linked, so they are portable.
+COPY --from=uv /uv /uvx /usr/local/bin/
+
 ADD requirements.txt .
 RUN echo "Install AWS & Azure CLIs" && \
     apk add -q --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers musl-dev openldap-dev openssh-client python3-dev gcc libffi-dev libressl-dev make rsync tzdata groff zip && \
     rm -f /usr/lib/python*/EXTERNALLY-MANAGED && \
     python3 -m ensurepip && \
-    pip3 install --no-cache --upgrade pip setuptools wheel && \
-    pip3 -q install boto3 PyYAML && \
-    pip3 install -r requirements.txt && \
+    uv pip install --system --no-cache boto3 PyYAML -r requirements.txt && \
     apk add aws-cli && \
     echo "Done installing AWS & Azure CLIs"
 
