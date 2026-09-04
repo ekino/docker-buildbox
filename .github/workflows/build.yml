@@ -66,6 +66,14 @@ jobs:
       # per repository.
       - name: Mint a scoped token for the GitHub API version lookups
         id: gh_api_token
+        # A fork pull request gets no secrets, so app-id is empty and this
+        # action treats that as a hard error. That must not fail the run.
+        # version_resolver already reads an empty bearer token as no header at
+        # all and resolves anonymously, which the 60/hour anonymous limit
+        # accommodates now that its response cache makes a full matrix 19
+        # requests. Nothing else in a pull request run needs a credential: the
+        # build jobs load the image locally, test it and push nothing.
+        continue-on-error: true
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.APP_ID }}
