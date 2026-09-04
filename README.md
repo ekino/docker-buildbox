@@ -94,9 +94,14 @@ command then assembles into the multi-arch tag users pull. `merge` only does
 anything on a publishing run, so you will rarely need it locally.
 
 ``` bash
-$ python image_builder.py merge --image java --version 21
+$ python image_builder.py merge --image java --version 21 --markers-dir markers
 > Creating ekino/ci-java:21-latest from ekino/ci-java-amd64:21-latest, ekino/ci-java-arm64:21-latest
 ```
+
+`--markers-dir` must contain one file per configured architecture, named after
+it (`amd64`, `arm64`). CI populates it from artifacts that each build job
+uploads only after its tests pass, so an architecture that failed has no marker
+and the merge refuses rather than publishing a tag that lost it.
 
 ## Contribution
 

@@ -27,8 +27,10 @@ pipenv run python image_builder.py build --image php --version 8.3
 pipenv run python image_builder.py build --image aws --version 1 --debug
 pipenv run python image_builder.py build --image aws --version 1 --platform linux/amd64
 
-# Assemble the per-arch staging tags into the multi-arch tag (publishing runs only)
-pipenv run python image_builder.py merge --image aws --version 1
+# Assemble the per-arch staging tags into the multi-arch tag (publishing runs only).
+# --markers-dir must hold one file per configured arch, named after it (amd64, arm64);
+# CI populates it from the build jobs' artifacts.
+pipenv run python image_builder.py merge --image aws --version 1 --markers-dir markers
 
 # Generate build matrix (used by CI)
 pipenv run python matrix_generator.py
@@ -118,8 +120,23 @@ Files in `excluded_files` list don't trigger builds: `.gitignore`, `CHANGELOG.md
 
 The `merge` job depends on `build` with `if: !cancelled()` rather than the
 default `success()`: `fail-fast` is off, so one image failing must not skip the
-other 26 merges. Each merge verifies its own staging tags exist first, so a
-broken image fails only its own job.
+other 26 merges. Isolation comes from **per-arch markers** instead: each build
+job writes `markers/<arch>` and uploads it as a `tested-<image>-<version>-<arch>`
+artifact, and that step only runs if the build-and-test step succeeded. `merge`
+downloads the markers matching its own image and refuses to publish unless every
+configured platform has one, so a broken image fails only its own merge.
+
+Do **not** gate the merge on staging-tag existence instead. A tag existing says
+nothing about which run put it there or whether its tests passed: the publishing
+path pushes *before* it tests, so the tag can hold an image whose tests then
+failed, and a tag left by last night's run outlives a build job that fails
+before pushing anything. Reading the digest back with `imagetools inspect` is
+not a fix either - Docker Hub's CDN served a stale digest for a tag during
+development of this.
+
+Whether a run publishes is decided once, by the `publishing` output of
+`generate_matrix`, which mirrors `config.is_publishing`. The build marker steps
+and the whole `merge` job key off it.
 
 ### Available Images
 - **aws**: AWS CLI, Terraform, Kubectl, Helm, Python
@@ -151,8 +168,9 @@ broken image fails only its own job.
     `merge`. Pushing rather than loading preserves the provenance attestation,
     which is a BuildKit export artifact and would be lost by a `load` + `push`.
 - The `merge` command runs `docker buildx imagetools create` over the per-arch
-  staging tags. This writes an OCI index referencing manifests already in the
-  registry, so no blobs move; it is idempotent and rerunnable.
+  staging tags, gated on the markers described above. This writes an OCI index
+  referencing manifests already in the registry, so no blobs move; it is
+  idempotent and rerunnable.
 - There is no local `registry:2` container any more, and no `localname` tag.
 
 ## Dependencies

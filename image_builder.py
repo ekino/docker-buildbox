@@ -1,5 +1,6 @@
 import platform as host_platform_module
-from os.path import exists
+from os import listdir
+from os.path import exists, isdir
 
 import click
 
@@ -122,21 +123,50 @@ def build(image, version, platform, debug):
 @click.command()
 @click.option("--image", "-i", default="aws", help="image to merge")
 @click.option("--version", "-v", default="1", help="image version")
+@click.option("--markers-dir", default="markers",
+              help="directory holding one marker file per architecture that passed")
 @click.option("--debug", "-d", is_flag=True, help="debug")
-def merge(image, version, debug):
+def merge(image, version, markers_dir, debug):
     """Assemble the per-arch staging tags into the multi-arch tag users pull.
 
     The build jobs run on different machines, so the registry is what they hand
-    off through. This reads the staging tags they pushed and writes an OCI index
-    over them - a metadata operation, no blobs move. Every source is checked
-    first, so an image whose arm64 build failed fails its own merge instead of
-    publishing a tag that silently lost an architecture.
+    off through. This writes an OCI index over manifests already in the registry
+    - a metadata operation, no blobs move.
+
+    What it will not do is take a staging tag's existence as proof it should be
+    published. A tag existing says nothing about which run put it there or
+    whether that run's tests passed. The publishing path pushes before it tests,
+    so a tag can hold an image whose tests then failed; and a tag left by last
+    night's run outlives a build job that fails before pushing anything. Either
+    would let this splice a broken or a stale architecture into the tag users
+    pull.
+
+    So the gate is markers_dir: one file per architecture, written by the build
+    job only after its tests passed and carried here as a workflow artifact. An
+    architecture with no marker did not pass in this run, and this refuses to
+    publish rather than quietly dropping it.
     """
     env_conf, image_conf = load_config(image, version, debug)
 
     if not config.is_publishing(env_conf):
         print("> [Info] Not a publishing run - nothing to merge")
         return
+
+    passed = set(listdir(markers_dir)) if isdir(markers_dir) else set()
+    if debug:
+        print(f">> Architectures that passed: {', '.join(sorted(passed)) or '(none)'}")
+
+    missing = [
+        platform for platform in image_conf["platforms"]
+        if config.parse_platform(platform)[1] not in passed
+    ]
+    if missing:
+        print(
+            f"> [Error] Refusing to publish {image} {version}:"
+            f" {', '.join(missing)} did not pass in this run."
+            " Rerun the failed build jobs, then rerun this merge."
+        )
+        exit(1)
 
     image_tags = config.get_image_tags(image, version, image_conf, env_conf)
 
@@ -151,11 +181,13 @@ def merge(image, version, debug):
         sources = [
             image_tags["platforms"][p][registry] for p in image_conf["platforms"]
         ]
-        missing = [source for source in sources if not docker_tools.manifest_exists(source)]
-        if missing:
+        # The markers already prove these passed; this only catches a tag deleted
+        # since, and gives a clearer error than imagetools would.
+        unresolvable = [source for source in sources if not docker_tools.manifest_exists(source)]
+        if unresolvable:
             print(
-                f"> [Error] Refusing to publish {target}: missing staging tags"
-                f" {', '.join(missing)} - the build job for those architectures failed"
+                f"> [Error] Refusing to publish {target}: {', '.join(unresolvable)}"
+                " passed its tests but no longer resolves in the registry"
             )
             exit(1)
         docker_tools.create_manifest(sources, target)

@@ -68,9 +68,29 @@ jobs:
           echo "build=$(echo "$matrix" | jq -c .build)" >> "$GITHUB_OUTPUT"
           echo "merge=$(echo "$matrix" | jq -c .merge)" >> "$GITHUB_OUTPUT"
 
+      # Decided once, here, so the build steps, the merge job and
+      # image_builder.py cannot disagree about whether this run publishes.
+      # Mirrors config.is_publishing.
+      - name: Decide whether this run publishes
+        id: publishing
+        env:
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          PUBLISH_TAG: ${{ inputs.publish_tag }}
+        run: |
+          if [ -n "$PUBLISH_TAG" ] \
+            || [ "$EVENT" = "release" ] \
+            || [ "$EVENT" = "schedule" ] \
+            || { [ "$EVENT" != "pull_request" ] && [ "$REF" = "refs/heads/master" ]; }; then
+            echo "publishing=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "publishing=false" >> "$GITHUB_OUTPUT"
+          fi
+
     outputs:
       build: ${{ steps.run_script.outputs.build }}
       merge: ${{ steps.run_script.outputs.merge }}
+      publishing: ${{ steps.publishing.outputs.publishing }}
 
   build:
     # One architecture per job, on a runner of that architecture. QEMU is gone:
@@ -140,6 +160,24 @@ jobs:
             --image ${{ matrix.image }} \
             --version ${{ matrix.version }} \
             --platform ${{ matrix.platform }}
+      # Only reached when the step above succeeded, which means this
+      # architecture built AND its tests passed. The merge job requires one
+      # marker per configured platform before it will publish, because the
+      # staging tag alone proves nothing: the publishing path pushes before it
+      # tests, so the tag can hold an image whose tests then failed, and a tag
+      # left by last night's run outlives a build that fails before pushing.
+      - name: Record that this architecture passed
+        if: needs.generate_matrix.outputs.publishing == 'true'
+        run: |
+          mkdir -p markers
+          echo "${{ matrix.platform }} passed in run ${{ github.run_id }}" > "markers/${{ matrix.arch }}"
+      - name: Upload the marker for the merge job
+        if: needs.generate_matrix.outputs.publishing == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tested-${{ matrix.image }}-${{ matrix.version }}-${{ matrix.arch }}
+          path: markers/${{ matrix.arch }}
+          retention-days: 1
 
   merge:
     # Assembles the per-arch staging tags each build job pushed into the
@@ -167,10 +205,7 @@ jobs:
       && needs.generate_matrix.result == 'success'
       && github.actor != 'dependabot[bot]'
       && fromJSON(needs.generate_matrix.outputs.merge).include[0]
-      && (github.event_name == 'release'
-          || github.event_name == 'schedule'
-          || (github.event_name != 'pull_request' && github.ref == 'refs/heads/master')
-          || (github.event_name == 'workflow_dispatch' && inputs.publish_tag != ''))
+      && needs.generate_matrix.outputs.publishing == 'true'
     timeout-minutes: 15
 
     strategy:
@@ -188,6 +223,16 @@ jobs:
         run: |
           pip install pip pipenv
           pipenv sync
+      # One artifact per architecture that passed. continue-on-error because a
+      # pattern that matches nothing is an error here, and image_builder.py says
+      # which architectures are missing far more clearly than that would.
+      - name: Collect the markers from the build jobs
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: tested-${{ matrix.image }}-${{ matrix.version }}-*
+          path: markers
+          merge-multiple: true
       - name: Merge per-arch tags into the multi-arch image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
