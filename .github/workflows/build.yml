@@ -87,9 +87,12 @@ jobs:
       packages: write
     if: (github.actor != 'dependabot[bot]' || github.event_name == 'pull_request') && fromJSON(needs.generate_matrix.outputs.build).include[0]
     needs: generate_matrix
-    # A native build of the slowest image takes well under this. The cap is here
-    # so a build that hangs becomes a rerunnable failure within the hour rather
-    # than occupying a runner until the 6-hour default.
+    # #2021 capped this at 120 minutes to bound the QEMU wedges, and said to
+    # tighten it once post-optimisation durations were known. They are: with
+    # emulation gone the slowest of the 54 jobs is 6 minutes (run 33848464523),
+    # against 40 before. 90 leaves an order of magnitude of headroom for the
+    # push a publishing run adds, while still turning a hang into a rerunnable
+    # failure instead of an occupied runner.
     timeout-minutes: 90
 
     strategy:
