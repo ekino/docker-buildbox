@@ -96,7 +96,7 @@ jobs:
           echo "build=$(echo "$matrix" | jq -c .build)" >> "$GITHUB_OUTPUT"
           echo "merge=$(echo "$matrix" | jq -c .merge)" >> "$GITHUB_OUTPUT"
       - name: Upload the resolved versions for the build jobs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: resolved-versions
           path: versions.json
@@ -197,7 +197,7 @@ jobs:
           echo "${{ matrix.platform }} passed in run ${{ github.run_id }}" > "markers/${{ matrix.arch }}"
       - name: Upload the marker for the merge job
         if: needs.generate_matrix.outputs.publishing == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: tested-${{ matrix.image }}-${{ matrix.version }}-${{ matrix.arch }}
           path: markers/${{ matrix.arch }}
