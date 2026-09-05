@@ -17,7 +17,7 @@ FROM base-$TARGETARCH
 ADD requirements.txt .
 RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends \
         curl unzip ca-certificates git \
-        build-essential pkg-config libzstd-dev zlib1g-dev \
+        build-essential \
     && pip install --no-cache-dir -U pip \
     && pip install --no-cache-dir -r requirements.txt \
     && curl -f --retry 3 --retry-delay 2 "${AWSCLI_URL}" -o "awscliv2.zip" \
