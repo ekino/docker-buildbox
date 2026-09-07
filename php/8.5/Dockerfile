@@ -37,26 +37,26 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") && \
     date.timezone=${PHP_TIMEZONE:-UTC} \n\
     short_open_tag=Off \n\
     " > /usr/local/etc/php/php.ini && \
-    curl -sSL https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
-    curl -sSL https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VERSION}/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
-    curl -sSL https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VERSION}/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && chmod a+x /usr/local/bin/php-cs-fixer && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz | tar xz -C /tmp && \
     cd /tmp/phpredis-${REDIS_VERSION} && phpize && ./configure && make && make install && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
-    curl -sSL https://github.com/xdebug/xdebug/archive/${XDEBUG_VERSION}.tar.gz | tar xz -C /tmp && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://github.com/xdebug/xdebug/archive/${XDEBUG_VERSION}.tar.gz | tar xz -C /tmp && \
     cd /tmp/xdebug-${XDEBUG_VERSION} && phpize && ./configure --enable-xdebug && make && make install && \
     echo -e "zend_extension=xdebug.so \nxdebug.mode=coverage \n" > /usr/local/etc/php/conf.d/xdebug.ini && \
     mkdir -p /tmp/blackfire-probe && \
-    curl -A "Docker" -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/${TARGETARCH}/$version && \
+    curl -f -A "Docker" --retry 5 --retry-delay 2 --retry-all-errors -o /tmp/blackfire-probe/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/${TARGETARCH}/$version && \
     tar zxpf /tmp/blackfire-probe/blackfire-probe.tar.gz -C /tmp/blackfire-probe && \
     mv /tmp/blackfire-probe/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so && \
     printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini && \
     mkdir -p /tmp/blackfire-client && \
-    curl -A "Docker" -L https://blackfire.io/api/v1/releases/cli/linux/${TARGETARCH} | tar zxp -C /tmp/blackfire-client && \
+    curl -f -A "Docker" --retry 5 --retry-delay 2 --retry-all-errors -L https://blackfire.io/api/v1/releases/cli/linux/${TARGETARCH} | tar zxp -C /tmp/blackfire-client && \
     mv /tmp/blackfire-client/blackfire /usr/bin/blackfire && \
     # Starting AWS
     apk add aws-cli && \
     # Adding an up to date mime-types definition file
-    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     # Cleaning files
     apk del --purge alpine-sdk autoconf && \
     rm -rf /tmp/* /usr/share/doc /var/cache/apk/*

@@ -10,6 +10,7 @@ Versions
 * AWS, Azure, GCP & Scaleway: Helm is no longer a release candidate. The 3.x lookup matched any tag containing v3.x.y, so a published v3.x.y-rc.N was picked ahead of the newest stable release
 * AWS, Chrome, DIND, Golang, Node, PHP & Scaleway: fixing the mime.types source, the Debian mime-support repository having been renamed to media-types. The old URL had been returning 404 for a while, and its HTML error page was being written to /etc/mime.types
 * Cloudsploit: removing this image, as we're now using Prowler instead. Existing `ekino/ci-cloudsploit` tags are left in place but will no longer be rebuilt or receive updates
+* PHP: the downloads of composer, php-cs-fixer, phpredis, xdebug and the Blackfire probe and client now fail the build, and retry on transient errors, instead of silently writing an HTTP error page to the target path. A GitHub 504 on the php-cs-fixer release asset was being saved as an executable `/usr/local/bin/php-cs-fixer` and only surfaced four minutes later as a test failure. php-cs-fixer is also fetched from the project's current repository name, PHP-CS-Fixer/PHP-CS-Fixer, rather than through the FriendsOfPHP redirect left over from the rename
 * Prowler: added new image with Prowler and AWS CLI v2
 
 2026-08-31
