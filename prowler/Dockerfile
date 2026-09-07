@@ -1,3 +1,14 @@
+# check=skip=InvalidDefaultArgInFrom
+# UV_VERSION is resolved from the GitHub API by image_builder.py. It has to be a
+# global ARG, declared before the first FROM: FROM can expand one, but
+# `COPY --from` cannot expand variables at all, so uv arrives through a named
+# stage below. It deliberately has no default, so that a bare `docker build`
+# fails instead of silently pulling an unpinned uv - which is the lint the
+# check directive above skips.
+ARG UV_VERSION
+
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
+
 # Base image used for all architectures.
 # We start from the official Python slim image, then add metadata for the project.
 FROM python:3.13.15-slim-trixie AS base
@@ -15,11 +26,14 @@ ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
 FROM base-$TARGETARCH
 
 ADD requirements.txt .
+# uv installs the Python packages below, and stays in the image as a tool. The
+# distroless binaries are statically linked, so they are portable.
+COPY --from=uv /uv /uvx /usr/local/bin/
+
 RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends \
         curl unzip ca-certificates git \
         build-essential \
-    && pip install --no-cache-dir -U pip \
-    && pip install --no-cache-dir -r requirements.txt \
+    && uv pip install --system --no-cache -r requirements.txt \
     && curl -f --retry 3 --retry-delay 2 "${AWSCLI_URL}" -o "awscliv2.zip" \
     && unzip -q awscliv2.zip \
     && ./aws/install \

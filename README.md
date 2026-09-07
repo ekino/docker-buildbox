@@ -227,7 +227,7 @@ Contains Python with PIP, PIPENV, UV and Poetry.
 - https://hub.docker.com/r/ekino/ci-prowler/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-prowler
 
-Contains Prowler and AWS CLI v2.
+Contains Prowler and AWS CLI v2. Python packages are installed with uv, which is also available in the image.
 
 ### Scaleway
 - https://hub.docker.com/r/ekino/ci-scaleway/tags
