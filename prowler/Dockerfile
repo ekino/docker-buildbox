@@ -24,7 +24,7 @@ RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends \
     && unzip -q awscliv2.zip \
     && ./aws/install \
     && rm -f awscliv2.zip && rm -rf aws \
-    && apt-get purge -y --auto-remove build-essential pkg-config libzstd-dev zlib1g-dev \
+    && apt-get purge -y --auto-remove build-essential \
     && apt-get -qq clean \
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old
 
