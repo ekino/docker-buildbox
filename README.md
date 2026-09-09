@@ -158,7 +158,7 @@ Contains Chromium browser and the latest Node LTS.
 - https://hub.docker.com/r/ekino/ci-reviewtools/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-reviewtools
 
-Contains Node.js 24 on Alpine Linux with AI code review tools: Claude Code, OpenAI Codex, and Google Gemini CLI. Runs under a dedicated `reviewtools:reviewtools` user for security.
+Contains Node.js 24 on Alpine Linux with AI code review tools: Claude Code, OpenAI Codex, and Google Gemini CLI, plus Chromium for browser automation. Runs under a dedicated `reviewtools:reviewtools` user for security.
 
 ### GCP
 - https://hub.docker.com/r/ekino/ci-gcp/tags
