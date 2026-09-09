@@ -51,14 +51,13 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Set up Python
-        uses: actions/setup-python@v7
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.0.1
         with:
-          python-version: 3.11
-      - name: Set up Pipenv
-        run: |
-          pip install pip pipenv
-          pipenv sync
+          python-version: "3.11"
+          enable-cache: true
+      - name: Install dependencies
+        run: uv sync --locked
       # Version resolution now happens here, so this is the only job that holds
       # the API token. This token grants nothing beyond reading public metadata,
       # expires within the hour, and the action revokes it when the job ends. It
@@ -92,7 +91,7 @@ jobs:
           # nothing running inside an image can see it.
           GH_AUTH_HEADER: "Authorization: Bearer ${{ steps.gh_api_token.outputs.token }}"
         run: |
-          matrix="$(pipenv run python matrix_generator.py --versions-file versions.json)"
+          matrix="$(uv run --frozen python matrix_generator.py --versions-file versions.json)"
           echo "build=$(echo "$matrix" | jq -c .build)" >> "$GITHUB_OUTPUT"
           echo "merge=$(echo "$matrix" | jq -c .merge)" >> "$GITHUB_OUTPUT"
       - name: Upload the resolved versions for the build jobs
@@ -156,14 +155,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v4
-      - name: Set up Python
-        uses: actions/setup-python@v7
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.0.1
         with:
-          python-version: 3.11
-      - name: Set up Pipenv
-        run: |
-          pip install pip pipenv
-          pipenv sync
+          python-version: "3.11"
+          enable-cache: true
+      - name: Install dependencies
+        run: uv sync --locked
       - name: Fetch the versions resolved for this run
         uses: actions/download-artifact@v8
         with:
@@ -179,7 +177,7 @@ jobs:
           # Empty for every trigger but a workflow_dispatch that asked for it.
           PUBLISH_TAG: ${{ inputs.publish_tag }}
         run: |
-          pipenv run python image_builder.py build -d \
+          uv run --frozen python image_builder.py build -d \
             --image ${{ matrix.image }} \
             --version ${{ matrix.version }} \
             --platform ${{ matrix.platform }} \
@@ -239,14 +237,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v4
-      - name: Set up Python
-        uses: actions/setup-python@v7
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.0.1
         with:
-          python-version: 3.11
-      - name: Set up Pipenv
-        run: |
-          pip install pip pipenv
-          pipenv sync
+          python-version: "3.11"
+          enable-cache: true
+      - name: Install dependencies
+        run: uv sync --locked
       # One artifact per architecture that passed. continue-on-error because a
       # pattern that matches nothing is an error here, and image_builder.py says
       # which architectures are missing far more clearly than that would.
@@ -264,6 +261,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           PUBLISH_TAG: ${{ inputs.publish_tag }}
         run: |
-          pipenv run python image_builder.py merge -d \
+          uv run --frozen python image_builder.py merge -d \
             --image ${{ matrix.image }} \
             --version ${{ matrix.version }}

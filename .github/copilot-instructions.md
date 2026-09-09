@@ -13,7 +13,7 @@ This is the **Docker BuildBox** project by Ekino - a comprehensive collection of
 - `image_builder.py` - Main build script for individual images
 - `matrix_generator.py` - Generates build matrix for CI/CD (determines which images to build based on file changes)
 - `base_config.yml` - Base configuration shared across all images
-- `Pipfile` / `Pipfile.lock` - Python dependencies (pipenv-based)
+- `pyproject.toml` / `uv.lock` - Python dependencies (uv-based)
 - `src/` - Core Python modules:
   - `config.py` - Configuration loading and management
   - `docker_tools.py` - Docker build/test/push utilities
@@ -37,7 +37,7 @@ Each image has its own directory with:
 7. **Node** (`node/`) - Node.js + AWS CLI
 8. **PHP** (`php/`) - PHP 8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
 9. **Platform.sh** (`platformsh/`) - Platform.sh CLI
-10. **Python** (`python/`) - Python 3.10-3.14 + pip, pipenv
+10. **Python** (`python/`) - Python 3.10-3.14 + pip, pipenv, uv, Poetry
 11. **Scaleway** (`scaleway/`) - Scaleway CLI + Terraform, Kubectl, Helm
 12. **SonarQube** (`sonar/`) - SonarQube Scanner
 
@@ -75,16 +75,15 @@ versions:
 ### Local Development
 
 ```bash
-# Setup environment
-pipenv install
-pipenv shell
+# Setup environment (uv provisions Python itself)
+uv sync
 
 # Build specific image/version
-python image_builder.py build --image IMAGE_NAME --version VERSION [--debug]
+uv run python image_builder.py build --image IMAGE_NAME --version VERSION [--debug]
 
 # Examples
-python image_builder.py build --image java --version 17
-python image_builder.py build --image aws --version 1 --debug
+uv run python image_builder.py build --image java --version 17
+uv run python image_builder.py build --image aws --version 1 --debug
 ```
 
 ### CI/CD Workflow (GitHub Actions)
@@ -179,7 +178,7 @@ Images are published to:
 
 ## Dependencies
 
-- **Python 3.11** (pipenv environment)
+- **Python 3.11** (uv environment, `.venv` from `uv.lock`)
 - **Key packages**:
   - `python-on-whales` - Docker Python API
   - `click` - CLI framework
