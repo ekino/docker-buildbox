@@ -2,7 +2,16 @@ FROM node:24-alpine3.24
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-RUN apk update && apk add --no-cache git curl bash jq python3 make g++ coreutils
+RUN apk update && apk add --no-cache git curl bash jq python3 make g++ coreutils \
+    chromium nss freetype harfbuzz ttf-freefont
+
+# Browser automation tools (puppeteer, playwright) must use the Chromium from
+# apk: the versions they download themselves are glibc builds and don't run on
+# Alpine.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true \
+    CHROME_PATH=/usr/bin/chromium-browser
 
 # Install GitLab CLI (glab)
 ARG TARGETARCH

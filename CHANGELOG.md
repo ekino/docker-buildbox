@@ -12,6 +12,7 @@ Versions
 * Cloudsploit: removing this image, as we're now using Prowler instead. Existing `ekino/ci-cloudsploit` tags are left in place but will no longer be rebuilt or receive updates
 * PHP: the downloads of composer, php-cs-fixer, phpredis, xdebug and the Blackfire probe and client now fail the build, and retry on transient errors, instead of silently writing an HTTP error page to the target path. A GitHub 504 on the php-cs-fixer release asset was being saved as an executable `/usr/local/bin/php-cs-fixer` and only surfaced four minutes later as a test failure. php-cs-fixer is also fetched from the project's current repository name, PHP-CS-Fixer/PHP-CS-Fixer, rather than through the FriendsOfPHP redirect left over from the rename
 * Prowler: added new image with Prowler and AWS CLI v2
+* Reviewtools: adding chromium, so the review tools can drive a browser through puppeteer or playwright. Both are pointed at the Alpine build via `PUPPETEER_EXECUTABLE_PATH` and `CHROME_PATH`, and told not to download their own
 
 2026-08-31
 ----------
