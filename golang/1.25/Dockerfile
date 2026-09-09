@@ -78,5 +78,6 @@ RUN apt-get update -q && \
     mv mock_${MOCKGEN_VERSION}_${MOCKGEN_ARCH}/mockgen /usr/local/bin && \
     rm -rf mock* && \
     # Install go tools
-    go install golang.org/x/tools/cmd/goimports@latest && \
+    # x/tools >= v0.50.0 needs go 1.26 and the golang image pins GOTOOLCHAIN=local
+    go install golang.org/x/tools/cmd/goimports@v0.49.0 && \
     go install github.com/boumenot/gocover-cobertura@latest
