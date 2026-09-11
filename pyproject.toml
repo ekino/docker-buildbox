@@ -5,7 +5,7 @@ description = "Builds, tests and publishes the ekino CI images"
 requires-python = ">=3.11"
 dependencies = [
     "click==8.5.0",
-    "gitpython==3.1.61",
+    "gitpython==3.1.62",
     "pydantic==2.13.5",
     "python-on-whales==0.81.0",
     "pyyaml==6.0.3",
