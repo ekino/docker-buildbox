@@ -26,7 +26,7 @@ RUN echo "Starting ..." && \
     gem install scss_lint:'~> 0.57.1' --verbose && \
     echo "Done base install!" && \
     echo "Install Taskfile" && \
-    sh -c "$(curl -f --location https://taskfile.dev/install.sh)" -- -d && \
+    sh -c "$(curl -f --retry 3 --retry-delay 2 --retry-all-errors --location https://taskfile.dev/install.sh)" -- -d && \
     echo "Done Install Taskfile" && \
     echo "Starting Javascript..." && \
     : "${LATEST_NVM_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
@@ -40,18 +40,18 @@ RUN echo "Starting ..." && \
     nvm install ${LATEST_NODE_VERSION} && nvm alias default ${LATEST_NODE_VERSION} && \
     ln -s /root/.nvm/versions/node/v${LATEST_NODE_VERSION} /root/.nvm/versions/node/current && \
     nvm install-latest-npm && \
-    curl -fsSL --retry 3 --retry-delay 2 https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/keyrings/yarn.gpg && \
+    curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors https://dl.yarnpkg.com/debian/pubkey.gpg -o /etc/apt/keyrings/yarn.gpg && \
     echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn --no-install-recommends && \
     echo "Done JS!" && \
     echo "Starting AWS" && \
-    curl -f --retry 3 --retry-delay 2 https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
+    curl -f --retry 3 --retry-delay 2 --retry-all-errors https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && rm -rf aws && \
     echo "Done installing AWS" && \
     echo "Adding an up to date mime-types definition file" && \
-    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     echo "Cleaning files!" && \
     rm -rf /tmp/* && \
     apt-get -qq -y remove --purge emacsen-common fakeroot file firebird3.0-common firebird3.0-common-doc \

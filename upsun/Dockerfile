@@ -32,8 +32,8 @@ RUN apt-get update -qq && apt-get install -y curl git jq \
     && uv pip install --system --no-cache pipenv \
     && : "${CLI_VERSION:?must be passed as a build arg, resolved by image_builder.py}" \
     && echo "Using CLI version: ${CLI_VERSION}" \
-    && curl -fsSL --retry 3 --retry-delay 2 "https://github.com/platformsh/cli/releases/download/${CLI_VERSION}/upsun-cli_${CLI_VERSION}_linux_${CLI_ARCH}.deb" -o /tmp/upsun.deb \
-    && curl -fsSL --retry 3 --retry-delay 2 "https://github.com/platformsh/cli/releases/download/${CLI_VERSION}/platformsh-cli_${CLI_VERSION}_linux_${CLI_ARCH}.deb" -o /tmp/platform.deb \
+    && curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors "https://github.com/platformsh/cli/releases/download/${CLI_VERSION}/upsun-cli_${CLI_VERSION}_linux_${CLI_ARCH}.deb" -o /tmp/upsun.deb \
+    && curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors "https://github.com/platformsh/cli/releases/download/${CLI_VERSION}/platformsh-cli_${CLI_VERSION}_linux_${CLI_ARCH}.deb" -o /tmp/platform.deb \
     && apt install -y /tmp/upsun.deb /tmp/platform.deb \
     && rm -f /tmp/upsun.deb /tmp/platform.deb \
     && apt-get clean \
