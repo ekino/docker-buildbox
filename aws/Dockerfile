@@ -20,7 +20,6 @@ ARG KUBECTL_ARCH="amd64"
 ARG KUSTOMIZE_ARCH="linux_amd64"
 ARG TRIVY_ARCH="Linux-64bit"
 ARG TERRAGRUNT_ARCH="amd64"
-ARG INFRACOST_ARCH="amd64"
 ARG JQ_ARCH="amd64"
 
 FROM base AS base-arm64
@@ -30,7 +29,6 @@ ARG KUBECTL_ARCH="arm64"
 ARG KUSTOMIZE_ARCH="linux_arm64"
 ARG TRIVY_ARCH="Linux-ARM64"
 ARG TERRAGRUNT_ARCH="arm64"
-ARG INFRACOST_ARCH="arm64"
 ARG JQ_ARCH="arm64"
 
 FROM base-$TARGETARCH
@@ -39,7 +37,6 @@ ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-${AWSCLI_ARCH}.zip
 # Tool versions, resolved from the GitHub API by image_builder.py
 ARG HELM_DIFF_VERSION
 ARG HELM_VERSION
-ARG INFRACOST_VERSION
 ARG KUSTOMIZE_VERSION
 ARG TERRAGRUNT_VERSION
 ARG TRIVY_VERSION
@@ -90,13 +87,5 @@ RUN apt-get update -qq && apt-get install -qq -y curl git zip jq wget && \
     curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} && \
     mv terragrunt_linux_${TERRAGRUNT_ARCH} /usr/bin/terragrunt && \
     chmod +x /usr/bin/terragrunt && \
-    # Downloading latest infracost
-    : "${INFRACOST_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
-    curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://github.com/infracost/infracost/releases/download/v${INFRACOST_VERSION}/infracost-linux-${INFRACOST_ARCH}.tar.gz && \
-    tar xvf infracost-linux-${INFRACOST_ARCH}.tar.gz && \
-    mv infracost-linux-${INFRACOST_ARCH} /usr/bin/infracost && \
-    curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://raw.githubusercontent.com/infracost/infracost/v${INFRACOST_VERSION}/scripts/ci/diff.sh && \
-    mv diff.sh /opt/diff.sh && \
-    chmod +x /opt/diff.sh && \
     git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv && \
     ln -s ~/.tfenv/bin/* /usr/local/bin
