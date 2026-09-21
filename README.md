@@ -164,7 +164,7 @@ Contains Node.js 24 on Alpine Linux with AI code review tools: Claude Code, Open
 - https://hub.docker.com/r/ekino/ci-gcp/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-gcp
 
-Contains GCloud Cli, Terraform, Kubectl, Helm, Kustomize, Terragrunt, Infracost, Python & misc tools
+Contains GCloud Cli, Terraform, Kubectl, Helm, Kustomize, Terragrunt, Python & misc tools
 
 ### DIND
 - https://hub.docker.com/r/ekino/ci-dind/tags

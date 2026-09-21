@@ -8,7 +8,6 @@ versions:
       HELM_VERSION:
         repo: helm/helm
         rule: latest_v3
-      INFRACOST_VERSION: infracost/infracost
       KUSTOMIZE_VERSION:
         repo: kubernetes-sigs/kustomize
         rule: kustomize
@@ -27,7 +26,6 @@ versions:
         - uv --version
         - trivy --version
         - terragrunt --version
-        - infracost --version
         - tfenv init
         - unzip -v
         - zip --version
