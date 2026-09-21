@@ -44,7 +44,7 @@ COPY --from=uv /uv /uvx /usr/local/bin/
 
 RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certificates gnupg curl git zip unzip jq wget \
     && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list \
-    && curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
+    && curl -fsSL --retry 6 --retry-all-errors https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
     && apt-get update -qq \
     && apt-get install -qq -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin \
     && apt-get -qq -y autoremove \
@@ -54,24 +54,24 @@ RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certific
     && chmod +x /usr/bin/yq \
     && uv pip install --system --no-cache pipenv \
     # Installing kubectl
-    && curl -fLO --retry 3 --retry-delay 2 --retry-all-errors "https://dl.k8s.io/release/$(curl -fL -s --retry 3 --retry-delay 2 --retry-all-errors https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" \
+    && curl -fLO --retry 6 --retry-all-errors "https://dl.k8s.io/release/$(curl -fL -s --retry 6 --retry-all-errors https://dl.k8s.io/release/stable.txt)/bin/linux/${KUBECTL_ARCH}/kubectl" \
     && chmod +x ./kubectl \
     && mv ./kubectl /usr/bin/kubectl \
     # Downloading latest kustomize
     && : "${KUSTOMIZE_VERSION:?must be passed as a build arg, resolved by image_builder.py}" \
-    && curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz \
+    && curl -fLO --retry 6 --retry-all-errors https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz \
     && tar -xf kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz \
     && rm kustomize_v${KUSTOMIZE_VERSION}_${KUSTOMIZE_ARCH}.tar.gz \
     && mv ./kustomize /usr/bin/kustomize \
     # Downloading latest trivy
     && : "${TRIVY_VERSION:?must be passed as a build arg, resolved by image_builder.py}" \
-    && curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
+    && curl -fLO --retry 6 --retry-all-errors https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
     && tar xf trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
     && rm trivy_${TRIVY_VERSION}_${TRIVY_ARCH}.tar.gz \
     && mv trivy /usr/bin/trivy \
     # Downloading latest helm (3.x.x)
     && : "${HELM_VERSION:?must be passed as a build arg, resolved by image_builder.py}" \
-    && curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz \
+    && curl -fLO --retry 6 --retry-all-errors https://get.helm.sh/helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz \
     && tar xf helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz && rm helm-v${HELM_VERSION}-${HELM_ARCH}.tar.gz \
     && mv ${HELM_ARCH}/helm /usr/local/bin/helm \
     # Downloading latest helm diff plugin
@@ -79,7 +79,7 @@ RUN apt-get update -qq && apt-get install -qq -y apt-transport-https ca-certific
     && helm plugin install --version $HELM_DIFF_VERSION https://github.com/databus23/helm-diff \
     # Downloading latest terragrunt
     && : "${TERRAGRUNT_VERSION:?must be passed as a build arg, resolved by image_builder.py}" \
-    && curl -fLO --retry 3 --retry-delay 2 --retry-all-errors https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} \
+    && curl -fLO --retry 6 --retry-all-errors https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_${TERRAGRUNT_ARCH} \
     && mv terragrunt_linux_${TERRAGRUNT_ARCH} /usr/bin/terragrunt \
     && chmod +x /usr/bin/terragrunt \
     && git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv \

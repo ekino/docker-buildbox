@@ -20,7 +20,7 @@ RUN cat /etc/apt/sources.list && \
     # Install base
     apt-get -qq -y install curl git openssh-client jq unzip graphviz postgresql-client && \
     # Installing AWS CLIv2
-    curl -f --retry 3 --retry-delay 2 --retry-all-errors https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
+    curl -f --retry 6 --retry-all-errors https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && \
