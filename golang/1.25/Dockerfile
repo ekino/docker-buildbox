@@ -40,13 +40,13 @@ ARG MOCKGEN_VERSION
 RUN apt-get update -q && \
     apt-get -qq -y install rsync zip curl unzip wget jq && \
     # Install AWS CLI
-    curl -f --retry 3 --retry-delay 2 "https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip" -o "awscliv2.zip" && \
+    curl -f --retry 3 --retry-delay 2 --retry-all-errors "https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && \
     rm -rf aws && \
     # Add an up to date mime-types definition file
-    curl -fsSL --retry 3 --retry-delay 2 https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors https://salsa.debian.org/debian/media-types/raw/master/mime.types -o /etc/mime.types && \
     # Install gitleaks
     : "${GITLEAKS_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
     wget -q https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_${GITLEAKS_ARCH}.tar.gz && \
