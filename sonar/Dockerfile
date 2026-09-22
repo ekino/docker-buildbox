@@ -15,7 +15,7 @@ RUN echo "Starting ..." && \
     echo "Starting Sonar Scanner" && \
     : "${SONARSCANNER_VERSION:?must be passed as a build arg, resolved by image_builder.py}" && \
     echo "Using SonarScanner version: ${SONARSCANNER_VERSION}" && \
-    curl -f --retry 3 --retry-delay 2 --retry-all-errors -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARSCANNER_VERSION}.zip && \
+    curl -f --retry 6 --retry-all-errors -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARSCANNER_VERSION}.zip && \
     unzip sonarscanner.zip && \
     rm sonarscanner.zip && \
     mv sonar-scanner-${SONARSCANNER_VERSION} ${SONARSCANNER_HOME} && \

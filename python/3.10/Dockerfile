@@ -31,7 +31,7 @@ COPY --from=uv /uv /uvx /usr/local/bin/
 RUN apt-get update -y && \
     apt-get install curl unzip groff less -y  && \
     # Installing AWS CLIv2
-    curl -f --retry 3 --retry-delay 2 --retry-all-errors "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip" -o "awscliv2.zip" && \
+    curl -f --retry 6 --retry-all-errors "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -rf aws && \
@@ -42,4 +42,4 @@ RUN apt-get update -y && \
     apt-get -qq clean && apt-get -qq purge && \
     rm -rf /var/lib/apt/lists/* /var/lib/dpkg/*-old && \
     # Install Poetry
-    curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors https://install.python-poetry.org | python3 -
+    curl -fsSL --retry 6 --retry-all-errors https://install.python-poetry.org | python3 -

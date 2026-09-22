@@ -19,7 +19,7 @@ RUN cat /etc/apt/sources.list && \
     # Install base
     apt-get -qq -y install build-essential curl git make openssh-client jq unzip groff less && \
     # Installing AWS CLIv2
-    curl -f --retry 3 --retry-delay 2 --retry-all-errors https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
+    curl -f --retry 6 --retry-all-errors https://awscli.amazonaws.com/awscli-exe-${AWSCLI_ARCH}.zip -o awscliv2.zip && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -f awscliv2.zip && \
