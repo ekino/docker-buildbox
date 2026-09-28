@@ -9,7 +9,7 @@ ARG UV_VERSION
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM docker:29.8.0-dind AS base
+FROM docker:29.8.1-dind AS base
 LABEL maintainer="Rémi Marseille <marseille@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
