@@ -11,7 +11,7 @@ FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
 # Base image used for all architectures.
 # We start from the official Python slim image, then add metadata for the project.
-FROM python:3.13.15-slim-trixie AS base
+FROM python:3.14.0-slim-trixie AS base
 LABEL maintainer="Axel Pavageau <axel.pavageau@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
