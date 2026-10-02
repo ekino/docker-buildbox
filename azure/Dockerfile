@@ -9,7 +9,7 @@ ARG UV_VERSION
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM python:3.14.7-slim-trixie AS base
+FROM python:3.15.0rc2-slim-trixie AS base
 
 LABEL maintainer="opensource@ekino.com"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
