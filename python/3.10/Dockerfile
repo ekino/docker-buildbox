@@ -9,7 +9,7 @@ ARG UV_VERSION
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM python:3.10.21-slim-trixie AS base
+FROM python:3.10.22-slim-trixie AS base
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG TARGETARCH
