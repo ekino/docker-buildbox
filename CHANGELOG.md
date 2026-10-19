@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-10-31
+----------
+* Golang: adding 1.27, removing 1.25 which reached end of life on 2026-08-19
+
 2026-09-30
 ----------
 * All images: building, testing and publishing each architecture natively on its own runner instead of emulating arm64, then assembling the multi-arch tag

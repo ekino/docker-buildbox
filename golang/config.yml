@@ -18,13 +18,13 @@ github_versions: &github_versions
   MOCKGEN_VERSION: golang/mock
 
 versions:
-  "1.25":
+  "1.26":
     platforms:
       - linux/amd64
       - linux/arm64
     github_versions: *github_versions
     test_config: *test_config
-  "1.26":
+  "1.27":
     platforms:
       - linux/amd64
       - linux/arm64
