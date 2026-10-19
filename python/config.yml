@@ -17,11 +17,6 @@ github_versions: &github_versions
   UV_VERSION: astral-sh/uv
 
 versions:
-  "3.10":
-    build_args: *build_args
-    github_versions: *github_versions
-    platforms: *platforms
-    test_config: *test_config
   "3.11":
     build_args: *build_args
     github_versions: *github_versions
@@ -45,6 +40,18 @@ versions:
         - uv --version
         - psql --version
   "3.14":
+    build_args: *build_args
+    github_versions: *github_versions
+    platforms: *platforms
+    test_config:
+      cmd:
+        - pip --version
+        - python --version
+        - aws --version
+        - poetry --version
+        - uv --version
+        - psql --version
+  "3.15":
     build_args: *build_args
     github_versions: *github_versions
     platforms: *platforms
