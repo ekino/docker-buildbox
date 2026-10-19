@@ -4,6 +4,7 @@ Versions
 2026-10-31
 ----------
 * Golang: adding 1.27, removing 1.25 which reached end of life on 2026-08-19
+* Python: adding 3.15, removing 3.10 which reached end of life on 2026-10-01
 
 2026-09-30
 ----------

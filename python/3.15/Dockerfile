@@ -9,7 +9,7 @@ ARG UV_VERSION
 
 FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
-FROM python:3.10.22-slim-trixie AS base
+FROM python:3.15.0-slim-trixie AS base
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
 ARG TARGETARCH
@@ -29,7 +29,7 @@ FROM base-$TARGETARCH
 COPY --from=uv /uv /uvx /usr/local/bin/
 
 RUN apt-get update -y && \
-    apt-get install curl unzip groff less -y  && \
+    apt-get install curl postgresql-client unzip groff less -y  && \
     # Installing AWS CLIv2
     curl -f --retry 6 --retry-all-errors "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \

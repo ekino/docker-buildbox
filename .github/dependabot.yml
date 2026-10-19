@@ -218,17 +218,6 @@ updates:
         update-types: ['version-update:semver-major']
   # Python
   - package-ecosystem: 'docker'
-    directory: '/python/3.10'
-    schedule:
-      interval: 'weekly'
-    labels:
-      - 'dependencies'
-      - 'docker'
-      - 'python'
-    ignore:
-      - dependency-name: '*'
-        update-types: ['version-update:semver-major', 'version-update:semver-minor']
-  - package-ecosystem: 'docker'
     directory: '/python/3.11'
     schedule:
       interval: 'weekly'
@@ -263,6 +252,17 @@ updates:
         update-types: ['version-update:semver-major', 'version-update:semver-minor']
   - package-ecosystem: 'docker'
     directory: '/python/3.14'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'python'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+  - package-ecosystem: 'docker'
+    directory: '/python/3.15'
     schedule:
       interval: 'weekly'
     labels:
