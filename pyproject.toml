@@ -4,7 +4,7 @@ version = "0.0.0"
 description = "Builds, tests and publishes the ekino CI images"
 requires-python = ">=3.11"
 dependencies = [
-    "click==8.5.0",
+    "click==8.5.1",
     "gitpython==3.2.1",
     "pydantic==2.14.2",
     "python-on-whales==0.81.0",
