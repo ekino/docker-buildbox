@@ -1,0 +1,33 @@
+versions:
+  '1':
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    github_versions:
+      ALIYUN_CLI_VERSION: aliyun/aliyun-cli
+      HELM_DIFF_VERSION: databus23/helm-diff
+      HELM_VERSION:
+        repo: helm/helm
+        rule: latest_v3
+      KUSTOMIZE_VERSION:
+        repo: kubernetes-sigs/kustomize
+        rule: kustomize
+      TERRAGRUNT_VERSION: gruntwork-io/terragrunt
+      TRIVY_VERSION: aquasecurity/trivy
+      UV_VERSION: astral-sh/uv
+    test_config:
+      cmd:
+        - aliyun version
+        - git --version
+        - helm diff version
+        - helm version
+        - kustomize version
+        - pip --version
+        - pipenv --version
+        - uv --version
+        - zip --version
+        - unzip -v
+        - trivy --version
+        - terragrunt --version
+        - tfenv init
+        - kubectl version --client

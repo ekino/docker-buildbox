@@ -194,6 +194,7 @@ Whether a run publishes is decided once, by the `publishing` output of
 and the whole `merge` job key off it.
 
 ### Available Images
+- **aliyun**: Aliyun (Alibaba Cloud) CLI, Terraform, Kubectl, Helm, Python
 - **aws**: AWS CLI, Terraform, Kubectl, Helm, Python
 - **azure**: Azure CLI, Terraform, Kubectl, Helm, Python
 - **chrome**: Chromium + Node.js LTS
