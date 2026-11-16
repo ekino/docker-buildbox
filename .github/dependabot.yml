@@ -11,6 +11,18 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+  # Aliyun
+  - package-ecosystem: 'docker'
+    directory: '/aliyun'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'docker'
+      - 'aliyun'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   # AWS
   - package-ecosystem: 'docker'
     directory: '/aws'

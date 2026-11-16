@@ -136,6 +136,12 @@ Do not forget to add an entry in `.github/dependabot.yml` too if you want it to 
 
 ## Available images
 
+### Aliyun
+- https://hub.docker.com/r/ekino/ci-aliyun/tags
+- https://github.com/orgs/ekino/packages/container/package/ci-aliyun
+
+Contains Aliyun (Alibaba Cloud) Cli, Terraform, Kubectl, Helm, Kustomize, Terragrunt, Python & misc tools
+
 ### AWS
 - https://hub.docker.com/r/ekino/ci-aws/tags
 - https://github.com/orgs/ekino/packages/container/package/ci-aws
