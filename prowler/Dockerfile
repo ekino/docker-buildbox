@@ -15,15 +15,25 @@ FROM python:3.13.15-slim-trixie AS base
 LABEL maintainer="Axel Pavageau <axel.pavageau@ekino.com>"
 LABEL org.opencontainers.image.source="https://github.com/ekino/docker-buildbox/"
 
-# Architecture-specific stages: AWS CLI download URL differs between amd64 and arm64.
+# Architecture-specific stages: AWS and Aliyun CLI download URLs differ between amd64 and arm64.
 FROM base AS base-amd64
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+ARG ALIYUN_ARCH="amd64"
 
 FROM base AS base-arm64
 ARG AWSCLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
+ARG ALIYUN_ARCH="arm64"
 
 # Select the correct architecture stage dynamically using Docker buildx TARGETARCH.
 FROM base-$TARGETARCH
+
+# Tool versions, resolved from the GitHub API by image_builder.py
+ARG ALIYUN_CLI_VERSION
+
+# azure-cli goes into its own virtualenv: installed next to prowler, its pinned
+# azure-* SDKs would fight prowler's over the same packages.
+ENV UV_TOOL_DIR=/opt/uv/tools \
+    UV_TOOL_BIN_DIR=/usr/local/bin
 
 ADD requirements.txt .
 # uv installs the Python packages below, and stays in the image as a tool. The
@@ -31,9 +41,18 @@ ADD requirements.txt .
 COPY --from=uv /uv /uvx /usr/local/bin/
 
 RUN apt-get update -qq && apt-get install -qq -y --no-install-recommends \
-        curl unzip ca-certificates git \
+        curl unzip ca-certificates git gnupg \
         build-essential \
+    && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" > /etc/apt/sources.list.d/google-cloud-sdk.list \
+    && curl -fsSL --retry 6 --retry-all-errors https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
+    && apt-get update -qq \
+    && apt-get install -qq -y --no-install-recommends google-cloud-cli \
     && uv pip install --system --no-cache -r requirements.txt \
+    && uv tool install --no-cache azure-cli \
+    && : "${ALIYUN_CLI_VERSION:?must be passed as a build arg, resolved by image_builder.py}" \
+    && curl -fLO --retry 6 --retry-all-errors https://github.com/aliyun/aliyun-cli/releases/download/v${ALIYUN_CLI_VERSION}/aliyun-cli-linux-${ALIYUN_CLI_VERSION}-${ALIYUN_ARCH}.tgz \
+    && tar xf aliyun-cli-linux-${ALIYUN_CLI_VERSION}-${ALIYUN_ARCH}.tgz -C /usr/local/bin aliyun \
+    && rm aliyun-cli-linux-${ALIYUN_CLI_VERSION}-${ALIYUN_ARCH}.tgz \
     && curl -f --retry 6 --retry-all-errors "${AWSCLI_URL}" -o "awscliv2.zip" \
     && unzip -q awscliv2.zip \
     && ./aws/install \

@@ -4,9 +4,13 @@ versions:
       - linux/amd64
       - linux/arm64
     github_versions:
+      ALIYUN_CLI_VERSION: aliyun/aliyun-cli
       UV_VERSION: astral-sh/uv
     test_config:
       cmd:
         - prowler aws --list-checks
         - aws --version
+        - az --version
+        - gcloud --version
+        - aliyun version
         - uv --version
