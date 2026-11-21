@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-11-30
+----------
+* Prowler: adding Azure CLI, Google Cloud CLI and Aliyun CLI, to scan Azure, GCP and Alibaba Cloud accounts
+
 2026-10-31
 ----------
 * Aliyun: added new image with Aliyun CLI, Terraform, Kubectl, Helm, Kustomize, Terragrunt & Trivy

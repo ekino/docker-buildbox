@@ -204,7 +204,7 @@ and the whole `merge` job key off it.
 - **node**: Node.js + AWS CLI
 - **php**: PHP 8.2/8.3/8.4 + Composer, Blackfire, AWS CLI
 - **platformsh**: Platform.sh CLI
-- **prowler**: Prowler + AWS CLI
+- **prowler**: Prowler + AWS, Azure, GCP and Aliyun CLIs
 - **python**: Python 3.11-3.15 + pip, pipenv, uv, Poetry
 - **scaleway**: Scaleway CLI + Terraform, Kubectl, Helm
 - **sonar**: SonarQube Scanner
