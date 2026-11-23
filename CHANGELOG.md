@@ -1,6 +1,10 @@
 Versions
 ========
 
+2026-11-30
+----------
+* Build tooling: pull request runs resolve tool versions with GITHUB_TOKEN instead of falling back to anonymous requests, which were rate-limited before the first lookup on dependabot and fork pull requests
+
 2026-10-31
 ----------
 * Aliyun: added new image with Aliyun CLI, Terraform, Kubectl, Helm, Kustomize, Terragrunt & Trivy

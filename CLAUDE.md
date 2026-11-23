@@ -146,15 +146,20 @@ Do not move this back into the build jobs. Two reasons:
   construction.
 
 `generate_matrix` is consequently the only job that holds the API token. Set
-`GH_AUTH_HEADER` (CI does, from a scoped GitHub App token) to get the
-authenticated rate limit; without it resolution still works, anonymously - a
-local `image_builder.py build` with no `--versions-file` resolves live.
+`GH_AUTH_HEADER` to get the authenticated rate limit; without it resolution
+still works, anonymously - a local `image_builder.py build` with no
+`--versions-file` resolves live.
 
-A **fork pull request** gets no secrets, so the token step is
-`continue-on-error` and resolution falls back to anonymous. That is why the 20
-matters: a full matrix fits inside the anonymous 60/hour, where the 90 requests
-of the per-job scheme did not. It does mean roughly three fork pull request runs
-per hour share one runner IP's budget before lookups start failing.
+CI uses two tokens. **Pull request runs use `GITHUB_TOKEN`** (1000/hour per
+repository, plenty for one run's 20 requests). Fork and dependabot pull
+requests get no Actions secrets, and the anonymous fallback that once covered
+them does not work in practice: hosted runners share outbound IPs, so the
+60/hour anonymous budget is usually already spent (#2131, #2133 failed on the
+first lookup). Using `GITHUB_TOKEN` there also keeps the app private key away
+from unreviewed code - do not "fix" dependabot runs by copying `APP_ID` /
+`APP_PRIVATE_KEY` into Dependabot secrets. **Every other run mints a scoped
+GitHub App token** (`permission-metadata: read`, 5000/hour), because nightly,
+master and release runs would otherwise share the repository's 1000/hour.
 Because the versions arrive as build args, a bare `docker build` fails with
 `NAME: must be passed as a build arg` - build through `image_builder.py`.
 
