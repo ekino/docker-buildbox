@@ -3,7 +3,7 @@ Versions
 
 2026-11-30
 ----------
-* Build tooling: pull request runs resolve tool versions with GITHUB_TOKEN instead of falling back to anonymous requests, which were rate-limited before the first lookup on dependabot and fork pull requests
+* Build tooling: pull request runs resolve tool versions with GITHUB_TOKEN instead of anonymous requests, and a latest-release lookup the API refuses (aquasecurity/trivy) reads the github.com release redirect instead; both paths were failing on the anonymous rate limit, which hosted runners share
 
 2026-10-31
 ----------

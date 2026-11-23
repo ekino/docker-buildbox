@@ -138,7 +138,13 @@ Do not move this back into the build jobs. Two reasons:
   IP allow list that refuses authenticated requests from runners, and
   `version_resolver` then falls back to the anonymous 60/hour. That is what
   started failing builds. Central resolution plus the response cache in
-  `version_resolver` makes a full matrix **20** requests.
+  `version_resolver` makes a full matrix **20** requests. The anonymous budget
+  is shared by every hosted runner on the same outbound IP, so it is usually
+  already spent; when it is, a `releases/latest` lookup reads the tag from the
+  `github.com/<repo>/releases/latest` web redirect instead, which is not an
+  API call and has no API quota. Rules that list releases (`latest_v3`,
+  `highest_with_prefix`) have no such fallback, and none of their repositories
+  has needed one.
 - **Consistency.** Two jobs resolving the same tool minutes apart can get
   different answers if a release lands between them, and `imagetools create`
   would assemble those two halves into one multi-arch tag without complaint.
