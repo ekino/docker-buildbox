@@ -4,6 +4,7 @@ Versions
 2026-11-30
 ----------
 * Build tooling: pull request runs resolve tool versions with GITHUB_TOKEN instead of anonymous requests, and a latest-release lookup the API refuses (aquasecurity/trivy) reads the github.com release redirect instead; both paths were failing on the anonymous rate limit, which hosted runners share
+* Prowler: adding Azure CLI, Google Cloud CLI and Aliyun CLI, to scan Azure, GCP and Alibaba Cloud accounts
 
 2026-10-31
 ----------
