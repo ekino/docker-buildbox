@@ -2,11 +2,13 @@ import json
 import os
 import re
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from src.docker_tools import retry_with_backoff
 
 API_ROOT = "https://api.github.com/repos"
+WEB_ROOT = "https://github.com"
 USER_AGENT = "ekino-docker-buildbox"
 
 
@@ -20,6 +22,10 @@ class VersionResolutionError(Exception):
 
 class AuthRefused(VersionResolutionError):
     """GitHub refused the authenticated request, but may still serve it anonymously."""
+
+
+class RateLimited(VersionResolutionError):
+    """GitHub refused the anonymous request too; only a non-API route is left."""
 
 
 def _auth_header():
@@ -81,7 +87,9 @@ def _explain(url, http_error, authenticated):
             # runners while still serving the same public data anonymously. The
             # anonymous quota is separate, so it is worth a try either way.
             return AuthRefused(f"{context}{detail}")
-        return VersionResolutionError(f"{context}{detail}")
+        # Hosted runners share outbound IPs, so the anonymous 60/hour is
+        # usually spent by someone else before this run makes its first call.
+        return RateLimited(f"{context}{detail}")
 
     if http_error.code == 404:
         return VersionResolutionError(
@@ -115,8 +123,46 @@ def _fetch(path):
     return response
 
 
+@retry_with_backoff(exceptions=(TransientApiError,))
+def _latest_release_redirect(repo):
+    """The latest release tag, read from where github.com/<repo>/releases/latest lands.
+
+    A web request, not an API call, so no API quota applies. It is the way out
+    for the repositories whose IP allow list refuses authenticated API requests
+    from runners (aquasecurity) on the usual day when the shared anonymous
+    budget is gone as well. Only the latest release is reachable this way,
+    which is all _latest_tag needs; listing releases still takes the API.
+    """
+    url = f"{WEB_ROOT}/{repo}/releases/latest"
+    if url in _response_cache:
+        return _response_cache[url]
+    request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            landed = response.geturl()
+    except urllib.error.HTTPError as http_error:
+        context = f"{url} returned HTTP {http_error.code}"
+        if http_error.code >= 500 or http_error.code == 429:
+            raise TransientApiError(context) from http_error
+        raise VersionResolutionError(context) from http_error
+    except (urllib.error.URLError, TimeoutError) as url_error:
+        raise TransientApiError(f"{url}: {url_error}") from url_error
+    # A repository with no release lands on /releases instead. Tags with a
+    # slash (kustomize/v5.8.3) may arrive percent-encoded.
+    match = re.search(r"/releases/tag/(.+)$", landed)
+    if not match:
+        raise VersionResolutionError(f"{repo}: {url} landed on {landed}, which names no release")
+    tag = urllib.parse.unquote(match.group(1))
+    _response_cache[url] = tag
+    return tag
+
+
 def _latest_tag(repo):
-    tag = _fetch(f"{repo}/releases/latest").get("tag_name", "")
+    try:
+        tag = _fetch(f"{repo}/releases/latest").get("tag_name", "")
+    except RateLimited as limited:
+        print(f"> [Warning] {limited} - reading the release page redirect instead")
+        return _latest_release_redirect(repo)
     if not tag:
         raise VersionResolutionError(f"{repo}: the latest release has no tag_name")
     return tag
