@@ -8,7 +8,7 @@ dependencies = [
     "gitpython==3.2.1",
     "pydantic==2.14.3",
     "python-on-whales==0.81.0",
-    "pyyaml==6.0.3",
+    "pyyaml==6.0.4",
 ]
 
 [tool.uv]
