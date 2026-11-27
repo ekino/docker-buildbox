@@ -1,1 +1,1 @@
-prowler==5.51.0
+prowler==5.52.0
